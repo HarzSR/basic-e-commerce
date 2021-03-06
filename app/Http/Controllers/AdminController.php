@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 class AdminController extends Controller
 {
-    // Login FUnction
+    // Login Function
 
     public function login(Request $request)
     {
@@ -27,14 +28,24 @@ class AdminController extends Controller
             }
             else
             {
-                return redirect('/admin');
+                return redirect('/admin')->with('flash_message_error', 'Incorrect, please try again.');
             }
         }
         return view('admin.admin_login');
     }
 
+    // Dashboard Function
+
     public function dashboard()
     {
         return view('admin.dashboard');
+    }
+
+    // Logout Function
+
+    public function logout()
+    {
+        Session::flush();
+        return redirect('/admin')->with('flash_message_success', 'Logged out Successfully');
     }
 }

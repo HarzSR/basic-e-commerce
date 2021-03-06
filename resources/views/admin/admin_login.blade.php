@@ -42,6 +42,18 @@
     <div class="auth-wrapper d-flex no-block justify-content-center align-items-center bg-dark">
         <div class="auth-box bg-dark border-top border-secondary">
             <div id="loginform">
+                @if(Session::has('flash_message_error'))
+                    <div class="alert alert-danger alert-block">
+                        {{-- <button type="button" class="close" data-dismiss="alert">x</button>--}}
+                        <strong>{!! session('flash_message_error') !!}</strong>
+                    </div>
+                @endif
+                    @if(Session::has('flash_message_success'))
+                        <div class="alert alert-success alert-block">
+                            {{-- <button type="button" class="close" data-dismiss="alert">x</button>--}}
+                            <strong>{!! session('flash_message_success') !!}</strong>
+                        </div>
+                    @endif
                 <div class="text-center pt-3 pb-3">
                     <span class="db"><img src="{{ asset('images/backend_images/logo.png') }}" alt="logo" /></span>
                 </div>
@@ -81,18 +93,6 @@
     <!-- ============================================================== -->
     <!-- Login box.scss -->
     <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Page wrapper scss in scafholding.scss -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Page wrapper scss in scafholding.scss -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Right Sidebar -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Right Sidebar -->
-    <!-- ============================================================== -->
 </div>
 <!-- ============================================================== -->
 <!-- All Required js -->
@@ -101,6 +101,7 @@
 
 <!-- Bootstrap tether Core JavaScript -->
 <script src="{{ asset('js/backend_js/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('js/backend_js/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <!-- ============================================================== -->
 <!-- This page plugin js -->
 <!-- ============================================================== -->
