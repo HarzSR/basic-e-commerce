@@ -17,8 +17,12 @@ Route::get('/', function () {
 
 // Route::get('/admin','AdminController@login');
 Route::match(['get', 'post'], '/admin', 'AdminController@login');
-Route::get('/admin/dashboard', 'AdminController@dashboard');
+// Route::get('/admin/dashboard', 'AdminController@dashboard');
 Route::get('/logout', 'AdminController@logout');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/admin/dashboard', 'AdminController@dashboard');
+});
 
 Auth::routes();
 

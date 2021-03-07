@@ -26,7 +26,7 @@ class AdminController extends Controller
             {
                 // Add Session
 
-                Session::put('adminSession', $data['email']);
+                // Session::put('adminSession', $data['email']);
 
                 // Redirect to Dashboard
 
@@ -48,6 +48,7 @@ class AdminController extends Controller
     {
         // Validate Session to provide access
 
+        /*
         if(Session::has('adminSession'))
         {
             // Perform Admin Task
@@ -56,6 +57,7 @@ class AdminController extends Controller
         {
             return redirect('/admin')->with('flash_message_error', 'Please Login to access data.');
         }
+        */
 
         // Return Admin view
 
