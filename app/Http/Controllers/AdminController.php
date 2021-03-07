@@ -24,10 +24,18 @@ class AdminController extends Controller
 
             if(Auth::attempt(['email' => $data['email'], 'password' => $data['password'], 'admin' => '1']))
             {
+                // Add Session
+
+                Session::put('adminSession', $data['email']);
+
+                // Redirect to Dashboard
+
                 return redirect('/admin/dashboard');
             }
             else
             {
+                // Redirect to Login with Error
+
                 return redirect('/admin')->with('flash_message_error', 'Incorrect, please try again.');
             }
         }
@@ -38,6 +46,19 @@ class AdminController extends Controller
 
     public function dashboard()
     {
+        // Validate Session to provide access
+
+        if(Session::has('adminSession'))
+        {
+            // Perform Admin Task
+        }
+        else
+        {
+            return redirect('/admin')->with('flash_message_error', 'Please Login to access data.');
+        }
+
+        // Return Admin view
+
         return view('admin.dashboard');
     }
 
@@ -45,7 +66,12 @@ class AdminController extends Controller
 
     public function logout()
     {
+        // Clear session
+
         Session::flush();
+
+        // Redirect to Login with success message
+
         return redirect('/admin')->with('flash_message_success', 'Logged out Successfully');
     }
 }
