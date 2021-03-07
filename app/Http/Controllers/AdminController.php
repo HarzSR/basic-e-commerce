@@ -81,7 +81,7 @@ class AdminController extends Controller
     {
         $data = $request->all();
         $current_password = $data['current_pwd'];
-        $check_password = User::where(['admin'=>'1'])->first();
+        $check_password = User::where(['admin'=>'1'],['email' => Auth::user()->email])->first();
         if(Hash::check($current_password,$check_password->password))
         {
             echo "true"; die;
@@ -89,6 +89,28 @@ class AdminController extends Controller
         else
         {
             echo "false"; die;
+        }
+    }
+
+    // Update Password Function
+
+    public function updatePassword(Request $request)
+    {
+        if($request->isMethod('POST'))
+        {
+            $data = $request->all();
+            $check_password = User::where(['email' => Auth::user()->email])->first();
+            $current_password = $data['current_pwd'];
+            if(Hash::check($current_password,$check_password->password))
+            {
+                $password = bcrypt($data['new_pwd']);
+                User::where(['email' => Auth::user()->email])->update(['password' => $password]);
+                return redirect('/admin/settings')->with('flash_message_success', 'Password update Successful.');
+            }
+            else
+            {
+                return redirect('/admin/settings')->with('flash_message_error', 'Incorrect current password');
+            }
         }
     }
 
