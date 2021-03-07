@@ -64,6 +64,15 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
+    // Settings Function
+
+    public function settings()
+    {
+        // Return Settings View
+
+        return view('admin.settings');
+    }
+
     // Logout Function
 
     public function logout()
