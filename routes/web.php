@@ -21,10 +21,16 @@ Route::match(['get', 'post'], '/admin', 'AdminController@login');
 Route::get('/logout', 'AdminController@logout');
 
 Route::group(['middleware' => ['auth']], function () {
+    // Admin Routes
+
     Route::get('/admin/dashboard', 'AdminController@dashboard');
     Route::get('/admin/settings', 'AdminController@settings');
     Route::get('/admin/check-pwd', 'AdminController@chkPassword');
     Route::match(['get', 'post'], '/admin/update-pwd', 'AdminController@updatePassword');
+
+    // Category Routes
+
+    Route::match(['get', 'post'], '/admin/add-category', 'CategoryController@addCategory');
 });
 
 Auth::routes();
