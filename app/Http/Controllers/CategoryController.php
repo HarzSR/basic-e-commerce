@@ -35,7 +35,7 @@ class CategoryController extends Controller
 
     // Edit Category
 
-    public function  editCategory(Request $request, $id = null)
+    public function editCategory(Request $request, $id = null)
     {
         if($request->isMethod('POST'))
         {
@@ -46,5 +46,20 @@ class CategoryController extends Controller
 
         $categoryDetails = Category::where(['id' => $id])->first();
         return view('admin.categories.edit_category')->with(compact('categoryDetails'));
+    }
+
+    // Delete Category
+
+    public function deleteCategory($id = null)
+    {
+        if(!empty($id))
+        {
+            Category::where(['id' => $id])->delete();
+            return redirect()->back()->with('flash_message_success', 'Successfully Deleted Category');
+        }
+        else
+        {
+            return redirect()->back()->with('flash_message_error', 'Failed to Deleted Category');
+        }
     }
 }
