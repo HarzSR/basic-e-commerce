@@ -3,7 +3,7 @@
 
 <div id="content">
     <div id="content-header">
-        <div id="breadcrumb"> <a href="{{ url('/admin/dashboard') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{ url('/admin/dashboard') }}">Categories</a> <a href="#" class="current">Add Category</a> </div>
+        <div id="breadcrumb"> <a href="{{ url('/admin/dashboard') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Categories</a> <a href="#" class="current">Add Category</a> </div>
         <h1>Categories</h1>
     </div>
     <div class="container-fluid"><hr>
@@ -20,6 +20,17 @@
                                 <label class="control-label">Category Name</label>
                                 <div class="controls">
                                     <input type="text" name="category_name" id="category_name">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Category Level</label>
+                                <div class="controls">
+                                    <select name="parent_id" style="width: 220px;">
+                                        <option value="0">Main Category</option>
+                                        @foreach($levels as $val)
+                                            <option value="{{ $val->id }}">{{ $val->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="control-group">
