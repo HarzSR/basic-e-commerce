@@ -10,7 +10,7 @@ use Image;
 
 class ProductsController extends Controller
 {
-    //
+    // Add Product Function
 
     public function addProduct(Request $request)
     {
@@ -117,5 +117,20 @@ class ProductsController extends Controller
         }
 
         return view('admin.products.add_product')->with(compact('categories_dropdown'));
+    }
+
+    // View Product Functsion
+
+    public function viewProducts()
+    {
+        $products = Product::get();
+
+        foreach ($products as $key => $val)
+        {
+            $category_name = Category::where(['id' => $val->category_id])->first();
+            $products[$key]->category_name = $category_name->name;
+        }
+
+        return view('admin.products.view_products')->with(compact('products'));
     }
 }
