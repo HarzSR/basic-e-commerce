@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Product;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -11,8 +12,75 @@ class ProductsController extends Controller
 
     public function addProduct(Request $request)
     {
+        if($request->isMethod('POST'))
+        {
+            $data = $request->all();
+
+            $product = new Product();
+            if(!empty($data['category_id']))
+            {
+                $product->category_id = $data['category_id'];
+            }
+            else
+            {
+                return redirect()->back()->with('flash_message_error', 'Category is missing');
+            }
+            if(!empty($data['product_name']))
+            {
+                $product->product_name = $data['product_name'];
+            }
+            else
+            {
+                return redirect()->back()->with('flash_message_error', 'Product Name is missing');
+            }
+            if(!empty($data['product_code']))
+            {
+                $product->product_code = $data['product_code'];
+            }
+            else
+            {
+                return redirect()->back()->with('flash_message_error', 'Product Code is missing');
+            }
+            if(!empty($data['product_color']))
+            {
+                $product->product_color = $data['product_color'];
+            }
+            else
+            {
+                return redirect()->back()->with('flash_message_error', 'Product Color is missing');
+            }
+            if(!empty($data['description']))
+            {
+                $product->description = $data['description'];
+            }
+            else
+            {
+                $product->description = '';
+            }
+            if(!empty($data['price']))
+            {
+                $product->price = $data['price'];
+            }
+            else
+            {
+                return redirect()->back()->with('flash_message_error', 'Product Price is missing');
+            }
+            if(!empty($data['image']))
+            {
+                $product->image = '';
+            }
+            else
+            {
+                $product->image = '';
+            }
+
+            $product->save();
+
+            return redirect()->back()->with('flash_message_success', 'Product Added Successfully');
+        }
+
         $categories = Category::where(['parent_id' => 0])->get();
-        $categories_dropdown = "<option selected disable>Select</option>";
+            $categories_dropdown = "<option value='' selected disable>Select</option>";
 
         foreach($categories as $category)
         {

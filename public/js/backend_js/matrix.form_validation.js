@@ -94,10 +94,10 @@ $(document).ready(function()
     $("#add_product").validate({
 		rules:{
 			category_id:{
-				required:true
+				required:true,
 			},
 			product_name:{
-				required:true
+				required:true,
 			},
 			product_code:{
 				required:true,
@@ -105,13 +105,16 @@ $(document).ready(function()
 			product_color:{
 				required:true,
 			},
+            description:{
+			    required:true,
+            },
 			price:{
 				required:true,
-				number:true
+				number:true,
 			},
-			image:{
-				required:true,
-			}
+			// image:{
+			// 	required:true,
+			// }
 		},
 		errorClass: "help-inline",
 		errorElement: "span",

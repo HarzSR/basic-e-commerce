@@ -31,7 +31,7 @@
                                     <label class="control-label">Under Category</label>
                                     <div class="controls">
                                         <select name="category_id" id="category_id" style="width: 220px;">
-                                            <?php echo $categories_dropdown; ?>
+                                            {{ print($categories_dropdown) }}
                                         </select>
                                     </div>
                                 </div>
