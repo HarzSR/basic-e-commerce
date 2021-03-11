@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Image;
 
 class ProductsController extends Controller
 {
@@ -65,13 +67,34 @@ class ProductsController extends Controller
             {
                 return redirect()->back()->with('flash_message_error', 'Product Price is missing');
             }
-            if(!empty($data['image']))
+            if(empty($data['image']))
             {
+                echo "Hai";
                 $product->image = '';
             }
             else
             {
-                $product->image = '';
+                if($request->hasFile('image'))
+                {
+                    $image_tmp = Input::file('image');
+
+                    if($image_tmp->isValid())
+                    {
+
+                        $extension = $image_tmp->getClientOriginalExtension();
+                        $fileName = time(). mt_rand() . '.' . $extension;
+
+                        $large_image_path = 'images/backend_images/products/large/' . $fileName;
+                        $medium_image_path = 'images/backend_images/products/medium/' . $fileName;
+                        $small_image_path = 'images/backend_images/products/small/' . $fileName;
+
+                        Image::make($image_tmp)->save($large_image_path);
+                        Image::make($image_tmp)->resize(600, 600)->save($medium_image_path);
+                        Image::make($image_tmp)->resize(300, 300)->save($small_image_path);
+
+                        $product->image = $fileName;
+                    }
+                }
             }
 
             $product->save();
