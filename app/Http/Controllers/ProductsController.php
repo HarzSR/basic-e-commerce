@@ -103,7 +103,7 @@ class ProductsController extends Controller
         }
 
         $categories = Category::where(['parent_id' => 0])->get();
-            $categories_dropdown = "<option value='' selected disable>Select</option>";
+            $categories_dropdown = "<option value='' selected disabled>Select</option>";
 
         foreach($categories as $category)
         {
@@ -119,7 +119,7 @@ class ProductsController extends Controller
         return view('admin.products.add_product')->with(compact('categories_dropdown'));
     }
 
-    // View Product Functsion
+    // View Product Function
 
     public function viewProducts()
     {
@@ -132,5 +132,55 @@ class ProductsController extends Controller
         }
 
         return view('admin.products.view_products')->with(compact('products'));
+    }
+
+    // Edit Product Function
+
+    public function editProduct(Request $request, $id = null)
+    {
+        if($request->isMethod('POST'))
+        {
+            $data = $request->all();
+
+            Product::where(['id' => $id])->update(['category_id' => $data['category_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'description' => $data['description'], 'price' => $data['price']]);
+
+            return redirect()->back()->with('flash_message_success', 'Product Updated Successfully');
+        }
+
+        $productDetails = Product::where(['id' => $id])->first();
+
+        $categories = Category::where(['parent_id' => 0])->get();
+        $categories_dropdown = "<option value='' selected disabled>Select</option>";
+
+        foreach($categories as $category)
+        {
+            if($category->id == $productDetails->category_id)
+            {
+                $selectVariable = "selected";
+            }
+            else
+            {
+                $selectVariable = "";
+            }
+
+            $categories_dropdown .= "<option value='" . $category->id . "' " . $selectVariable . ">" . $category->name . "</option>";
+            $sub_categories = Category::where(['parent_id' => $category->id])->get();
+
+            foreach($sub_categories as $sub_category)
+            {
+                if($sub_category->id == $productDetails->category_id)
+                {
+                    $selectVariable = "selected";
+                }
+                else
+                {
+                    $selectVariable = "";
+                }
+
+                $categories_dropdown .= "<option value='" . $sub_category->id . "' " . $selectVariable . "> &nbsp; --&nbsp; " . $sub_category->name . "</option>";
+            }
+        }
+
+        return view('admin.products.edit_product')->with(compact('productDetails', 'categories_dropdown'));
     }
 }
