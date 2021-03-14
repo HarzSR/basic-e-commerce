@@ -6,6 +6,7 @@ use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\File;
 use Image;
 
 class ProductsController extends Controller
@@ -69,7 +70,6 @@ class ProductsController extends Controller
             }
             if(empty($data['image']))
             {
-                echo "Hai";
                 $product->image = '';
             }
             else
@@ -142,7 +142,34 @@ class ProductsController extends Controller
         {
             $data = $request->all();
 
-            Product::where(['id' => $id])->update(['category_id' => $data['category_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'description' => $data['description'], 'price' => $data['price']]);
+            if($request->hasFile('image')) {
+                $image_tmp = Input::file('image');
+
+                if ($image_tmp->isValid()) {
+
+                    $extension = $image_tmp->getClientOriginalExtension();
+                    $fileName = time() . mt_rand() . '.' . $extension;
+
+                    $large_image_path = 'images/backend_images/products/large/' . $fileName;
+                    $medium_image_path = 'images/backend_images/products/medium/' . $fileName;
+                    $small_image_path = 'images/backend_images/products/small/' . $fileName;
+
+                    Image::make($image_tmp)->save($large_image_path);
+                    Image::make($image_tmp)->resize(600, 600)->save($medium_image_path);
+                    Image::make($image_tmp)->resize(300, 300)->save($small_image_path);
+                }
+            }
+            else
+            {
+                $fileName = $data['current_image'];
+            }
+
+            if(empty($data['description']))
+            {
+                $data['description'] = '';
+            }
+
+            Product::where(['id' => $id])->update(['category_id' => $data['category_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'description' => $data['description'], 'price' => $data['price'], 'image' => $fileName]);
 
             return redirect()->back()->with('flash_message_success', 'Product Updated Successfully');
         }
@@ -182,5 +209,26 @@ class ProductsController extends Controller
         }
 
         return view('admin.products.edit_product')->with(compact('productDetails', 'categories_dropdown'));
+    }
+
+    // Delete Product Image Function
+
+    public function deleteProductImage($id = null)
+    {
+        // Hard Delete
+
+        $product = Product::where(['id' => $id])->first();
+
+        $large_image_path = 'images/backend_images/products/large/' . $product->image;
+        $medium_image_path = 'images/backend_images/products/medium/' . $product->image;
+        $small_image_path = 'images/backend_images/products/small/' . $product->image;
+
+        File::delete($large_image_path, $medium_image_path, $small_image_path);
+
+        // Soft Delete
+
+        Product::where(['id' => $id])->update(['image' => '']);
+
+        return redirect()->back()->with('flash_message_success', 'Product Image Removed Successfully');
     }
 }
