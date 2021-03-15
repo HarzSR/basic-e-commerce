@@ -16,11 +16,11 @@ $(document).ready(function()
                 {
                     $("#chkPwd").html("<font color='red'>Current Password is Empty</font>");
                 }
-				else if(resp=="false")
+				else if(resp == "false")
 				{
 					$("#chkPwd").html("<font color='red'>Current Password is Incorrect</font>");
 				}
-				else if(resp=="true")
+				else if(resp == "true")
 				{
 					$("#chkPwd").html("<font color='green'>Current Password is Correct</font>");
 				}
@@ -207,11 +207,18 @@ $(document).ready(function()
 		}
 	});
 
-	$("#delCat").click(function(){
+	$(".delCategory").click(function(){
 		if(confirm('Are you sure you want to delete this Category?')){
 			return true;
 		}
 		return false;
 	});
+
+    $(".delProduct").click(function(){
+        if(confirm('Are you sure you want to delete this Category?')){
+            return true;
+        }
+        return false;
+    });
 
 });

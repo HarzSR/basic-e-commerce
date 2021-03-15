@@ -211,6 +211,15 @@ class ProductsController extends Controller
         return view('admin.products.edit_product')->with(compact('productDetails', 'categories_dropdown'));
     }
 
+    // Delete Product Function
+
+    public function deleteProduct($id = null)
+    {
+        Product::where(['id' => $id])->delete();
+
+        return redirect()->back()->with('flash_message_success', 'Product removed successfully');
+    }
+
     // Delete Product Image Function
 
     public function deleteProductImage($id = null)
