@@ -207,18 +207,42 @@ $(document).ready(function()
 		}
 	});
 
-	$(".delCategory").click(function(){
-		if(confirm('Are you sure you want to delete this Category?')){
-			return true;
-		}
-		return false;
-	});
+	// $(".delCategory").click(function(){
+	// 	if(confirm('Are you sure you want to delete this Category?')){
+	// 		return true;
+	// 	}
+	// 	return false;
+	// });
 
-    $(".delProduct").click(function(){
-        if(confirm('Are you sure you want to delete this Category?')){
-            return true;
-        }
-        return false;
-    });
+    // $(".delProduct").click(function(){
+    //     if(confirm('Are you sure you want to delete this Category?')){
+    //         return true;
+    //     }
+    //     return false;
+    // });
+
+    $(".deleteRecord").click(function (){
+        var id = $(this).attr('rel');
+        var deleteFunction = $(this).attr('rel1');
+        swal({
+                title: "Are you sure",
+                text: "Would you like to Delete the Product ID " + id + " ? ",
+                type: "warning",
+                showCancelButton: true,
+                // confirmButtonClass: "btn-danger",
+                // confirmButtonText: "Yes, Delete it",
+                confirmButtonColor: '#3085D6',
+                cancelButtonColor: '#D33',
+                confirmButtonText: "Yes, Delete it",
+                cancelButtonText: "No",
+                confirmButtonClass: 'btn btn-danger',
+                cancelButtonClass: 'btn btn-success',
+                buttonStyling: false,
+                reverseButtons: true
+            },
+            function (){
+                window.location.href="/admin/" + deleteFunction + "/" + id;
+            });
+    })
 
 });
