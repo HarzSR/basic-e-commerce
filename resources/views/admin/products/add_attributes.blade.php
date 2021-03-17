@@ -89,11 +89,11 @@
                                         <td>{{ $attribute->price }}</td>
                                         <td>{{ $attribute->stock }}</td>
                                         <td class="center">
-                                            <!-- <a href="{{ $productDetails->id }}" data-toggle="modal" class="btn btn-success btn-mini">View</a>
-                                            <a href="{{ url('/admin/edit-product/'.$productDetails->id) }}" class="btn btn-primary btn-mini">Edit</a>
-                                            <a href="{{ url('/admin/add-attributes/'.$productDetails->id) }}" class="btn btn-warning btn-mini">Add</a>
-                                            <a href="{{ url('/admin/delete-product/'.$productDetails->id) }}" class="btn btn-danger btn-mini delProduct" >Delete</a></td> -->
-                                            <a rel="{{ $productDetails->id }}" rel1="delete-product" href="javascript:" class="btn btn-danger btn-mini deleteRecord" >Delete</a>
+                                            <!-- <a href="{{ $attribute->id }}" data-toggle="modal" class="btn btn-success btn-mini">View</a>
+                                            <a href="{{ url('/admin/edit-product/'.$attribute->id) }}" class="btn btn-primary btn-mini">Edit</a>
+                                            <a href="{{ url('/admin/add-attributes/'.$attribute->id) }}" class="btn btn-warning btn-mini">Add</a>
+                                            <a href="{{ url('/admin/delete-product/'.$attribute->id) }}" class="btn btn-danger btn-mini delProduct" >Delete</a></td> -->
+                                            <a rel="{{ $attribute->id }}" rel1="delete-attribute" rel2="Attribute" href="javascript:" class="btn btn-danger btn-mini deleteRecord" >Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach

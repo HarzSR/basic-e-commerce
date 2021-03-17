@@ -59,7 +59,7 @@
                                             <a href="{{ url('/admin/edit-product/'.$product->id) }}" class="btn btn-primary btn-mini">Edit</a>
                                             <a href="{{ url('/admin/add-attributes/'.$product->id) }}" class="btn btn-warning btn-mini">Add</a>
                                             <!-- <a href="{{ url('/admin/delete-product/'.$product->id) }}" class="btn btn-danger btn-mini delProduct" >Delete</a></td> -->
-                                            <a rel="{{ $product->id }}" rel1="delete-product" href="javascript:" class="btn btn-danger btn-mini deleteRecord" >Delete</a>
+                                            <a rel="{{ $product->id }}" rel1="delete-product" rel2="Product" href="javascript:" class="btn btn-danger btn-mini deleteRecord" >Delete</a>
                                         </td>
                                     </tr>
                                     <div id="myModal{{ $product->id }}" class="modal hide">

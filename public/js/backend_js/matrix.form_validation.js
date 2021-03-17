@@ -224,9 +224,10 @@ $(document).ready(function()
     $(".deleteRecord").click(function (){
         var id = $(this).attr('rel');
         var deleteFunction = $(this).attr('rel1');
+        var deleteType = $(this).attr('rel2');
         swal({
             title: "Are you sure",
-            text: "Would you like to Delete the Product ID " + id + " ? ",
+            text: "Would you like to Delete the " + deleteType + " ID " + id + " ? ",
             type: "warning",
             showCancelButton: true,
             // confirmButtonClass: "btn-danger",
