@@ -225,24 +225,54 @@ $(document).ready(function()
         var id = $(this).attr('rel');
         var deleteFunction = $(this).attr('rel1');
         swal({
-                title: "Are you sure",
-                text: "Would you like to Delete the Product ID " + id + " ? ",
-                type: "warning",
-                showCancelButton: true,
-                // confirmButtonClass: "btn-danger",
-                // confirmButtonText: "Yes, Delete it",
-                confirmButtonColor: '#3085D6',
-                cancelButtonColor: '#D33',
-                confirmButtonText: "Yes, Delete it",
-                cancelButtonText: "No",
-                confirmButtonClass: 'btn btn-danger',
-                cancelButtonClass: 'btn btn-success',
-                buttonStyling: false,
-                reverseButtons: true
-            },
-            function (){
-                window.location.href="/admin/" + deleteFunction + "/" + id;
-            });
+            title: "Are you sure",
+            text: "Would you like to Delete the Product ID " + id + " ? ",
+            type: "warning",
+            showCancelButton: true,
+            // confirmButtonClass: "btn-danger",
+            // confirmButtonText: "Yes, Delete it",
+            confirmButtonColor: '#3085D6',
+            cancelButtonColor: '#D33',
+            confirmButtonText: "Yes, Delete it",
+            cancelButtonText: "No",
+            confirmButtonClass: 'btn btn-danger',
+            cancelButtonClass: 'btn btn-success',
+            buttonStyling: false,
+            reverseButtons: true
+        },
+        function (){
+            window.location.href="/admin/" + deleteFunction + "/" + id;
+        });
     })
+
+    $(document).ready(function () {
+        // Max Input Field
+        var maxField = 10;
+        // Add Button to Select
+        var addButton = $('.add_button');
+        // Input Field Wrapper
+        var wrapper = $('.field_wrapper');
+        // New Input Field
+        // var fieldHTML = '<div><input type="text" name="field_name[]" value=""><a href="javascipr:void(0);" class="remove_button" title="Remove Filed"><img src="remove-icon.png"></a></div>';
+        var fieldHTML = '<div class="field_wrapper" style="margin-left: 180px;">\n' +
+            '                                        <div><input type="text" name="sku[]" id="sku" placeholder="SKU" style="width: 120px;">\n' +
+            '                                            <input type="text" name="size[]" id="size" placeholder="Size" style="width: 120px;">\n' +
+            '                                            <input type="text" name="price[]" id="price" placeholder="Price" style="width: 120px;">\n' +
+            '                                            <input type="text" name="stock[]" id="stock" placeholder="Stock" style="width: 120px;"><a href="javascipr:void(0);" class="remove_button" title="Remove Filed">Remove</a></div></div>';
+        // Counter Initialization
+        var counter = 1;
+        $(addButton).click(function (){
+            if( counter < maxField)
+            {
+                counter++;
+                $(wrapper).append(fieldHTML);
+            }
+        });
+        $(wrapper).on('click', '.remove_button', function (e){
+            e.preventDefault();
+            $(this).parent('div').remove();
+            counter--;
+        });
+    });
 
 });

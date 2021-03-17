@@ -26,7 +26,7 @@
                             <h5>Edit Product</h5>
                         </div>
                         <div class="widget-content nopadding">
-                            <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{ url('/admin/edit-product/'.$productDetails->id) }}" name="edit_product" id="edit_product" novalidate="novalidate">
+                            <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{ url('/admin/edit-product/' . $productDetails->id) }}" name="edit_product" id="edit_product" novalidate="novalidate">
                                 {{ csrf_field() }}
                                 <div class="control-group">
                                     <label class="control-label">Under Category</label>
