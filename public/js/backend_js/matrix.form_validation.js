@@ -255,10 +255,10 @@ $(document).ready(function()
         // New Input Field
         // var fieldHTML = '<div><input type="text" name="field_name[]" value=""><a href="javascipr:void(0);" class="remove_button" title="Remove Filed"><img src="remove-icon.png"></a></div>';
         var fieldHTML = '<div class="field_wrapper" style="margin-left: 180px;">\n' +
-            '                                        <div><input type="text" name="sku[]" id="sku" placeholder="SKU" style="width: 120px;">\n' +
-            '                                            <input type="text" name="size[]" id="size" placeholder="Size" style="width: 120px;">\n' +
-            '                                            <input type="text" name="price[]" id="price" placeholder="Price" style="width: 120px;">\n' +
-            '                                            <input type="text" name="stock[]" id="stock" placeholder="Stock" style="width: 120px;"><a href="javascipr:void(0);" class="remove_button" title="Remove Filed">Remove</a></div></div>';
+            '                                        <div><input type="text" name="sku[]" id="sku" placeholder="SKU" style="width: 120px;" required>\n' +
+            '                                            <input type="text" name="size[]" id="size" placeholder="Size" style="width: 120px;" required>\n' +
+            '                                            <input type="text" name="price[]" id="price" placeholder="Price" style="width: 120px;" required>\n' +
+            '                                            <input type="text" name="stock[]" id="stock" placeholder="Stock" style="width: 120px;" required><a href="javascipr:void(0);" class="remove_button" title="Remove Filed">Remove</a></div></div>';
         // Counter Initialization
         var counter = 1;
         $(addButton).click(function (){

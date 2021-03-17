@@ -266,7 +266,7 @@ class ProductsController extends Controller
             return redirect('/admin/add-attributes/' . $id)->with('flash_message_success', 'Product Attributes Added Successfully');
         }
 
-        $productDetails = Product::where(['id' => $id])->first();
+        $productDetails = Product::with('attributes')->where(['id' => $id])->first();
 
         return view('admin.products.add_attributes')->with(compact('productDetails'));
     }
