@@ -26,6 +26,10 @@ class IndexController extends Controller
 
         // Get Sub Categories
 
+        /*
+
+        // General Method
+
         $categories = Category::where(['parent_id' => 0])->get();
 
         $category_menu = "";
@@ -54,7 +58,10 @@ class IndexController extends Controller
                 </div>
             </div>';
         }
+        */
 
-        return view('index')->with(compact('productsAll' , 'category_menu'));
+        $categories = Category::with('categories')->where(['parent_id' => 0])->get();
+
+        return view('index')->with(compact('productsAll' , 'categories'));
     }
 }
