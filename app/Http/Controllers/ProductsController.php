@@ -162,7 +162,14 @@ class ProductsController extends Controller
             }
             else
             {
-                $fileName = $data['current_image'];
+                if(empty($data['current_image']))
+                {
+                    $fileName = "";
+                }
+                else
+                {
+                    $fileName = $data['current_image'];
+                }
             }
 
             if(empty($data['description']))
