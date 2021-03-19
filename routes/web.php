@@ -15,7 +15,13 @@
 //    return view('welcome');
 //});
 
+// Index Page
+
 Route::get('/', 'IndexController@index');
+
+// List Category
+
+Route::get('/products/{url}', 'ProductsController@products');
 
 // Route::get('/admin','AdminController@login');
 Route::match(['get', 'post'], '/admin', 'AdminController@login');
