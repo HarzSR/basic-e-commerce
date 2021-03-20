@@ -1,3 +1,8 @@
+<?php
+    use App\Http\Controllers\Controller;
+    $mainCategories = Controller::mainCategories();
+?>
+
 <header id="header"><!--header-->
     <div class="header_top"><!--header_top-->
         <div class="container">
@@ -35,23 +40,23 @@
                     <div class="btn-group pull-right">
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                USA
+                                India
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Canada</a></li>
+                                <li><a href="#">New Zealand</a></li>
                                 <li><a href="#">UK</a></li>
                             </ul>
                         </div>
 
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                DOLLAR
+                                &#8377; Rupees
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Canadian Dollar</a></li>
-                                <li><a href="#">Pound</a></li>
+                                <li><a href="#">&#36; New Zealand Dollar</a></li>
+                                <li><a href="#">&#163; Pound Sterling</a></li>
                             </ul>
                         </div>
                     </div>
@@ -88,11 +93,9 @@
                             <li><a href="index.html" class="active">Home</a></li>
                             <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    <li><a href="shop.html">Products</a></li>
-                                    <li><a href="product-details.html">Product Details</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li><a href="login.html">Login</a></li>
+                                    @foreach($mainCategories as $mainCategory)
+                                        <li><a href="{{ asset('/products/' . $mainCategory->url) }}">{{ $mainCategory->name }}</a></li>
+                                    @endforeach
                                 </ul>
                             </li>
                             <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>

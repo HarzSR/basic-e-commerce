@@ -295,13 +295,19 @@ class ProductsController extends Controller
 
         $categoryDetails = Category::where(['url' => $url])->first();
 
-        if($categoryDetails->id != 0)
+        if($categoryDetails->parent_id != 0)
         {
             $productsAll = Product::where(['category_id' => $categoryDetails->id])->get();
         }
         else
         {
-            $productsAll = "";
+            $subCategories = Category::where(['parent_id' => $categoryDetails->id])->get();
+            foreach ($subCategories as $subCategory)
+            {
+                $categoryIds[] = $subCategory->id;
+            }
+            array_push($categoryIds, $categoryDetails->id);
+            $productsAll = Product::whereIn('category_id',$categoryIds)->get();
         }
 
         return view('products.listing')->with(compact('categoryDetails', 'productsAll', 'categories'));
