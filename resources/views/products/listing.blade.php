@@ -89,7 +89,7 @@
                                         <div class="panel-body">
                                             <ul>
                                                 @foreach($category->categories as $sub_category)
-                                                    <li><a href="{{ $sub_category->url }}">{{ $sub_category->name }}</a></li>
+                                                    <li><a href="{{ url('products/' , $sub_category->url) }}">{{ $sub_category->name }}</a></li>
                                                 @endforeach
                                             </ul>
                                         </div>
@@ -139,14 +139,14 @@
                                             <img src="{{ asset('images/backend_images/products/small/' . $product->image   ) }}" alt="" />
                                             <h2>NZ$ {{ $product->price }}</h2>
                                             <p>{{ $product->product_name }}</p>
-                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            <a href="{{ url('product/' . $product->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                         </div>
                                         <div class="product-overlay">
                                             <div class="overlay-content">
                                                 <h2>NZ$ {{ $product->price }}</h2>
                                                 <p>{{ $product->product_name }}</p>
                                                 <p>{{ $product->description }}</p>
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                <a href="{{ url('product/' . $product->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                             </div>
                                         </div>
                                     </div>

@@ -240,7 +240,19 @@ class ProductsController extends Controller
         $medium_image_path = 'images/backend_images/products/medium/' . $product->image;
         $small_image_path = 'images/backend_images/products/small/' . $product->image;
 
-        File::delete($large_image_path, $medium_image_path, $small_image_path);
+        // File::delete($large_image_path, $medium_image_path, $small_image_path);
+        if(file_exists($large_image_path))
+        {
+            unlink($large_image_path);
+        }
+        if(file_exists($medium_image_path))
+        {
+            unlink($medium_image_path);
+        }
+        if(file_exists($small_image_path))
+        {
+            unlink($small_image_path);
+        }
 
         // Soft Delete
 
@@ -317,5 +329,16 @@ class ProductsController extends Controller
         }
 
         return view('products.listing')->with(compact('categoryDetails', 'productsAll', 'categories'));
+    }
+
+    // Display Individual Product Function
+
+    public function product($id = null)
+    {
+        $productDetails = Product::where(['id' => $id])->first();
+
+        $categories = Category::with('categories')->where(['parent_id' => 0])->get();
+
+        return view('products.detail')->with(compact('productDetails', 'categories'));
     }
 }
