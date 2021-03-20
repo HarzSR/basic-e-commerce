@@ -94,7 +94,9 @@
                             <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
                                     @foreach($mainCategories as $mainCategory)
-                                        <li><a href="{{ asset('/products/' . $mainCategory->url) }}">{{ $mainCategory->name }}</a></li>
+                                        @if($mainCategory->status == 1)
+                                            <li><a href="{{ asset('/products/' . $mainCategory->url) }}">{{ $mainCategory->name }}</a></li>
+                                        @endif
                                     @endforeach
                                 </ul>
                             </li>

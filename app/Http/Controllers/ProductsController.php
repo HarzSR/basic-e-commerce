@@ -291,7 +291,7 @@ class ProductsController extends Controller
 
     public function products($url = null)
     {
-        $categoryCount = Category::where(['url' => $url])->count();
+        $categoryCount = Category::where(['url' => $url, 'status' => 1])->count();
         if($categoryCount == 0)
         {
             abort(404);
