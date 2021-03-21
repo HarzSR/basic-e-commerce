@@ -335,10 +335,21 @@ class ProductsController extends Controller
 
     public function product($id = null)
     {
-        $productDetails = Product::where(['id' => $id])->first();
+        $productDetails = Product::with('attributes')->where(['id' => $id])->first();
 
         $categories = Category::with('categories')->where(['parent_id' => 0])->get();
 
         return view('products.detail')->with(compact('productDetails', 'categories'));
+    }
+
+    // Get Product Price upon Attribute Change Function
+
+    public function getProductPrice(Request $request)
+    {
+        $data = $request->all();
+
+        $sizeArray = explode('-', $data['idSize']);
+        $productAttribute = ProductsAttribute::where(['product_id' => $sizeArray[0], 'size' => $sizeArray[1]])->first();
+        echo $productAttribute->price;
     }
 }
