@@ -61,6 +61,14 @@ class ProductsController extends Controller
             {
                 $product->description = '';
             }
+            if(!empty($data['care']))
+            {
+                $product->care = $data['care'];
+            }
+            else
+            {
+                $product->care = '';
+            }
             if(!empty($data['price']))
             {
                 $product->price = $data['price'];
@@ -124,7 +132,7 @@ class ProductsController extends Controller
 
     public function viewProducts()
     {
-        $products = Product::get();
+        $products = Product::orderby('id', 'DESC')->get();
 
         foreach ($products as $key => $val)
         {
@@ -177,7 +185,12 @@ class ProductsController extends Controller
                 $data['description'] = '';
             }
 
-            Product::where(['id' => $id])->update(['category_id' => $data['category_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'description' => $data['description'], 'price' => $data['price'], 'image' => $fileName]);
+            if(empty($data['care']))
+            {
+                $data['care'] = '';
+            }
+
+            Product::where(['id' => $id])->update(['category_id' => $data['category_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'description' => $data['description'], 'care' => $data['care'], 'price' => $data['price'], 'image' => $fileName]);
 
             return redirect()->back()->with('flash_message_success', 'Product Updated Successfully');
         }

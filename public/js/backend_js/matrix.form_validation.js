@@ -108,6 +108,9 @@ $(document).ready(function()
             description:{
 			    required:true,
             },
+            care:{
+                required:true,
+            },
 			price:{
 				required:true,
 				number:true,
@@ -136,6 +139,9 @@ $(document).ready(function()
 			description:{
 				required:true,
 			},
+            care:{
+                required:true,
+            },
 			url:{
 				required:true,
 			}

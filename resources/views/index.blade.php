@@ -71,38 +71,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
-                    <div class="left-sidebar">
-                        <h2>Category</h2>
-                        <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-                            <div class="panel panel-default">
-                                <?php // echo $category_menu; ?>
-                                @foreach($categories as $category)
-                                    @if($category->status == 1)
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#{{ $category->id }}" href="#{{ $category->url }}">
-                                                    <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                                    {{ $category->name }}
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="{{ $category->url }}" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                <ul>
-                                                    @foreach($category->categories as $sub_category)
-                                                        @if($sub_category->status == 1)
-                                                            <li><a href="{{ asset('/products/' . $sub_category->url) }}">{{ $sub_category->name }}</a></li>
-                                                        @endif
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    @endif
-                                @endforeach
-                            </div>
-                        </div><!--/category-products-->
-
-                    </div>
+                    @include('layouts.frontLayout.front_sidebar')
                 </div>
 
                 <div class="col-sm-9 padding-right">
@@ -116,14 +85,14 @@
                                         <img src="{{ asset('images/backend_images/products/small/' . $product->image   ) }}" alt="" />
                                         <h2>NZ$ {{ $product->price }}</h2>
                                         <p>{{ $product->product_name }}</p>
-                                        <a href="{{ asset('/product/' . $sub_category->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        <a href="{{ asset('/product/' . $product->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </div>
                                     <div class="product-overlay">
                                         <div class="overlay-content">
                                             <h2>NZ$ {{ $product->price }}</h2>
                                             <p>{{ $product->product_name }}</p>
                                             <p>{{ $product->description }}</p>
-                                            <a href="{{ asset('/product/' . $sub_category->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            <a href="{{ asset('/product/' . $product->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                         </div>
                                     </div>
                                 </div>

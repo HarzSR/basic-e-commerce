@@ -61,6 +61,12 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
+                                    <label class="control-label">Materials & Care</label>
+                                    <div class="controls">
+                                        <textarea name="care" id="care">{{ $productDetails->care }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="control-group">
                                     <label class="control-label">Price</label>
                                     <div class="controls">
                                         <input type="text" name="price" id="price" value="{{ $productDetails->price }}">
