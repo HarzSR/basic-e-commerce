@@ -30,28 +30,29 @@ $(document).ready(function(){
 });
 
 $(document).ready(function (){
-    var originalSize = document.getElementById('getPrice').innerHTML;
-    $('#size').change(function (){
-        var idSize = $(this).val();
-        if(idSize){
-            $.ajax({
-                type: 'get',
-                url: '/get-product-price',
-                data: {
-                    idSize: idSize,
-                },
-                success: function (response){
-                    // alert(response);
-                    $('#getPrice').html("&#8377; " + response);
-                },
-                error: function (){
-                    alert("Error");
-                }
-            });
-        }
-        else
-        {
-            $('#getPrice').html(originalSize);
-        }
-    });
+    if(document.getElementById("getPrice") !== null)
+    {
+        var originalSize = document.getElementById('getPrice').innerHTML;
+        $('#size').change(function () {
+            var idSize = $(this).val();
+            if (idSize) {
+                $.ajax({
+                    type: 'get',
+                    url: '/get-product-price',
+                    data: {
+                        idSize: idSize,
+                    },
+                    success: function (response) {
+                        // alert(response);
+                        $('#getPrice').html("&#8377; " + response);
+                    },
+                    error: function () {
+                        alert("Error");
+                    }
+                });
+            } else {
+                $('#getPrice').html(originalSize);
+            }
+        });
+    }
 });

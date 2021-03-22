@@ -81,22 +81,22 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($productDetails['attributes'] as $attribute)
-                                    <tr class="gradeX">
-                                        <td>{{ $attribute->id }}</td>
-                                        <td>{{ $attribute->sku }}</td>
-                                        <td>{{ $attribute->size }}</td>
-                                        <td>{{ $attribute->price }}</td>
-                                        <td>{{ $attribute->stock }}</td>
-                                        <td class="center">
-                                            <!-- <a href="{{ $attribute->id }}" data-toggle="modal" class="btn btn-success btn-mini">View</a>
-                                            <a href="{{ url('/admin/edit-product/'.$attribute->id) }}" class="btn btn-primary btn-mini">Edit</a>
-                                            <a href="{{ url('/admin/add-attributes/'.$attribute->id) }}" class="btn btn-warning btn-mini">Add</a>
-                                            <a href="{{ url('/admin/delete-product/'.$attribute->id) }}" class="btn btn-danger btn-mini delProduct" >Delete</a></td> -->
-                                            <a rel="{{ $attribute->id }}" rel1="delete-attribute" rel2="Attribute" href="javascript:" class="btn btn-danger btn-mini deleteRecord" >Delete</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                    @foreach($productDetails['attributes'] as $attribute)
+                                        <tr class="gradeX">
+                                            <td>{{ $attribute->id }}</td>
+                                            <td>{{ $attribute->sku }}</td>
+                                            <td>{{ $attribute->size }}</td>
+                                            <td>{{ $attribute->price }}</td>
+                                            <td>{{ $attribute->stock }}</td>
+                                            <td class="center">
+                                                <!-- <a href="{{ $attribute->id }}" data-toggle="modal" class="btn btn-success btn-mini">View</a>
+                                                <a href="{{ url('/admin/edit-product/'.$attribute->id) }}" class="btn btn-primary btn-mini">Edit</a>
+                                                <a href="{{ url('/admin/add-attributes/'.$attribute->id) }}" class="btn btn-warning btn-mini">Add</a>
+                                                <a href="{{ url('/admin/delete-product/'.$attribute->id) }}" class="btn btn-danger btn-mini delProduct" >Delete</a></td> -->
+                                                <a rel="{{ $attribute->id }}" rel1="delete-attribute" rel2="Attribute" href="javascript:" class="btn btn-danger btn-mini deleteRecord" >Delete</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                                 <tfoot>
                                     <th>Attribute ID</th>

@@ -87,14 +87,14 @@
                                             <p>{{ $product->product_name }}</p>
                                             <a href="{{ url('product/' . $product->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                         </div>
-                                        <div class="product-overlay">
+                                        <!-- <div class="product-overlay">
                                             <div class="overlay-content">
                                                 <h2>NZ$ {{ $product->price }}</h2>
                                                 <p>{{ $product->product_name }}</p>
                                                 <p>{{ $product->description }}</p>
                                                 <a href="{{ url('product/' . $product->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="choose">
                                         <ul class="nav nav-pills nav-justified">
