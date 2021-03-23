@@ -21,29 +21,19 @@
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner">
                                     <div class="item active">
-                                        <a href=""><img src="" alt=""></a>
-                                        <a href=""><img src="" alt=""></a>
-                                        <a href=""><img src="" alt=""></a>
-                                    </div>
-                                    <div class="item">
-                                        <a href=""><img src="" alt=""></a>
-                                        <a href=""><img src="" alt=""></a>
-                                        <a href=""><img src="" alt=""></a>
-                                    </div>
-                                    <div class="item">
-                                        <a href=""><img src="" alt=""></a>
-                                        <a href=""><img src="" alt=""></a>
-                                        <a href=""><img src="" alt=""></a>
+                                        @foreach($productAdditionalImages as $productAdditionalImage)
+                                            <a href=""><img src="{{ asset('images/backend_images/products/small/' . $productAdditionalImage->image) }}" alt="" style="width: 80px"></a>
+                                        @endforeach
                                     </div>
                                 </div>
 
-                                <!-- Controls -->
-                                <a class="left item-control" href="#similar-product" data-slide="prev">
-                                    <i class="fa fa-angle-left"></i>
-                                </a>
-                                <a class="right item-control" href="#similar-product" data-slide="next">
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
+{{--                                <!-- Controls -->--}}
+{{--                                <a class="left item-control" href="#similar-product" data-slide="prev">--}}
+{{--                                    <i class="fa fa-angle-left"></i>--}}
+{{--                                </a>--}}
+{{--                                <a class="right item-control" href="#similar-product" data-slide="next">--}}
+{{--                                    <i class="fa fa-angle-right"></i>--}}
+{{--                                </a>--}}
                             </div>
 
                         </div>

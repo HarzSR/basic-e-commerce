@@ -408,7 +408,9 @@ class ProductsController extends Controller
 
         $categories = Category::with('categories')->where(['parent_id' => 0])->get();
 
-        return view('products.detail')->with(compact('productDetails', 'categories'));
+        $productAdditionalImages = ProductsImage::where('product_id', $id)->get();
+
+        return view('products.detail')->with(compact('productDetails', 'categories', 'productAdditionalImages'));
     }
 
     // Get Product Price upon Attribute Change Function
