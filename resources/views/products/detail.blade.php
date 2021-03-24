@@ -13,27 +13,25 @@
                     <div class="product-details"><!--product-details-->
                         <div class="col-sm-5">
                             <div class="view-product">
-                                <img src="{{ asset('images/backend_images/products/medium/' . $productDetails->image) }}" alt="" />
-                                <!-- <h3>ZOOM</h3> -->
+                                <div class="easyzoom easyzoom--overlay easyzoom--with-thumbnails">
+                                    <a href="{{ asset('images/backend_images/products/large/' . $productDetails->image) }}">
+                                        <img class="mainImage" src="{{ asset('images/backend_images/products/medium/' . $productDetails->image) }}" alt="" style="width: 100%"/>
+                                    </a>
+                                </div>
                             </div>
                             <div id="similar-product" class="carousel slide" data-ride="carousel">
 
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner">
-                                    <div class="item active">
+                                    <div class="item active thumbnails">
                                         @foreach($productAdditionalImages as $productAdditionalImage)
-                                            <a href=""><img src="{{ asset('images/backend_images/products/small/' . $productAdditionalImage->image) }}" alt="" style="width: 80px"></a>
+                                            <a href="{{ asset('images/backend_images/products/large/' . $productAdditionalImage->image) }}" data-standard="{{ asset('images/backend_images/products/small/' . $productAdditionalImage->image) }}">
+                                                <img class="changeImage" src="{{ asset('images/backend_images/products/small/' . $productAdditionalImage->image) }}" alt="" style="width: 80px">
+                                            </a>
                                         @endforeach
                                     </div>
                                 </div>
 
-{{--                                <!-- Controls -->--}}
-{{--                                <a class="left item-control" href="#similar-product" data-slide="prev">--}}
-{{--                                    <i class="fa fa-angle-left"></i>--}}
-{{--                                </a>--}}
-{{--                                <a class="right item-control" href="#similar-product" data-slide="next">--}}
-{{--                                    <i class="fa fa-angle-right"></i>--}}
-{{--                                </a>--}}
                             </div>
 
                         </div>
