@@ -315,6 +315,22 @@ class ProductsController extends Controller
         return view('admin.products.add_attributes')->with(compact('productDetails'));
     }
 
+    // Edit Attributes Function
+
+    public function editAttributes(Request $request, $id = null)
+    {
+        if($request->isMethod('POST'))
+        {
+            $data = $request->all();
+            foreach ($data['idAttr'] as $key => $attr)
+            {
+                ProductsAttribute::where(['id' => $data['idAttr'][$key]])->update(['price' => $data['price'][$key], 'stock' => $data['stock'][$key]]);
+            }
+
+            return redirect()->back()->with('flash_message_success', 'Products Attribute Updated Successfully');
+        }
+    }
+
     // Add More Images Function
 
     public function addImages(Request $request, $id = null)
