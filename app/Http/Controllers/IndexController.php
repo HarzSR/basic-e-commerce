@@ -22,7 +22,7 @@ class IndexController extends Controller
 
         // Get All Products - Random
 
-        $productsAll = Product::inRandomOrder()->get();
+        $productsAll = Product::inRandomOrder()->where('status', 1)->get();
 
         // Get Sub Categories
 

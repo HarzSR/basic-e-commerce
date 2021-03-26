@@ -106,6 +106,14 @@ class ProductsController extends Controller
                     }
                 }
             }
+            if(empty($data['status']))
+            {
+                $product->status = 0;
+            }
+            else
+            {
+                $product->status = 1;
+            }
 
             $product->save();
 
@@ -190,8 +198,16 @@ class ProductsController extends Controller
             {
                 $data['care'] = '';
             }
+            if(empty($data['status']))
+            {
+                $status = 0;
+            }
+            else
+            {
+                $status = 1;
+            }
 
-            Product::where(['id' => $id])->update(['category_id' => $data['category_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'description' => $data['description'], 'care' => $data['care'], 'price' => $data['price'], 'image' => $fileName]);
+            Product::where(['id' => $id])->update(['category_id' => $data['category_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'description' => $data['description'], 'care' => $data['care'], 'price' => $data['price'], 'image' => $fileName, 'status' => $status]);
 
             return redirect()->back()->with('flash_message_success', 'Product Updated Successfully');
         }
@@ -400,7 +416,7 @@ class ProductsController extends Controller
 
         if($categoryDetails->parent_id != 0)
         {
-            $productsAll = Product::where(['category_id' => $categoryDetails->id])->get();
+            $productsAll = Product::where(['category_id' => $categoryDetails->id])->where('status', 1)->get();
         }
         else
         {
@@ -410,7 +426,7 @@ class ProductsController extends Controller
                 $categoryIds[] = $subCategory->id;
             }
             array_push($categoryIds, $categoryDetails->id);
-            $productsAll = Product::whereIn('category_id',$categoryIds)->get();
+            $productsAll = Product::whereIn('category_id',$categoryIds)->where('status', 1)->get();
         }
 
         return view('products.listing')->with(compact('categoryDetails', 'productsAll', 'categories'));
@@ -420,6 +436,12 @@ class ProductsController extends Controller
 
     public function product($id = null)
     {
+        $productsCount = Product::where(['id' => $id, 'status' => 1])->count();
+        if($productsCount == 0)
+        {
+            abort(404);
+        }
+
         $productDetails = Product::with('attributes')->where(['id' => $id])->first();
 
         $categories = Category::with('categories')->where(['parent_id' => 0])->get();
