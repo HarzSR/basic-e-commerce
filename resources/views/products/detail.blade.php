@@ -14,7 +14,7 @@
                         <div class="col-sm-5">
                             <div class="view-product">
                                 <div class="easyzoom easyzoom--overlay easyzoom--with-thumbnails">
-                                    <a href="{{ asset('images/backend_images/products/large/' . $productDetails->image) }}">
+                                    <a class="mainImageHref" href="{{ asset('images/backend_images/products/large/' . $productDetails->image) }}">
                                         <img class="mainImage" src="{{ asset('images/backend_images/products/medium/' . $productDetails->image) }}" alt="" style="width: 100%"/>
                                     </a>
                                 </div>
@@ -25,7 +25,7 @@
                                 <div class="carousel-inner">
                                     <div class="item active thumbnails">
                                         @foreach($productAdditionalImages as $productAdditionalImage)
-                                            <a href="{{ asset('images/backend_images/products/large/' . $productAdditionalImage->image) }}" data-standard="{{ asset('images/backend_images/products/small/' . $productAdditionalImage->image) }}">
+                                            <a class="changeImageHref" href="{{ asset('images/backend_images/products/large/' . $productAdditionalImage->image) }}" data-standard="{{ asset('images/backend_images/products/medium/' . $productAdditionalImage->image) }}">
                                                 <img class="changeImage" src="{{ asset('images/backend_images/products/small/' . $productAdditionalImage->image) }}" alt="" style="width: 80px">
                                             </a>
                                         @endforeach
@@ -53,12 +53,22 @@
 									<span id="getPrice">&#8377; {{ $productDetails->price }}</span>
 									<label>Quantity:</label>
 									<input type="text" value="1" />
-									<button type="button" class="btn btn-fefault cart">
-										<i class="fa fa-shopping-cart"></i>
-										Add to cart
-									</button>
+                                    @if($total_stock > 0)
+                                        <button type="button" class="btn btn-fefault cart" id="cartButton">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            Add to cart
+                                        </button>
+                                    @endif
 								</span>
-                                <p><b>Availability:</b> In Stock</p>
+                                <p><b>Availability:</b>
+                                    <span id="availability">
+                                        @if($total_stock > 0)
+                                            In Stock
+                                        @else
+                                            Out of Stock
+                                        @endif
+                                    </span>
+                                </p>
                                 <p><b>Condition:</b> New</p>
                                 <a href=""><img src="{{ asset('images/frontend_images/product-details/share.png') }}" class="share img-responsive"  alt="" /></a>
                             </div><!--/product-information-->

@@ -47,7 +47,23 @@ $(document).ready(function ()
                     },
                     success: function (response) {
                         // alert(response);
-                        $('#getPrice').html("&#8377; " + response);
+                        var getPrice = response.split('#');
+                        $('#getPrice').html("&#8377; " + getPrice[0]);
+                        if(getPrice[1] == 0)
+                        {
+                            $('#cartButton').hide();
+                            $('#availability').text("Out of Stock");
+                        }
+                        else if(getPrice[1] <= 5)
+                        {
+                            $('#cartButton').show();
+                            $('#availability').text("Last few in Stock");
+                        }
+                        else
+                        {
+                            $('#cartButton').show();
+                            $('#availability').text("In Stock");
+                        }
                     },
                     error: function () {
                         alert("Error");
@@ -67,8 +83,10 @@ $(document).ready(function ()
         {
             var originalImage = $(".mainImage").attr('src');
             var imageSource = $(this).attr('src');
+            $(".mainImageHref").attr('href', imageSource);
             $(".mainImage").attr('src', imageSource);
             $(this).attr('src', originalImage);
+            $(this).parent('.changeImageHref').attr('href', originalImage);
         });
     }
 });

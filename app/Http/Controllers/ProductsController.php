@@ -426,7 +426,9 @@ class ProductsController extends Controller
 
         $productAdditionalImages = ProductsImage::where('product_id', $id)->get();
 
-        return view('products.detail')->with(compact('productDetails', 'categories', 'productAdditionalImages'));
+        $total_stock = ProductsAttribute::where('product_id', $id)->sum('stock');
+
+        return view('products.detail')->with(compact('productDetails', 'categories', 'productAdditionalImages', 'total_stock'));
     }
 
     // Get Product Price upon Attribute Change Function
@@ -437,7 +439,7 @@ class ProductsController extends Controller
 
         $sizeArray = explode('-', $data['idSize']);
         $productAttribute = ProductsAttribute::where(['product_id' => $sizeArray[0], 'size' => $sizeArray[1]])->first();
-        echo $productAttribute->price;
+        echo $productAttribute->price . '#' . $productAttribute->stock;
     }
 
     // Delete Additional Image Function
