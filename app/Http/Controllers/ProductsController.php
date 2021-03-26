@@ -428,7 +428,9 @@ class ProductsController extends Controller
 
         $total_stock = ProductsAttribute::where('product_id', $id)->sum('stock');
 
-        return view('products.detail')->with(compact('productDetails', 'categories', 'productAdditionalImages', 'total_stock'));
+        $relatedProducts = Product::where('id', '!=', $id)->where(['category_id' => $productDetails->category_id])->get();
+
+        return view('products.detail')->with(compact('productDetails', 'categories', 'productAdditionalImages', 'total_stock', 'relatedProducts'));
     }
 
     // Get Product Price upon Attribute Change Function
