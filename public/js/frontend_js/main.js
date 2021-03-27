@@ -49,6 +49,7 @@ $(document).ready(function ()
                         // alert(response);
                         var getPrice = response.split('#');
                         $('#getPrice').html("&#8377; " + getPrice[0]);
+                        $('#hiddenPrice').val(getPrice[0]);
                         if(getPrice[1] == 0)
                         {
                             $('#cartButton').hide();

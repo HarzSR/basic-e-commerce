@@ -30,6 +30,8 @@ Route::match(['get', 'post'], '/admin', 'AdminController@login');
 // Route::get('/admin/dashboard', 'AdminController@dashboard');
 Route::get('/logout', 'AdminController@logout');
 
+Route::match(['get', 'post'], '/add-cart', 'ProductsController@addToCart');
+
 Route::group(['middleware' => ['auth']], function () {
     // Admin Routes
 

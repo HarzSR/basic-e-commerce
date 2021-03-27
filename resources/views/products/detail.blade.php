@@ -11,6 +11,18 @@
 
                 <div class="col-sm-9 padding-right">
                     <div class="product-details"><!--product-details-->
+                        @if(Session::has('flash_message_error'))
+                            <div class="alert alert-error alert-block">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>{!! session('flash_message_error') !!}</strong>
+                            </div>
+                        @endif
+                        @if(Session::has('flash_message_success'))
+                            <div class="alert alert-success alert-block">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>{!! session('flash_message_success') !!}</strong>
+                            </div>
+                        @endif
                         <div class="col-sm-5">
                             <div class="view-product">
                                 <div class="easyzoom easyzoom--overlay easyzoom--with-thumbnails">
@@ -36,12 +48,19 @@
 
                         </div>
                         <div class="col-sm-7">
-                            <div class="product-information"><!--/product-information-->
+                            <form action="{{ url('add-cart') }}" name="addToCartForm" id="addToCartForm" method="post">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="product_id" value="{{ $productDetails->id }}">
+                                <input type="hidden" name="product_name" value="{{ $productDetails->product_name }}">
+                                <input type="hidden" name="product_code" value="{{ $productDetails->product_code }}">
+                                <input type="hidden" name="product_color" value="{{ $productDetails->product_color }}">
+                                <input type="hidden" name="price" value="{{ $productDetails->price }}" id="hiddenPrice">
+                                <div class="product-information"><!--/product-information-->
                                 <img src="{{ asset('images/frontend_images/product-details/new.jpg') }}" class="newarrival" alt="" />
                                 <h2>{{ $productDetails->product_name }}</h2>
                                 <p>Web Code: {{ $productDetails->product_code }}</p>
                                 <p>Select Size:&#8194;
-                                    <select name="size" id="size" style="width: 150px">
+                                    <select name="size" id="size" style="width: 150px" required>
                                         <option value="">Select</option>
                                         @foreach($productDetails->attributes as $productDetail)
                                             <option value="{{ $productDetails->id }}-{{ $productDetail->size }}">{{ $productDetail->size }}</option>
@@ -52,9 +71,9 @@
                                 <span>
 									<span id="getPrice">&#8377; {{ $productDetails->price }}</span>
 									<label>Quantity:</label>
-									<input type="text" value="1" />
+									<input type="text" name="quantity" id="quantity" value="1" />
                                     @if($total_stock > 0)
-                                        <button type="button" class="btn btn-fefault cart" id="cartButton">
+                                        <button type="submit" class="btn btn-fefault cart" id="cartButton">
                                             <i class="fa fa-shopping-cart"></i>
                                             Add to cart
                                         </button>
@@ -72,6 +91,7 @@
                                 <p><b>Condition:</b> New</p>
                                 <a href=""><img src="{{ asset('images/frontend_images/product-details/share.png') }}" class="share img-responsive"  alt="" /></a>
                             </div><!--/product-information-->
+                            </form>
                         </div>
                     </div><!--/product-details-->
 
