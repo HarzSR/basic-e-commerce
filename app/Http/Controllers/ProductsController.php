@@ -448,8 +448,8 @@ class ProductsController extends Controller
 
         DB::table('cart')->insert(['product_id' => $data['product_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'price' => $data['price'], 'size' => $sizeArray[1], 'quantity' => $data['quantity'], 'user_email' => $data['user_email'], 'session_id' => $session_id, 'created_at' => DB::raw('CURRENT_TIMESTAMP'), 'updated_at' => DB::raw('CURRENT_TIMESTAMP')]);
 
-        // return redirect()->back()->with('flash_message_success', 'Added to cart Successfully');
-        return redirect('cart')->with('flash_message_success', 'Added to cart Successfully');
+        return redirect()->back()->with('flash_message_success', 'Added to cart Successfully');
+        // return redirect('cart')->with('flash_message_success', 'Added to cart Successfully');
     }
 
     // Display Cart Function
@@ -461,11 +461,25 @@ class ProductsController extends Controller
             $session_id = Session::get('session_id');
             $userCart = DB::table('cart')->where(['session_id' => $session_id])->get();
 
+            foreach ($userCart as $key => $value)
+            {
+                $productDetails = Product::where('id', $value->product_id)->first();
+                $userCart[$key]->image = $productDetails->image;
+            }
+
             return view('products.cart')->with(compact('userCart'));
         }
         else
         {
             return view('products.cart');
         }
+    }
+
+    // Delete Cart Product
+    public function deleteCartProduct($id = null)
+    {
+        DB::table('cart')->where('id', $id)->delete();
+
+        return redirect('cart')->with('flash_message_success', 'Removed from cart Successfully');
     }
 }
