@@ -61,14 +61,14 @@
                                 @endforeach
                                 </tbody>
                                 <tfoot>
-                                <tr>
-                                    <th>Category ID</th>
-                                    <th>Category Name</th>
-                                    <th>Category Description</th>
-                                    <th>Category Level</th>
-                                    <th>Category URL</th>
-                                    <th>Actions</th>
-                                </tr>
+                                    <tr>
+                                        <th>Category ID</th>
+                                        <th>Category Name</th>
+                                        <th>Category Description</th>
+                                        <th>Category Level</th>
+                                        <th>Category URL</th>
+                                        <th>Actions</th>
+                                    </tr>
                                 </tfoot>
                             </table>
                         </div>

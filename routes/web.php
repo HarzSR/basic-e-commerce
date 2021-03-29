@@ -31,6 +31,7 @@ Route::match(['get', 'post'], '/admin', 'AdminController@login');
 Route::get('/logout', 'AdminController@logout');
 
 Route::match(['get', 'post'], '/add-cart', 'ProductsController@addToCart');
+Route::match(['get', 'post'], '/cart', 'ProductsController@cart');
 
 Route::group(['middleware' => ['auth']], function () {
     // Admin Routes

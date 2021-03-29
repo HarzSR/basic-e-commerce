@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 use Image;
 
 class ProductsController extends Controller
@@ -435,15 +436,36 @@ class ProductsController extends Controller
         {
             $data['user_email'] = '';
         }
-        if(empty($data['session_id']))
+
+        if(empty(Session::has('session_id')))
         {
-            $data['session_id'] = '';
+            $session_id = str_random(40);
+            Session::put('session_id', $session_id);
         }
+        $session_id = Session::get('session_id');
 
         $sizeArray = explode('-', $data['size']);
 
-        DB::table('cart')->insert(['product_id' => $data['product_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'price' => $data['price'], 'size' => $sizeArray[1], 'quantity' => $data['quantity'], 'user_email' => $data['user_email'], 'session_id' => $data['session_id'], 'created_at' => DB::raw('CURRENT_TIMESTAMP'), 'updated_at' => DB::raw('CURRENT_TIMESTAMP')]);
+        DB::table('cart')->insert(['product_id' => $data['product_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'price' => $data['price'], 'size' => $sizeArray[1], 'quantity' => $data['quantity'], 'user_email' => $data['user_email'], 'session_id' => $session_id, 'created_at' => DB::raw('CURRENT_TIMESTAMP'), 'updated_at' => DB::raw('CURRENT_TIMESTAMP')]);
 
-        return redirect()->back()->with('flash_message_success', 'Added to cart Successfully');
+        // return redirect()->back()->with('flash_message_success', 'Added to cart Successfully');
+        return redirect('cart')->with('flash_message_success', 'Added to cart Successfully');
+    }
+
+    // Display Cart Function
+
+    public function cart(Request $request)
+    {
+        if(Session::has('session_id'))
+        {
+            $session_id = Session::get('session_id');
+            $userCart = DB::table('cart')->where(['session_id' => $session_id])->get();
+
+            return view('products.cart')->with(compact('userCart'));
+        }
+        else
+        {
+            return view('products.cart');
+        }
     }
 }

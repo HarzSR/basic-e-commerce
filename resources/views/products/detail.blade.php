@@ -27,7 +27,7 @@
                             <div class="view-product">
                                 <div class="easyzoom easyzoom--overlay easyzoom--with-thumbnails">
                                     <a class="mainImageHref" href="{{ asset('images/backend_images/products/large/' . $productDetails->image) }}">
-                                        <img class="mainImage" src="{{ asset('images/backend_images/products/medium/' . $productDetails->image) }}" alt="" style="width: 100%"/>
+                                        <img class="mainImage" src="{{ asset('images/backend_images/products/small/' . $productDetails->image) }}" alt="" style="width: 100%"/>
                                     </a>
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                                 <div class="carousel-inner">
                                     <div class="item active thumbnails">
                                         @foreach($productAdditionalImages as $productAdditionalImage)
-                                            <a class="changeImageHref" href="{{ asset('images/backend_images/products/large/' . $productAdditionalImage->image) }}" data-standard="{{ asset('images/backend_images/products/medium/' . $productAdditionalImage->image) }}">
+                                            <a class="changeImageHref" href="{{ asset('images/backend_images/products/large/' . $productAdditionalImage->image) }}" data-standard="{{ asset('images/backend_images/products/small/' . $productAdditionalImage->image) }}">
                                                 <img class="changeImage" src="{{ asset('images/backend_images/products/small/' . $productAdditionalImage->image) }}" alt="" style="width: 80px">
                                             </a>
                                         @endforeach
@@ -71,7 +71,7 @@
                                 <span>
 									<span id="getPrice">&#8377; {{ $productDetails->price }}</span>
 									<label>Quantity:</label>
-									<input type="text" name="quantity" id="quantity" value="1" />
+									<input type="number" name="quantity" id="quantity" value="1" />
                                     @if($total_stock > 0)
                                         <button type="submit" class="btn btn-fefault cart" id="cartButton">
                                             <i class="fa fa-shopping-cart"></i>

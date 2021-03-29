@@ -29,16 +29,16 @@
                         <div class="widget-content nopadding">
                             <table class="table table-bordered data-table">
                                 <thead>
-                                <tr>
-                                    <th>Product ID</th>
-                                    <th>Category Name</th>
-                                    <th>Product Name</th>
-                                    <th>Product Code</th>
-                                    <th>Product Color</th>
-                                    <th>Product Image</th>
-                                    <th>Product Price</th>
-                                    <th>Actions</th>
-                                </tr>
+                                    <tr>
+                                        <th>Product ID</th>
+                                        <th>Category Name</th>
+                                        <th>Product Name</th>
+                                        <th>Product Code</th>
+                                        <th>Product Color</th>
+                                        <th>Product Image</th>
+                                        <th>Product Price</th>
+                                        <th>Actions</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($products as $product)

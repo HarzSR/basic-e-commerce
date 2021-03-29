@@ -88,6 +88,8 @@ $(document).ready(function ()
             $(".mainImage").attr('src', imageSource);
             $(this).attr('src', originalImage);
             $(this).parent('.changeImageHref').attr('href', originalImage);
+            $(this).parent('.changeImageHref').attr('data-standard', originalImage);
+            return false;
         });
     }
 });
