@@ -11,7 +11,7 @@
                 </ol>
             </div>
             @if(Session::has('flash_message_error'))
-                <div class="alert alert-error alert-block">
+                <div class="alert alert-danger alert-block">
                     <button type="button" class="close" data-dismiss="alert">×</button>
                     <strong>{!! session('flash_message_error') !!}</strong>
                 </div>
@@ -50,9 +50,11 @@
                                     </td>
                                     <td class="cart_quantity">
                                         <div class="cart_quantity_button">
-                                            <a class="cart_quantity_up" href=""> + </a>
+                                            @if($cart->quantity > 1)
+                                                <a class="cart_quantity_down" href="{{ url('cart/update-quantity/' . $cart->id . '/-1') }}"> - </a>
+                                            @endif
                                             <input class="cart_quantity_input" type="text" name="quantity" value="{{ $cart->quantity }}" autocomplete="off" size="2">
-                                            <a class="cart_quantity_down" href=""> - </a>
+                                            <a class="cart_quantity_up" href="{{ url('cart/update-quantity/' . $cart->id . '/1') }}"> + </a>
                                         </div>
                                     </td>
                                     <td class="cart_total">
