@@ -458,7 +458,16 @@ class ProductsController extends Controller
         }
         else
         {
-            DB::table('cart')->insert(['product_id' => $data['product_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'price' => $data['price'], 'size' => $sizeArray[1], 'quantity' => $data['quantity'], 'user_email' => $data['user_email'], 'session_id' => $session_id, 'created_at' => DB::raw('CURRENT_TIMESTAMP'), 'updated_at' => DB::raw('CURRENT_TIMESTAMP')]);
+            $getSku = ProductsAttribute::select('sku')->where(['product_id' => $data['product_id'], 'size' => $sizeArray[1]])->first();
+
+            $getStockCount = ProductsAttribute::select('stock')->where(['product_id' => $data['product_id'], 'size' => $sizeArray[1]])->first();
+
+            if($data['quantity'] > $getStockCount->stock)
+            {
+                return redirect()->back()->with('flash_message_error', 'Quantity out of Stock, Please choose a lower quantity. Available quantity - ' . $getStockCount->stock);
+            }
+
+            DB::table('cart')->insert(['product_id' => $data['product_id'], 'product_name' => $data['product_name'], 'product_code' => $getSku->sku, 'product_color' => $data['product_color'], 'price' => $data['price'], 'size' => $sizeArray[1], 'quantity' => $data['quantity'], 'user_email' => $data['user_email'], 'session_id' => $session_id, 'created_at' => DB::raw('CURRENT_TIMESTAMP'), 'updated_at' => DB::raw('CURRENT_TIMESTAMP')]);
 
             return redirect()->back()->with('flash_message_success', 'Added to cart Successfully');
         }
@@ -502,7 +511,19 @@ class ProductsController extends Controller
 
     public function updateCartQuantity($id = null, $quantity = null)
     {
-        DB::table('cart')->where('id', $id)->increment('quantity', $quantity);
-        return redirect('cart')->with('flash_message_success', 'Product updated Successfully');
+        $getCartDetails = DB::table('cart')->where('id', $id)->first();
+        $getAttributeStock = ProductsAttribute::where('sku', $getCartDetails->product_code)->first();
+
+        if($getCartDetails->quantity + $quantity <= $getAttributeStock->stock)
+        {
+            DB::table('cart')->where('id', $id)->increment('quantity', $quantity);
+
+            return redirect('cart')->with('flash_message_success', 'Product updated Successfully');
+        }
+        else
+        {
+            return redirect('cart')->with('flash_message_error', 'Requested Quantity Unavailable. This it the last available quantity - ' . $getAttributeStock->stock);
+        }
+
     }
 }
