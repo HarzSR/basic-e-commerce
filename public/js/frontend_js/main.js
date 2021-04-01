@@ -76,22 +76,6 @@ $(document).ready(function ()
         });
     }
 
-    // Replace Main Image with Additional Image
-
-    if(document.getElementsByClassName("changeImage") !== null)
-    {
-        $(".changeImage").click(function ()
-        {
-            var originalImage = $(".mainImage").attr('src');
-            var imageSource = $(this).attr('src');
-            $(".mainImageHref").attr('href', imageSource);
-            $(".mainImage").attr('src', imageSource);
-            $(this).attr('src', originalImage);
-            $(this).parent('.changeImageHref').attr('href', originalImage);
-            $(this).parent('.changeImageHref').attr('data-standard', originalImage);
-            return false;
-        });
-    }
 });
 
 // Instantiate EasyZoom instances
@@ -105,8 +89,15 @@ $('.thumbnails').on('click', 'a', function(e)
     var $this = $(this);
     e.preventDefault();
 
+    var originalImage = $(".mainImage").attr("src");
+    var mainImageHref = $(".mainImageHref").attr('href');
+
     // Use EasyZoom's `swap` method
     api1.swap($this.data('standard'), $this.attr('href'));
+
+    $this.attr('href', mainImageHref);
+    $this.data('standard', originalImage);
+    $this.find("img").attr("src", originalImage);
 });
 
 // Setup toggles example
