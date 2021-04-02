@@ -59,14 +59,18 @@ class ProductsController extends Controller
             } else {
                 return redirect()->back()->with('flash_message_error', 'Product Price is missing');
             }
-            if (empty($data['image'])) {
+            if (empty($data['image']))
+            {
                 $product->image = '';
-            } else {
-                if ($request->hasFile('image')) {
+            }
+            else
+            {
+                if ($request->hasFile('image'))
+                {
                     $image_tmp = Input::file('image');
 
-                    if ($image_tmp->isValid()) {
-
+                    if ($image_tmp->isValid())
+                    {
                         $extension = $image_tmp->getClientOriginalExtension();
                         $fileName = time() . mt_rand() . '.' . $extension;
 
