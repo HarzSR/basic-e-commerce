@@ -110,7 +110,7 @@
                             <ul>
                                 @if(!empty(Session::get('couponAmount')))
                                     <li>Cart Sub Total <span>NZ$ <?php echo $total_amount; ?></span></li>
-                                    <li>Discount <span>NZ$ <?php echo Session::get('couponAmount'); ?></span></li>
+                                    <li>Discount <span>NZ$ <?php echo Session::get('couponAmount'); ?> | <a class="cart_quantity_delete" href="{{ url('cart/remove-coupon/') }}" onclick="return confirm('Would you like to remove Coupon?')"><i class="fa fa-times"></i></a></span></li>
                                     <li>Shipping Cost <span>Free</span></li>
                                     <li>Total <span>NZ$ <?php
                                             if ($total_amount - Session::get('couponAmount') < 0)

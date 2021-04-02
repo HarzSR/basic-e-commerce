@@ -431,6 +431,9 @@ class ProductsController extends Controller
 
     public function addToCart(Request $request)
     {
+        Session::forget('couponAmount');
+        Session::forget('couponCode');
+
         $data = $request->all();
 
         if(empty($data['user_email']))
@@ -503,6 +506,9 @@ class ProductsController extends Controller
 
     public function deleteCartProduct($id = null)
     {
+        Session::forget('couponAmount');
+        Session::forget('couponCode');
+
         DB::table('cart')->where('id', $id)->delete();
 
         return redirect('cart')->with('flash_message_success', 'Removed from cart Successfully');
@@ -512,6 +518,9 @@ class ProductsController extends Controller
 
     public function updateCartQuantity($id = null, $quantity = null)
     {
+        Session::forget('couponAmount');
+        Session::forget('couponCode');
+
         $getCartDetails = DB::table('cart')->where('id', $id)->first();
         $getAttributeStock = ProductsAttribute::where('sku', $getCartDetails->product_code)->first();
 
@@ -580,5 +589,15 @@ class ProductsController extends Controller
                 return redirect()->back()->with('flash_message_success', 'Coupon added Successfully');
             }
         }
+    }
+
+    // Remove Coupon Function
+
+    public function removeCoupon()
+    {
+        Session::forget('couponAmount');
+        Session::forget('couponCode');
+
+        return redirect()->back()->with('flash_message_success', 'Coupon removed Successfully');
     }
 }

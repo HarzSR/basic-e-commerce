@@ -52,6 +52,17 @@
                                 </div>
                             </div>
 
+                            <!-- <div class="item active">
+                                <img src="{{ asset('images/frontend_images/banners/banner1.png') }}" class="girl img-responsive" alt="" />
+                            </div>
+                            <div class="item">
+                                <img src="{{ asset('images/frontend_images/banners/banner2.png') }}" class="girl img-responsive" alt="" />
+                            </div>
+
+                            <div class="item">
+                                <img src="{{ asset('images/frontend_images/banners/banner3.png') }}" class="girl img-responsive" alt="" />
+                            </div> -->
+
                         </div>
 
                         <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
