@@ -20,43 +20,65 @@ class ProductsController extends Controller
 
     public function addProduct(Request $request)
     {
-        if ($request->isMethod('POST')) {
+        if ($request->isMethod('POST'))
+        {
             $data = $request->all();
 
             $product = new Product();
-            if (!empty($data['category_id'])) {
+            if (!empty($data['category_id']))
+            {
                 $product->category_id = $data['category_id'];
-            } else {
+            }
+            else
+            {
                 return redirect()->back()->with('flash_message_error', 'Category is missing');
             }
-            if (!empty($data['product_name'])) {
+            if (!empty($data['product_name']))
+            {
                 $product->product_name = $data['product_name'];
-            } else {
+            }
+            else
+            {
                 return redirect()->back()->with('flash_message_error', 'Product Name is missing');
             }
-            if (!empty($data['product_code'])) {
+            if (!empty($data['product_code']))
+            {
                 $product->product_code = $data['product_code'];
-            } else {
+            }
+            else
+            {
                 return redirect()->back()->with('flash_message_error', 'Product Code is missing');
             }
-            if (!empty($data['product_color'])) {
+            if (!empty($data['product_color']))
+            {
                 $product->product_color = $data['product_color'];
-            } else {
+            }
+            else
+            {
                 return redirect()->back()->with('flash_message_error', 'Product Color is missing');
             }
-            if (!empty($data['description'])) {
+            if (!empty($data['description']))
+            {
                 $product->description = $data['description'];
-            } else {
+            }
+            else
+            {
                 $product->description = '';
             }
-            if (!empty($data['care'])) {
+            if (!empty($data['care']))
+            {
                 $product->care = $data['care'];
-            } else {
+            }
+            else
+            {
                 $product->care = '';
             }
-            if (!empty($data['price'])) {
+            if (!empty($data['price']))
+            {
                 $product->price = $data['price'];
-            } else {
+            }
+            else
+            {
                 return redirect()->back()->with('flash_message_error', 'Product Price is missing');
             }
             if (empty($data['image']))
@@ -86,9 +108,12 @@ class ProductsController extends Controller
                     }
                 }
             }
-            if (empty($data['status'])) {
+            if (empty($data['status']))
+            {
                 $product->status = 0;
-            } else {
+            }
+            else
+            {
                 $product->status = 1;
             }
 
@@ -100,11 +125,13 @@ class ProductsController extends Controller
         $categories = Category::where(['parent_id' => 0])->get();
         $categories_dropdown = "<option value='' selected disabled>Select</option>";
 
-        foreach ($categories as $category) {
+        foreach ($categories as $category)
+        {
             $categories_dropdown .= "<option value='" . $category->id . "' >" . $category->name . "</option>";
             $sub_categories = Category::where(['parent_id' => $category->id])->get();
 
-            foreach ($sub_categories as $sub_category) {
+            foreach ($sub_categories as $sub_category)
+            {
                 $categories_dropdown .= "<option value='" . $sub_category->id . "'> &nbsp; --&nbsp;" . $sub_category->name . "</option>";
             }
         }
@@ -118,7 +145,8 @@ class ProductsController extends Controller
     {
         $products = Product::orderby('id', 'DESC')->get();
 
-        foreach ($products as $key => $val) {
+        foreach ($products as $key => $val)
+        {
             $category_name = Category::where(['id' => $val->category_id])->first();
             $products[$key]->category_name = $category_name->name;
         }
@@ -130,14 +158,16 @@ class ProductsController extends Controller
 
     public function editProduct(Request $request, $id = null)
     {
-        if ($request->isMethod('POST')) {
+        if ($request->isMethod('POST'))
+        {
             $data = $request->all();
 
-            if ($request->hasFile('image')) {
+            if ($request->hasFile('image'))
+            {
                 $image_tmp = Input::file('image');
 
-                if ($image_tmp->isValid()) {
-
+                if ($image_tmp->isValid())
+                {
                     $extension = $image_tmp->getClientOriginalExtension();
                     $fileName = time() . mt_rand() . '.' . $extension;
 
@@ -149,24 +179,35 @@ class ProductsController extends Controller
                     Image::make($image_tmp)->resize(600, 600)->save($medium_image_path);
                     Image::make($image_tmp)->resize(300, 300)->save($small_image_path);
                 }
-            } else {
-                if (empty($data['current_image'])) {
+            }
+            else
+            {
+                if (empty($data['current_image']))
+                {
                     $fileName = "";
-                } else {
+                }
+                else
+                {
                     $fileName = $data['current_image'];
                 }
             }
 
-            if (empty($data['description'])) {
+            if (empty($data['description']))
+            {
                 $data['description'] = '';
             }
 
-            if (empty($data['care'])) {
+            if (empty($data['care']))
+            {
                 $data['care'] = '';
             }
-            if (empty($data['status'])) {
+
+            if (empty($data['status']))
+            {
                 $status = 0;
-            } else {
+            }
+            else
+            {
                 $status = 1;
             }
 
@@ -180,20 +221,28 @@ class ProductsController extends Controller
         $categories = Category::where(['parent_id' => 0])->get();
         $categories_dropdown = "<option value='' selected disabled>Select</option>";
 
-        foreach ($categories as $category) {
-            if ($category->id == $productDetails->category_id) {
+        foreach ($categories as $category)
+        {
+            if ($category->id == $productDetails->category_id)
+            {
                 $selectVariable = "selected";
-            } else {
+            }
+            else
+            {
                 $selectVariable = "";
             }
 
             $categories_dropdown .= "<option value='" . $category->id . "' " . $selectVariable . ">" . $category->name . "</option>";
             $sub_categories = Category::where(['parent_id' => $category->id])->get();
 
-            foreach ($sub_categories as $sub_category) {
-                if ($sub_category->id == $productDetails->category_id) {
+            foreach ($sub_categories as $sub_category)
+            {
+                if ($sub_category->id == $productDetails->category_id)
+                {
                     $selectVariable = "selected";
-                } else {
+                }
+                else
+                {
                     $selectVariable = "";
                 }
 
@@ -208,6 +257,51 @@ class ProductsController extends Controller
 
     public function deleteProduct($id = null)
     {
+        $product = Product::where(['id' => $id])->first();
+
+        $large_image_path = 'images/backend_images/products/large/' . $product->image;
+        $medium_image_path = 'images/backend_images/products/medium/' . $product->image;
+        $small_image_path = 'images/backend_images/products/small/' . $product->image;
+
+        // File::delete($large_image_path, $medium_image_path, $small_image_path);
+        if (file_exists($large_image_path))
+        {
+            unlink($large_image_path);
+        }
+        if (file_exists($medium_image_path))
+        {
+            unlink($medium_image_path);
+        }
+        if (file_exists($small_image_path))
+        {
+            unlink($small_image_path);
+        }
+
+        $products = ProductsImage::where(['product_id' => $id])->first();
+
+        foreach ($products as $product)
+        {
+            $large_image_path = 'images/backend_images/products/large/' . $product->image;
+            $medium_image_path = 'images/backend_images/products/medium/' . $product->image;
+            $small_image_path = 'images/backend_images/products/small/' . $product->image;
+
+            // File::delete($large_image_path, $medium_image_path, $small_image_path);
+            if (file_exists($large_image_path))
+            {
+                unlink($large_image_path);
+            }
+            if (file_exists($medium_image_path))
+            {
+                unlink($medium_image_path);
+            }
+            if (file_exists($small_image_path))
+            {
+                unlink($small_image_path);
+            }
+        }
+
+        ProductsAttribute::where(['product_id' => $id])->delete();
+
         Product::where(['id' => $id])->delete();
 
         return redirect()->back()->with('flash_message_success', 'Product removed successfully');
@@ -226,13 +320,16 @@ class ProductsController extends Controller
         $small_image_path = 'images/backend_images/products/small/' . $product->image;
 
         // File::delete($large_image_path, $medium_image_path, $small_image_path);
-        if (file_exists($large_image_path)) {
+        if (file_exists($large_image_path))
+        {
             unlink($large_image_path);
         }
-        if (file_exists($medium_image_path)) {
+        if (file_exists($medium_image_path))
+        {
             unlink($medium_image_path);
         }
-        if (file_exists($small_image_path)) {
+        if (file_exists($small_image_path))
+        {
             unlink($small_image_path);
         }
 
@@ -247,16 +344,21 @@ class ProductsController extends Controller
 
     public function addAttributes(Request $request, $id = null)
     {
-        if ($request->isMethod('POST')) {
+        if ($request->isMethod('POST'))
+        {
             $data = $request->all();
-            foreach ($data['sku'] as $key => $val) {
-                if (!empty($val)) {
+            foreach ($data['sku'] as $key => $val)
+            {
+                if (!empty($val))
+                {
                     $attributeSkuCheck = ProductsAttribute::where('sku', $val)->count();
-                    if ($attributeSkuCheck > 0) {
+                    if ($attributeSkuCheck > 0)
+                    {
                         return redirect('/admin/add-attributes/' . $id)->with('flash_message_error', 'SKU \"' . $val . '\" already existing');
                     }
                     $attributeSizeCheck = ProductsAttribute::where(['product_id' => $id, 'size' => $data['size'][$key]])->count();
-                    if ($attributeSizeCheck > 0) {
+                    if ($attributeSizeCheck > 0)
+                    {
                         return redirect('/admin/add-attributes/' . $id)->with('flash_message_error', 'Size \"' . $data['size'][$key] . '\" already existing');
                     }
 
@@ -282,9 +384,11 @@ class ProductsController extends Controller
 
     public function editAttributes(Request $request, $id = null)
     {
-        if ($request->isMethod('POST')) {
+        if ($request->isMethod('POST'))
+        {
             $data = $request->all();
-            foreach ($data['idAttr'] as $key => $attr) {
+            foreach ($data['idAttr'] as $key => $attr)
+            {
                 ProductsAttribute::where(['id' => $data['idAttr'][$key]])->update(['price' => $data['price'][$key], 'stock' => $data['stock'][$key]]);
             }
 
@@ -296,12 +400,16 @@ class ProductsController extends Controller
 
     public function addImages(Request $request, $id = null)
     {
-        if ($request->isMethod('POST')) {
+        if ($request->isMethod('POST'))
+        {
             $data = $request->all();
-            if ($request->hasFile('image')) {
+            if ($request->hasFile('image'))
+            {
                 $files = $request->file('image');
-                foreach ($files as $file) {
-                    if ($file->isValid()) {
+                foreach ($files as $file)
+                {
+                    if ($file->isValid())
+                    {
                         $image = new ProductsImage;
 
                         $extension = $file->getClientOriginalExtension();
@@ -346,7 +454,8 @@ class ProductsController extends Controller
     public function products($url = null)
     {
         $categoryCount = Category::where(['url' => $url, 'status' => 1])->count();
-        if ($categoryCount == 0) {
+        if ($categoryCount == 0)
+        {
             abort(404);
         }
 
@@ -354,11 +463,15 @@ class ProductsController extends Controller
 
         $categoryDetails = Category::where(['url' => $url])->first();
 
-        if ($categoryDetails->parent_id != 0) {
+        if ($categoryDetails->parent_id != 0)
+        {
             $productsAll = Product::where(['category_id' => $categoryDetails->id])->where('status', 1)->get();
-        } else {
+        }
+        else
+        {
             $subCategories = Category::where(['parent_id' => $categoryDetails->id])->get();
-            foreach ($subCategories as $subCategory) {
+            foreach ($subCategories as $subCategory)
+            {
                 $categoryIds[] = $subCategory->id;
             }
             array_push($categoryIds, $categoryDetails->id);
@@ -373,7 +486,8 @@ class ProductsController extends Controller
     public function product($id = null)
     {
         $productsCount = Product::where(['id' => $id, 'status' => 1])->count();
-        if ($productsCount == 0) {
+        if ($productsCount == 0)
+        {
             abort(404);
         }
 
@@ -414,13 +528,16 @@ class ProductsController extends Controller
         $small_image_path = 'images/backend_images/products/small/' . $product->image;
 
         // File::delete($large_image_path, $medium_image_path, $small_image_path);
-        if (file_exists($large_image_path)) {
+        if (file_exists($large_image_path))
+        {
             unlink($large_image_path);
         }
-        if (file_exists($medium_image_path)) {
+        if (file_exists($medium_image_path))
+        {
             unlink($medium_image_path);
         }
-        if (file_exists($small_image_path)) {
+        if (file_exists($small_image_path))
+        {
             unlink($small_image_path);
         }
 

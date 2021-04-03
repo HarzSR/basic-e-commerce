@@ -8,13 +8,13 @@
                 <div class="col-sm-12">
                     <div id="slider-carousel" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
-                            <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#slider-carousel" data-slide-to="1"></li>
-                            <li data-target="#slider-carousel" data-slide-to="2"></li>
+                            @foreach($banners as $key => $banner)
+                                <li data-target="#slider-carousel" data-slide-to="{{ $key }}" @if($key == 0) class="active" @endif></li>
+                            @endforeach
                         </ol>
 
                         <div class="carousel-inner">
-                            <div class="item active">
+                            {{-- <div class="item active">
                                 <div class="col-sm-6">
                                     <h1><span>E</span>-SHOPPER</h1>
                                     <h2>Free E-Commerce Template</h2>
@@ -50,18 +50,13 @@
                                     <img src="{{ asset('images/frontend_images/home/girl3.jpg') }}" class="girl img-responsive" alt="" />
                                     <img src="{{ asset('images/frontend_images/home/pricing.png') }}" class="pricing" alt="" />
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <!-- <div class="item active">
-                                <img src="{{ asset('images/frontend_images/banners/banner1.png') }}" class="girl img-responsive" alt="" />
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('images/frontend_images/banners/banner2.png') }}" class="girl img-responsive" alt="" />
-                            </div>
-
-                            <div class="item">
-                                <img src="{{ asset('images/frontend_images/banners/banner3.png') }}" class="girl img-responsive" alt="" />
-                            </div> -->
+                            @foreach($banners as $key => $banner)
+                                <div class="item @if($key == 0) active @endif">
+                                    <a href="{{ $banner->link }}"><img src="{{ asset('images/frontend_images/banners/' . $banner->image) }}" class="girl img-responsive" alt="{{ $banner->title }}" /></a>
+                                </div>
+                            @endforeach
 
                         </div>
 

@@ -37,6 +37,7 @@
                                         <th>Product Color</th>
                                         <th>Product Image</th>
                                         <th>Product Price</th>
+                                        <th>Product Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -54,6 +55,13 @@
                                             @endif
                                         </td>
                                         <td>{{ $product->price }}</td>
+                                        <td>
+                                            @if($product->status == 1)
+                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Active</button>
+                                            @else
+                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">In-Active</button>
+                                            @endif
+                                        </td>
                                         <td class="center">
                                             <a href="#myModal{{ $product->id }}" data-toggle="modal" class="btn btn-success btn-mini" title="View Description">View</a>
                                             <a href="{{ url('/admin/edit-product/' . $product->id) }}" class="btn btn-primary btn-mini" title="Edit Product">Edit</a>
@@ -92,6 +100,7 @@
                                     <th>Product Color</th>
                                     <th>Product Image</th>
                                     <th>Product Price</th>
+                                    <th>Product Status</th>
                                     <th>Actions</th>
                                 </tfoot>
                             </table>

@@ -59,4 +59,90 @@ class BannersController extends Controller
 
         return view('admin.banners.add_banner');
     }
+
+    // View Banners Function
+
+    public function viewBanners()
+    {
+        $banners = Banner::get();
+
+        return view('admin.banners.view_banners')->with(compact('banners'));
+    }
+
+    // Edit Banner Function
+
+    public function editBanner(Request $request, $id = null)
+    {
+        $bannerDetails = Banner::where('id', $id)->first();
+
+        if($request->isMethod('POST'))
+        {
+            $data = $request->all();
+
+            $banner = new Banner();
+            if ($request->hasFile('image'))
+            {
+                $image_tmp = Input::file('image');
+
+                if ($image_tmp->isValid())
+                {
+                    $extension = $image_tmp->getClientOriginalExtension();
+                    $fileName = time() . mt_rand() . '.' . $extension;
+
+                    $banner_path = 'images/frontend_images/banners/' . $fileName;
+
+                    Image::make($image_tmp)->resize(1140, 340)->save($banner_path);
+                }
+            }
+            else if(!empty($data['current_image']))
+            {
+                $fileName= $data['current_image'];
+            }
+            else
+            {
+                $fileName = '';
+            }
+            if(empty($data['title']))
+            {
+                $data['title'] = '';
+            }
+            if(empty($data['link']))
+            {
+                $data['link'] = '';
+            }
+            if(empty($data['status']))
+            {
+                $status = 0;
+            }
+            else
+            {
+                $status = 1;
+            }
+
+            Banner::where('id', $id)->update(['image' => $fileName, 'title' => $data['title'], 'link' => $data['link'], 'status' => $status]);
+
+            return redirect()->back()->with('flash_message_success', 'Banner Edited Successfully');
+        }
+
+        return view('admin.banners.edit_banner')->with(compact('bannerDetails'));
+    }
+
+    // Delete Banner Function
+
+    public function deleteBanner($id = null)
+    {
+        $banner = Banner::where(['id' => $id])->first();
+
+        $banner_image_path = 'images/frontend_images/banners/' . $banner->image;
+
+        // File::delete($banner_image_path);
+        if (file_exists($banner_image_path))
+        {
+            unlink($banner_image_path);
+        }
+
+        Banner::where(['id' => $id])->delete();
+
+        return redirect()->back()->with('flash_message_success', 'Product removed successfully');
+    }
 }

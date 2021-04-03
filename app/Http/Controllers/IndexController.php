@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Banner;
 use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
@@ -62,6 +63,8 @@ class IndexController extends Controller
 
         $categories = Category::with('categories')->where(['parent_id' => 0])->get();
 
-        return view('index')->with(compact('productsAll' , 'categories'));
+        $banners = Banner::where('status', 1)->get();
+
+        return view('index')->with(compact('productsAll' , 'categories', 'banners'));
     }
 }

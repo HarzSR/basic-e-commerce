@@ -3,8 +3,8 @@
 
     <div id="content">
         <div id="content-header">
-            <div id="breadcrumb"> <a href="{{ url('/admin/dashboard') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Categories</a> <a href="#" class="current">View Categories</a> </div>
-            <h1>Categories</h1>
+            <div id="breadcrumb"> <a href="{{ url('/admin/dashboard') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Banners</a> <a href="#" class="current">View Banner</a> </div>
+            <h1>Banners</h1>
             @if(Session::has('flash_message_error'))
                 <div class="alert alert-error alert-block">
                     <button type="button" class="close" data-dismiss="alert">×</button>
@@ -24,60 +24,52 @@
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-                            <h5>View Categories</h5>
+                            <h5>View Banners</h5>
                         </div>
                         <div class="widget-content nopadding">
                             <table class="table table-bordered data-table">
                                 <thead>
                                     <tr>
-                                        <th>Category ID</th>
-                                        <th>Category Name</th>
-                                        <th>Category Description</th>
-                                        <th>Category Level</th>
-                                        <th>Category URL</th>
-                                        <th>Category Status</th>
+                                        <th>Banner ID</th>
+                                        <th>Name</th>
+                                        <th>Link</th>
+                                        <th>Image</th>
+                                        <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($categories as $category)
+                                @foreach($banners as $banner)
                                     <tr class="gradeX">
-                                        <td>{{ $category->id }}</td>
-                                        <td>{{ $category->name }}</td>
-                                        <td>{{ $category->description }}</td>
+                                        <td>{{ $banner->id }}</td>
+                                        <td>{{ $banner->title }}</td>
+                                        <td>{{ $banner->link }}</td>
                                         <td>
-                                            @foreach($levels as $val)
-                                                @if($val->id == $category->parent_id)
-                                                    {{ $val->name }}
-                                                @endif
-                                            @endforeach
+                                            @if(!empty($banner->image))
+                                                <img src="{{ asset('/images/frontend_images/banners/' . $banner->image) }}" style="width: 250px">
+                                            @endif
                                         </td>
-                                        <td>{{ $category->url }}</td>
                                         <td>
-                                            @if($category->status == 1)
+                                            @if($banner->status == 1)
                                                 <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Active</button>
                                             @else
                                                 <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">In-Active</button>
                                             @endif
                                         </td>
                                         <td class="center">
-                                            <a href="{{ url('/admin/edit-category/'.$category->id) }}" class="btn btn-primary btn-mini">Edit</a>
-                                            {{-- <a href="{{ url('/admin/delete-category/'.$category->id) }}" class="btn btn-danger btn-mini delCategory">Delete</a> --}}
-                                            <a rel="{{ $category->id }}" rel1="delete-category" rel2="Category" href="javascript:" class="btn btn-danger btn-mini deleteRecord">Delete</a>
+                                            <a href="{{ url('/admin/edit-banner/' . $banner->id) }}" class="btn btn-primary btn-mini" title="Edit Product">Edit</a>
+                                            <a rel="{{ $banner->id }}" rel1="delete-banner" rel2="Product" href="javascript:" class="btn btn-danger btn-mini deleteRecord" title="Delete Product">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                                 <tfoot>
-                                    <tr>
-                                        <th>Category ID</th>
-                                        <th>Category Name</th>
-                                        <th>Category Description</th>
-                                        <th>Category Level</th>
-                                        <th>Category URL</th>
-                                        <th>Category Status</th>
-                                        <th>Actions</th>
-                                    </tr>
+                                    <th>Banner ID</th>
+                                    <th>Name</th>
+                                    <th>Link</th>
+                                    <th>Image</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
                                 </tfoot>
                             </table>
                         </div>
