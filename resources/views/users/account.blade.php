@@ -20,13 +20,23 @@
                 <div class="col-sm-4 col-sm-offset-1">
                     <div class="login-form">
                         <h2>Update Account</h2>
-                        <form action="{{ url('/user-login') }}" id="loginForm" name="loginForm" method="post">
+                        <form action="{{ url('/account') }}" id="accountForm" name="accountForm" method="post">
                             {{ csrf_field() }}
-                            <input id="email" name="email" type="email" placeholder="Email Address" />
-                            <input id="loginPassword" name="loginPassword" type="password" placeholder="Password"/>
-                            <button type="submit" class="btn btn-default">Login</button>
+                            <input id="name" name="name" type="text" placeholder="Full Name" value="{{ $userDetails->name }}"/>
+                            <input id="address" name="address" type="text" placeholder="Address" value="{{ $userDetails->address }}"/>
+                            <input id="city" name="city" type="text" placeholder="City" value="{{ $userDetails->city }}"/>
+                            <input id="state" name="state" type="text" placeholder="State" value="{{ $userDetails->state }}"/>
+                            <select name="country" id="country">
+                                <option value="">Select Country</option>
+                                @foreach($countries as $country)
+                                    <option value="{{ $country->country_code }}" @if($country->country_code == $userDetails->country) selected @endif>{{ $country->country_name }}</option>
+                                @endforeach
+                            </select>
+                            <input id="pincode" name="pincode" type="text" placeholder="Pin Code" style="margin-top: 10px;" value="{{ $userDetails->pincode }}"/>
+                            <input id="mobile" name="mobile" type="text" placeholder="Mobile" value="{{ $userDetails->mobile }}"/>
+                            <button type="submit" class="btn btn-default">Update Profile</button>
                         </form>
-                    </div><!--/login form-->
+                    </div>
                 </div>
                 <div class="col-sm-1">
                     <h2 class="or">OR</h2>
@@ -34,14 +44,15 @@
                 <div class="col-sm-4">
                     <div class="signup-form">
                         <h2>Update Password</h2>
-                        <form action="{{ url('/user-register') }}" id="registerForm" name="registerForm" method="post">
+                        <form action="{{ url('/update-user-pwd') }}" id="passwordForm" name="passwordForm" method="post">
                             {{ csrf_field() }}
-                            <input id="name" name="name" type="text" placeholder="Full Name"/>
-                            <input id="email" name="email" type="email" placeholder="Email Address"/>
-                            <input id="registerPassword" name="registerPassword" type="password" placeholder="Password"/>
-                            <button type="submit" class="btn btn-default">Signup</button>
+                            <input id="current_pwd" name="current_pwd" type="password" placeholder="Current Password"/>
+                            <span id="chkPwd"></span>
+                            <input id="new_pwd" name="new_pwd" type="password" placeholder="New Password"/>
+                            <input id="confirm_pwd" name="confirm_pwd" type="password" placeholder="Confirm New Password"/>
+                            <button type="submit" class="btn btn-default">Update Password</button>
                         </form>
-                    </div><!--/sign up form-->
+                    </div>
                 </div>
             </div>
         </div>

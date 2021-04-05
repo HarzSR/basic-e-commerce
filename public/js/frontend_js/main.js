@@ -176,7 +176,155 @@ $().ready(function (){
         }
     });
 
+    $("#accountForm").validate({
+        rules: {
+            name: {
+                required: true,
+                minlength: 2,
+                accept: "[a-zA-Z]+"
+            },
+            address: {
+                required: true
+            },
+            city: {
+                required: true,
+                minlength: 2,
+                accept: "[a-zA-Z]+"
+            },
+            state: {
+                required: true,
+                minlength: 2,
+                accept: "[a-zA-Z]+"
+            },
+            country: {
+                required: true
+            },
+            pincode: {
+                required: true,
+                minlength: 4,
+                maxlength: 6,
+                accept: "[0-9]+"
+            },
+            mobile: {
+                required: true,
+                accept: "[0-9]+"
+            }
+        },
+        messages: {
+            name: {
+                required: "Please enter your Full Name",
+                minlength: "Minimum 2 characters",
+                accept: "Only Alphabets"
+            },
+            address: {
+                required: "Please enter your Address with Street Name"
+            },
+            city: {
+                required: "Please enter your City Name",
+                minlength: "Minimum 2 characters",
+                accept: "Only Alphabets"
+            },
+            state: {
+                required: "Please enter your State Name",
+                minlength: "Minimum 2 characters",
+                accept: "Only Alphabets"
+            },
+            country: {
+                required: "Please select your Country"
+            },
+            pincode: {
+                required: "Please enter your Pin Code/Zip Code",
+                minlength: "Minimum 4 digit",
+                maxlength: "Maximum 6 digit",
+                accept: "Only Numbers"
+            },
+            mobile: {
+                required: "Please enter your Mobile number with + ISD code",
+                accept: "Only Numbers & +"
+            }
+        }
+    });
+
+    $("#passwordForm").validate({
+        rules: {
+            current_pwd: {
+                required: true,
+                minlength: 5
+            },
+            new_pwd: {
+                required: true,
+                minlength: 5
+            },
+            confirm_pwd: {
+                required: true,
+                minlength: 5,
+                equalTo : "#new_pwd"
+            }
+        },
+        messages: {
+            current_pwd: {
+                required: "Please enter the Password.",
+                minlength: "Password should be at least 5 characters long."
+            },
+            new_pwd: {
+                required: "Please enter the Password.",
+                minlength: "Password should be at least 5 characters long."
+            },
+            confirm_pwd: {
+                required: "Please enter the Password.",
+                minlength: "Password should be at least 5 characters long.",
+                equalTo: "Password doesn't match with New one. Please type same password"
+            }
+        }
+    });
+
+    $("#current_pwd").keyup(function () {
+        var current_pwd = $(this).val();
+        $.ajax({
+            type: 'POST',
+            url: '/check-user-pwd',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                current_pwd: current_pwd
+            },
+            success: function (resp) {
+                // alert(resp);
+                if(resp == "false")
+                {
+                    $("#chkPwd").html("<font color='red'> Current Password is Incorrect</font>");
+                }
+                else if(resp == "true")
+                {
+                    $("#chkPwd").html("<font color='green'> Current Password is Corret</font>");
+                }
+            },
+            error: function (resp) {
+                alert("Error - " + resp);
+            }
+        });
+    });
+
     $("#registerPassword").passtrength({
+        minChars: 5,
+        passwordToggle: true,
+        tooltip: true
+    });
+
+    $("#current_pwd").passtrength({
+        minChars: 5,
+        passwordToggle: true,
+        tooltip: true
+    });
+
+    $("#new_pwd").passtrength({
+        minChars: 5,
+        passwordToggle: true,
+        tooltip: true
+    });
+
+    $("#confirm_pwd").passtrength({
         minChars: 5,
         passwordToggle: true,
         tooltip: true

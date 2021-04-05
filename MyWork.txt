@@ -58,5 +58,12 @@ Things done on this project
 - Side Bar Update for Active Page
 - Add visual password strength checker
 - User Registration
+- Account details
+- Front Login Auth
+- Account Details
+- Country DB
+- Update Account
+- Update Password
 
 ToDo List
+- Migrate Laravel 5.7
