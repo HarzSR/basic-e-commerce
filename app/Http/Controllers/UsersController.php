@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 class UsersController extends Controller
 {
@@ -38,6 +39,8 @@ class UsersController extends Controller
 
                 if(Auth::attempt(['email' => $data['email'], 'password' => $data['registerPassword']]))
                 {
+                    Session::put('frontSession', $data['email']);
+
                     return redirect('/');
                 }
 
@@ -56,6 +59,8 @@ class UsersController extends Controller
 
             if(Auth::attempt(['email' => $data['email'], 'password' => $data['loginPassword'], 'admin' => '0']))
             {
+                Session::put('frontSession', $data['email']);
+
                 return redirect('/');
             }
             else
@@ -82,10 +87,18 @@ class UsersController extends Controller
         }
     }
 
+    // User Account Function
+
+    public function account()
+    {
+        return view('users.account');
+    }
+
     // User Logout Function
 
     public function logout()
     {
+        Session::forget('frontSession');
         Auth::logout();
 
         return redirect('/');

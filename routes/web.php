@@ -43,6 +43,10 @@ Route::post('/user-login', 'UsersController@login');
 Route::match(['get', 'post'], '/check-email', 'UsersController@checkEmail');
 Route::get('/user-logout', 'UsersController@logout');
 
+Route::group(['middleware' => ['frontlogin']], function () {
+    Route::match(['get', 'post'], '/account', 'UsersController@account');
+});
+
 Route::group(['middleware' => ['auth']], function () {
     // Admin Routes
 
