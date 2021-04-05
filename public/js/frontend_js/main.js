@@ -118,3 +118,46 @@ $('.toggle').on('click', function()
         api2._init();
     }
 });
+
+$().ready(function (){
+    $("#registerForm").validate({
+        rules: {
+            name: {
+                required: true,
+                minlength: 2,
+                accept: "[a-zA-Z]+"
+            },
+            password: {
+                required: true,
+                minlength: 5
+            },
+            email: {
+                required: true,
+                email: true,
+                remote: '/check-email'
+            }
+        },
+        messages: {
+            name: {
+                required: "Please enter your Full Name.",
+                minlength: "Minimum length required is 2.",
+                accept: "Please enter only Alphabets."
+            },
+            password: {
+                required: "Please enter your Password.",
+                minlength: "Minimum length required is 5."
+            },
+            email: {
+                required: "Please enter your email.",
+                email: "Please enter a valid email.",
+                remote: "Email already exists, Please try signing in or else sign up with a new Email."
+            }
+        }
+    });
+
+    $("#password").passtrength({
+        minChars: 5,
+        passwordToggle: true,
+        tooltip: true
+    });
+});

@@ -1,0 +1,62 @@
+Things done on this project
+- Download Admin Template
+- Copy Template to Laravel
+- Fix CSS/JS Link issues
+- Admin Login and Dashboard
+- Default Login - Laravel Migration
+- Default Login - redirect for Admin
+- Setup Admin Dashboard, Header, Footer
+- Login failure handling
+- Securing routes
+- Settings Page with Password Update
+- Jquery/Ajax for current password setup
+- Admin Panel - CRUD operations
+- Display categories with table
+- Edit categories
+- Delete categories
+- Add sub categories
+- Product section
+- Display product with table
+- Product details pop-up
+- Edit products
+- Delete products - Sweet Alert
+- Update delete categories - Sweet Alert
+- Products Attributes section
+- Display product attributes with table
+- Edit product attributes
+- Delete products attribute - Sweet Alert
+- Download E-Shop Template
+- Copy Template to Laravel
+- Fix CSS/JS Link issues
+- Display products in Home page
+- Display sidebar
+- Display listing
+- Display Menu
+- Display sub category
+- 404 Redirects and URL not found
+- Enable/Disable categories
+- Hard delete of images
+- Additional product information
+- Alternate images
+- Display alternate images
+- Delete alternate images
+- Easy Zoom for Product images
+- Check stock availability
+- Recommended or Related items
+- Enable/Disable products
+- Add to cart
+- Remove cart items
+- Prevent duplicates in cart
+- Stock check in cart
+- Coupons functionality
+- Avail discount during checkout
+- Dynamic Banners
+- Edit banners
+- Delete banners
+- User Login/Register
+- User validation before submitting form using JQuery
+- Side Bar Update for Active Page
+- Add visual password strength checker
+- User Registration
+
+ToDo List

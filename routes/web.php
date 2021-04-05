@@ -37,6 +37,11 @@ Route::match(['get', 'post'], '/cart', 'ProductsController@cart');
 Route::get('/cart/delete-product/{id}', 'ProductsController@deleteCartProduct');
 Route::get('/cart/update-quantity/{id}/{quantity}', 'ProductsController@updateCartQuantity');
 
+Route::get('/login-register', 'UsersController@userLoginRegister');
+Route::post('/user-register', 'UsersController@register');
+Route::match(['get', 'post'], '/check-email', 'UsersController@checkEmail');
+Route::get('/user-logout', 'UsersController@logout');
+
 Route::group(['middleware' => ['auth']], function () {
     // Admin Routes
 
