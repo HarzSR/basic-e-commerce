@@ -39,6 +39,7 @@ Route::get('/cart/update-quantity/{id}/{quantity}', 'ProductsController@updateCa
 
 Route::get('/login-register', 'UsersController@userLoginRegister');
 Route::post('/user-register', 'UsersController@register');
+Route::post('/user-login', 'UsersController@login');
 Route::match(['get', 'post'], '/check-email', 'UsersController@checkEmail');
 Route::get('/user-logout', 'UsersController@logout');
 

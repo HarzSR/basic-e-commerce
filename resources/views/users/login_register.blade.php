@@ -20,13 +20,14 @@
                 <div class="col-sm-4 col-sm-offset-1">
                     <div class="login-form"><!--login form-->
                         <h2>Login to your account</h2>
-                        <form action="#">
-                            <input type="text" placeholder="Name" />
-                            <input type="email" placeholder="Email Address" />
-                            <span>
+                        <form action="{{ url('/user-login') }}" id="loginForm" name="loginForm" method="post">
+                            {{ csrf_field() }}
+                            <input id="email" name="email" type="email" placeholder="Email Address" />
+                            <input id="loginPassword" name="loginPassword" type="password" placeholder="Password"/>
+                            {{-- <span>
 								<input type="checkbox" class="checkbox">
 								Keep me signed in
-							</span>
+							</span> --}}
                             <button type="submit" class="btn btn-default">Login</button>
                         </form>
                     </div><!--/login form-->
@@ -41,7 +42,7 @@
                             {{ csrf_field() }}
                             <input id="name" name="name" type="text" placeholder="Full Name"/>
                             <input id="email" name="email" type="email" placeholder="Email Address"/>
-                            <input id="password" name="password" type="password" placeholder="Password"/>
+                            <input id="registerPassword" name="registerPassword" type="password" placeholder="Password"/>
                             <button type="submit" class="btn btn-default">Signup</button>
                         </form>
                     </div><!--/sign up form-->

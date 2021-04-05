@@ -127,7 +127,7 @@ $().ready(function (){
                 minlength: 2,
                 accept: "[a-zA-Z]+"
             },
-            password: {
+            registerPassword: {
                 required: true,
                 minlength: 5
             },
@@ -143,7 +143,7 @@ $().ready(function (){
                 minlength: "Minimum length required is 2.",
                 accept: "Please enter only Alphabets."
             },
-            password: {
+            registerPassword: {
                 required: "Please enter your Password.",
                 minlength: "Minimum length required is 5."
             },
@@ -155,7 +155,28 @@ $().ready(function (){
         }
     });
 
-    $("#password").passtrength({
+    $("#loginForm").validate({
+        rules: {
+            email: {
+                required: true,
+                email: true,
+            },
+            loginPassword: {
+                required: true
+            }
+        },
+        messages: {
+            email: {
+                required: "Please enter your email.",
+                email: "Please enter a valid email."
+            },
+            loginPassword: {
+                required: "Please enter your Password.",
+            }
+        }
+    });
+
+    $("#registerPassword").passtrength({
         minChars: 5,
         passwordToggle: true,
         tooltip: true

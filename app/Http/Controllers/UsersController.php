@@ -33,15 +33,34 @@ class UsersController extends Controller
                 $user = new User();
                 $user->name = $data['name'];
                 $user->email = $data['email'];
-                $user->password = bcrypt($data['password']);
+                $user->password = bcrypt($data['registerPassword']);
                 $user->save();
 
-                if(Auth::attempt(['email' => $data['email'], 'password' => $data['password']]))
+                if(Auth::attempt(['email' => $data['email'], 'password' => $data['registerPassword']]))
                 {
-                    return redirect(('/'));
+                    return redirect('/');
                 }
 
                 // return redirect()->back()->with('flash_message_success', 'User Registration Successful. Please Login');
+            }
+        }
+    }
+
+    // Login User Function
+
+    public function login(Request $request)
+    {
+        if($request->isMethod('POST'))
+        {
+            $data = $request->all();
+
+            if(Auth::attempt(['email' => $data['email'], 'password' => $data['loginPassword'], 'admin' => '0']))
+            {
+                return redirect('/');
+            }
+            else
+            {
+                return redirect()->back()->with('flash_message_error', 'Invalid Credentials. Please check Email and Password and try again.');
             }
         }
     }
