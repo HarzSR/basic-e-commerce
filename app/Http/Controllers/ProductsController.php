@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Country;
 use App\Coupon;
 use App\Product;
 use App\ProductsAttribute;
 use App\ProductsImage;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\File;
@@ -720,5 +723,16 @@ class ProductsController extends Controller
         Session::forget('couponCode');
 
         return redirect()->back()->with('flash_message_success', 'Coupon removed Successfully');
+    }
+
+    // Checkout Function
+
+    public function checkout(Request $request)
+    {
+        $user_id = Auth::User()->id;
+        $userDetails = User::find($user_id);
+        $countries = Country::get();
+
+        return view('products.checkout')->with(compact('userDetails', 'countries'));
     }
 }

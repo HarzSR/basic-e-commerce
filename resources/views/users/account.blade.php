@@ -29,7 +29,7 @@
                             <select name="country" id="country">
                                 <option value="">Select Country</option>
                                 @foreach($countries as $country)
-                                    <option value="{{ $country->country_code }}" @if($country->country_code == $userDetails->country) selected @endif>{{ $country->country_name }}</option>
+                                    <option value="{{ $country->country_name }}" @if($country->country_name == $userDetails->country) selected @endif>{{ $country->country_name }}</option>
                                 @endforeach
                             </select>
                             <input id="pincode" name="pincode" type="text" placeholder="Pin Code" style="margin-top: 10px;" value="{{ $userDetails->pincode }}"/>
