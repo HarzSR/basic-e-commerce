@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('pincode');
             $table->string('mobile');
             $table->string('email')->unique();
+            $table->dateTime('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('admin')->default('0');
             $table->rememberToken();

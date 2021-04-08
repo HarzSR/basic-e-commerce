@@ -48,6 +48,7 @@ Route::group(['middleware' => ['frontlogin']], function () {
     Route::post('/check-user-pwd', 'UsersController@chkUserPassword');
     Route::post('/update-user-pwd', 'UsersController@updatePassword');
     Route::match(['get', 'post'], '/checkout', 'ProductsController@checkout');
+    Route::match(['get', 'post'], '/order-review', 'ProductsController@orderReview');
 });
 
 Route::group(['middleware' => ['auth']], function () {
@@ -96,6 +97,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/delete-banner/{id}', 'BannersController@deleteBanner');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');

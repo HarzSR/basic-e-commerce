@@ -15,7 +15,7 @@ class CreateDeliveryAddressesTable extends Migration
     {
         Schema::create('delivery_addresses', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('parent_id');
+            $table->integer('user_id');
             $table->string('user_email');
             $table->string('name');
             $table->string('address');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Country;
 use App\Coupon;
+use App\DeliveryAddress;
 use App\Product;
 use App\ProductsAttribute;
 use App\ProductsImage;
@@ -730,9 +731,79 @@ class ProductsController extends Controller
     public function checkout(Request $request)
     {
         $user_id = Auth::User()->id;
+        $user_email = Auth::User()->email;
         $userDetails = User::find($user_id);
         $countries = Country::get();
 
-        return view('products.checkout')->with(compact('userDetails', 'countries'));
+        $shippingCount = DeliveryAddress::where('user_id', $user_id)->count();
+
+        if($shippingCount > 0)
+        {
+            $shippingDetails = DeliveryAddress::where('user_id', $user_id)->first();
+        }
+        else
+        {
+            $shippingDetails = '';
+        }
+
+        $session_id = Session::get('session_id');
+
+        DB::table('cart')->where(['session_id' => $session_id])->update(['user_email' => $user_email]);
+
+        if($request->isMethod('POST'))
+        {
+            $data = $request->all();
+
+            if(empty($data['billing_name']) || empty($data['billing_address']) || empty($data['billing_city']) || empty($data['billing_state']) || empty($data['billing_country']) || empty($data['billing_pincode']) || empty($data['billing_mobile']) || empty($data['billing_mobile']) || empty($data['shipping_address']) || empty($data['shipping_city']) || empty($data['shipping_state']) || empty($data['shipping_country']) || empty($data['shipping_pincode']) || empty($data['shipping_mobile']))
+            {
+                return redirect()->back()->with('flash_message_error', 'Please fill in all details');
+            }
+
+            User::where('id', $user_id)->update(['name' => $data['billing_name'], 'address' => $data['billing_address'], 'city' => $data['billing_city'], 'state' => $data['billing_state'], 'country' => $data['billing_country'], 'pincode' => $data['billing_pincode'], 'mobile' => $data['billing_mobile']]);
+
+            if($shippingDetails > 0)
+            {
+                DeliveryAddress::where('user_id', $user_id)->update(['name' => $data['shipping_name'], 'address' => $data['shipping_address'], 'city' => $data['shipping_city'], 'state' => $data['shipping_state'], 'country' => $data['shipping_country'], 'pincode' => $data['shipping_pincode'], 'mobile' => $data['shipping_mobile']]);
+            }
+            else
+            {
+                $shipping = new DeliveryAddress;
+                $shipping->user_id = $user_id;
+                $shipping->user_email = $user_email;
+                $shipping->name = $data['shipping_name'];
+                $shipping->address = $data['shipping_address'];
+                $shipping->city = $data['shipping_city'];
+                $shipping->state = $data['shipping_state'];
+                $shipping->country = $data['shipping_country'];
+                $shipping->pincode = $data['shipping_pincode'];
+                $shipping->mobile = $data['shipping_mobile'];
+
+                $shipping->save();
+            }
+
+            return redirect()->action('ProductsController@orderReview');
+        }
+
+        return view('products.checkout')->with(compact('userDetails', 'countries', 'shippingDetails'));
+    }
+
+    // Order Review Function
+
+    public function orderReview()
+    {
+        $user_id = Auth::User()->id;
+        $user_email = Auth::User()->email;
+        $userDetails = User::find($user_id);
+        $countries = Country::get();
+        $shippingDetails = DeliveryAddress::where('user_id', $user_id)->first();
+        $userCart = DB::table('cart')->where(['user_email' => $user_email])->get();
+
+        foreach ($userCart as $key => $product)
+        {
+            $productDetails = Product::where('id', $product->product_id)->first();
+            $userCart[$key]->image = $productDetails->image;
+        }
+
+        return view('products.order_review')->with(compact('userDetails', 'shippingDetails', 'userCart'));
     }
 }
