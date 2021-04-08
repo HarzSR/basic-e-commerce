@@ -122,7 +122,31 @@
                                     <p class="cart_total_price">NZ$ {{ $cart->price * $cart->quantity }}</p>
                                 </td>
                             </tr>
+                            <?php $total_amount = $total_amount + ($cart->price * $cart->quantity); ?>
                         @endforeach
+                        <tr>
+                            <td colspan="3">&nbsp;</td>
+                            <td colspan="2">
+                                <table class="table table-condensed total-result">
+                                    <tr>
+                                        <td>Cart Sub Total</td>
+                                        <td>NZ$ {{ $total_amount }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Discount Amount</td>
+                                        <td>@if(!empty(Session::get('couponAmount')))NZ$ {{ Session::get('couponAmount') }} @else NZ$ 0 @endif</td>
+                                    </tr>
+                                    <tr class="shipping-cost">
+                                        <td>Shipping Cost</td>
+                                        <td>Free</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total</td>
+                                        <td><span>NZ$ {{ $total_amount - Session::get('couponAmount') }}</span></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
