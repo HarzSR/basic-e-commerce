@@ -68,7 +68,9 @@ Things done on this project
 - Add Billing details and Shipping details
 - Add JS to handle copy address from Billing to Shipping
 - Add to DB if address not available
-- Add Email Auth (Might not use)
+- Add Email Auth (Might not use) // Haven't added mailtrap credentials
+- Display Order Review Page
+- Gather Payment Method
 
 ToDo List
-- Migrate Laravel 5.7
+- Process Order

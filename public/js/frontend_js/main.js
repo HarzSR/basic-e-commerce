@@ -353,3 +353,16 @@ $().ready(function (){
         }
     });
 });
+
+function selectPaymentMethod()
+{
+    if($('#Paypal').is(':checked') || $('#COD').is(':checked'))
+    {
+        // alert("Paypal");
+    }
+    else
+    {
+        alert("Please select Payment method");
+        return false;
+    }
+}

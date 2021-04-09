@@ -795,8 +795,9 @@ class ProductsController extends Controller
         $user_email = Auth::User()->email;
         $userDetails = User::find($user_id);
         $countries = Country::get();
+        $session_id = Session::get('session_id');
         $shippingDetails = DeliveryAddress::where('user_id', $user_id)->first();
-        $userCart = DB::table('cart')->where(['user_email' => $user_email])->get();
+        $userCart = DB::table('cart')->where(['user_email' => $user_email, 'session_id' => $session_id])->get();
 
         foreach ($userCart as $key => $product)
         {
@@ -805,5 +806,16 @@ class ProductsController extends Controller
         }
 
         return view('products.order_review')->with(compact('userDetails', 'shippingDetails', 'userCart'));
+    }
+
+    // Place Order Function
+
+    public function placeOrder(Request $request)
+    {
+        if($request->isMethod('POST'))
+        {
+            $data = $request->all();
+            print_r($data);die;
+        }
     }
 }

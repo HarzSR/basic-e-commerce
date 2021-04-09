@@ -142,7 +142,7 @@
                                     </tr>
                                     <tr>
                                         <td>Total</td>
-                                        <td><span>NZ$ {{ $total_amount - Session::get('couponAmount') }}</span></td>
+                                        <td><span>NZ$ {{ $grand_total = $total_amount - Session::get('couponAmount') }}</span></td>
                                     </tr>
                                 </table>
                             </td>
@@ -150,17 +150,24 @@
                     </tbody>
                 </table>
             </div>
-            <div class="payment-options">
-					<span>
-						<label><input type="checkbox"> Direct Bank Transfer</label>
-					</span>
-                <span>
-						<label><input type="checkbox"> Check Payment</label>
-					</span>
-                <span>
-						<label><input type="checkbox"> Paypal</label>
-					</span>
-            </div>
+            <form action="{{ url('/place-order') }}" name="paymentForm" id="paymentForm" method="post">
+                {{ csrf_field() }}
+                <input type="hidden" name="grand_total" id="grand_total" value="{{ $grand_total }}">
+                <div class="payment-options">
+                    <span>
+                        <label><strong>Select Payment Method : </strong></label>
+                    </span>
+                    <span>
+                        <label><input type="radio" name="payment_method" id="COD" value="COD" required><strong>  COD</strong></label>
+                    </span>
+                    <span>
+                        <label><input type="radio" name="payment_method" id="Paypal" value="Paypal" required><strong>  Paypal</strong></label>
+                    </span>
+                    <span style="float: right; margin-top: -23px;">
+                        <button type="submit" class="btn btn-primary" onclick="return selectPaymentMethod();">Place Order</button>
+                    </span>
+                </div>
+            </form>
         </div>
     </section>
 
