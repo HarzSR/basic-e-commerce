@@ -51,6 +51,7 @@ Route::group(['middleware' => ['frontlogin']], function () {
     Route::match(['get', 'post'], '/order-review', 'ProductsController@orderReview');
     Route::match(['get', 'post'], '/place-order', 'ProductsController@placeOrder');
     Route::get('/thanks', 'ProductsController@thanks');
+    Route::get('/orders', 'ProductsController@userOrders');
 });
 
 Route::group(['middleware' => ['auth']], function () {

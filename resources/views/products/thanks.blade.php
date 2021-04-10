@@ -31,11 +31,11 @@
                     <h3>Your Order has been placed Successfully</h3>
                     <p>Order ID #{{ Session::get('order_id') }} and Payable Amount is NZ$ {{ Session::get('grand_total') }}</p>
                 </div>
-                {{ Session::forget('order_id') }} {{ Session::forget('grand_total') }}
+                {{ Session::forget('order_id') }} {{ Session::forget('grand_total') }} {{ Session::forget('session_id') }}
             @else
                 <div class="heading" align="center">
                     <h3>No New Orders Placed</h3>
-                    <p>Please check your <a href="{{ url('/account') }}">Account page</a> for Order Details.</p>
+                    <p>Please check your <a href="{{ url('/orders') }}">Orders page</a> for Order Details.</p>
                 </div>
             @endif
         </div>

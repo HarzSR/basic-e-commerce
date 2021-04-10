@@ -904,4 +904,14 @@ class ProductsController extends Controller
     {
         return view('products.thanks');
     }
+
+    // User Order Function
+
+    public function userOrders(Request $request)
+    {
+        $user_id = Auth::User()->id;
+        $orders = Order::with('orders')->where('user_id', $user_id)->get();
+
+        return view('products.user_orders')->with(compact('orders'));
+    }
 }

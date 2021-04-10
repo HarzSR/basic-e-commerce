@@ -142,7 +142,14 @@
                                     </tr>
                                     <tr>
                                         <td>Total</td>
-                                        <td><span>NZ$ {{ $grand_total = $total_amount - Session::get('couponAmount') }}</span></td>
+                                        <td><span>NZ$
+                                                <?php
+                                                    if($total_amount - Session::get('couponAmount') > 0)
+                                                        $grand_total = $total_amount - Session::get('couponAmount');
+                                                    else
+                                                        $grand_total = 0;
+                                                    echo $grand_total;
+                                                    ?></span></td>
                                     </tr>
                                 </table>
                             </td>
