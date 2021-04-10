@@ -81,7 +81,7 @@
                 </div>
             @endif
         </div>
-    </section> <!--/#cart_items-->
+    </section>
 
     <section id="do_action">
         @if(!empty($userCart) && count($userCart) > 0)
@@ -131,6 +131,6 @@
                 </div>
             </div>
         @endif
-    </section><!--/#do_action-->
+    </section>
 
 @endsection

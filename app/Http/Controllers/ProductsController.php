@@ -6,6 +6,8 @@ use App\Category;
 use App\Country;
 use App\Coupon;
 use App\DeliveryAddress;
+use App\Order;
+use App\OrdersProduct;
 use App\Product;
 use App\ProductsAttribute;
 use App\ProductsImage;
@@ -561,9 +563,13 @@ class ProductsController extends Controller
 
         $data = $request->all();
 
-        if(empty($data['user_email']))
+        if(empty(Auth::User()->email))
         {
             $data['user_email'] = '';
+        }
+        else
+        {
+            $data['user_email'] = Auth::User()->email;
         }
 
         if(empty(Session::has('session_id')))
@@ -610,6 +616,21 @@ class ProductsController extends Controller
     {
         if(Session::has('session_id'))
         {
+            /*
+             *
+             * // Get all cart items instead of just current session
+             *
+            if(Auth::check())
+            {
+                $user_email = Auth::User()->email;
+                $userCart = DB::table('cart')->where(['user_email' => $user_email])->get();
+            }
+            else
+            {
+                $session_id = Session::get('session_id');
+                $userCart = DB::table('cart')->where(['session_id' => $session_id])->get();
+            }
+            */
             $session_id = Session::get('session_id');
             $userCart = DB::table('cart')->where(['session_id' => $session_id])->get();
 
@@ -794,7 +815,6 @@ class ProductsController extends Controller
         $user_id = Auth::User()->id;
         $user_email = Auth::User()->email;
         $userDetails = User::find($user_id);
-        $countries = Country::get();
         $session_id = Session::get('session_id');
         $shippingDetails = DeliveryAddress::where('user_id', $user_id)->first();
         $userCart = DB::table('cart')->where(['user_email' => $user_email, 'session_id' => $session_id])->get();
@@ -815,7 +835,73 @@ class ProductsController extends Controller
         if($request->isMethod('POST'))
         {
             $data = $request->all();
-            print_r($data);die;
+
+            $user_id = Auth::User()->id;
+            $user_email = Auth::User()->email;
+            $session_id = Session::get('session_id');
+
+            $shippingDetails = DeliveryAddress::where(['user_email' => $user_email])->first();
+
+            if(empty(Session::has('couponCode')) || empty(Session::has('couponAmount')))
+            {
+                $couponCode = '0';
+                $couponAmount = '0';
+            }
+            else
+            {
+                $couponCode = Session::get('couponCode');
+                $couponAmount = Session::get('couponAmount');
+            }
+
+            $order = new Order;
+            $order->user_id = $user_id;
+            $order->user_email = $user_email;
+            $order->name = $shippingDetails->name;
+            $order->address = $shippingDetails->address;
+            $order->city = $shippingDetails->city;
+            $order->state = $shippingDetails->state;
+            $order->pincode = $shippingDetails->pincode;
+            $order->country = $shippingDetails->country;
+            $order->mobile = $shippingDetails->mobile;
+            $order->coupon_code = $couponCode;
+            $order->coupon_amount = $couponAmount;
+            $order->order_status = "New";
+            $order->payment_method = $data['payment_method'];
+            $order->grand_total = $data['grand_total'];
+
+            $order->save();
+
+            $order_id = DB::getPdo()->lastInsertId();
+
+            $cartProducts = DB::table('cart')->where(['user_email' => $user_email, 'session_id' => $session_id])->get();
+
+            foreach ($cartProducts as $cartProduct)
+            {
+                $cartPro = New OrdersProduct;
+                $cartPro->order_id = $order_id;
+                $cartPro->user_id = $user_id;
+                $cartPro->product_id = $cartProduct->product_id;
+                $cartPro->product_code = $cartProduct->product_code;
+                $cartPro->product_name = $cartProduct->product_name;
+                $cartPro->product_color = $cartProduct->product_color;
+                $cartPro->product_size = $cartProduct->size;
+                $cartPro->product_price = $cartProduct->price;
+                $cartPro->product_qty = $cartProduct->quantity;
+
+                $cartPro->save();
+            }
+
+            Session::put('order_id', $order_id);
+            Session::put('grand_total', $data['grand_total']);
+
+            return redirect(('/thanks'));
         }
+    }
+
+    // Order Confirmation - COD Function
+
+    public function thanks(Request $request)
+    {
+        return view('products.thanks');
     }
 }

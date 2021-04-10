@@ -71,6 +71,8 @@ Things done on this project
 - Add Email Auth (Might not use) // Haven't added mailtrap credentials
 - Display Order Review Page
 - Gather Payment Method
+- Save Order (Order and Ordered Items)
+- Show confirmation for COD
 
 ToDo List
 - Process Order

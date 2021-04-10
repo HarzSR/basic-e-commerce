@@ -14,7 +14,7 @@ class ProductsImagesTable extends Migration
     public function up()
     {
         Schema::create('products_images', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->integer('product_id');
             $table->string('image');
             $table->rememberToken();
