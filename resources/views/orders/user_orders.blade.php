@@ -49,8 +49,8 @@
                                 </td>
                                 <td>{{ $order->payment_method }}</td>
                                 <td>NZ$ {{ $order->grand_total }}</td>
-                                <td>{{ date("F jS, Y", strtotime($order->created_at)) }}</td>
-                                <td><a href="{{ url('/admin/edit-product/' . $order->id) }}" class="btn btn-primary btn-mini" title="Edit Product" style="margin-top: 0px;">View Order</a></td>
+                                <td>{{ date("F jS, Y h:m A", strtotime($order->created_at)) }}</td>
+                                <td><a href="{{ url('/orders/' . $order->id) }}" class="btn btn-primary btn-mini" title="Edit Product" style="margin-top: 0px;">View Order</a></td>
                             </tr>
                         @endforeach
                     </tbody>
