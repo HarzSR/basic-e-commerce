@@ -894,7 +894,14 @@ class ProductsController extends Controller
             Session::put('order_id', $order_id);
             Session::put('grand_total', $data['grand_total']);
 
-            return redirect(('/thanks'));
+            if($data['payment_method'] == "COD")
+            {
+                return redirect(('/thanks'));
+            }
+            else if($data['payment_method'] == "Paypal")
+            {
+                return redirect(('/paypal'));
+            }
         }
     }
 
@@ -902,7 +909,11 @@ class ProductsController extends Controller
 
     public function thanks(Request $request)
     {
-        return view('products.thanks');
+        $user_email = Auth::User()->email;
+
+        DB::table('cart')->where('user_email', $user_email)->delete();
+
+        return view('orders.thanks');
     }
 
     // User Order Function
@@ -922,5 +933,16 @@ class ProductsController extends Controller
         $orderDetails = Order::with('orders')->where('id', $id)->first();
 
         return view('orders.user_order_details')->with(compact('orderDetails'));
+    }
+
+    // Paypal Function
+
+    public function paypal(Request $request)
+    {
+        $user_email = Auth::User()->email;
+
+        DB::table('cart')->where('user_email', $user_email)->delete();
+
+        return view('orders.paypal');
     }
 }

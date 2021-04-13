@@ -73,6 +73,9 @@ Things done on this project
 - Gather Payment Method
 - Save Order (Order and Ordered Items)
 - Show confirmation for COD
+- Add User Email to Cart during Login - This is done to update cart with current User ID
+- Show confirmation for Paypal
+- Add Paypal Sandbox Credentials
 
 ToDo List
 - Process Order

@@ -31,7 +31,7 @@
                     <h3>Your Order has been placed Successfully</h3>
                     <p>Order ID #{{ Session::get('order_id') }} and Payable Amount is NZ$ {{ Session::get('grand_total') }}</p>
                 </div>
-                {{ Session::forget('order_id') }} {{ Session::forget('grand_total') }} {{ Session::forget('session_id') }}
+                {{ Session::forget('order_id') }} {{ Session::forget('grand_total') }} {{ Session::forget('session_id') }} {{ Session::forget('couponCode') }} {{ Session::forget('couponAmount') }}
             @else
                 <div class="heading" align="center">
                     <h3>No New Orders Placed</h3>

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Session;
+use DB;
 
 class UsersController extends Controller
 {
@@ -43,6 +44,12 @@ class UsersController extends Controller
                 {
                     Session::put('frontSession', $data['email']);
 
+                    if(!empty(Session::has('session_id')))
+                    {
+                        $session_id = Session::get('session_id');
+                        DB::table('cart')->where('session_id', $session_id)->update(['user_email' => $data['email']]);
+                    }
+
                     return redirect('/');
                 }
 
@@ -62,6 +69,12 @@ class UsersController extends Controller
             if(Auth::attempt(['email' => $data['email'], 'password' => $data['loginPassword'], 'admin' => '0']))
             {
                 Session::put('frontSession', $data['email']);
+
+                if(!empty(Session::has('session_id')))
+                {
+                    $session_id = Session::get('session_id');
+                    DB::table('cart')->where('session_id', $session_id)->update(['user_email' => $data['email']]);
+                }
 
                 return redirect('/');
             }
@@ -201,6 +214,11 @@ class UsersController extends Controller
     public function logout()
     {
         Session::forget('frontSession');
+
+        // These will remove cart items
+
+        // Session::forget('session_id');
+        // Session::flush();
         Auth::logout();
 
         return redirect('/');
