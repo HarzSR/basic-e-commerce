@@ -945,4 +945,18 @@ class ProductsController extends Controller
 
         return view('orders.paypal');
     }
+
+    // Thanks Paypal - Paypal Confirmation Function
+
+    public function thanksPaypal()
+    {
+        return view('orders.thanks_paypal');
+    }
+
+    // Cancel Paypal - Paypal Cancellation Function
+
+    public function cancelPaypal()
+    {
+        return view('orders.cancel_paypal');
+    }
 }

@@ -54,6 +54,8 @@ Route::group(['middleware' => ['frontlogin']], function () {
     Route::get('/paypal', 'ProductsController@paypal');
     Route::get('/orders', 'ProductsController@userOrders');
     Route::get('/orders/{id}', 'ProductsController@userOrderDetails');
+    Route::get('/paypal/thanks', 'ProductsController@thanksPaypal');
+    Route::get('/paypal/cancel', 'ProductsController@cancelPaypal');
 });
 
 Route::group(['middleware' => ['auth']], function () {
