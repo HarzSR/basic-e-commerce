@@ -959,4 +959,13 @@ class ProductsController extends Controller
     {
         return view('orders.cancel_paypal');
     }
+
+    // Admin View Orders Function
+
+    public function viewOrders()
+    {
+        $orders = Order::with('orders')->orderBy('id','DESC')->get();
+
+        return view('admin.orders.view_orders')->with(compact('orders'));
+    }
 }

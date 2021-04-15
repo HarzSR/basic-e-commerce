@@ -214,10 +214,10 @@ class UsersController extends Controller
     public function logout()
     {
         Session::forget('frontSession');
+        Session::forget('session_id');
 
         // These will remove cart items
 
-        // Session::forget('session_id');
         // Session::flush();
         Auth::logout();
 

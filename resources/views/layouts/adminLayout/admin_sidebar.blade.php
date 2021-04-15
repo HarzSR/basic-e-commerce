@@ -20,6 +20,11 @@
                 <li <?php if (preg_match("/(view-coupons|edit-coupon)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-coupons') }}">View Coupons</a></li>
             </ul>
         </li>
+        <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Orders</span> <span class="label label-important">1</span></a>
+            <ul <?php if (preg_match("/orders/i", url()->current())) echo "style=\"display: block;\"" ?>>
+                <li <?php if (preg_match("/(view-orders|edit-order)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-orders') }}">View Orders</a></li>
+            </ul>
+        </li>
         <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Banners</span> <span class="label label-important">2</span></a>
             <ul <?php if (preg_match("/banner/i", url()->current())) echo "style=\"display: block;\"" ?>>
                 <li <?php if (preg_match("/add-banner/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/add-banner') }}">Add Banner</a></li>
