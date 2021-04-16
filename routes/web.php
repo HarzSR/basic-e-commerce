@@ -106,6 +106,8 @@ Route::group(['middleware' => ['auth']], function () {
     // Orders Routes
 
     Route::get('/admin/view-orders', 'ProductsController@viewOrders');
+    Route::get('/admin/view-order/{id}', 'ProductsController@viewOrdersDetails');
+    Route::post('/admin/update-order-status', 'ProductsController@updateOrderStatus');
 });
 
 Auth::routes(['verify' => true]);

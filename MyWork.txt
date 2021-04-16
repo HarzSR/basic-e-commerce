@@ -78,6 +78,8 @@ Things done on this project
 - Add Paypal Sandbox Credentials
 - Send details to Paypal Form
 - Admin Panel - Process orders
+- View Individual Order
+- Update Order Status
 
 ToDo List
 

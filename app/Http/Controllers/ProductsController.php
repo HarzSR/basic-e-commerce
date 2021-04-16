@@ -968,4 +968,30 @@ class ProductsController extends Controller
 
         return view('admin.orders.view_orders')->with(compact('orders'));
     }
+
+    // View Specific Order Details
+
+    public function viewOrdersDetails($order_id = null)
+    {
+        $orderDetails = Order::with('orders')->where('id', $order_id)->first();
+
+        $user_id = $orderDetails->user_id;
+        $userDetails = User::where('id', $user_id)->first();
+
+        return view('admin.orders.order_details')->with(compact('orderDetails', 'userDetails'));
+    }
+
+    // Update Order Status Function
+
+    public function updateOrderStatus(Request $request)
+    {
+        if($request->isMethod('POST'))
+        {
+            $data = $request->all();
+
+            Order::where('id', $data['order_id'])->update(['order_status' => $data['order_status']]);
+
+            return redirect()->back()->with('flash_message_success', 'Order Status has been Updated Successfully');
+        }
+    }
 }
