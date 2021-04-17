@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
@@ -14,30 +15,23 @@ class AdminController extends Controller
 
     public function login(Request $request)
     {
-        // Check whether the method is requested as POST
-
         if($request->isMethod('POST'))
         {
-            // Grab the sent input data
-
             $data = $request->input();
 
-            // Attempt to validate against Email and Pass and also check for Admin
+            $adminCount = Admin::where(['username' => $data['username'], 'password' => md5($data['password']), 'status' => '1'])->count();
 
-            if(Auth::attempt(['email' => $data['email'], 'password' => $data['password'], 'admin' => '1']))
+            // if(Auth::attempt(['email' => $data['email'], 'password' => $data['password'], 'admin' => '1']))
+            if($adminCount == 1)
             {
                 // Add Session
 
-                // Session::put('adminSession', $data['email']);
-
-                // Redirect to Dashboard
+                Session::put('adminSession', $data['username']);
 
                 return redirect('/admin/dashboard');
             }
             else
             {
-                // Redirect to Login with Error
-
                 return redirect('/admin')->with('flash_message_error', 'Incorrect, please try again.');
             }
         }
@@ -101,10 +95,12 @@ class AdminController extends Controller
             $data = $request->all();
             $check_password = User::where(['email' => Auth::user()->email])->first();
             $current_password = $data['current_pwd'];
+
             if(Hash::check($current_password,$check_password->password))
             {
                 $password = bcrypt($data['new_pwd']);
                 User::where(['email' => Auth::user()->email])->update(['password' => $password]);
+
                 return redirect('/admin/settings')->with('flash_message_success', 'Password update Successful.');
             }
             else

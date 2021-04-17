@@ -80,6 +80,8 @@ Things done on this project
 - Admin Panel - Process orders
 - View Individual Order
 - Update Order Status
+- Add Separate Admin Database
+- Update Password
 
 ToDo List
 

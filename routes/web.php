@@ -58,7 +58,7 @@ Route::group(['middleware' => ['frontlogin']], function () {
     Route::get('/paypal/cancel', 'ProductsController@cancelPaypal');
 });
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['adminlogin']], function () {
     // Admin Routes
 
     Route::get('/admin/dashboard', 'AdminController@dashboard');
