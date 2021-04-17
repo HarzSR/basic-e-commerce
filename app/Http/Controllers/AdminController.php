@@ -24,8 +24,6 @@ class AdminController extends Controller
             // if(Auth::attempt(['email' => $data['email'], 'password' => $data['password'], 'admin' => '1']))
             if($adminCount == 1)
             {
-                // Add Session
-
                 Session::put('adminSession', $data['username']);
 
                 return redirect('/admin/dashboard');
@@ -55,8 +53,6 @@ class AdminController extends Controller
         }
         */
 
-        // Return Admin view
-
         return view('admin.dashboard');
     }
 
@@ -64,9 +60,9 @@ class AdminController extends Controller
 
     public function settings()
     {
-        // Return Settings View
+        $adminDetails = Admin::where(['username' => Session::get('adminSession')])->first();
 
-        return view('admin.settings');
+        return view('admin.settings')->with(compact('adminDetails'));
     }
 
     // Check Password Function
@@ -74,9 +70,8 @@ class AdminController extends Controller
     public function chkPassword(Request $request)
     {
         $data = $request->all();
-        $current_password = $data['current_pwd'];
-        $check_password = User::where(['admin'=>'1'],['email' => Auth::user()->email])->first();
-        if(Hash::check($current_password,$check_password->password))
+        $adminCount = Admin::where(['username' => Session::get('adminSession'),'password'=>md5($data['current_pwd'])])->count();
+        if ($adminCount == 1)
         {
             echo "true"; die;
         }
@@ -93,19 +88,18 @@ class AdminController extends Controller
         if($request->isMethod('POST'))
         {
             $data = $request->all();
-            $check_password = User::where(['email' => Auth::user()->email])->first();
-            $current_password = $data['current_pwd'];
+            $adminCount = Admin::where(['username' => Session::get('adminSession'),'password'=>md5($data['current_pwd'])])->count();
 
-            if(Hash::check($current_password,$check_password->password))
+            if ($adminCount == 1)
             {
-                $password = bcrypt($data['new_pwd']);
-                User::where(['email' => Auth::user()->email])->update(['password' => $password]);
+                $password = md5($data['new_pwd']);
+                Admin::where('username',Session::get('adminSession'))->update(['password'=>$password]);
 
-                return redirect('/admin/settings')->with('flash_message_success', 'Password update Successful.');
+                return redirect('/admin/settings')->with('flash_message_success', 'Password updated successfully.');
             }
             else
             {
-                return redirect('/admin/settings')->with('flash_message_error', 'Incorrect current password');
+                return redirect('/admin/settings')->with('flash_message_error', 'Current Password entered is incorrect.');
             }
         }
     }
@@ -114,11 +108,7 @@ class AdminController extends Controller
 
     public function logout()
     {
-        // Clear session
-
         Session::flush();
-
-        // Redirect to Login with success message
 
         return redirect('/admin')->with('flash_message_success', 'Logged out Successfully');
     }
