@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Session;
 use DB;
 
@@ -39,6 +40,12 @@ class UsersController extends Controller
                 $user->email = $data['email'];
                 $user->password = bcrypt($data['registerPassword']);
                 $user->save();
+
+                $email = $data['email'];
+                $messageData = ['email' => $data['email'], 'name' => $data['name']];
+                Mail::send('emails.register', $messageData, function($message) use($email) {
+                    $message->to($email)->subject('Welcone to site');
+                });
 
                 if(Auth::attempt(['email' => $data['email'], 'password' => $data['registerPassword']]))
                 {

@@ -84,4 +84,4 @@ Things done on this project
 - Update Password
 
 ToDo List
-
+- /admin/dashboard reload after session expiry goes to Multiple Redirect Error
