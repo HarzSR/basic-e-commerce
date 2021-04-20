@@ -41,12 +41,29 @@ class UsersController extends Controller
                 $user->password = bcrypt($data['registerPassword']);
                 $user->save();
 
+                // Send Successful Registration Email
+
+                /*
                 $email = $data['email'];
                 $messageData = ['email' => $data['email'], 'name' => $data['name']];
                 Mail::send('emails.register', $messageData, function($message) use($email) {
-                    $message->to($email)->subject('Welcone to site');
+                    $message->to($email)->subject('Welcome to site');
+                });
+                */
+
+                // Email Confirmation
+
+                $email = $data['email'];
+                $messageData = ['email' => $data['email'], 'name' => $data['name'], 'code' => base64_encode($data['email'])];
+                Mail::send('emails.confirmation', $messageData, function($message) use($email) {
+                    $message->to($email)->subject('Please verify your account');
                 });
 
+                return redirect()->back()->with('flash_message_success', 'User Successfully Registered. Please check email for verification link.');
+
+                // Register and Login in by Default
+
+                /*
                 if(Auth::attempt(['email' => $data['email'], 'password' => $data['registerPassword']]))
                 {
                     Session::put('frontSession', $data['email']);
@@ -59,6 +76,7 @@ class UsersController extends Controller
 
                     return redirect('/');
                 }
+                */
 
                 // return redirect()->back()->with('flash_message_success', 'User Registration Successful. Please Login');
             }
@@ -75,6 +93,20 @@ class UsersController extends Controller
 
             if(Auth::attempt(['email' => $data['email'], 'password' => $data['loginPassword'], 'admin' => '0']))
             {
+                $userStatus = User::where('email', $data['email'])->first();
+
+                if($userStatus->status == 0)
+                {
+                    return redirect()->back()->with('flash_message_error', 'Your account is not activated. Please check your emails for activation link.');
+                }
+                if($userStatus->status == 2)
+                {
+                    return redirect()->back()->with('flash_message_error', 'Your Account has been Deactivated. Please contact Admin for further Assistance');
+                }
+                if($userStatus == 3)
+                {
+                    return redirect()->back()->with('flash_message_error', 'Your account has been suspended for violating our Terms & Condition. We are sorry, but we can not retrieve your account.');
+                }
                 Session::put('frontSession', $data['email']);
 
                 if(!empty(Session::has('session_id')))
