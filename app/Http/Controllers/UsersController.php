@@ -141,6 +141,41 @@ class UsersController extends Controller
         }
     }
 
+    // User Email Confirmation
+
+    public function confirmAccount($email = null)
+    {
+        $email = base64_decode($email);
+        $userCount = User::where('email', $email)->count();
+
+        If($userCount == 1)
+        {
+            $userDetails = User::where('email', $email)->first();
+
+            if($userDetails->status == 1)
+            {
+                return redirect('login-register')->with('flash_message_success', 'User Already Registered.');
+            }
+            else
+            {
+                User::where('email', $email)->update(['status' => 1]);
+
+                // Send Successful Registration Email
+
+                $messageData = ['email' => $email, 'name' => $userDetails->name];
+                Mail::send('emails.welcome', $messageData, function($message) use($email) {
+                    $message->to($email)->subject('Welcome to site');
+                });
+
+                return redirect('login-register')->with('flash_message_success', 'Successfully Activated. Please Login.');
+            }
+        }
+        else
+        {
+            abort(404);
+        }
+    }
+
     // User Account Function
 
     public function account(Request $request)
