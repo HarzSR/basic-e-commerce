@@ -900,7 +900,6 @@ class ProductsController extends Controller
                 $productDetails = Order::with('orders')->where('id', $order_id)->first();
                 $userDetails = User::where('id', $user_id)->first();
 
-
                 $email = $user_email;
                 $messageData = [
                     'email' => $user_email,

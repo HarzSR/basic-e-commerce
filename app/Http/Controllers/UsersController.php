@@ -298,4 +298,13 @@ class UsersController extends Controller
 
         return redirect('/');
     }
+
+    // Admin View Users Function
+
+    public function viewUsers()
+    {
+        $users = User::get();
+
+        return view('admin.users.view_users')->with(compact('users'));
+    }
 }

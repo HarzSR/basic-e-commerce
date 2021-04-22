@@ -29,38 +29,38 @@
                         <div class="widget-content nopadding">
                             <table class="table table-bordered data-table">
                                 <thead>
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>Order Date</th>
-                                    <th>Customer Name</th>
-                                    <th>Customer Email</th>
-                                    <th>Order Products</th>
-                                    <th>Order Amount</th>
-                                    <th>Order Status</th>
-                                    <th>Payment Method</th>
-                                    <th>Actions</th>
-                                </tr>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Order Date</th>
+                                        <th>Customer Name</th>
+                                        <th>Customer Email</th>
+                                        <th>Order Products</th>
+                                        <th>Order Amount</th>
+                                        <th>Order Status</th>
+                                        <th>Payment Method</th>
+                                        <th>Actions</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($orders as $order)
-                                    <tr class="gradeX">
-                                        <td>{{ $order->id }}</td>
-                                        <td><?php echo date('d-M-Y h:i A', strtotime($order->created_at)); ?></td>
-                                        <td>{{ $order->name }}</td>
-                                        <td>{{ $order->user_email }}</td>
-                                        <td>
-                                            @foreach($order->orders as $product)
-                                                {{ $product->product_name }} | {{ $product->product_code }} | {{ $product->product_size }} | {{ $product->product_color }} | {{ $product->product_qty }}<br>
-                                            @endforeach
-                                        </td>
-                                        <td>{{ $order->grand_total }}</td>
-                                        <td>{{ $order->order_status }}</td>
-                                        <td>{{ $order->payment_method }}</td>
-                                        <td class="center">
-                                            <a href="{{ url('/admin/view-order/' . $order->id) }}" class="btn btn-success btn-mini" title="View Description">View Order Details</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                    @foreach($orders as $order)
+                                        <tr class="gradeX">
+                                            <td>{{ $order->id }}</td>
+                                            <td><?php echo date('d-M-Y h:i A', strtotime($order->created_at)); ?></td>
+                                            <td>{{ $order->name }}</td>
+                                            <td>{{ $order->user_email }}</td>
+                                            <td>
+                                                @foreach($order->orders as $product)
+                                                    {{ $product->product_name }} | {{ $product->product_code }} | {{ $product->product_size }} | {{ $product->product_color }} | {{ $product->product_qty }}<br>
+                                                @endforeach
+                                            </td>
+                                            <td>{{ $order->grand_total }}</td>
+                                            <td>{{ $order->order_status }}</td>
+                                            <td>{{ $order->payment_method }}</td>
+                                            <td class="center">
+                                                <a href="{{ url('/admin/view-order/' . $order->id) }}" class="btn btn-success btn-mini" title="View Description">View Order Details</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                                 <tfoot>
                                     <th>Order ID</th>
