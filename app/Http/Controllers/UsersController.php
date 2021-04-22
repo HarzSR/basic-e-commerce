@@ -91,7 +91,8 @@ class UsersController extends Controller
         {
             $data = $request->all();
 
-            if(Auth::attempt(['email' => $data['email'], 'password' => $data['loginPassword'], 'admin' => '0']))
+            // if(Auth::attempt(['email' => $data['email'], 'password' => $data['loginPassword'], 'admin' => '0']))
+            if(Auth::attempt(['email' => $data['email'], 'password' => $data['loginPassword']]))
             {
                 $userStatus = User::where('email', $data['email'])->first();
 
@@ -101,9 +102,9 @@ class UsersController extends Controller
                 }
                 if($userStatus->status == 2)
                 {
-                    return redirect()->back()->with('flash_message_error', 'Your Account has been Deactivated. Please contact Admin for further Assistance');
+                    return redirect()->back()->with('flash_message_error', 'Your Account has been Deactivated. Please contact Support for further Assistance');
                 }
-                if($userStatus == 3)
+                if($userStatus->status == 3)
                 {
                     return redirect()->back()->with('flash_message_error', 'Your account has been suspended for violating our Terms & Condition. We are sorry, but we can not retrieve your account.');
                 }

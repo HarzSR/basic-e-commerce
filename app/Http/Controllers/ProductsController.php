@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Image;
 
@@ -896,6 +897,22 @@ class ProductsController extends Controller
 
             if($data['payment_method'] == "COD")
             {
+                $productDetails = Order::with('orders')->where('id', $order_id)->first();
+                $userDetails = User::where('id', $user_id)->first();
+
+
+                $email = $user_email;
+                $messageData = [
+                    'email' => $user_email,
+                    'name' => $shippingDetails->name,
+                    'order_id' => $order_id,
+                    'productDetails' => $productDetails,
+                    'userDetails' => $userDetails
+                ];
+                Mail::send('emails.order', $messageData, function ($message) use($email) {
+                    $message->to($email)->subject('Order Placed Successfully');
+                });
+
                 return redirect(('/thanks'));
             }
             else if($data['payment_method'] == "Paypal")
