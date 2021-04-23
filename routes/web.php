@@ -109,6 +109,8 @@ Route::group(['middleware' => ['adminlogin']], function () {
 
     Route::get('/admin/view-orders', 'ProductsController@viewOrders');
     Route::get('/admin/view-order/{id}', 'ProductsController@viewOrdersDetails');
+    Route::get('/admin/view-order-invoice/{id}', 'ProductsController@viewOrdersInvoice');
+    Route::get('/admin/print-order-invoice/{id}', 'ProductsController@viewOrdersInvoice');
     Route::post('/admin/update-order-status', 'ProductsController@updateOrderStatus');
 
     // Users Routes
