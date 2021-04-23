@@ -65,7 +65,7 @@
                                         <td class="center">
                                             <a href="#myModal{{ $product->id }}" data-toggle="modal" class="btn btn-success btn-mini" title="View Description">View</a>
                                             <a href="{{ url('/admin/edit-product/' . $product->id) }}" class="btn btn-primary btn-mini" title="Edit Product">Edit</a>
-                                            <a href="{{ url('/admin/add-attributes/' . $product->id) }}" class="btn btn-warning btn-mini" title="Add Attributes">Add Attributes</a>
+                                            <a href="{{ url('/admin/add-attributes/' . $product->id) }}" class="btn btn-warning btn-mini" title="Add Attributes">Add/View Attributes</a>
                                             <a href="{{ url('/admin/add-images/' . $product->id) }}" class="btn btn-info btn-mini" title="Add Images">Add Images</a>
                                             <!-- <a href="{{ url('/admin/delete-product/' . $product->id) }}" class="btn btn-danger btn-mini delProduct" >Delete</a></td> -->
                                             <a rel="{{ $product->id }}" rel1="delete-product" rel2="Product" href="javascript:" class="btn btn-danger btn-mini deleteRecord" title="Delete Product">Delete</a>

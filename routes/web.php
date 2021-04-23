@@ -43,6 +43,7 @@ Route::get('/confirm/{code}', 'UsersController@confirmAccount');
 Route::post('/user-login', 'UsersController@login');
 Route::match(['get', 'post'], '/check-email', 'UsersController@checkEmail');
 Route::get('/user-logout', 'UsersController@logout');
+Route::post('/search-products', 'ProductsController@searchProducts');
 
 Route::group(['middleware' => ['frontlogin']], function () {
     Route::match(['get', 'post'], '/account', 'UsersController@account');

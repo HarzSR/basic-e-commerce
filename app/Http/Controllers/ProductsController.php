@@ -1010,4 +1010,20 @@ class ProductsController extends Controller
             return redirect()->back()->with('flash_message_success', 'Order Status has been Updated Successfully');
         }
     }
+
+    // Front Page Search Function
+
+    public function searchProducts(Request $request)
+    {
+        if($request->isMethod('POST'))
+        {
+            $data = $request->all();
+
+            $categories = Category::with('categories')->where(['parent_id' => 0])->get();
+            $search_product = $data['product'];
+            $productsAll = Product::where('product_name', 'like', '%' . $search_product . '%')->orwhere('product_code', 'like', '%' . $search_product . '%')->where('status', '1')->get();
+
+            return view('products.listing')->with(compact('categories', 'productsAll', 'search_product'));
+        }
+    }
 }
