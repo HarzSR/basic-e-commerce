@@ -37,6 +37,7 @@
                                         <th>Product Color</th>
                                         <th>Product Image</th>
                                         <th>Product Price</th>
+                                        <th>Product Featured</th>
                                         <th>Product Status</th>
                                         <th>Actions</th>
                                     </tr>
@@ -55,6 +56,13 @@
                                             @endif
                                         </td>
                                         <td>{{ $product->price }}</td>
+                                        <td>
+                                            @if($product->feature_item == 1)
+                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Featured</button>
+                                            @else
+                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">Not Featured</button>
+                                            @endif
+                                        </td>
                                         <td>
                                             @if($product->status == 1)
                                                 <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Active</button>
@@ -100,6 +108,7 @@
                                     <th>Product Color</th>
                                     <th>Product Image</th>
                                     <th>Product Price</th>
+                                    <th>Product Featured</th>
                                     <th>Product Status</th>
                                     <th>Actions</th>
                                 </tfoot>

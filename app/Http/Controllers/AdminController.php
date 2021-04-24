@@ -33,6 +33,12 @@ class AdminController extends Controller
                 return redirect('/admin')->with('flash_message_error', 'Incorrect, please try again.');
             }
         }
+
+        if(Session::has('adminSession'))
+        {
+            return redirect('/admin/dashboard');
+        }
+
         return view('admin.admin_login');
     }
 

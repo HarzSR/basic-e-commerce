@@ -86,6 +86,12 @@
                                 <div class="control-group">
                                     <label class="control-label">Enable</label>
                                     <div class="controls">
+                                        <input type="checkbox" name="feature_item" id="feature_item" @if($productDetails->feature_item == 1) checked @endif value="1">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Enable</label>
+                                    <div class="controls">
                                         <input type="checkbox" name="status" id="status" @if($productDetails->status == 1) checked @endif value="1">
                                     </div>
                                 </div>

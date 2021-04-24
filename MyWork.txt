@@ -85,6 +85,7 @@ Things done on this project
 - View Users
 - Search for products based on Product Name
 - Order Invoice : A4 HTML Template
+- Added Feature Image to Products Table
+- Changed Index page to Display Featured Items and All Items
 
 ToDo List
-- /admin/dashboard reload after session expiry goes to Multiple Redirect Error

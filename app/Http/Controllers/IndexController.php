@@ -23,7 +23,8 @@ class IndexController extends Controller
 
         // Get All Products - Random
 
-        $productsAll = Product::inRandomOrder()->where('status', 1)->get();
+        $productsFeaturedAll = Product::inRandomOrder()->where('status', 1)->where('feature_item', 1)->take(3)->get();
+        $productsAll = Product::inRandomOrder()->where('status', 1)->where('feature_item', 0)->get();
 
         // Get Sub Categories
 
@@ -65,6 +66,6 @@ class IndexController extends Controller
 
         $banners = Banner::where('status', 1)->get();
 
-        return view('index')->with(compact('productsAll' , 'categories', 'banners'));
+        return view('index')->with(compact('productsFeaturedAll', 'productsAll' , 'categories', 'banners'));
     }
 }

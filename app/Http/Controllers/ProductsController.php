@@ -115,6 +115,14 @@ class ProductsController extends Controller
                     }
                 }
             }
+            if (empty($data['feature_item']))
+            {
+                $product->feature_item = 0;
+            }
+            else
+            {
+                $product->feature_item = 1;
+            }
             if (empty($data['status']))
             {
                 $product->status = 0;
@@ -218,7 +226,16 @@ class ProductsController extends Controller
                 $status = 1;
             }
 
-            Product::where(['id' => $id])->update(['category_id' => $data['category_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'description' => $data['description'], 'care' => $data['care'], 'price' => $data['price'], 'image' => $fileName, 'status' => $status]);
+            if (empty($data['feature_item']))
+            {
+                $feature_item = 0;
+            }
+            else
+            {
+                $feature_item = 1;
+            }
+
+            Product::where(['id' => $id])->update(['category_id' => $data['category_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'description' => $data['description'], 'care' => $data['care'], 'price' => $data['price'], 'image' => $fileName, 'feature_item' => $feature_item , 'status' => $status]);
 
             return redirect()->back()->with('flash_message_success', 'Product Updated Successfully');
         }
