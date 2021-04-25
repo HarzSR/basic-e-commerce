@@ -24,7 +24,7 @@ class IndexController extends Controller
         // Get All Products - Random
 
         $productsFeaturedAll = Product::inRandomOrder()->where('status', 1)->where('feature_item', 1)->take(3)->get();
-        $productsAll = Product::inRandomOrder()->where('status', 1)->where('feature_item', 0)->get();
+        $productsAll = Product::inRandomOrder()->where('status', 1)->where('feature_item', 0)->paginate(3);
 
         // Get Sub Categories
 

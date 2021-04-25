@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <section id="slider"><!--slider-->
+    <section id="slider">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
@@ -148,6 +148,9 @@
                                 </div>
                             </div>
                         @endforeach
+                    </div>
+                    <div align="center">
+                        {{ $productsAll->links() }}
                     </div>
                 </div>
             </div>

@@ -305,8 +305,9 @@ class UsersController extends Controller
     public function viewUsers()
     {
         $users = User::get();
+        $userCount = User::count();
 
-        return view('admin.users.view_users')->with(compact('users'));
+        return view('admin.users.view_users')->with(compact('users', 'userCount'));
     }
 
     // Forgot Password for Users

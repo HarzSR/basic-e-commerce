@@ -36,6 +36,7 @@
                 <li <?php if (preg_match("/(view-banners|edit-banner)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-banners') }}">View Banners</a></li>
             </ul>
         </li>
+        <li <?php if (preg_match("/dashboard/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/dashboard') }}"><i class="icon icon-cogs"></i> <span>Settings</span></a> </li>
     </ul>
 </div>
 <!--sidebar-menu-->

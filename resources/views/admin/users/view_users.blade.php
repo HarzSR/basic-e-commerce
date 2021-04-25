@@ -24,7 +24,7 @@
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-                            <h5>View Orders</h5>
+                            <h5>View Users - {{ $userCount }}</h5>
                         </div>
                         <div class="widget-content nopadding">
                             <table class="table table-bordered data-table">

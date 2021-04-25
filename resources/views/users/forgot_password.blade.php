@@ -24,6 +24,7 @@
                             {{ csrf_field() }}
                             <input id="email" name="email" type="email" placeholder="Email Address" required/>
                             <button type="submit" class="btn btn-default" style="margin-top: 0px;">Verify & Reset</button>
+                            <a href="{{ url('/login-register') }}"><button type="button" class="btn btn-default">Login</button></a>
                         </form>
                     </div>
                 </div>

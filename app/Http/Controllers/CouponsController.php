@@ -41,8 +41,9 @@ class CouponsController extends Controller
     public function viewCoupons()
     {
         $coupons = Coupon::get();
+        $couponCount = Coupon::count();
 
-        return view('admin.coupons.view_coupons')->with(compact('coupons'));
+        return view('admin.coupons.view_coupons')->with(compact('coupons', 'couponCount'));
     }
 
     // Edit Coupon Function

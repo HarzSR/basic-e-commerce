@@ -44,9 +44,10 @@ class CategoryController extends Controller
     public function viewCategory()
     {
         $categories = Category::get();
+        $categoryCount = Category::count();
         $levels = Category::where(['parent_id' => 0])->get();
 
-        return view('admin.categories.view_categories')->with(compact('categories', 'levels'));
+        return view('admin.categories.view_categories')->with(compact('categories', 'categoryCount', 'levels'));
     }
 
     // Edit Category

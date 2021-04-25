@@ -54,7 +54,7 @@
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-                            <h5>View Images</h5>
+                            <h5>View Images - {{ $productImageCount }}</h5>
                         </div>
                         <div class="widget-content nopadding">
                             <table class="table table-bordered data-table">

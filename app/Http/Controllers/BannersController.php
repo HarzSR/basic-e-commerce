@@ -65,8 +65,9 @@ class BannersController extends Controller
     public function viewBanners()
     {
         $banners = Banner::get();
+        $bannerCount = Banner::count();
 
-        return view('admin.banners.view_banners')->with(compact('banners'));
+        return view('admin.banners.view_banners')->with(compact('banners', 'bannerCount'));
     }
 
     // Edit Banner Function

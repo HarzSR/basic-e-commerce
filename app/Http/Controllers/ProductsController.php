@@ -159,6 +159,7 @@ class ProductsController extends Controller
     public function viewProducts()
     {
         $products = Product::orderby('id', 'DESC')->get();
+        $productCount = Product::count();
 
         foreach ($products as $key => $val)
         {
@@ -166,7 +167,7 @@ class ProductsController extends Controller
             $products[$key]->category_name = $category_name->name;
         }
 
-        return view('admin.products.view_products')->with(compact('products'));
+        return view('admin.products.view_products')->with(compact('products', 'productCount'));
     }
 
     // Edit Product Function
@@ -400,8 +401,9 @@ class ProductsController extends Controller
         }
 
         $productDetails = Product::with('attributes')->where(['id' => $id])->first();
+        $productDetailCount = ProductsAttribute::where(['product_id' => $id])->count();
 
-        return view('admin.products.add_attributes')->with(compact('productDetails'));
+        return view('admin.products.add_attributes')->with(compact('productDetails', 'productDetailCount'));
     }
 
     // Edit Attributes Function
@@ -460,8 +462,9 @@ class ProductsController extends Controller
         $productDetails = Product::with('attributes')->where(['id' => $id])->first();
 
         $productsImages = ProductsImage::where(['product_id' => $id])->get();
+        $productImageCount = ProductsImage::where(['product_id' => $id])->count();
 
-        return view('admin.products.add_images')->with(compact('productDetails', 'productsImages'));
+        return view('admin.products.add_images')->with(compact('productDetails', 'productsImages', 'productImageCount'));
     }
 
     // Delete Product Attribute Function
@@ -489,7 +492,7 @@ class ProductsController extends Controller
 
         if ($categoryDetails->parent_id != 0)
         {
-            $productsAll = Product::where(['category_id' => $categoryDetails->id])->where('status', 1)->get();
+            $productsAll = Product::where(['category_id' => $categoryDetails->id])->where('status', 1)->paginate(3);
         }
         else
         {
@@ -499,7 +502,7 @@ class ProductsController extends Controller
                 $categoryIds[] = $subCategory->id;
             }
             array_push($categoryIds, $categoryDetails->id);
-            $productsAll = Product::whereIn('category_id', $categoryIds)->where('status', 1)->get();
+            $productsAll = Product::whereIn('category_id', $categoryIds)->where('status', 1)->paginate(3);
         }
 
         return view('products.listing')->with(compact('categoryDetails', 'productsAll', 'categories'));
@@ -998,8 +1001,9 @@ class ProductsController extends Controller
     public function viewOrders()
     {
         $orders = Order::with('orders')->orderBy('id','DESC')->get();
+        $orderCount = Order::count();
 
-        return view('admin.orders.view_orders')->with(compact('orders'));
+        return view('admin.orders.view_orders')->with(compact('orders', 'orderCount'));
     }
 
     // View Specific Order Details

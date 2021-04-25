@@ -66,7 +66,7 @@
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-                            <h5>View Attributes</h5>
+                            <h5>View Attributes - {{ $productDetailCount }}</h5>
                         </div>
                         <div class="widget-content nopadding" method="post">
                             <form action="{{ url('/admin/edit-attributes/' . $productDetails->id) }}" method="post">
