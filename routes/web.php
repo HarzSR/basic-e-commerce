@@ -38,6 +38,7 @@ Route::get('/cart/delete-product/{id}', 'ProductsController@deleteCartProduct');
 Route::get('/cart/update-quantity/{id}/{quantity}', 'ProductsController@updateCartQuantity');
 
 Route::get('/login-register', 'UsersController@userLoginRegister');
+Route::match(['get', 'post'], '/forgot-password', 'UsersController@forgotPassword');
 Route::post('/user-register', 'UsersController@register');
 Route::get('/confirm/{code}', 'UsersController@confirmAccount');
 Route::post('/user-login', 'UsersController@login');

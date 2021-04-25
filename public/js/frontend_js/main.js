@@ -176,6 +176,21 @@ $().ready(function (){
         }
     });
 
+    $("#forgotPasswordForm").validate({
+        rules: {
+            email: {
+                required: true,
+                email: true,
+            }
+        },
+        messages: {
+            email: {
+                required: "Please enter your email.",
+                email: "Please enter a valid email."
+            }
+        }
+    });
+
     $("#accountForm").validate({
         rules: {
             name: {

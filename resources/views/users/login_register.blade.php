@@ -18,7 +18,7 @@
                     </div>
                 @endif
                 <div class="col-sm-4 col-sm-offset-1">
-                    <div class="login-form"><!--login form-->
+                    <div class="login-form">
                         <h2>Login to your account</h2>
                         <form action="{{ url('/user-login') }}" id="loginForm" name="loginForm" method="post">
                             {{ csrf_field() }}
@@ -28,15 +28,16 @@
 								<input type="checkbox" class="checkbox">
 								Keep me signed in
 							</span> --}}
-                            <button type="submit" class="btn btn-default">Login</button>
+                            <button type="submit" class="btn btn-default" style="margin-top: 0px;">Login</button>
+                            <a href="{{ url('/forgot-password') }}"><button type="button" class="btn btn-default">Forgot Password ?</button></a>
                         </form>
-                    </div><!--/login form-->
+                    </div>
                 </div>
                 <div class="col-sm-1">
                     <h2 class="or">OR</h2>
                 </div>
                 <div class="col-sm-4">
-                    <div class="signup-form"><!--sign up form-->
+                    <div class="signup-form"><
                         <h2>New User Signup!</h2>
                         <form action="{{ url('/user-register') }}" id="registerForm" name="registerForm" method="post">
                             {{ csrf_field() }}
@@ -45,10 +46,10 @@
                             <input id="registerPassword" name="registerPassword" type="password" placeholder="Password"/>
                             <button type="submit" class="btn btn-default">Signup</button>
                         </form>
-                    </div><!--/sign up form-->
+                    </div>
                 </div>
             </div>
         </div>
-    </section><!--/form-->
+    </section>
 
 @endsection

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Session;
 use DB;
+use function foo\func;
 
 class UsersController extends Controller
 {
@@ -306,5 +307,43 @@ class UsersController extends Controller
         $users = User::get();
 
         return view('admin.users.view_users')->with(compact('users'));
+    }
+
+    // Forgot Password for Users
+
+    public function forgotPassword(Request $request)
+    {
+        if($request->isMethod('POST'))
+        {
+            $data = $request->all();
+
+            $userCount = User::where('email', $data['email'])->count();
+
+            if($userCount == 0)
+            {
+                return redirect()->back()->with('flash_message_error', 'Email doesn\'t exist in the system. Please check the spelling and try again.');
+            }
+
+            $userDetails = User::where('email', $data['email'])->first();
+            $random_password = str_random(10);
+            $new_password = bcrypt($random_password);
+
+            User::where('email', $data['email'])->update(['password' => $new_password]);
+
+            $email = $data['email'];
+            $name = $userDetails->name;
+            $messageData = [
+                'email' => $email,
+                'name' => $name,
+                'password' => $random_password
+            ];
+            Mail::send('emails.forgotpassword', $messageData, function ($message) use ($email){
+                $message->to($email)->subject('New Temporary Password');
+            });
+
+            return redirect('/login-register')->with('flash_message_success', 'Password reset Successful. Please check email for Temporary New Password');
+        }
+
+        return view('users.forgot_password');
     }
 }

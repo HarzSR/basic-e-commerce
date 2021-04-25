@@ -87,5 +87,6 @@ Things done on this project
 - Order Invoice : A4 HTML Template
 - Added Feature Image to Products Table
 - Changed Index page to Display Featured Items and All Items
+- Forgot Password for Users
 
 ToDo List
