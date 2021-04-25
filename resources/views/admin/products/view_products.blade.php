@@ -75,7 +75,7 @@
                                             <a href="{{ url('/admin/edit-product/' . $product->id) }}" class="btn btn-primary btn-mini" title="Edit Product">Edit</a>
                                             <a href="{{ url('/admin/add-attributes/' . $product->id) }}" class="btn btn-warning btn-mini" title="Add Attributes">Add/View Attributes</a>
                                             <a href="{{ url('/admin/add-images/' . $product->id) }}" class="btn btn-info btn-mini" title="Add Images">Add Images</a>
-                                            <!-- <a href="{{ url('/admin/delete-product/' . $product->id) }}" class="btn btn-danger btn-mini delProduct" >Delete</a></td> -->
+                                            {{-- <a href="{{ url('/admin/delete-product/' . $product->id) }}" class="btn btn-danger btn-mini delProduct" >Delete</a></td> --}}
                                             <a rel="{{ $product->id }}" rel1="delete-product" rel2="Product" href="javascript:" class="btn btn-danger btn-mini deleteRecord" title="Delete Product">Delete</a>
                                         </td>
                                     </tr>
@@ -85,12 +85,12 @@
                                             <h3>{{ $product->product_name }} Full Description</h3>
                                         </div>
                                         <div class="modal-body">
-                                            <p>Product ID: {{ $product->id }}</p>
-                                            <p>Category ID: {{ $product->category_id }}</p>
-                                            <p>Product Code: {{ $product->product_code }}</p>
-                                            <p>Product Color: {{ $product->product_color }}</p>
-                                            <p>Price: {{ $product->price }}</p>
-                                            <p>Description: {{ $product->description }}</p>
+                                            <p><strong>Product ID:</strong> {{ $product->id }}</p>
+                                            <p><strong>Category ID:</strong> {{ $product->category_id }}</p>
+                                            <p><strong>Product Code:</strong> {{ $product->product_code }}</p>
+                                            <p><strong>Product Color:</strong> {{ $product->product_color }}</p>
+                                            <p><strong>Price:</strong> {{ $product->price }}</p>
+                                            <p><strong>Description:</strong> {{ $product->description }}</p>
                                             <p>
                                                 @if(!empty($product->image))
                                                     <img src="{{ asset('/images/backend_images/products/small/' . $product->image) }}">

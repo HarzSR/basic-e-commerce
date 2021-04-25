@@ -90,5 +90,6 @@ Things done on this project
 - Forgot Password for Users
 - Pagination for Products Display
 - Add CMS Page
+- View CMS Page
 
 ToDo List

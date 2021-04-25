@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class CmsController extends Controller
 {
-    //
+    // Add CMS Page Function
 
     public function addCmsPage(Request $request)
     {
@@ -33,5 +33,15 @@ class CmsController extends Controller
         }
 
         return view('admin.pages.add_cms_page');
+    }
+
+    // View CMS Page Function
+
+    public function viewCmsPage()
+    {
+        $cmsPages = CmsPage::get();
+        $cmsPageCount = CmsPage::count();
+
+        return view('admin.pages.view_cms_pages')->with(compact('cmsPages', 'cmsPageCount'));
     }
 }

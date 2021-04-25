@@ -3,7 +3,7 @@
 
     <div id="content">
         <div id="content-header">
-            <div id="breadcrumb"> <a href="{{ url('/admin/dashboard') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">CMS Page</a> <a href="#" class="current">Add CMS Page</a> </div>
+            <div id="breadcrumb"> <a href="{{ url('/admin/dashboard') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">CMS Pages</a> <a href="#" class="current">Add CMS Page</a> </div>
             <h1>CMS Page</h1>
             @if(Session::has('flash_message_error'))
                 <div class="alert alert-error alert-block">
