@@ -88,5 +88,7 @@ Things done on this project
 - Added Feature Image to Products Table
 - Changed Index page to Display Featured Items and All Items
 - Forgot Password for Users
+- Pagination for Products Display
+- Add CMS Page
 
 ToDo List

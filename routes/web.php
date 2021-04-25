@@ -117,6 +117,10 @@ Route::group(['middleware' => ['adminlogin']], function () {
     // Users Routes
 
     Route::get('/admin/view-users', 'UsersController@viewUsers');
+
+    // CMS Pages Routes
+    Route::match(['get', 'post'], '/admin/add-cms-page', 'CmsController@addCmsPage');
+
 });
 
 Auth::routes(['verify' => true]);
