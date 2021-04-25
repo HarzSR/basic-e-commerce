@@ -120,7 +120,9 @@ Route::group(['middleware' => ['adminlogin']], function () {
 
     // CMS Pages Routes
     Route::match(['get', 'post'], '/admin/add-cms-page', 'CmsController@addCmsPage');
-    Route::get('/admin/view-cms-page', 'CmsController@viewCmsPage');
+    Route::get('/admin/view-cms-pages/', 'CmsController@viewCmsPages');
+    Route::match(['get', 'post'], '/admin/edit-cms-page/{id}', 'CmsController@editCmsPage');
+    Route::get('/admin/delete-cms-page/{id}', 'CmsController@deleteCmsPage');
 
 });
 

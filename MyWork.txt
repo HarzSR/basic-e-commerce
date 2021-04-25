@@ -91,5 +91,7 @@ Things done on this project
 - Pagination for Products Display
 - Add CMS Page
 - View CMS Page
+- Edit CMS Page
+- Delete CMS Page
 
 ToDo List

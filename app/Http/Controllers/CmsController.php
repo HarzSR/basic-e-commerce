@@ -37,11 +37,47 @@ class CmsController extends Controller
 
     // View CMS Page Function
 
-    public function viewCmsPage()
+    public function viewCmsPages()
     {
         $cmsPages = CmsPage::get();
         $cmsPageCount = CmsPage::count();
 
         return view('admin.pages.view_cms_pages')->with(compact('cmsPages', 'cmsPageCount'));
+    }
+
+    // Edit CMS Page Function
+
+    public function editCmsPage(Request $request, $id = null)
+    {
+        if($request->isMethod('POST'))
+        {
+            $data = $request->all();
+
+            if(empty($data['status']))
+            {
+                $status = 0;
+            }
+            else
+            {
+                $status = 1;
+            }
+
+            CmsPage::where('id', $id)->update(['title' => $data['title'], 'url' => $data['url'], 'description' => $data['description'], 'status' => $status]);
+
+            return redirect('/admin/view-cms-pages')->with('flash_message_success', 'CMS Page Updated Successfully');
+        }
+
+        $cmsPage = CmsPage::where('id', $id)->first();
+
+        return view('admin.pages.edit_cms_page')->with(compact('cmsPage'));
+    }
+
+    // Delete CMS Page Function
+
+    public function deleteCmsPage($id = null)
+    {
+        CmsPage::where('id', $id)->delete();
+
+        return redirect('/admin/view-cms-pages')->with('flash_message_success', 'CMS Page Deleted Successfully');
     }
 }

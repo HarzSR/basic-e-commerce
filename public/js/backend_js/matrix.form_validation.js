@@ -181,6 +181,30 @@ $(document).ready(function()
         }
     });
 
+    // Edit CMS Page Validation
+    $("#edit_cms_page").validate({
+        rules:{
+            title:{
+                required:true,
+            },
+            url:{
+                required:true,
+            },
+            description:{
+                required:true,
+            },
+        },
+        errorClass: "help-inline",
+        errorElement: "span",
+        highlight:function(element, errorClass, validClass) {
+            $(element).parents('.control-group').addClass('error');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).parents('.control-group').removeClass('error');
+            $(element).parents('.control-group').addClass('success');
+        }
+    });
+
 	$("#number_validate").validate({
 		rules:{
 			min:{

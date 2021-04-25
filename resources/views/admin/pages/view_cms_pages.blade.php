@@ -6,13 +6,13 @@
             <div id="breadcrumb"> <a href="{{ url('/admin/dashboard') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">CMS Pages</a> <a href="#" class="current">View CMS Pages</a> </div>
             <h1>CMS Pages</h1>
             @if(Session::has('flash_message_error'))
-                <div class="alert alert-error alert-block">
+                <div class="alert-error alert-block">
                     <button type="button" class="close" data-dismiss="alert">×</button>
                     <strong>{!! session('flash_message_error') !!}</strong>
                 </div>
             @endif
             @if(Session::has('flash_message_success'))
-                <div class="alert alert-success alert-block">
+                <div class="alert-success alert-block">
                     <button type="button" class="close" data-dismiss="alert">×</button>
                     <strong>{!! session('flash_message_success') !!}</strong>
                 </div>

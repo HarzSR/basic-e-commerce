@@ -10,7 +10,7 @@
         <li class="submenu"> <a href="#"><i class="icon icon-file-alt"></i> <span>CMS Pages</span> <span class="label label-important">2</span></a>
             <ul <?php if (preg_match("/cms-page/i", url()->current())) echo "style=\"display: block;\"" ?>>
                 <li <?php if (preg_match("/add-cms-page/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/add-cms-page') }}">Add CMS Pages</a></li>
-                <li <?php if (preg_match("/(view-cms-page|edit-cms-page)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-cms-page') }}">View CMS Pages</a></li>
+                <li <?php if (preg_match("/(view-cms-page|edit-cms-page)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-cms-pages') }}">View CMS Pages</a></li>
             </ul>
         </li>
         <li class="submenu"> <a href="#"><i class="icon icon-folder-open"></i> <span>Categories</span> <span class="label label-important">2</span></a>
