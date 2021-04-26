@@ -95,8 +95,8 @@
                     </div>
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a href="{{ url('/') }}" class="active">Home</a></li>
-                            <li class="dropdown"><a href="#">Categories<i class="fa fa-angle-down"></i></a>
+                            <li><a href="{{ url('/') }}" <?php if (url('/') == url()->current()) echo "class=\"active\"" ?>>Home</a></li>
+                            <li class="dropdown"><a href="#" <?php if (preg_match("/products/i", url()->current())) echo "class=\"active\"" ?>>Categories<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
                                     @foreach($mainCategories as $mainCategory)
                                         @if($mainCategory->status == 1)
@@ -105,6 +105,7 @@
                                     @endforeach
                                 </ul>
                             </li>
+                            <li><a href="{{ url('/page/contact') }}" <?php if (preg_match("/page\/contact/", url()->current())) echo "class=\"active\"" ?>>Contact Us</a></li>
                         </ul>
                     </div>
                 </div>

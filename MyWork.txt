@@ -93,5 +93,9 @@ Things done on this project
 - View CMS Page
 - Edit CMS Page
 - Delete CMS Page
+- Get CMS Page in Frontend
+- Contact Us Page & Email Enquiry
+- Added Validator for Contact Us Page
 
 ToDo List
+- Add Validator to all Admin and Frontend Forms

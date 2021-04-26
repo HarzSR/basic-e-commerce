@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\CmsPage;
+use Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CmsController extends Controller
 {
@@ -102,5 +104,42 @@ class CmsController extends Controller
         }
 
         return view('pages.cms_page')->with(compact('cmsPageDetails'));
+    }
+
+    // Contact Us Function
+
+    public function contact(Request $request)
+    {
+        if($request->isMethod('POST'))
+        {
+            $data = $request->all();
+
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                'email' => 'required|email',
+                'subject' => 'required',
+                'message' => 'required'
+            ]);
+
+            if($validator->fails())
+            {
+                return redirect()->back()->withErrors($validator)->withInput($request->input());
+            }
+
+            $email = "hariharansmm@gmail.com";
+            $messageData = [
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'subject' => $data['subject'],
+                'comment' => $data['message']
+            ];
+            Mail::send('emails.enquiry', $messageData, function ($message) use ($email){
+                $message->to($email)->subject('Enquiry - Contact Form');
+            });
+
+            return redirect()->back()->with('flash_message_success', 'Thank you for your enquiry. We will get back to you soon.');
+        }
+
+        return view('pages.contact');
     }
 }
