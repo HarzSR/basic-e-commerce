@@ -80,4 +80,27 @@ class CmsController extends Controller
 
         return redirect('/admin/view-cms-pages')->with('flash_message_success', 'CMS Page Deleted Successfully');
     }
+
+    // Display CMS Page Function
+
+    public function cmsPage(Request $request, $url = null)
+    {
+        if($request->isMethod('POST'))
+        {
+            $data = $request->all();
+        }
+
+        $cmsPageCount = CmsPage::where(['url' => $url, 'status' => 1])->count();
+
+        if($cmsPageCount == 1)
+        {
+            $cmsPageDetails = CmsPage::where('url', $url)->first();
+        }
+        else
+        {
+            abort(404);
+        }
+
+        return view('pages.cms_page')->with(compact('cmsPageDetails'));
+    }
 }

@@ -46,6 +46,8 @@ Route::match(['get', 'post'], '/check-email', 'UsersController@checkEmail');
 Route::get('/user-logout', 'UsersController@logout');
 Route::post('/search-products', 'ProductsController@searchProducts');
 
+Route::match(['get', 'post'], '/page/{url}', 'CmsController@cmsPage');
+
 Route::group(['middleware' => ['frontlogin']], function () {
     Route::match(['get', 'post'], '/account', 'UsersController@account');
     Route::post('/check-user-pwd', 'UsersController@chkUserPassword');

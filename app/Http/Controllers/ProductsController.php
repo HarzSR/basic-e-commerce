@@ -1054,7 +1054,7 @@ class ProductsController extends Controller
 
             $categories = Category::with('categories')->where(['parent_id' => 0])->get();
             $search_product = $data['product'];
-            $productsAll = Product::where('product_name', 'like', '%' . $search_product . '%')->orwhere('product_code', 'like', '%' . $search_product . '%')->where('status', '1')->get();
+            $productsAll = Product::where('product_name', 'like', '%' . $search_product . '%')->orwhere('product_code', 'like', '%' . $search_product . '%')->where('status', '1')->paginate(3);
 
             return view('products.listing')->with(compact('categories', 'productsAll', 'search_product'));
         }
