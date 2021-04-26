@@ -140,6 +140,10 @@ class CmsController extends Controller
             return redirect()->back()->with('flash_message_success', 'Thank you for your enquiry. We will get back to you soon.');
         }
 
-        return view('pages.contact');
+        $meta_title = "E Commerce Shopping";
+        $meta_description = "Online shopping for Men, Women, Boys, Girls, Children";
+        $meta_keywords = "online shopping, sale, e-commerce, buy online";
+
+        return view('pages.contact')->with(compact('meta_title', 'meta_description', 'meta_keywords'));
     }
 }

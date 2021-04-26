@@ -66,6 +66,10 @@ class IndexController extends Controller
 
         $banners = Banner::where('status', 1)->get();
 
-        return view('index')->with(compact('productsFeaturedAll', 'productsAll' , 'categories', 'banners'));
+        $meta_title = "E Commerce Shopping";
+        $meta_description = "Online shopping for Men, Women, Boys, Girls, Children";
+        $meta_keywords = "online shopping, sale, e-commerce, buy online";
+
+        return view('index')->with(compact('productsFeaturedAll', 'productsAll' , 'categories', 'banners', 'meta_title', 'meta_description', 'meta_keywords'));
     }
 }
