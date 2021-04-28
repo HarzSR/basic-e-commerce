@@ -97,7 +97,8 @@ Things done on this project
 - Contact Us Page & Email Enquiry
 - Added Validator for Contact Us Page
 - Search Engine Optimization | Meta Tags (Home and Contact Pages)
+- Add Search Engine Optimization to other CMS Pages
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms
-- Search Engine Optimization for CMS Page and Products Page
+- Search Engine Optimization for Products Page

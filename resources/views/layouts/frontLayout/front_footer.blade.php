@@ -111,8 +111,8 @@
                         <h2>Policies</h2>
                         <ul class="nav nav-pills nav-stacked">
                             <li><a href="{{ url('/page/terms-conditions') }}">Terms of Use</a></li>
-                            <li><a href="{{ url('/page/privacy-policy') }}">Privecy Policy</a></li>
-                            <li><a href="#">Refund Policy</a></li>
+                            <li><a href="{{ url('/page/privacy-policy') }}">Privacy Policy</a></li>
+                            <li><a href="{{ url('/page/refund-policy') }}">Refund Policy</a></li>
                             <li><a href="#">Billing System</a></li>
                             <li><a href="#">Ticket System</a></li>
                         </ul>

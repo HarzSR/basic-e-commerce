@@ -168,7 +168,7 @@ $(document).ready(function()
             },
             description:{
                 required:true,
-            },
+            }
         },
         errorClass: "help-inline",
         errorElement: "span",

@@ -17,10 +17,24 @@ class CmsController extends Controller
         {
             $data = $request->all();
 
+            $validator = Validator::make($request->all(), [
+                'title' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                'url' => 'required|regex:/^([a-z0-9]+-)*[a-z0-9]+$/i',
+                'description' => 'required'
+            ]);
+
+            if($validator->fails())
+            {
+                return redirect()->back()->withErrors($validator)->withInput($request->input());
+            }
+
             $cmsPage = new CmsPage;
             $cmsPage->title = $data['title'];
             $cmsPage->url = $data['url'];
             $cmsPage->description = $data['description'];
+            $cmsPage->meta_title = $data['meta_title'];
+            $cmsPage->meta_description = $data['meta_description'];
+            $cmsPage->meta_keywords = $data['meta_keywords'];
             if(empty($data['status']))
             {
                 $cmsPage->status = 0;
@@ -55,6 +69,17 @@ class CmsController extends Controller
         {
             $data = $request->all();
 
+            $validator = Validator::make($request->all(), [
+                'title' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                'url' => 'required|regex:/^([a-z0-9]+-)*[a-z0-9]+$/i',
+                'description' => 'required'
+            ]);
+
+            if($validator->fails())
+            {
+                return redirect()->back()->withErrors($validator)->withInput($request->input());
+            }
+
             if(empty($data['status']))
             {
                 $status = 0;
@@ -64,7 +89,7 @@ class CmsController extends Controller
                 $status = 1;
             }
 
-            CmsPage::where('id', $id)->update(['title' => $data['title'], 'url' => $data['url'], 'description' => $data['description'], 'status' => $status]);
+            CmsPage::where('id', $id)->update(['title' => $data['title'], 'url' => $data['url'], 'description' => $data['description'], 'meta_title' => $data['meta_title'], 'meta_description' => $data['meta_description'], 'meta_keywords' => $data['meta_keywords'], 'status' => $status]);
 
             return redirect('/admin/view-cms-pages')->with('flash_message_success', 'CMS Page Updated Successfully');
         }
@@ -94,16 +119,17 @@ class CmsController extends Controller
 
         $cmsPageCount = CmsPage::where(['url' => $url, 'status' => 1])->count();
 
-        if($cmsPageCount == 1)
-        {
-            $cmsPageDetails = CmsPage::where('url', $url)->first();
-        }
-        else
+        if($cmsPageCount == 0)
         {
             abort(404);
         }
 
-        return view('pages.cms_page')->with(compact('cmsPageDetails'));
+        $cmsPageDetails = CmsPage::where('url', $url)->first();
+        $meta_title = $cmsPageDetails->meta_title;
+        $meta_description = $cmsPageDetails->meta_description;
+        $meta_keywords = $cmsPageDetails->meta_keywords;
+
+        return view('pages.cms_page')->with(compact('cmsPageDetails', 'meta_title', 'meta_description', 'meta_keywords'));
     }
 
     // Contact Us Function

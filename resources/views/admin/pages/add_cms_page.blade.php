@@ -25,31 +25,58 @@
                         <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
                             <h5>Add CMS Page</h5>
                         </div>
+                        @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="widget-content nopadding">
                             <form class="form-horizontal" method="post" action="{{ url('/admin/add-cms-page') }}" name="add_cms_page" id="add_cms_page" novalidate="novalidate">
                                 {{ csrf_field() }}
                                 <div class="control-group">
                                     <label class="control-label">Title</label>
                                     <div class="controls">
-                                        <input type="text" name="title" id="title">
+                                        <input type="text" name="title" id="title"  value="{{ old('title') }}">
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">CMS Page URL</label>
                                     <div class="controls">
-                                        <input type="text" name="url" id="url">
+                                        <input type="text" name="url" id="url" value="{{ old('url') }}">
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Description</label>
                                     <div class="controls">
-                                        <textarea name="description" id="description"></textarea>
+                                        <textarea name="description" id="description">{{ old('description') }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Meta Title</label>
+                                    <div class="controls">
+                                        <input type="text" name="meta_title" id="meta_title" value="{{ old('meta_title') }}">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Meta Description</label>
+                                    <div class="controls">
+                                        <input type="text" name="meta_description" id="meta_description" value="{{ old('meta_description') }}">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Meta Keywords</label>
+                                    <div class="controls">
+                                        <input type="text" name="meta_keywords" id="meta_keywords" value="{{ old('meta_keywords') }}">
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Enable</label>
                                     <div class="controls">
-                                        <input type="checkbox" name="status" id="status" value="1">
+                                        <input type="checkbox" name="status" id="status" @if(!empty(old('status'))) checked @endif value="1">
                                     </div>
                                 </div>
                                 <div class="form-actions">
