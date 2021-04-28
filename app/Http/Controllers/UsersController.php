@@ -18,7 +18,11 @@ class UsersController extends Controller
 
     public function userLoginRegister()
     {
-        return view('users.login_register');
+        $meta_title = "Sign up/Sign in";
+        $meta_description = "Log in to access the full power of shopping";
+        $meta_keywords = "shopping";
+
+        return view('users.login_register')->with(compact('meta_title', 'meta_description', 'meta_keywords'));
     }
 
     // User Registration Function
@@ -99,7 +103,7 @@ class UsersController extends Controller
 
                 if($userStatus->status == 0)
                 {
-                    return redirect()->back()->with('flash_message_error', 'Your account is not activated. Please check your emails for activation link.');
+                    return redirect()->back()->with('flash_message_error', 'Your account is not activated. Please check your emails for activation link.')->withInput($request->input());
                 }
                 if($userStatus->status == 2)
                 {

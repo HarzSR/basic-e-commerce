@@ -22,8 +22,8 @@
                         <h2>Login to your account</h2>
                         <form action="{{ url('/user-login') }}" id="loginForm" name="loginForm" method="post">
                             {{ csrf_field() }}
-                            <input id="email" name="email" type="email" placeholder="Email Address" />
-                            <input id="loginPassword" name="loginPassword" type="password" placeholder="Password"/>
+                            <input id="email" name="email" type="email" placeholder="Email Address" value="{{ old('email') }}"/>
+                            <input id="loginPassword" name="loginPassword" id="loginPassword" type="password" placeholder="Password" value="{{ old('loginPassword') }}"/>
                             {{-- <span>
 								<input type="checkbox" class="checkbox">
 								Keep me signed in
@@ -37,7 +37,7 @@
                     <h2 class="or">OR</h2>
                 </div>
                 <div class="col-sm-4">
-                    <div class="signup-form"><
+                    <div class="signup-form">
                         <h2>New User Signup!</h2>
                         <form action="{{ url('/user-register') }}" id="registerForm" name="registerForm" method="post">
                             {{ csrf_field() }}

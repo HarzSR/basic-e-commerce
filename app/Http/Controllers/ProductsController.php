@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Banner;
 use App\Category;
 use App\Country;
 use App\Coupon;
@@ -489,6 +490,9 @@ class ProductsController extends Controller
         $categories = Category::with('categories')->where(['parent_id' => 0])->get();
 
         $categoryDetails = Category::where(['url' => $url])->first();
+        $meta_title = $categoryDetails->meta_title;
+        $meta_description = $categoryDetails->meta_description;
+        $meta_keywords = $categoryDetails->meta_keywords;
 
         if ($categoryDetails->parent_id != 0)
         {
@@ -505,7 +509,9 @@ class ProductsController extends Controller
             $productsAll = Product::whereIn('category_id', $categoryIds)->where('status', 1)->paginate(3);
         }
 
-        return view('products.listing')->with(compact('categoryDetails', 'productsAll', 'categories'));
+        $banners = Banner::where('status', 1)->get();
+
+        return view('products.listing')->with(compact('categoryDetails', 'productsAll', 'categories', 'meta_title', 'meta_description', 'meta_keywords', 'banners'));
     }
 
     // Display Individual Product Function
@@ -519,6 +525,9 @@ class ProductsController extends Controller
         }
 
         $productDetails = Product::with('attributes')->where(['id' => $id])->first();
+        $meta_title = $productDetails->product_name;
+        $meta_description = $productDetails->description;
+        $meta_keywords = $productDetails->product_name;
 
         $categories = Category::with('categories')->where(['parent_id' => 0])->get();
 
@@ -528,7 +537,7 @@ class ProductsController extends Controller
 
         $relatedProducts = Product::where('id', '!=', $id)->where(['category_id' => $productDetails->category_id])->get();
 
-        return view('products.detail')->with(compact('productDetails', 'categories', 'productAdditionalImages', 'total_stock', 'relatedProducts'));
+        return view('products.detail')->with(compact('productDetails', 'categories', 'productAdditionalImages', 'total_stock', 'relatedProducts', 'meta_title', 'meta_description', 'meta_keywords'));
     }
 
     // Get Product Price upon Attribute Change Function
@@ -661,11 +670,19 @@ class ProductsController extends Controller
                 $userCart[$key]->image = $productDetails->image;
             }
 
-            return view('products.cart')->with(compact('userCart'));
+            $meta_title = "Cart";
+            $meta_description = "Cart for Shopping";
+            $meta_keywords = "cart,shopping";
+
+            return view('products.cart')->with(compact('userCart', 'meta_title', 'meta_description', 'meta_keywords'));
         }
         else
         {
-            return view('products.cart');
+            $meta_title = "Cart";
+            $meta_description = "Cart for Shopping";
+            $meta_keywords = "cart,shopping";
+
+            return view('products.cart')->with(compact('meta_title', 'meta_description', 'meta_keywords'));
         }
     }
 
@@ -826,7 +843,11 @@ class ProductsController extends Controller
             return redirect()->action('ProductsController@orderReview');
         }
 
-        return view('products.checkout')->with(compact('userDetails', 'countries', 'shippingDetails'));
+        $meta_title = "Check-out Process";
+        $meta_description = "Checking out Shopping Cart";
+        $meta_keywords = "check-out,shopping";
+
+        return view('products.checkout')->with(compact('userDetails', 'countries', 'shippingDetails', 'meta_title', 'meta_description', 'meta_keywords'));
     }
 
     // Order Review Function
@@ -846,7 +867,11 @@ class ProductsController extends Controller
             $userCart[$key]->image = $productDetails->image;
         }
 
-        return view('products.order_review')->with(compact('userDetails', 'shippingDetails', 'userCart'));
+        $meta_title = "Order Review";
+        $meta_description = "Check before you place your Order";
+        $meta_keywords = "place-order,shopping";
+
+        return view('products.order_review')->with(compact('userDetails', 'shippingDetails', 'userCart', 'meta_title', 'meta_description', 'meta_keywords'));
     }
 
     // Place Order Function
@@ -932,11 +957,19 @@ class ProductsController extends Controller
                     $message->to($email)->subject('Order Placed Successfully');
                 });
 
-                return redirect(('/thanks'));
+                $meta_title = "COD Placed";
+                $meta_description = "COD for Order Placed";
+                $meta_keywords = "cod,shopping";
+
+                return redirect(('/thanks'))->with(compact( 'meta_title', 'meta_description', 'meta_keywords'));
             }
             else if($data['payment_method'] == "Paypal")
             {
-                return redirect(('/paypal'));
+                $meta_title = "Paypal Placed";
+                $meta_description = "Paypal for Order Placed";
+                $meta_keywords = "paypal,shopping";
+
+                return redirect(('/paypal'))->with(compact( 'meta_title', 'meta_description', 'meta_keywords'));
             }
         }
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use Validator;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -15,13 +16,15 @@ class CategoryController extends Controller
         {
             $data = $request->all();
 
-            if(empty($data['status']))
+            $validator = Validator::make($request->all(), [
+                'category_name' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                'parent_id' => 'required|numeric',
+                'url' => 'required|regex:/^([a-z0-9]+-)*[a-z0-9]+$/i'
+            ]);
+
+            if($validator->fails())
             {
-                $status = 0;
-            }
-            else
-            {
-                $status = 1;
+                return redirect()->back()->withErrors($validator)->withInput($request->input());
             }
 
             $category = new Category();
@@ -29,8 +32,40 @@ class CategoryController extends Controller
             $category->parent_id = $data['parent_id'];
             $category->description = $data['description'];
             $category->url = $data['url'];
-            $category->status = $status;
+            if(empty($data['meta_title']))
+            {
+                $category->meta_title = "";
+            }
+            else
+            {
+                $category->meta_title = $data['meta_title'];
+            }
+            if(empty($data['status']))
+            {
+                $category->meta_description = "";
+            }
+            else
+            {
+                $category->meta_description = $data['meta_description'];
+            }
+            if(empty($data['status']))
+            {
+                $category->meta_keywords = "";
+            }
+            else
+            {
+                $category->meta_keywords = $data['meta_keywords'];
+            }
+            if(empty($data['status']))
+            {
+                $category->status = 0;
+            }
+            else
+            {
+                $category->status = 1;
+            }
             $category->save();
+
             return redirect('/admin/view-categories')->with('flash_message_success', 'Category added Successfully');
         }
 
@@ -58,6 +93,41 @@ class CategoryController extends Controller
         {
             $data = $request->all();
 
+            $validator = Validator::make($request->all(), [
+                'category_name' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                'parent_id' => 'required|numeric',
+                'url' => 'required|regex:/^([a-z0-9]+-)*[a-z0-9]+$/i'
+            ]);
+
+            if($validator->fails())
+            {
+                return redirect()->back()->withErrors($validator)->withInput($request->input());
+            }
+
+            if(empty($data['meta_title']))
+            {
+                $meta_title = "";
+            }
+            else
+            {
+                $meta_title = $data['meta_title'];
+            }
+            if(empty($data['meta_description']))
+            {
+                $meta_description = "";
+            }
+            else
+            {
+                $meta_description = $data['meta_description'];
+            }
+            if(empty($data['meta_keywords']))
+            {
+                $meta_keywords = "";
+            }
+            else
+            {
+                $meta_keywords = $data['meta_keywords'];
+            }
             if(empty($data['status']))
             {
                 $status = 0;
@@ -66,8 +136,8 @@ class CategoryController extends Controller
             {
                 $status = 1;
             }
+            Category::where(['id' => $id])->update(['name' => $data['category_name'], 'description' => $data['description'], 'url' => $data['url'], 'parent_id' => $data['parent_id'], 'meta_title' => $meta_title, 'meta_description' => $meta_description, 'meta_keywords' => $meta_keywords, 'status' => $status]);
 
-            Category::where(['id' => $id])->update(['name' => $data['category_name'], 'description' => $data['description'], 'url' => $data['url'], 'parent_id' => $data['parent_id'], 'status' => $status]);
             return redirect('/admin/view-categories')->with('flash_message_success', 'Category Update Successful');
         }
 

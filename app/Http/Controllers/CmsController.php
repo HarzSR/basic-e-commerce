@@ -32,9 +32,30 @@ class CmsController extends Controller
             $cmsPage->title = $data['title'];
             $cmsPage->url = $data['url'];
             $cmsPage->description = $data['description'];
-            $cmsPage->meta_title = $data['meta_title'];
-            $cmsPage->meta_description = $data['meta_description'];
-            $cmsPage->meta_keywords = $data['meta_keywords'];
+            if(empty($data['meta_title']))
+            {
+                $cmsPage->meta_title = "";
+            }
+            else
+            {
+                $cmsPage->meta_title = $data['meta_title'];
+            }
+            if(empty($data['meta_description']))
+            {
+                $cmsPage->meta_description = "";
+            }
+            else
+            {
+                $cmsPage->meta_description = $data['meta_description'];
+            }
+            if(empty($data['meta_keywords']))
+            {
+                $cmsPage->meta_keywords = "";
+            }
+            else
+            {
+                $cmsPage->meta_keywords = $data['meta_keywords'];
+            }
             if(empty($data['status']))
             {
                 $cmsPage->status = 0;
@@ -80,6 +101,30 @@ class CmsController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput($request->input());
             }
 
+            if(empty($data['meta_title']))
+            {
+                $meta_title = "";
+            }
+            else
+            {
+                $meta_title = $data['meta_title'];
+            }
+            if(empty($data['meta_description']))
+            {
+                $meta_description = "";
+            }
+            else
+            {
+                $meta_description = $data['meta_description'];
+            }
+            if(empty($data['meta_keywords']))
+            {
+                $meta_keywords = "";
+            }
+            else
+            {
+                $meta_keywords = $data['meta_keywords'];
+            }
             if(empty($data['status']))
             {
                 $status = 0;
@@ -89,7 +134,7 @@ class CmsController extends Controller
                 $status = 1;
             }
 
-            CmsPage::where('id', $id)->update(['title' => $data['title'], 'url' => $data['url'], 'description' => $data['description'], 'meta_title' => $data['meta_title'], 'meta_description' => $data['meta_description'], 'meta_keywords' => $data['meta_keywords'], 'status' => $status]);
+            CmsPage::where('id', $id)->update(['title' => $data['title'], 'url' => $data['url'], 'description' => $data['description'], 'meta_title' => $meta_title, 'meta_description' => $meta_description, 'meta_keywords' => $meta_keywords, 'status' => $status]);
 
             return redirect('/admin/view-cms-pages')->with('flash_message_success', 'CMS Page Updated Successfully');
         }
