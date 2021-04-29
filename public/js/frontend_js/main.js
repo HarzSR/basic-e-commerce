@@ -296,7 +296,7 @@ $().ready(function (){
     $("#current_pwd").keyup(function () {
         var current_pwd = $(this).val();
         $.ajax({
-            type: 'POST',
+            type: 'post',
             url: '/check-user-pwd',
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -379,5 +379,41 @@ function selectPaymentMethod()
     {
         alert("Please select Payment method");
         return false;
+    }
+}
+
+function checkPincode()
+{
+    var pincode = $('#chkPincode').val();
+    if(pincode == '')
+    {
+        alert("Please Enter Pincode");
+    }
+    else
+    {
+        $.ajax({
+            type: 'post',
+            data: {
+                pincode: pincode
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '/check-pincode',
+            success: function (response) {
+                // alert(response);
+                if(response > 0)
+                {
+                    $('#pincodeResponse').html("<font color='green'><b>Yes, We can deliver to this pincode - " + pincode + "</b></font>");
+                }
+                else
+                {
+                    $('#pincodeResponse').html("<font color='red'><b>Unfortunately, we are yet to cover the pincode - " + pincode + ". But, don't worry, we will soon service this area (if its possible).</b></font>");
+                }
+            },
+            error: function (response) {
+                alert("Error : " + response);
+            }
+        });
     }
 }

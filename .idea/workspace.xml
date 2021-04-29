@@ -2,18 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d55aefa-07cd-49f9-b334-7d2ae82c409a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/database/migrations/2021_04_29_085342_create_pincodes_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2021_04_29_111030_create_cod_pincodes_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2021_04_29_112511_create_prepaid_pincodes_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/all_india_PO_list_without_APS_offices_ver2_lat_long.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyWork.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MyWork.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CmsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CmsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_03_08_102132_create_category_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_03_08_102132_create_category_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/categories/add_category.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/categories/add_category.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/categories/edit_category.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/categories/edit_category.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/products/listing.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/listing.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/login_register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/login_register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_03_10_092426_create_products_tables.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_03_10_092426_create_products_tables.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/frontend_js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/frontend_js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/products/detail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/detail.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/products/order_review.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/order_review.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,6 +151,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -185,7 +186,7 @@
       <workItem from="1619362424368" duration="702000" />
       <workItem from="1619363270420" duration="299000" />
       <workItem from="1619363581766" duration="20628000" />
-      <workItem from="1619548705224" duration="13488000" />
+      <workItem from="1619548705224" duration="24298000" />
     </task>
     <servers />
   </component>
@@ -203,6 +204,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

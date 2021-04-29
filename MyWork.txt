@@ -100,6 +100,9 @@ Things done on this project
 - Add Search Engine Optimization to other CMS Pages
 - Add Search Engine Optimization for Products Pages
 - Add Search Engine Optimization for all Pages
+- Add Delivery Pincode/Zipcode Check
+- Also check Delivery Pincode while placing Order
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms
+- Check whether Order can be placed for Invalid Pincode

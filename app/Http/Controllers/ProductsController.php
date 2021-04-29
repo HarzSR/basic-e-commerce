@@ -840,6 +840,14 @@ class ProductsController extends Controller
                 $shipping->save();
             }
 
+            $shippingDetails = DeliveryAddress::where(['user_email' => $user_email])->first();
+            $pincodeCount = DB::table('pincodes')->where('pincode', $shippingDetails->pincode)->count();
+
+            if($pincodeCount == 0)
+            {
+                return redirect()->back()->with('flash_message_error', 'Your Location is currently unserviceable. Please choose a friends place or a different address');
+            }
+
             return redirect()->action('ProductsController@orderReview');
         }
 
@@ -867,11 +875,14 @@ class ProductsController extends Controller
             $userCart[$key]->image = $productDetails->image;
         }
 
+        $codPincodeCount = DB::table('cod_pincodes')->where('pincode', $shippingDetails->pincode)->count();
+        $prepaidPincodeCount = DB::table('prepaid_pincodes')->where('pincode', $shippingDetails->pincode)->count();
+
         $meta_title = "Order Review";
         $meta_description = "Check before you place your Order";
         $meta_keywords = "place-order,shopping";
 
-        return view('products.order_review')->with(compact('userDetails', 'shippingDetails', 'userCart', 'meta_title', 'meta_description', 'meta_keywords'));
+        return view('products.order_review')->with(compact('userDetails', 'shippingDetails', 'userCart', 'meta_title', 'meta_description', 'meta_keywords', 'codPincodeCount', 'prepaidPincodeCount'));
     }
 
     // Place Order Function
@@ -887,6 +898,12 @@ class ProductsController extends Controller
             $session_id = Session::get('session_id');
 
             $shippingDetails = DeliveryAddress::where(['user_email' => $user_email])->first();
+            $pincodeCount = DB::table('pincodes')->where('pincode', $shippingDetails->pincode)->count();
+
+            if($pincodeCount == 0)
+            {
+                return redirect()->back()->with('flash_message_error', 'Your Location is currently unserviceable. Please choose a friends place or a different address');
+            }
 
             if(empty(Session::has('couponCode')) || empty(Session::has('couponAmount')))
             {
@@ -1090,6 +1107,20 @@ class ProductsController extends Controller
             $productsAll = Product::where('product_name', 'like', '%' . $search_product . '%')->orwhere('product_code', 'like', '%' . $search_product . '%')->where('status', '1')->paginate(3);
 
             return view('products.listing')->with(compact('categories', 'productsAll', 'search_product'));
+        }
+    }
+
+    // Check Pincode Function
+
+    public function checkPincode(Request $request)
+    {
+        if($request->isMethod('POST'))
+        {
+            $data = $request->all();
+
+            $pincodeCount = DB::table('pincodes')->where('pincode', $data['pincode'])->count();
+
+            echo $pincodeCount;
         }
     }
 }

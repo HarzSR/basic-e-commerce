@@ -56,46 +56,48 @@
                                 <input type="hidden" name="product_color" value="{{ $productDetails->product_color }}">
                                 <input type="hidden" name="price" value="{{ $productDetails->price }}" id="hiddenPrice">
                                 <div class="product-information"><!--/product-information-->
-                                <img src="{{ asset('images/frontend_images/product-details/new.jpg') }}" class="newarrival" alt="" />
-                                <h2>{{ $productDetails->product_name }}</h2>
-                                <p>Web Code: {{ $productDetails->product_code }}</p>
-                                <p>Select Size:&#8194;
-                                    <select name="size" id="size" style="width: 150px" required>
-                                        <option value="">Select</option>
-                                        @foreach($productDetails->attributes as $productDetail)
-                                            <option value="{{ $productDetails->id }}-{{ $productDetail->size }}">{{ $productDetail->size }}</option>
-                                        @endforeach
-                                    </select>
-                                </p>
-                                <img src="{{ asset('images/frontend_images/product-details/rating.png') }}" alt="" />
-                                <span>
-									<span id="getPrice">&#8377; {{ $productDetails->price }}</span>
-									<label>Quantity:</label>
-									<input type="number" name="quantity" id="quantity" value="1" />
-                                    @if($total_stock > 0)
-                                        <button type="submit" class="btn btn-fefault cart" id="cartButton">
-                                            <i class="fa fa-shopping-cart"></i>
-                                            Add to cart
-                                        </button>
-                                    @endif
-								</span>
-                                <p><b>Availability:</b>
-                                    <span id="availability">
+                                    <img src="{{ asset('images/frontend_images/product-details/new.jpg') }}" class="newarrival" alt="" />
+                                    <h2>{{ $productDetails->product_name }}</h2>
+                                    <p>Web Code: {{ $productDetails->product_code }}</p>
+                                    <p>Select Size:&#8194;
+                                        <select name="size" id="size" style="width: 150px" required>
+                                            <option value="">Select</option>
+                                            @foreach($productDetails->attributes as $productDetail)
+                                                <option value="{{ $productDetails->id }}-{{ $productDetail->size }}">{{ $productDetail->size }}</option>
+                                            @endforeach
+                                        </select>
+                                    </p>
+                                    <img src="{{ asset('images/frontend_images/product-details/rating.png') }}" alt="" />
+                                    <span>
+                                        <span id="getPrice">&#8377; {{ $productDetails->price }}</span>
+                                        <label>Quantity: </label>
+                                        <input type="number" name="quantity" id="quantity" value="1" />
                                         @if($total_stock > 0)
-                                            In Stock
-                                        @else
-                                            Out of Stock
+                                            <button type="submit" class="btn btn-fefault cart" id="cartButton">
+                                                <i class="fa fa-shopping-cart"></i>
+                                                Add to cart
+                                            </button>
                                         @endif
                                     </span>
-                                </p>
-                                <p><b>Condition:</b> New</p>
-                                <a href=""><img src="{{ asset('images/frontend_images/product-details/share.png') }}" class="share img-responsive"  alt="" /></a>
-                            </div><!--/product-information-->
+                                    <p><b>Availability: </b>
+                                        <span id="availability">
+                                            @if($total_stock > 0)
+                                                In Stock
+                                            @else
+                                                Out of Stock
+                                            @endif
+                                        </span>
+                                    </p>
+                                    <p><b>Condition: </b> New</p>
+                                    <p><b>Delivery: </b><input type="text" name="chkPincode" id="chkPincode" placeholder="Check Pincode"><button type="button" onclick="return checkPincode();">Go</button></p>
+                                    <span id="pincodeResponse" name="pincodeResponse"></span>
+                                    <a href=""><img src="{{ asset('images/frontend_images/product-details/share.png') }}" class="share img-responsive"  alt="" /></a>
+                                </div>
                             </form>
                         </div>
-                    </div><!--/product-details-->
+                    </div>
 
-                    <div class="category-tab shop-details-tab"><!--category-tab-->
+                    <div class="category-tab shop-details-tab">
                         <div class="col-sm-12">
                             <ul class="nav nav-tabs">
                                 <li class="active"><a href="#description" data-toggle="tab">Description</a></li>

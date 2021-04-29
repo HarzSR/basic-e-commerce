@@ -138,14 +138,17 @@
                                     </tr>
                                     <tr>
                                         <td>Total</td>
-                                        <td><span>NZ$
+                                        <td>
+                                            <span>NZ$
                                                 <?php
                                                     if($total_amount - Session::get('couponAmount') > 0)
                                                         $grand_total = $total_amount - Session::get('couponAmount');
                                                     else
                                                         $grand_total = 0;
                                                     echo $grand_total;
-                                                    ?></span></td>
+                                                    ?>
+                                            </span>
+                                        </td>
                                     </tr>
                                 </table>
                             </td>
@@ -160,12 +163,16 @@
                     <span>
                         <label><strong>Select Payment Method : </strong></label>
                     </span>
-                    <span>
-                        <label><input type="radio" name="payment_method" id="COD" value="COD" required><strong>  COD</strong></label>
-                    </span>
-                    <span>
-                        <label><input type="radio" name="payment_method" id="Paypal" value="Paypal" required><strong>  Paypal</strong></label>
-                    </span>
+                    @if($codPincodeCount > 0)
+                        <span>
+                            <label><input type="radio" name="payment_method" id="COD" value="COD" required><strong>  COD</strong></label>
+                        </span>
+                    @endif
+                    @if($prepaidPincodeCount > 0)
+                        <span>
+                            <label><input type="radio" name="payment_method" id="Paypal" value="Paypal" required><strong>  Paypal</strong></label>
+                        </span>
+                    @endif
                     <span style="float: right; margin-top: -23px;">
                         <button type="submit" class="btn btn-primary" onclick="return selectPaymentMethod();">Place Order</button>
                     </span>

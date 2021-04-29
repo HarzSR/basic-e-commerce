@@ -22,6 +22,7 @@ class CreateProductsTables extends Migration
             $table->string('product_code');
             $table->string('product_color');
             $table->text('description');
+            $table->text('care');
             $table->float('price');
             $table->string('image');
             $table->tinyInteger('feature_item')->default('1');
