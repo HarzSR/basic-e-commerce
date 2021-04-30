@@ -25,6 +25,7 @@ class CreateProductsTables extends Migration
             $table->text('care');
             $table->float('price');
             $table->string('image');
+            $table->string('video');
             $table->tinyInteger('feature_item')->default('1');
             $table->tinyInteger('status')->default('1');
             $table->timestamps();

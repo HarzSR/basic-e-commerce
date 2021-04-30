@@ -91,6 +91,7 @@ $(document).ready(function()
 	});
 
 	// Add Product Validation
+    /*
     $("#add_product").validate({
 		rules:{
 			category_id:{
@@ -129,8 +130,10 @@ $(document).ready(function()
 			$(element).parents('.control-group').addClass('success');
 		}
 	});
+    */
 
 	// Edit Category Validation
+    /*
     $("#edit_category").validate({
 		rules:{
 			category_name:{
@@ -156,6 +159,7 @@ $(document).ready(function()
 			$(element).parents('.control-group').addClass('success');
 		}
 	});
+	*/
 
     // Add CMS Page Validation
     $("#add_cms_page").validate({

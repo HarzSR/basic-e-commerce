@@ -25,6 +25,15 @@
                         <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
                             <h5>Add Product</h5>
                         </div>
+                        @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="widget-content nopadding">
                             <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{ url('/admin/add-product') }}" name="add_product" id="add_product" novalidate="novalidate">
                                 {{ csrf_field() }}
@@ -39,43 +48,49 @@
                                 <div class="control-group">
                                     <label class="control-label">Product Name</label>
                                     <div class="controls">
-                                        <input type="text" name="product_name" id="product_name">
+                                        <input type="text" name="product_name" id="product_name" value="{{ old('product_name') }}">
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Product Code</label>
                                     <div class="controls">
-                                        <input type="text" name="product_code" id="product_code">
+                                        <input type="text" name="product_code" id="product_code" value="{{ old('product_code') }}">
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Product Color</label>
                                     <div class="controls">
-                                        <input type="text" name="product_color" id="product_color">
+                                        <input type="text" name="product_color" id="product_color" value="{{ old('product_color') }}">
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Description</label>
                                     <div class="controls">
-                                        <textarea name="description" id="description"></textarea>
+                                        <textarea name="description" id="description">{{ old('description') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Materials & Care</label>
                                     <div class="controls">
-                                        <textarea name="care" id="care"></textarea>
+                                        <textarea name="care" id="care">{{ old('care') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Price</label>
                                     <div class="controls">
-                                        <input type="text" name="price" id="price">
+                                        <input type="text" name="price" id="price" value="{{ old('price') }}">
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Image</label>
                                     <div class="controls">
                                         <input type="file" name="image" id="image">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Video</label>
+                                    <div class="controls">
+                                        <input type="file" name="video" id="video">
                                     </div>
                                 </div>
                                 <div class="control-group">

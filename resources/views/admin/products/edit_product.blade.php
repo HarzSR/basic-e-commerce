@@ -25,6 +25,15 @@
                         <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
                             <h5>Edit Product</h5>
                         </div>
+                        @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="widget-content nopadding">
                             <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{ url('/admin/edit-product/' . $productDetails->id) }}" name="edit_product" id="edit_product" novalidate="novalidate">
                                 {{ csrf_field() }}
@@ -39,37 +48,37 @@
                                 <div class="control-group">
                                     <label class="control-label">Product Name</label>
                                     <div class="controls">
-                                        <input type="text" name="product_name" id="product_name" value="{{ $productDetails->product_name }}">
+                                        <input type="text" name="product_name" id="product_name" value="@if(!empty(old('product_name'))) {{ old('product_name') }} @else {{ $productDetails->product_name }} @endif">
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Product Code</label>
                                     <div class="controls">
-                                        <input type="text" name="product_code" id="product_code" value="{{ $productDetails->product_code }}">
+                                        <input type="text" name="product_code" id="product_code" value="@if(!empty(old('product_code'))) {{ old('product_code') }} @else {{ $productDetails->product_code }} @endif">
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Product Color</label>
                                     <div class="controls">
-                                        <input type="text" name="product_color" id="product_color" value="{{ $productDetails->product_color }}">
+                                        <input type="text" name="product_color" id="product_color" value="@if(!empty(old('product_color'))) {{ old('product_color') }} @else {{ $productDetails->product_color }} @endif">
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Description</label>
                                     <div class="controls">
-                                        <textarea name="description" id="description">{{ $productDetails->description }}</textarea>
+                                        <textarea name="description" id="description">@if(!empty(old('description'))) {{ old('description') }} @else {{ $productDetails->description }} @endif</textarea>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Materials & Care</label>
                                     <div class="controls">
-                                        <textarea name="care" id="care">{{ $productDetails->care }}</textarea>
+                                        <textarea name="care" id="care">@if(!empty(old('care'))) {{ old('care') }} @else {{ $productDetails->care }} @endif</textarea>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Price</label>
                                     <div class="controls">
-                                        <input type="text" name="price" id="price" value="{{ $productDetails->price }}">
+                                        <input type="text" name="price" id="price" value="@if(!empty(old('price'))) {{ old('price') }} @else {{ $productDetails->price }} @endif">
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -84,15 +93,26 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label">Enable</label>
+                                    <label class="control-label">Video</label>
                                     <div class="controls">
-                                        <input type="checkbox" name="feature_item" id="feature_item" @if($productDetails->feature_item == 1) checked @endif value="1">
+                                        <input type="file" name="video" id="video">
+                                        <input type="hidden" name="current_video" value="{{ $productDetails->video }}">
+                                        @if(!empty($productDetails->video))
+                                            <img src="{{ asset('/videos/' . $productDetails->video) }}" style="width: 90px">
+                                            | <a href="{{ url('/admin/delete-product-video/' . $productDetails->id) }}">Delete</a>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Enable</label>
                                     <div class="controls">
-                                        <input type="checkbox" name="status" id="status" @if($productDetails->status == 1) checked @endif value="1">
+                                        <input type="checkbox" name="feature_item" id="feature_item" @if(! ($errors->any() && is_null(old('feature_item'))) && old('feature_item', $productDetails->feature_item)) checked @endif value="1">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Enable</label>
+                                    <div class="controls">
+                                        <input type="checkbox" name="status" id="status" @if(! ($errors->any() && is_null(old('status'))) && old('status', $productDetails->status)) checked @endif value="1">
                                     </div>
                                 </div>
                                 <div class="form-actions">

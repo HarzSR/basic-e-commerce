@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Image;
+use Validator;
 
 class ProductsController extends Controller
 {
@@ -32,39 +33,28 @@ class ProductsController extends Controller
         {
             $data = $request->all();
 
+            $validator = Validator::make($request->all(), [
+                'category_id' => 'required|numeric',
+                'product_name' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                'product_code' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                'product_color' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+                'description' => 'required',
+                'care' => 'required',
+                'price' => 'required|numeric',
+                'image' => 'mimes:jpeg,png,jpg',
+                'video' => 'mimetypes:video/mp4,video/avi,video/mpeg,video/quicktime',
+            ]);
+
+            if($validator->fails())
+            {
+                return redirect()->back()->withErrors($validator)->withInput($request->input());
+            }
+
             $product = new Product();
-            if (!empty($data['category_id']))
-            {
-                $product->category_id = $data['category_id'];
-            }
-            else
-            {
-                return redirect()->back()->with('flash_message_error', 'Category is missing');
-            }
-            if (!empty($data['product_name']))
-            {
-                $product->product_name = $data['product_name'];
-            }
-            else
-            {
-                return redirect()->back()->with('flash_message_error', 'Product Name is missing');
-            }
-            if (!empty($data['product_code']))
-            {
-                $product->product_code = $data['product_code'];
-            }
-            else
-            {
-                return redirect()->back()->with('flash_message_error', 'Product Code is missing');
-            }
-            if (!empty($data['product_color']))
-            {
-                $product->product_color = $data['product_color'];
-            }
-            else
-            {
-                return redirect()->back()->with('flash_message_error', 'Product Color is missing');
-            }
+            $product->category_id = $data['category_id'];
+            $product->product_name = $data['product_name'];
+            $product->product_code = $data['product_code'];
+            $product->product_color = $data['product_color'];
             if (!empty($data['description']))
             {
                 $product->description = $data['description'];
@@ -81,14 +71,7 @@ class ProductsController extends Controller
             {
                 $product->care = '';
             }
-            if (!empty($data['price']))
-            {
-                $product->price = $data['price'];
-            }
-            else
-            {
-                return redirect()->back()->with('flash_message_error', 'Product Price is missing');
-            }
+            $product->price = $data['price'];
             if (empty($data['image']))
             {
                 $product->image = '';
@@ -115,6 +98,19 @@ class ProductsController extends Controller
                         $product->image = $fileName;
                     }
                 }
+            }
+            if (empty($data['video']))
+            {
+                $product->video = '';
+            }
+            elseif($request->hasFile('video'))
+            {
+                $video_temp = Input::file('video');
+                $video_name = $video_temp->getClientOriginalName();
+                $video_extension = $video_temp->getClientOriginalExtension();
+                $video_path = public_path() . '/videos/backend_videos/products';
+                $video_temp->move($video_path, $video_name);
+                $product->video = $video_name;
             }
             if (empty($data['feature_item']))
             {
@@ -179,6 +175,23 @@ class ProductsController extends Controller
         {
             $data = $request->all();
 
+            $validator = Validator::make($request->all(), [
+                'category_id' => 'required|numeric',
+                'product_name' => 'required|regex:/[a-zA-Z0-9\s]+/|max:255',
+                'product_code' => 'required|regex:/[a-zA-Z0-9\s]+/|max:255',
+                'product_color' => 'required|regex:/[a-zA-Z0-9\s]+/|max:255',
+                'description' => 'required',
+                'care' => 'required',
+                'price' => 'required|numeric',
+                'image' => 'image',
+                'video' => 'mimetypes:video/mp4,video/avi,video/mpeg,video/quicktime',
+            ]);
+
+            if($validator->fails())
+            {
+                return redirect()->back()->withErrors($validator)->withInput($request->input());
+            }
+
             if ($request->hasFile('image'))
             {
                 $image_tmp = Input::file('image');
@@ -206,6 +219,26 @@ class ProductsController extends Controller
                 else
                 {
                     $fileName = $data['current_image'];
+                }
+            }
+
+            if ($request->hasFile('video'))
+            {
+                $video_temp = Input::file('video');
+                $video_name = $video_temp->getClientOriginalName();
+                $video_extension = $video_temp->getClientOriginalExtension();
+                $video_path = public_path() . '/videos/backend_videos/products';
+                $video_temp->move($video_path, $video_name);
+            }
+            else
+            {
+                if (empty($data['current_video']))
+                {
+                    $video_name = "";
+                }
+                else
+                {
+                    $video_name = $data['current_video'];
                 }
             }
 
@@ -237,7 +270,7 @@ class ProductsController extends Controller
                 $feature_item = 1;
             }
 
-            Product::where(['id' => $id])->update(['category_id' => $data['category_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'description' => $data['description'], 'care' => $data['care'], 'price' => $data['price'], 'image' => $fileName, 'feature_item' => $feature_item , 'status' => $status]);
+            Product::where(['id' => $id])->update(['category_id' => $data['category_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'description' => $data['description'], 'care' => $data['care'], 'price' => $data['price'], 'image' => $fileName, 'video' => $video_name, 'feature_item' => $feature_item , 'status' => $status]);
 
             return redirect()->back()->with('flash_message_success', 'Product Updated Successfully');
         }
@@ -326,6 +359,16 @@ class ProductsController extends Controller
             }
         }
 
+        $product = Product::where(['id' => $id])->first();
+
+        $video_path = public_path() . '/videos/backend_videos/products/' . $product->video;
+
+        // File::delete($video_path);
+        if (file_exists($video_path))
+        {
+            unlink($video_path);
+        }
+
         ProductsAttribute::where(['product_id' => $id])->delete();
 
         Product::where(['id' => $id])->delete();
@@ -364,6 +407,29 @@ class ProductsController extends Controller
         Product::where(['id' => $id])->update(['image' => '']);
 
         return redirect()->back()->with('flash_message_success', 'Product Image Removed Successfully');
+    }
+
+    // Delete Product Video Function
+
+    public function deleteProductVideo($id = null)
+    {
+        // Hard Delete
+
+        $product = Product::where(['id' => $id])->first();
+
+        $video_path = public_path() . '/videos/backend_videos/products/' . $product->video;
+
+        // File::delete($video_path);
+        if (file_exists($video_path))
+        {
+            unlink($video_path);
+        }
+
+        // Soft Delete
+
+        Product::where(['id' => $id])->update(['video' => '']);
+
+        return redirect()->back()->with('flash_message_success', 'Product Video Removed Successfully');
     }
 
     // Add Product Attribute Function
