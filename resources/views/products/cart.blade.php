@@ -72,7 +72,7 @@
                 </div>
             @else
                 <div>
-                    <a href="{{ asset('/') }}" style="cursor: default"><img src="{{ asset('images/backend_images/empty-cart.png') }}" alt="" class="center-block"></a>
+                    <a href="{{ url('/') }}" style="cursor: default"><img src="{{ asset('images/backend_images/empty-cart.png') }}" alt="" class="center-block"></a>
                     <div class="container text-center">
                         <div class="content-404">
                             <h2><a href="{{ asset('/') }}">Let's Shop for some goodies</a></h2>

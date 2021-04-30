@@ -548,6 +548,7 @@ class ProductsController extends Controller
 
         $sizeArray = explode('-', $data['idSize']);
         $productAttribute = ProductsAttribute::where(['product_id' => $sizeArray[0], 'size' => $sizeArray[1]])->first();
+
         echo $productAttribute->price . '#' . $productAttribute->stock;
     }
 
@@ -1104,9 +1105,11 @@ class ProductsController extends Controller
 
             $categories = Category::with('categories')->where(['parent_id' => 0])->get();
             $search_product = $data['product'];
-            $productsAll = Product::where('product_name', 'like', '%' . $search_product . '%')->orwhere('product_code', 'like', '%' . $search_product . '%')->where('status', '1')->paginate(3);
+            $productsAll = Product::where('product_name', 'like', '%' . $search_product . '%')->orwhere('product_code', 'like', '%' . $search_product . '%')->where('status', '1')->get();
 
-            return view('products.listing')->with(compact('categories', 'productsAll', 'search_product'));
+            $banners = Banner::where('status', 1)->get();
+
+            return view('products.listing')->with(compact('categories', 'productsAll', 'search_product', 'banners'));
         }
     }
 

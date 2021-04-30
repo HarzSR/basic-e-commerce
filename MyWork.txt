@@ -105,4 +105,4 @@ Things done on this project
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms
-- Check whether Order can be placed for Invalid Pincode
+- Listing Pagination not working for Searched Products

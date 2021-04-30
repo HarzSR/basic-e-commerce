@@ -1,6 +1,9 @@
 <?php
+    use App\Product;
     use App\Http\Controllers\Controller;
+
     $mainCategories = Controller::mainCategories();
+    $cartCount = Product::cartCount();
 ?>
 
 <header id="header"><!--header-->
@@ -68,7 +71,7 @@
                             <li><a href="{{ url('/wishlist') }}"><i class="fa fa-star"></i> Wishlist</a></li>
                             <li><a href="{{ url('/orders') }}"><i class="fa fa-dropbox"></i> Orders</a></li>
                             <li><a href="{{ url('/checkout') }}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                            <li><a href="{{ url('/cart') }}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                            <li><a href="{{ url('/cart') }}"><i class="fa fa-shopping-cart"></i> Cart @if($cartCount != 0)<span class="notify">{{ $cartCount }}</span>@endif</a></li>
                             @if(empty(Auth::check()))
                                 <li><a href="{{ url('/login-register') }}"><i class="fa fa-sign-in"></i> Login</a></li>
                             @else

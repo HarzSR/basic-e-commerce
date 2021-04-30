@@ -2521,3 +2521,14 @@ h2.title {
 .contact-info .social-networks ul li a:hover{
   color: #0080FE;
 }
+
+.notify {
+    position: absolute;
+    top: -10px;
+    left: -18px;
+    padding: 2px 7px;
+    border-radius: 50%;
+    background: lightblue;
+    color: black;
+    font-weight: bold;
+}
