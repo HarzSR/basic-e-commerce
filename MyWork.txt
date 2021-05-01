@@ -102,6 +102,8 @@ Things done on this project
 - Add Search Engine Optimization for all Pages
 - Add Delivery Pincode/Zipcode Check
 - Also check Delivery Pincode while placing Order
+- Added Video to Product
+- Display Video if present in Product
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms

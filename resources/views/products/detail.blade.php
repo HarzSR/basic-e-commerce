@@ -10,7 +10,7 @@
                 </div>
 
                 <div class="col-sm-9 padding-right">
-                    <div class="product-details"><!--product-details-->
+                    <div class="product-details">
                         @if(Session::has('flash_message_error'))
                             <div class="alert alert-danger alert-block">
                                 <button type="button" class="close" data-dismiss="alert">×</button>
@@ -103,6 +103,9 @@
                                 <li class="active"><a href="#description" data-toggle="tab">Description</a></li>
                                 <li><a href="#care" data-toggle="tab">Materials & Care</a></li>
                                 <li><a href="#delivery" data-toggle="tab">Delivery Options</a></li>
+                                @if(!empty($productDetails->video))
+                                    <li><a href="#video" data-toggle="tab">Product Video</a></li>
+                                @endif
                             </ul>
                         </div>
                         <div class="tab-content">
@@ -124,10 +127,18 @@
                                 </div>
                             </div>
 
-                        </div>
-                    </div><!--/category-tab-->
+                            @if(!empty($productDetails->video))
+                            <div class="tab-pane fade" id="video" >
+                                <div class="col-sm-12">
+                                    <video src="{{ url('/videos/backend_videos/products/' . $productDetails->video) }}" width="320" height="240" controls></video>
+                                </div>
+                            </div>
+                            @endif
 
-                    <div class="recommended_items"><!--recommended_items-->
+                        </div>
+                    </div>
+
+                    <div class="recommended_items">
                         <h2 class="title text-center">recommended items</h2>
 
                         <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
@@ -142,7 +153,7 @@
                                                     <img src="{{ asset('images/backend_images/products/small/' . $item->image) }}" alt="" style="width: 150px"/>
                                                     <h2>&#8377; {{ $item->price }}</h2>
                                                     <p>{{ $item->price }}</p>
-                                                    <a href="{{ url('product/' . $item->id) }}"><button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button></a>
+                                                    <a href="{{ url('product/' . $item->id) }}"><button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>View Product</button></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -158,7 +169,7 @@
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </div>
-                    </div><!--/recommended_items-->
+                    </div>
 
                 </div>
             </div>

@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d55aefa-07cd-49f9-b334-7d2ae82c409a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/videos/backend_videos/products/SampleVideo_1280x720_1mb.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyWork.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MyWork.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/Adminlogin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/Adminlogin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/products/edit_product.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/products/edit_product.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/products/view_products.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/products/view_products.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/products/detail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/detail.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +36,14 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/MyWork.txt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/routes/web.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/ProductsController.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/products/view_products.blade.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/products/detail.blade.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/products/edit_product.blade.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -144,7 +158,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/emails" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../instaClone" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -175,7 +189,8 @@
       <workItem from="1619362424368" duration="702000" />
       <workItem from="1619363270420" duration="299000" />
       <workItem from="1619363581766" duration="20628000" />
-      <workItem from="1619548705224" duration="42222000" />
+      <workItem from="1619548705224" duration="43104000" />
+      <workItem from="1619823251989" duration="6490000" />
     </task>
     <servers />
   </component>

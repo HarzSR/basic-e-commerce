@@ -96,6 +96,12 @@
                                                     <img src="{{ asset('/images/backend_images/products/small/' . $product->image) }}">
                                                 @endif
                                             </p>
+                                            <p>
+                                                @if(!empty($product->video))
+                                                    <video src="{{ url('/videos/backend_videos/products/' . $product->video) }}" width="320" height="240" controls></video>
+                                                    {{-- <a href="{{ url('/videos/backend_videos/products/' . $product->video) }}" target="_blank" class="btn btn-info btn-mini" title="View Videos">View Video</a> --}}
+                                                @endif
+                                            </p>
                                         </div>
                                     </div>
                                 @endforeach

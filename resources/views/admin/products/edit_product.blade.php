@@ -98,7 +98,7 @@
                                         <input type="file" name="video" id="video">
                                         <input type="hidden" name="current_video" value="{{ $productDetails->video }}">
                                         @if(!empty($productDetails->video))
-                                            <img src="{{ asset('/videos/' . $productDetails->video) }}" style="width: 90px">
+                                            <video src="{{ asset('/videos/backend_videos/products/' . $productDetails->video) }}" width="320" height="240" controls></video>
                                             | <a href="{{ url('/admin/delete-product-video/' . $productDetails->id) }}">Delete</a>
                                         @endif
                                     </div>
