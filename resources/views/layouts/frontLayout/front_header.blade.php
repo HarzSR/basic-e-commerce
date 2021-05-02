@@ -43,23 +43,25 @@
                     <div class="btn-group pull-right">
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                New Zealand
+                                India
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="#">India</a></li>
+                                <li><a href="#">New Zealand</a></li>
                                 <li><a href="#">UK</a></li>
+                                <li><a href="#">United States of America</a></li>
                             </ul>
                         </div>
 
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                &#36; New Zealand Dollar
+                                &#8377; Rupees
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="#">&#8377; Rupees</a></li>
+                                <li><a href="#">&#36; New Zealand Dollar</a></li>
                                 <li><a href="#">&#163; Pound Sterling</a></li>
+                                <li><a href="#">&#36; United States Dollar</a></li>
                             </ul>
                         </div>
                     </div>

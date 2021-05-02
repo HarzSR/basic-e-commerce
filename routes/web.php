@@ -44,7 +44,7 @@ Route::get('/confirm/{code}', 'UsersController@confirmAccount');
 Route::post('/user-login', 'UsersController@login');
 Route::match(['get', 'post'], '/check-email', 'UsersController@checkEmail');
 Route::get('/user-logout', 'UsersController@logout');
-Route::post('/search-products', 'ProductsController@searchProducts');
+Route::match(['get', 'post'], '/search-products', 'ProductsController@searchProducts');
 Route::post('/check-pincode', 'ProductsController@checkPincode');
 
 Route::match(['get', 'post'], '/page/contact', 'CmsController@contact');
@@ -124,11 +124,18 @@ Route::group(['middleware' => ['adminlogin']], function () {
     Route::get('/admin/view-users', 'UsersController@viewUsers');
 
     // CMS Pages Routes
+
     Route::match(['get', 'post'], '/admin/add-cms-page', 'CmsController@addCmsPage');
     Route::get('/admin/view-cms-pages/', 'CmsController@viewCmsPages');
     Route::match(['get', 'post'], '/admin/edit-cms-page/{id}', 'CmsController@editCmsPage');
     Route::get('/admin/delete-cms-page/{id}', 'CmsController@deleteCmsPage');
 
+    // Currency Routes
+
+    Route::match(['get', 'post'], '/admin/add-currency', 'CurrencyController@addCurrency');
+    Route::get('/admin/view-currencies', 'CurrencyController@viewCurrency');
+    Route::match(['get', 'post'], '/admin/edit-currency/{id}', 'CurrencyController@editCurrency');
+    Route::match(['get', 'post'], '/admin/delete-currency/{id}', 'CurrencyController@deleteCurrency');
 });
 
 Auth::routes(['verify' => true]);

@@ -24,7 +24,7 @@
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-                            <h5>View Categories - {{ $categoryCount }}</h5>
+                            <h5>View Categories @if($categoryCount != 0) - {{ $categoryCount }} @endif</h5>
                         </div>
                         <div class="widget-content nopadding">
                             <table class="table table-bordered data-table">

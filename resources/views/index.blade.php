@@ -88,7 +88,7 @@
                                 <div class="single-products">
                                     <div class="productinfo text-center">
                                         <img src="{{ asset('images/backend_images/products/small/' . $product->image   ) }}" alt="" />
-                                        <h2>NZ$ {{ $product->price }}</h2>
+                                        <h2>&#8377; {{ $product->price }}</h2>
                                         <p>{{ $product->product_name }}</p>
                                         <a href="{{ asset('/product/' . $product->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>View Product</a>
                                     </div>
@@ -125,7 +125,7 @@
                                     <div class="single-products">
                                         <div class="productinfo text-center">
                                             <img src="{{ asset('images/backend_images/products/small/' . $product->image   ) }}" alt="" />
-                                            <h2>NZ$ {{ $product->price }}</h2>
+                                            <h2>&#8377; {{ $product->price }}</h2>
                                             <p>{{ $product->product_name }}</p>
                                             <a href="{{ asset('/product/' . $product->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>View Product</a>
                                         </div>

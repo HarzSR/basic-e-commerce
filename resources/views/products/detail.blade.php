@@ -1,3 +1,7 @@
+<?php
+    use App\Product;
+?>
+
 @extends('layouts.frontLayout.front_design')
 
 @section('content')
@@ -69,7 +73,17 @@
                                     </p>
                                     <img src="{{ asset('images/frontend_images/product-details/rating.png') }}" alt="" />
                                     <span>
-                                        <span id="getPrice">&#8377; {{ $productDetails->price }}</span>
+                                        <?php
+                                            $getCurrencyRates = Product::getCurrencyRates($productDetails->price);
+                                        ?>
+                                        <span id="getPrice">&#8377; {{ $productDetails->price }} <br>
+                                            <h2>
+                                                US&#x24; {{ $getCurrencyRates['USD_Rate'] }} <br>
+                                                GB&#xa3; {{ $getCurrencyRates['GBP_Rate'] }} <br>
+                                                EU&#x20AC; {{ $getCurrencyRates['EUR_Rate'] }} <br>
+                                                NZ&#x24; {{ $getCurrencyRates['NZD_Rate'] }} <br>
+                                            </h2>
+                                        </span>
                                         <label>Quantity: </label>
                                         <input type="number" name="quantity" id="quantity" value="1" />
                                         @if($total_stock > 0)

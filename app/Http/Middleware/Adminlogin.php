@@ -18,7 +18,7 @@ class Adminlogin
     {
         if(empty(Session::has('adminSession')))
         {
-            return redirect('/admin')->with('flash_error_message', 'Session Expired, Please login to Continue');
+            return redirect('/admin');
         }
         return $next($request);
     }
