@@ -52,6 +52,8 @@
         <script src="{{ asset('js/frontend_js/passtrength.js') }}"></script>
         <script src="{{ asset('js/frontend_js/main.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        {{-- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-608fe0fb4d00423c"></script>
+        <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=608fe577909b8400117dc8a7&product=inline-share-buttons" async="async"></script> --}}
         <script>
             $(function (){
                 $('[data-toggle="tooltip"]').tooltip();

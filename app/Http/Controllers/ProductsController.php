@@ -1172,7 +1172,10 @@ class ProductsController extends Controller
 
             $categories = Category::with('categories')->where(['parent_id' => 0])->get();
             $search_product = $data['product'];
-            $productsAll = Product::where('product_name', 'like', '%' . $search_product . '%')->orwhere('product_code', 'like', '%' . $search_product . '%')->where('status', '1')->get();
+            // $productsAll = Product::where('product_name', 'like', '%' . $search_product . '%')->orwhere('product_code', 'like', '%' . $search_product . '%')->where('status', '1')->get();
+            $productsAll = Product::where(function ($query) use ($search_product){
+                $query->where('product_name', 'like', '%' . $search_product . '%')->orwhere('product_code', 'like', '%' . $search_product . '%')->orwhere('product_color', 'like', '%' . $search_product . '%')->orwhere('description', 'like', '%' . $search_product . '%');
+            })->where('status', 1)->get();
 
             $banners = Banner::where('status', 1)->get();
 

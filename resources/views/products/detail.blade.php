@@ -63,6 +63,7 @@
                                     <img src="{{ asset('images/frontend_images/product-details/new.jpg') }}" class="newarrival" alt="" />
                                     <h2>{{ $productDetails->product_name }}</h2>
                                     <p>Web Code: {{ $productDetails->product_code }}</p>
+                                    <p>Product Color: {{ $productDetails->product_color }}</p>
                                     <p>Select Size:&#8194;
                                         <select name="size" id="size" style="width: 150px" required>
                                             <option value="">Select</option>
@@ -105,7 +106,9 @@
                                     <p><b>Condition: </b> New</p>
                                     <p><b>Delivery: </b><input type="text" name="chkPincode" id="chkPincode" placeholder="Check Pincode"><button type="button" onclick="return checkPincode();">Go</button></p>
                                     <span id="pincodeResponse" name="pincodeResponse"></span>
-                                    <a href=""><img src="{{ asset('images/frontend_images/product-details/share.png') }}" class="share img-responsive"  alt="" /></a>
+                                    {{-- <a href=""><img src="{{ asset('images/frontend_images/product-details/share.png') }}" class="share img-responsive"  alt="" /></a>
+                                    <div class="addthis_inline_share_toolbox_d6al"></div>
+                                    <div class="sharethis-inline-share-buttons"></div> --}}
                                 </div>
                             </form>
                         </div>

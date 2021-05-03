@@ -106,8 +106,12 @@ Things done on this project
 - Display Video if present in Product
 - Add Currency Conversion to Admin
 - Display different currencies in Product
+- Add Advance Search Product
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms
 - Listing Pagination not working for Searched Products
 - Show Currency based on Dropdown
+
+Not ToDo List
+- Add Social Share Button (Index: 145) - Implemented and commented out: CORS Errors
