@@ -614,8 +614,9 @@ class ProductsController extends Controller
 
         $sizeArray = explode('-', $data['idSize']);
         $productAttribute = ProductsAttribute::where(['product_id' => $sizeArray[0], 'size' => $sizeArray[1]])->first();
+        $getCurrencyRates = Product::getCurrencyRates($productAttribute->price);
 
-        echo $productAttribute->price . '#' . $productAttribute->stock;
+        echo $productAttribute->price . '-' . $getCurrencyRates['USD_Rate'] . '-' . $getCurrencyRates['GBP_Rate'] . '-' . $getCurrencyRates['EUR_Rate'] . '-' . $getCurrencyRates['NZD_Rate'] . '#' . $productAttribute->stock;
     }
 
     // Delete Additional Image Function

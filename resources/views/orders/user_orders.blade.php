@@ -1,3 +1,7 @@
+<?php
+    use App\Product;
+?>
+
 @extends('layouts.frontLayout.front_design')
 
 @section('content')
@@ -48,7 +52,10 @@
                                     @endforeach
                                 </td>
                                 <td>{{ $order->payment_method }}</td>
-                                <td>NZ$ {{ $order->grand_total }}</td>
+                                <?php
+                                    $getCurrencyRates = Product::getCurrencyRates($order->grand_total);
+                                ?>
+                                <td><span class="btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCurrencyRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCurrencyRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCurrencyRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCurrencyRates['NZD_Rate'] }} <br>">&#8377; {{ $order->grand_total }}</span></td>
                                 <td>{{ date("F jS, Y h:m A", strtotime($order->created_at)) }}</td>
                                 <td><a href="{{ url('/orders/' . $order->id) }}" class="btn btn-primary btn-mini" title="Edit Product" style="margin-top: 0px;">View Order</a></td>
                             </tr>

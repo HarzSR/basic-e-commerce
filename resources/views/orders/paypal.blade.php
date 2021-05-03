@@ -1,3 +1,7 @@
+<?php
+    use App\Product;
+?>
+
 @extends('layouts.frontLayout.front_design')
 
 @section('content')
@@ -31,7 +35,11 @@
             @if(!empty(Session::has('order_id') && !empty(Session::has('grand_total'))))
                 <div class="heading" align="center">
                     <h3>Your Order has been placed Successfully</h3>
-                    <p>Order ID #{{ Session::get('order_id') }} and Payable Amount is NZ$ {{ Session::get('grand_total') }}</p>
+                    <h3>Your Order has been placed Successfully</h3>
+                    <?php
+                        $getCartCurrencyRates = Product::getCurrencyRates(Session::get('grand_total'));
+                    ?>
+                    <p>Order ID #{{ Session::get('order_id') }} and Payable Amount is <span class="cart_total_price btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCartCurrencyRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCartCurrencyRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCartCurrencyRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCartCurrencyRates['NZD_Rate'] }} <br>">&#8377; {{ Session::get('grand_total') }}</span></p>
                     <p>Please make payment via the following link</p>
 
                     <?php

@@ -1,3 +1,7 @@
+<?php
+    use App\Product;
+?>
+
 @extends('layouts.frontLayout.front_design')
 
 @section('content')
@@ -46,7 +50,10 @@
                             <td>{{ $order->product_name }}</td>
                             <td>{{ $order->product_size }}</td>
                             <td>{{ $order->product_color }}</td>
-                            <td>{{ $order->product_price }}</td>
+                            <?php
+                                $getCurrencyRates = Product::getCurrencyRates($order->product_price);
+                            ?>
+                            <td><span class="btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCurrencyRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCurrencyRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCurrencyRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCurrencyRates['NZD_Rate'] }} <br>">&#8377; {{ $order->product_price }}</span></td>
                             <td>{{ $order->product_qty }}</td>
                         </tr>
                     @endforeach

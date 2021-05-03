@@ -1,3 +1,7 @@
+<?php
+    use App\Product;
+?>
+
 @extends('layouts.frontLayout.front_design')
 
 @section('content')
@@ -109,13 +113,19 @@
                                     <p>Web ID: {{ $cart->product_code }} | {{ $cart->size }}</p>
                                 </td>
                                 <td class="cart_price">
-                                    <p>NZ$ {{ $cart->price }}</p>
+                                    <?php
+                                        $getItemPrice = Product::getCurrencyRates($cart->price);
+                                    ?>
+                                    <p class="btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getItemPrice['USD_Rate'] }} <br> GB&#xa3; {{ $getItemPrice['GBP_Rate'] }} <br> EU&#x20AC; {{ $getItemPrice['EUR_Rate'] }} <br> NZ&#x24; {{ $getItemPrice['NZD_Rate'] }} <br>">&#8377; {{ $cart->price }}</p>
                                 </td>
                                 <td class="cart_quantity">
                                     <p>{{ $cart->quantity }}</p>
                                 </td>
                                 <td class="cart_total">
-                                    <p class="cart_total_price">NZ$ {{ $cart->price * $cart->quantity }}</p>
+                                    <?php
+                                        $getCartCurrencyRates = Product::getCurrencyRates($cart->quantity * $cart->price);
+                                    ?>
+                                    <p class="cart_total_price btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCartCurrencyRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCartCurrencyRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCartCurrencyRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCartCurrencyRates['NZD_Rate'] }} <br>">&#8377; {{ $cart->quantity * $cart->price }}</p>
                                 </td>
                             </tr>
                             <?php $total_amount = $total_amount + ($cart->price * $cart->quantity); ?>
@@ -125,12 +135,24 @@
                             <td colspan="2">
                                 <table class="table table-condensed total-result">
                                     <tr>
+                                        <?php
+                                            $getCartRates = Product::getCurrencyRates($total_amount);
+                                        ?>
                                         <td>Cart Sub Total</td>
-                                        <td>NZ$ {{ $total_amount }}</td>
+                                        <td data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCartRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCartRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCartRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCartRates['NZD_Rate'] }} <br>">&#8377; <?php echo $total_amount; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Discount Amount</td>
-                                        <td>@if(!empty(Session::get('couponAmount')))NZ$ {{ Session::get('couponAmount') }} @else NZ$ 0 @endif</td>
+                                        @if(!empty(Session::get('couponAmount')))
+                                            <?php
+                                                $getCouponRates = Product::getCurrencyRates(Session::get('couponAmount'));
+                                            ?>
+                                            <td data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCouponRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCouponRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCouponRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCouponRates['NZD_Rate'] }} <br>">
+                                                &#8377; {{ Session::get('couponAmount') }}
+                                            </td>
+                                        @else
+                                            0
+                                        @endif
                                     </tr>
                                     <tr class="shipping-cost">
                                         <td>Shipping Cost</td>
@@ -139,14 +161,15 @@
                                     <tr>
                                         <td>Total</td>
                                         <td>
-                                            <span>NZ$
-                                                <?php
-                                                    if($total_amount - Session::get('couponAmount') > 0)
-                                                        $grand_total = $total_amount - Session::get('couponAmount');
-                                                    else
-                                                        $grand_total = 0;
-                                                    echo $grand_total;
-                                                    ?>
+                                            <?php
+                                                if($total_amount - Session::get('couponAmount') > 0)
+                                                    $grand_total = $total_amount - Session::get('couponAmount');
+                                                else
+                                                    $grand_total = 0;
+                                                $getCurrencyRates = Product::getCurrencyRates($grand_total);
+                                            ?>
+                                            <span class="btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCurrencyRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCurrencyRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCurrencyRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCurrencyRates['NZD_Rate'] }} <br>">
+                                                    &#8377; <?php echo $grand_total; ?>
                                             </span>
                                         </td>
                                     </tr>

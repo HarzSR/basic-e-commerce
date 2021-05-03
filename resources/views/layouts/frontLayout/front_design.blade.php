@@ -51,5 +51,11 @@
         <script src="{{ asset('js/frontend_js/easyzoom.js') }}"></script>
         <script src="{{ asset('js/frontend_js/passtrength.js') }}"></script>
         <script src="{{ asset('js/frontend_js/main.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script>
+            $(function (){
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+        </script>
     </body>
 </html>

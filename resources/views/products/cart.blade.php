@@ -1,3 +1,7 @@
+<?php
+    use App\Product;
+?>
+
 @extends('layouts.frontLayout.front_design')
 
 @section('content')
@@ -47,7 +51,10 @@
                                         <p>Web ID: {{ $cart->product_code }} | {{ $cart->size }}</p>
                                     </td>
                                     <td class="cart_price">
-                                        <p>NZ$ {{ $cart->price }}</p>
+                                        <?php
+                                            $getItemPrice = Product::getCurrencyRates($cart->price);
+                                        ?>
+                                        <p class="btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getItemPrice['USD_Rate'] }} <br> GB&#xa3; {{ $getItemPrice['GBP_Rate'] }} <br> EU&#x20AC; {{ $getItemPrice['EUR_Rate'] }} <br> NZ&#x24; {{ $getItemPrice['NZD_Rate'] }} <br>">&#8377; {{ $cart->price }}</p>
                                     </td>
                                     <td class="cart_quantity">
                                         <div class="cart_quantity_button">
@@ -59,7 +66,10 @@
                                         </div>
                                     </td>
                                     <td class="cart_total">
-                                        <p class="cart_total_price">NZ$ {{ $cart->quantity * $cart->price }}</p>
+                                        <?php
+                                            $getCartCurrencyRates = Product::getCurrencyRates($cart->quantity * $cart->price);
+                                        ?>
+                                        <p class="cart_total_price btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCartCurrencyRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCartCurrencyRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCartCurrencyRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCartCurrencyRates['NZD_Rate'] }} <br>">&#8377; {{ $cart->quantity * $cart->price }}</p>
                                     </td>
                                     <td class="cart_delete">
                                         <a class="cart_quantity_delete" href="{{ url('cart/delete-product/' . $cart->id) }}" onclick="return confirm('Would you like to delete {{ $cart->product_name }} - {{ $cart->size }}?')"><i class="fa fa-times"></i></a>
@@ -109,22 +119,36 @@
                         <div class="total_area">
                             <ul>
                                 @if(!empty(Session::get('couponAmount')))
-                                    <li>Cart Sub Total <span>NZ$ <?php echo $total_amount; ?></span></li>
-                                    <li>Discount <span>NZ$ <?php echo Session::get('couponAmount'); ?> | <a class="cart_quantity_delete" href="{{ url('cart/remove-coupon/') }}" onclick="return confirm('Would you like to remove Coupon?')"><i class="fa fa-times"></i></a></span></li>
+                                    <?php
+                                        $getCartRates = Product::getCurrencyRates($total_amount);
+                                    ?>
+                                    <li>Cart Sub Total <span class="btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCartRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCartRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCartRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCartRates['NZD_Rate'] }} <br>">&#8377; <?php echo $total_amount; ?></span></li>
+                                    <?php
+                                        $getCouponRates = Product::getCurrencyRates(Session::get('couponAmount'));
+                                    ?>
+                                    <li>Discount <span class="btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCouponRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCouponRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCouponRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCouponRates['NZD_Rate'] }} <br>">&#8377; <?php echo Session::get('couponAmount'); ?> | <a class="cart_quantity_delete" href="{{ url('cart/remove-coupon/') }}" onclick="return confirm('Would you like to remove Coupon?')"><i class="fa fa-times"></i></a></span></li>
                                     <li>Shipping Cost <span>Free</span></li>
-                                    <li>Total <span>NZ$ <?php
-                                            if ($total_amount - Session::get('couponAmount') < 0)
-                                                echo '0';
-                                            else
-                                                echo $total_amount - Session::get('couponAmount'); ?>
-                                        </span></li>
+                                    <?php
+                                        if ($total_amount - Session::get('couponAmount') < 0)
+                                            $total_amount = 0;
+                                        else
+                                            $total_amount = $total_amount - Session::get('couponAmount');
+                                        $getCurrencyRates = Product::getCurrencyRates($total_amount);
+                                    ?>
+                                    <li>Total <span class="btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCurrencyRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCurrencyRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCurrencyRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCurrencyRates['NZD_Rate'] }} <br>">&#8377; <?php echo $total_amount; ?></span></li>
                                 @else
-                                    <li>Cart Sub Total <span>NZ$ <?php echo $total_amount; ?></span></li>
+                                    <?php
+                                        $getCartRates = Product::getCurrencyRates($total_amount);
+                                    ?>
+                                    <li>Cart Sub Total <span class="btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCartRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCartRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCartRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCartRates['NZD_Rate'] }} <br>">&#8377; <?php echo $total_amount; ?></span></li>
                                     <li>Shipping Cost <span>Free</span></li>
-                                    <li>Total <span>NZ$ <?php echo $total_amount; ?></span></li>
+                                    <?php
+                                        $getCurrencyRates = Product::getCurrencyRates($total_amount);
+                                    ?>
+                                    <li>Total <span class="btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCurrencyRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCurrencyRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCurrencyRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCurrencyRates['NZD_Rate'] }} <br>">&#8377; <?php echo $total_amount; ?></span></li>
                                 @endif
                             </ul>
-                            <a class="btn btn-default update" href="">Update</a>
+                            {{-- <a class="btn btn-default update" href="">Update</a> --}}
                             <a class="btn btn-default check_out" href="{{ url('/checkout') }}">Check Out</a>
                         </div>
                     </div>

@@ -48,8 +48,9 @@ $(document).ready(function ()
                     success: function (response) {
                         // alert(response);
                         var getPrice = response.split('#');
-                        $('#getPrice').html("&#8377; " + getPrice[0]);
-                        $('#hiddenPrice').val(getPrice[0]);
+                        var otherPrice = getPrice[0].split('-');
+                        $('#getPrice').html("&#8377; " + otherPrice[0] + "<br> <h2> US&#x24; " + otherPrice[1] + "<br> GB&#xa3; " + otherPrice[2] + "<br> EU&#x20AC; " + otherPrice[3] + "<br>NZ&#x24; " + otherPrice[4] + "<br> </h2>");
+                        $('#hiddenPrice').val(otherPrice[0]);
                         if(getPrice[1] == 0)
                         {
                             $('#cartButton').hide();
