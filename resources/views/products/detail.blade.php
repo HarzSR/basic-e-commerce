@@ -126,7 +126,7 @@
                             </ul>
                         </div>
                         <div class="tab-content">
-                            <div class="tab-pane fade active in" id="description" >
+                            <div class="tab-pane fade in active" id="description" >
                                 <div class="col-sm-12">
                                     <p>{{ $productDetails->description }}</p>
                                 </div>
