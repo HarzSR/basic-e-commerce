@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 use Image;
 use Validator;
 
@@ -554,7 +555,7 @@ class ProductsController extends Controller
         }
 
         $categories = Category::with('categories')->where(['parent_id' => 0])->get();
-
+        $colors = Product::distinct()->where('status', 1)->get(['product_color']);
         $categoryDetails = Category::where(['url' => $url])->first();
         $meta_title = $categoryDetails->meta_title;
         $meta_description = $categoryDetails->meta_description;
@@ -562,7 +563,7 @@ class ProductsController extends Controller
 
         if ($categoryDetails->parent_id != 0)
         {
-            $productsAll = Product::where(['category_id' => $categoryDetails->id])->where('status', 1)->paginate(3);
+            $productsAll = Product::where(['category_id' => $categoryDetails->id])->where('status', 1);
         }
         else
         {
@@ -572,12 +573,20 @@ class ProductsController extends Controller
                 $categoryIds[] = $subCategory->id;
             }
             array_push($categoryIds, $categoryDetails->id);
-            $productsAll = Product::whereIn('category_id', $categoryIds)->where('status', 1)->paginate(3);
+            $productsAll = Product::whereIn('category_id', $categoryIds)->where('status', 1);
         }
+
+        if(!empty($_GET['color']))
+        {
+            $colorArray = explode('-', $_GET['color']);
+            $productsAll = $productsAll->whereIn('product_color', $colorArray);
+        }
+
+        $productsAll = $productsAll->paginate(3);
 
         $banners = Banner::where('status', 1)->get();
 
-        return view('products.listing')->with(compact('categoryDetails', 'productsAll', 'categories', 'meta_title', 'meta_description', 'meta_keywords', 'banners'));
+        return view('products.listing')->with(compact('categoryDetails', 'productsAll', 'categories', 'meta_title', 'meta_description', 'meta_keywords', 'banners', 'url', 'colors'));
     }
 
     // Display Individual Product Function
@@ -596,6 +605,7 @@ class ProductsController extends Controller
         $meta_keywords = $productDetails->product_name;
 
         $categories = Category::with('categories')->where(['parent_id' => 0])->get();
+        $colors = Product::distinct()->where('status', 1)->get(['product_color']);
 
         $productAdditionalImages = ProductsImage::where('product_id', $id)->get();
 
@@ -603,7 +613,7 @@ class ProductsController extends Controller
 
         $relatedProducts = Product::where('id', '!=', $id)->where(['category_id' => $productDetails->category_id])->get();
 
-        return view('products.detail')->with(compact('productDetails', 'categories', 'productAdditionalImages', 'total_stock', 'relatedProducts', 'meta_title', 'meta_description', 'meta_keywords'));
+        return view('products.detail')->with(compact('productDetails', 'categories', 'productAdditionalImages', 'total_stock', 'relatedProducts', 'meta_title', 'meta_description', 'meta_keywords', 'id', 'colors'));
     }
 
     // Get Product Price upon Attribute Change Function
@@ -1196,6 +1206,48 @@ class ProductsController extends Controller
             $pincodeCount = DB::table('pincodes')->where('pincode', $data['pincode'])->count();
 
             echo $pincodeCount;
+        }
+    }
+
+    // Filter Products Function
+
+    public function filter(Request $request)
+    {
+        if($request->isMethod('POST'))
+        {
+            $data = $request->all();
+            $colorUrl = "";
+
+            if(!empty($data['colorFilter']))
+            {
+                foreach ($data['colorFilter'] as $color)
+                {
+                    if(empty($colorUrl))
+                    {
+                        $colorUrl = "color=" . $color;
+                    }
+                    else
+                    {
+                        $colorUrl = $colorUrl . "-" . $color;
+                    }
+                }
+            }
+
+            if(empty($data['url']) && empty($data['id']))
+            {
+                $data['url'] = "t-shirts";
+                $finalUrl = "products/" . $data['url'] . "?" . $colorUrl;
+            }
+            else if(empty($data['url']) && !empty($data['id']))
+            {
+                $finalUrl = "product/" . $data['id'] . "?" . $colorUrl;
+            }
+            else if(!empty($data['url']) && empty($data['id']))
+            {
+                $finalUrl = "products/" . $data['url'] . "?" . $colorUrl;
+            }
+
+            return redirect::to($finalUrl);
         }
     }
 }

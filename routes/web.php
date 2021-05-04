@@ -23,6 +23,7 @@ Route::get('/', 'IndexController@index');
 
 Route::get('/products/{url}', 'ProductsController@products');
 Route::get('/product/{id}', 'ProductsController@product');
+Route::match(['get', 'post'], '/products/filter', 'ProductsController@filter');
 Route::any('/get-product-price', 'ProductsController@getProductPrice');
 Route::post('/cart/apply-coupon', 'ProductsController@applyCoupon');
 Route::get('/cart/remove-coupon/', 'ProductsController@removeCoupon');

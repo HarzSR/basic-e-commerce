@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d55aefa-07cd-49f9-b334-7d2ae82c409a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/basic-e-commerce.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/basic-e-commerce.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/products/detail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/detail.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyWork.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MyWork.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/IndexController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/frontLayout/front_sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/frontLayout/front_sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +185,7 @@
       <workItem from="1619363581766" duration="20628000" />
       <workItem from="1619548705224" duration="43104000" />
       <workItem from="1619823251989" duration="35949000" />
-      <workItem from="1620092756243" duration="4784000" />
+      <workItem from="1620092756243" duration="12625000" />
     </task>
     <servers />
   </component>

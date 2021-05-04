@@ -63,7 +63,6 @@ class IndexController extends Controller
         */
 
         $categories = Category::with('categories')->where(['parent_id' => 0])->get();
-
         $banners = Banner::where('status', 1)->get();
 
         $meta_title = "E Commerce Shopping";
