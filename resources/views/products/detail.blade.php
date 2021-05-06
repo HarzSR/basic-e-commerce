@@ -58,12 +58,18 @@
                                 <input type="hidden" name="product_name" value="{{ $productDetails->product_name }}">
                                 <input type="hidden" name="product_code" value="{{ $productDetails->product_code }}">
                                 <input type="hidden" name="product_color" value="{{ $productDetails->product_color }}">
+                                @if(empty($productDetails->sleeve))
+                                    <input type="hidden" name="sleeve" value="{{ $productDetails->sleeve }}">
+                                @endif
                                 <input type="hidden" name="price" value="{{ $productDetails->price }}" id="hiddenPrice">
                                 <div class="product-information"><!--/product-information-->
                                     <img src="{{ asset('images/frontend_images/product-details/new.jpg') }}" class="newarrival" alt="" />
                                     <h2>{{ $productDetails->product_name }}</h2>
                                     <p>Web Code: {{ $productDetails->product_code }}</p>
                                     <p>Product Color: {{ $productDetails->product_color }}</p>
+                                    @if(empty($productDetails->sleeve))
+                                        <p>Sleeve: {{ $productDetails->sleeve }}</p>
+                                    @endif
                                     <p>Select Size:&#8194;
                                         <select name="size" id="size" style="width: 150px" required>
                                             <option value="">Select</option>

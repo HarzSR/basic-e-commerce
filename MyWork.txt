@@ -108,6 +108,7 @@ Things done on this project
 - Display different currencies in Product
 - Add Advance Search Product
 - Colors Filter - Category and Products Page only
+- Add Sleeve and sleeve based filter
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms

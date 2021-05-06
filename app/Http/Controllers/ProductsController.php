@@ -72,6 +72,14 @@ class ProductsController extends Controller
             {
                 $product->care = '';
             }
+            if (!empty($data['sleeve']))
+            {
+                $product->sleeve = $data['sleeve'];
+            }
+            else
+            {
+                $product->sleeve = '';
+            }
             $product->price = $data['price'];
             if (empty($data['image']))
             {
@@ -149,7 +157,9 @@ class ProductsController extends Controller
             }
         }
 
-        return view('admin.products.add_product')->with(compact('categories_dropdown'));
+        $sleeveArray = DB::table('sleeve_info')->get();
+
+        return view('admin.products.add_product')->with(compact('categories_dropdown', 'sleeveArray'));
     }
 
     // View Product Function
@@ -253,6 +263,11 @@ class ProductsController extends Controller
                 $data['care'] = '';
             }
 
+            if (empty($data['sleeve']))
+            {
+                $data['sleeve'] = '';
+            }
+
             if (empty($data['status']))
             {
                 $status = 0;
@@ -271,7 +286,7 @@ class ProductsController extends Controller
                 $feature_item = 1;
             }
 
-            Product::where(['id' => $id])->update(['category_id' => $data['category_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'description' => $data['description'], 'care' => $data['care'], 'price' => $data['price'], 'image' => $fileName, 'video' => $video_name, 'feature_item' => $feature_item , 'status' => $status]);
+            Product::where(['id' => $id])->update(['category_id' => $data['category_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'description' => $data['description'], 'care' => $data['care'], 'sleeve' => $data['sleeve'],'price' => $data['price'], 'image' => $fileName, 'video' => $video_name, 'feature_item' => $feature_item , 'status' => $status]);
 
             return redirect()->back()->with('flash_message_success', 'Product Updated Successfully');
         }
@@ -310,7 +325,9 @@ class ProductsController extends Controller
             }
         }
 
-        return view('admin.products.edit_product')->with(compact('productDetails', 'categories_dropdown'));
+        $sleeveArray = DB::table('sleeve_info')->get();
+
+        return view('admin.products.edit_product')->with(compact('productDetails', 'categories_dropdown', 'sleeveArray'));
     }
 
     // Delete Product Function

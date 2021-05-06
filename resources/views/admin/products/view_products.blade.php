@@ -35,6 +35,7 @@
                                         <th>Product Name</th>
                                         <th>Product Code</th>
                                         <th>Product Color</th>
+                                        <th>Product Sleeve</th>
                                         <th>Product Image</th>
                                         <th>Product Price</th>
                                         <th>Product Featured</th>
@@ -50,6 +51,7 @@
                                         <td>{{ $product->product_name }}</td>
                                         <td>{{ $product->product_code }}</td>
                                         <td>{{ $product->product_color }}</td>
+                                        <td>{{ $product->sleeve }}</td>
                                         <td>
                                             @if(!empty($product->image))
                                                 <img src="{{ asset('/images/backend_images/products/small/' . $product->image) }}" style="width: 70px">
@@ -112,6 +114,7 @@
                                     <th>Product Name</th>
                                     <th>Product Code</th>
                                     <th>Product Color</th>
+                                    <th>Product Sleeve</th>
                                     <th>Product Image</th>
                                     <th>Product Price</th>
                                     <th>Product Featured</th>

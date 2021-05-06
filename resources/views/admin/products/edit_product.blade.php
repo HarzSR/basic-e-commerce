@@ -76,6 +76,17 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
+                                    <label class="control-label">Product Sleeve</label>
+                                    <div class="controls">
+                                        <select name="sleeve" id="sleeve" class="form-control" style="width: 220px;">
+                                            <option value="">Select</option>
+                                            @foreach($sleeveArray as $sleeve)
+                                                <option value="{{ $sleeve->description }}" @if(!empty('$sleeve') && old('sleeve') == $sleeve->description) selected @elseif($productDetails->sleeve == $sleeve->description) selected @endif>{{ $sleeve->description }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="control-group">
                                     <label class="control-label">Price</label>
                                     <div class="controls">
                                         <input type="text" name="price" id="price" value="@if(!empty(old('price'))) {{ old('price') }} @else {{ $productDetails->price }} @endif">

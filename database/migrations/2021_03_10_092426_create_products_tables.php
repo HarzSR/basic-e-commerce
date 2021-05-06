@@ -23,6 +23,7 @@ class CreateProductsTables extends Migration
             $table->string('product_color');
             $table->text('description');
             $table->text('care');
+            $table->string('sleeve');
             $table->float('price');
             $table->string('image');
             $table->string('video');
