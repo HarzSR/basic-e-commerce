@@ -48,7 +48,7 @@
             <div class="panel-group category-products" id="color">
                 @if(!empty($_GET['color']))
                     <?php
-                    $colorArray = explode('-', $_GET['color']);
+                        $colorArray = explode('-', $_GET['color']);
                     ?>
                 @endif
                 <div class="panel panel-default">
@@ -57,6 +57,28 @@
                             <h4 class="panel-title">
                                 <a>
                                     {{ $color->product_color }}<span class="pull-right"><input type="checkbox" name="colorFilter[]" id="{{ $color->product_color }}" value="{{ $color->product_color }}" onchange="javascript:this.form.submit();" @if(!empty($colorArray) && in_array($color->product_color, $colorArray)) checked @endif></span>
+                                </a>
+                            </h4>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
+        <div class="left-sidebar">
+            <h2>Sleeve</h2>
+            <div class="panel-group category-products" id="color">
+                @if(!empty($_GET['sleeve']))
+                    <?php
+                        $sleeveArray = explode('-', $_GET['sleeve']);
+                    ?>
+                @endif
+                <div class="panel panel-default">
+                    @foreach($sleeves as $sleeve)
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a>
+                                    {{ $sleeve->description }}<span class="pull-right"><input type="checkbox" name="sleeveFilter[]" id="{{ $sleeve->description }}" value="{{ $sleeve->description }}" onchange="javascript:this.form.submit();" @if(!empty($sleeveArray) && in_array($sleeve->description, $sleeveArray)) checked @endif></span>
                                 </a>
                             </h4>
                         </div>

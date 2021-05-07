@@ -574,6 +574,7 @@ class ProductsController extends Controller
         $categories = Category::with('categories')->where(['parent_id' => 0])->get();
         $colors = Product::distinct()->where('status', 1)->get(['product_color']);
         $categoryDetails = Category::where(['url' => $url])->first();
+        $sleeves = DB::table('sleeve_info')->get();
         $meta_title = $categoryDetails->meta_title;
         $meta_description = $categoryDetails->meta_description;
         $meta_keywords = $categoryDetails->meta_keywords;
@@ -599,11 +600,17 @@ class ProductsController extends Controller
             $productsAll = $productsAll->whereIn('product_color', $colorArray);
         }
 
+        if(!empty($_GET['sleeve']))
+        {
+            $sleeveArray = explode('-', $_GET['sleeve']);
+            $productsAll = $productsAll->whereIn('sleeve', $sleeveArray);
+        }
+
         $productsAll = $productsAll->paginate(3);
 
         $banners = Banner::where('status', 1)->get();
 
-        return view('products.listing')->with(compact('categoryDetails', 'productsAll', 'categories', 'meta_title', 'meta_description', 'meta_keywords', 'banners', 'url', 'colors'));
+        return view('products.listing')->with(compact('categoryDetails', 'productsAll', 'categories', 'meta_title', 'meta_description', 'meta_keywords', 'banners', 'url', 'colors', 'sleeves'));
     }
 
     // Display Individual Product Function
@@ -623,6 +630,7 @@ class ProductsController extends Controller
 
         $categories = Category::with('categories')->where(['parent_id' => 0])->get();
         $colors = Product::distinct()->where('status', 1)->get(['product_color']);
+        $sleeves = DB::table('sleeve_info')->get();
 
         $productAdditionalImages = ProductsImage::where('product_id', $id)->get();
 
@@ -630,7 +638,7 @@ class ProductsController extends Controller
 
         $relatedProducts = Product::where('id', '!=', $id)->where(['category_id' => $productDetails->category_id])->get();
 
-        return view('products.detail')->with(compact('productDetails', 'categories', 'productAdditionalImages', 'total_stock', 'relatedProducts', 'meta_title', 'meta_description', 'meta_keywords', 'id', 'colors'));
+        return view('products.detail')->with(compact('productDetails', 'categories', 'productAdditionalImages', 'total_stock', 'relatedProducts', 'meta_title', 'meta_description', 'meta_keywords', 'id', 'colors', 'sleeves'));
     }
 
     // Get Product Price upon Attribute Change Function
@@ -1234,6 +1242,7 @@ class ProductsController extends Controller
         {
             $data = $request->all();
             $colorUrl = "";
+            $sleeveUrl = "";
 
             if(!empty($data['colorFilter']))
             {
@@ -1250,18 +1259,33 @@ class ProductsController extends Controller
                 }
             }
 
+            if(!empty($data['sleeveFilter']))
+            {
+                foreach ($data['sleeveFilter'] as $sleeve)
+                {
+                    if(empty($sleeveUrl))
+                    {
+                        $sleeveUrl = "sleeve=" . $sleeve;
+                    }
+                    else
+                    {
+                        $sleeveUrl = $sleeveUrl . "-" . $sleeve;
+                    }
+                }
+            }
+
             if(empty($data['url']) && empty($data['id']))
             {
                 $data['url'] = "t-shirts";
-                $finalUrl = "products/" . $data['url'] . "?" . $colorUrl;
+                $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $sleeveUrl;
             }
             else if(empty($data['url']) && !empty($data['id']))
             {
-                $finalUrl = "product/" . $data['id'] . "?" . $colorUrl;
+                $finalUrl = "product/" . $data['id'] . "?" . $colorUrl . '&' . $sleeveUrl;
             }
             else if(!empty($data['url']) && empty($data['id']))
             {
-                $finalUrl = "products/" . $data['url'] . "?" . $colorUrl;
+                $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $sleeveUrl;
             }
 
             return redirect::to($finalUrl);
