@@ -4,7 +4,7 @@
     <div id="content">
         <div id="content-header">
             <div id="breadcrumb"> <a href="{{ url('/admin/dashboard') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{ url('/admin/view-currencies') }}">Currencies</a> <a href="#" class="current">Edit Currency</a> </div>
-            <h1>Currencies</h1>
+            <h1>Currency</h1>
             @if(Session::has('flash_message_error'))
                 <div class="alert alert-error alert-block">
                     <button type="button" class="close" data-dismiss="alert">×</button>

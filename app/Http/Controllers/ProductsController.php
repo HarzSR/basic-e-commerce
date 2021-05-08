@@ -80,6 +80,14 @@ class ProductsController extends Controller
             {
                 $product->sleeve = '';
             }
+            if (!empty($data['pattern']))
+            {
+                $product->pattern = $data['pattern'];
+            }
+            else
+            {
+                $product->pattern = '';
+            }
             $product->price = $data['price'];
             if (empty($data['image']))
             {
@@ -158,8 +166,9 @@ class ProductsController extends Controller
         }
 
         $sleeveArray = DB::table('sleeve_info')->get();
+        $patternArray = DB::table('pattern')->get();
 
-        return view('admin.products.add_product')->with(compact('categories_dropdown', 'sleeveArray'));
+        return view('admin.products.add_product')->with(compact('categories_dropdown', 'sleeveArray', 'patternArray'));
     }
 
     // View Product Function
@@ -268,6 +277,11 @@ class ProductsController extends Controller
                 $data['sleeve'] = '';
             }
 
+            if (empty($data['pattern']))
+            {
+                $data['pattern'] = '';
+            }
+
             if (empty($data['status']))
             {
                 $status = 0;
@@ -286,7 +300,7 @@ class ProductsController extends Controller
                 $feature_item = 1;
             }
 
-            Product::where(['id' => $id])->update(['category_id' => $data['category_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'description' => $data['description'], 'care' => $data['care'], 'sleeve' => $data['sleeve'],'price' => $data['price'], 'image' => $fileName, 'video' => $video_name, 'feature_item' => $feature_item , 'status' => $status]);
+            Product::where(['id' => $id])->update(['category_id' => $data['category_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'description' => $data['description'], 'care' => $data['care'], 'sleeve' => $data['sleeve'], 'pattern' => $data['pattern'], 'price' => $data['price'], 'image' => $fileName, 'video' => $video_name, 'feature_item' => $feature_item , 'status' => $status]);
 
             return redirect()->back()->with('flash_message_success', 'Product Updated Successfully');
         }
@@ -326,8 +340,9 @@ class ProductsController extends Controller
         }
 
         $sleeveArray = DB::table('sleeve_info')->get();
+        $patternArray = DB::table('pattern')->get();
 
-        return view('admin.products.edit_product')->with(compact('productDetails', 'categories_dropdown', 'sleeveArray'));
+        return view('admin.products.edit_product')->with(compact('productDetails', 'categories_dropdown', 'sleeveArray', 'patternArray'));
     }
 
     // Delete Product Function
@@ -575,6 +590,7 @@ class ProductsController extends Controller
         $colors = Product::distinct()->where('status', 1)->get(['product_color']);
         $categoryDetails = Category::where(['url' => $url])->first();
         $sleeves = DB::table('sleeve_info')->get();
+        $patterns = DB::table('pattern')->get();
         $meta_title = $categoryDetails->meta_title;
         $meta_description = $categoryDetails->meta_description;
         $meta_keywords = $categoryDetails->meta_keywords;
@@ -606,11 +622,17 @@ class ProductsController extends Controller
             $productsAll = $productsAll->whereIn('sleeve', $sleeveArray);
         }
 
+        if(!empty($_GET['pattern']))
+        {
+            $patternArray = explode('-', $_GET['pattern']);
+            $productsAll = $productsAll->whereIn('pattern', $patternArray);
+        }
+
         $productsAll = $productsAll->paginate(3);
 
         $banners = Banner::where('status', 1)->get();
 
-        return view('products.listing')->with(compact('categoryDetails', 'productsAll', 'categories', 'meta_title', 'meta_description', 'meta_keywords', 'banners', 'url', 'colors', 'sleeves'));
+        return view('products.listing')->with(compact('categoryDetails', 'productsAll', 'categories', 'meta_title', 'meta_description', 'meta_keywords', 'banners', 'url', 'colors', 'sleeves', 'patterns'));
     }
 
     // Display Individual Product Function
@@ -631,6 +653,7 @@ class ProductsController extends Controller
         $categories = Category::with('categories')->where(['parent_id' => 0])->get();
         $colors = Product::distinct()->where('status', 1)->get(['product_color']);
         $sleeves = DB::table('sleeve_info')->get();
+        $patterns = DB::table('pattern')->get();
 
         $productAdditionalImages = ProductsImage::where('product_id', $id)->get();
 
@@ -638,7 +661,7 @@ class ProductsController extends Controller
 
         $relatedProducts = Product::where('id', '!=', $id)->where(['category_id' => $productDetails->category_id])->get();
 
-        return view('products.detail')->with(compact('productDetails', 'categories', 'productAdditionalImages', 'total_stock', 'relatedProducts', 'meta_title', 'meta_description', 'meta_keywords', 'id', 'colors', 'sleeves'));
+        return view('products.detail')->with(compact('productDetails', 'categories', 'productAdditionalImages', 'total_stock', 'relatedProducts', 'meta_title', 'meta_description', 'meta_keywords', 'id', 'colors', 'sleeves', 'patterns'));
     }
 
     // Get Product Price upon Attribute Change Function
@@ -1243,6 +1266,7 @@ class ProductsController extends Controller
             $data = $request->all();
             $colorUrl = "";
             $sleeveUrl = "";
+            $patternUrl = "";
 
             if(!empty($data['colorFilter']))
             {
@@ -1274,18 +1298,127 @@ class ProductsController extends Controller
                 }
             }
 
+            if(!empty($data['patternFilter']))
+            {
+                foreach ($data['patternFilter'] as $pattern)
+                {
+                    if(empty($patternUrl))
+                    {
+                        $patternUrl = "pattern=" . $pattern;
+                    }
+                    else
+                    {
+                        $patternUrl = $patternUrl . "-" . $pattern;
+                    }
+                }
+            }
+
             if(empty($data['url']) && empty($data['id']))
             {
                 $data['url'] = "t-shirts";
-                $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $sleeveUrl;
+
+                if (empty($colorUrl) && empty($sleeveUrl) && empty($patternUrl))
+                {
+                    $finalUrl = "products/" . $data['url'];
+                }
+                elseif(empty($sleeveUrl) && empty($patternUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $colorUrl;
+                }
+                elseif(empty($colorUrl) && empty($patternUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $sleeveUrl;
+                }
+                elseif(empty($colorUrl) && empty($sleeveUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $patternUrl;
+                }
+                elseif(empty($sleeveUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $patternUrl;
+                }
+                elseif(empty($colorUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $sleeveUrl . '&' . $patternUrl;
+                }
+                elseif(empty($patternUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $sleeveUrl;
+                }
+                else
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $sleeveUrl . '&' . $patternUrl;
+                }
             }
             else if(empty($data['url']) && !empty($data['id']))
             {
-                $finalUrl = "product/" . $data['id'] . "?" . $colorUrl . '&' . $sleeveUrl;
+                if (empty($colorUrl) && empty($sleeveUrl) && empty($patternUrl))
+                {
+                    $finalUrl = "product/" . $data['id'];
+                }
+                elseif(empty($sleeveUrl) && empty($patternUrl))
+                {
+                    $finalUrl = "product/" . $data['id'] . "?" . $sleeveUrl;
+                }
+                elseif(empty($colorUrl) && empty($patternUrl))
+                {
+                    $finalUrl = "product/" . $data['id'] . "?" . $colorUrl;
+                }
+                elseif(empty($colorUrl) && empty($sleeveUrl))
+                {
+                    $finalUrl = "product/" . $data['id'] . "?" . $patternUrl;
+                }
+                elseif(empty($sleeveUrl))
+                {
+                    $finalUrl = "product/" . $data['id'] . "?" . $colorUrl . '&' . $patternUrl;
+                }
+                elseif(empty($colorUrl))
+                {
+                    $finalUrl = "product/" . $data['id'] . "?" . $sleeveUrl . '&' . $patternUrl;
+                }
+                elseif(empty($patternUrl))
+                {
+                    $finalUrl = "product/" . $data['id'] . "?" . $colorUrl . '&' . $sleeveUrl;
+                }
+                else
+                {
+                    $finalUrl = "product/" . $data['id'] . "?" . $colorUrl . '&' . $sleeveUrl . '&' . $patternUrl;
+                }
             }
             else if(!empty($data['url']) && empty($data['id']))
             {
-                $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $sleeveUrl;
+                if (empty($colorUrl) && empty($sleeveUrl) && empty($patternUrl))
+                {
+                    $finalUrl = "products/" . $data['url'];
+                }
+                elseif(empty($sleeveUrl) && empty($patternUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $colorUrl;
+                }
+                elseif(empty($colorUrl) && empty($patternUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $sleeveUrl;
+                }
+                elseif(empty($colorUrl) && empty($sleeveUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $patternUrl;
+                }
+                elseif(empty($sleeveUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $patternUrl;
+                }
+                elseif(empty($colorUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $sleeveUrl . '&' . $patternUrl;
+                }
+                elseif(empty($patternUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $sleeveUrl;
+                }
+                else
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $sleeveUrl . '&' . $patternUrl;
+                }
             }
 
             return redirect::to($finalUrl);

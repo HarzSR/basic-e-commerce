@@ -61,14 +61,20 @@
                                 @if(empty($productDetails->sleeve))
                                     <input type="hidden" name="sleeve" value="{{ $productDetails->sleeve }}">
                                 @endif
+                                @if(empty($productDetails->pattern))
+                                    <input type="hidden" name="sleeve" value="{{ $productDetails->pattern }}">
+                                @endif
                                 <input type="hidden" name="price" value="{{ $productDetails->price }}" id="hiddenPrice">
                                 <div class="product-information"><!--/product-information-->
                                     <img src="{{ asset('images/frontend_images/product-details/new.jpg') }}" class="newarrival" alt="" />
                                     <h2>{{ $productDetails->product_name }}</h2>
                                     <p>Web Code: {{ $productDetails->product_code }}</p>
                                     <p>Product Color: {{ $productDetails->product_color }}</p>
-                                    @if(empty($productDetails->sleeve))
+                                    @if(!empty($productDetails->sleeve) || $productDetails->sleeve == "NA")
                                         <p>Sleeve: {{ $productDetails->sleeve }}</p>
+                                    @endif
+                                    @if(!empty($productDetails->pattern) || $productDetails->pattern == "NA")
+                                        <p>Pattern: {{ $productDetails->pattern }}</p>
                                     @endif
                                     <p>Select Size:&#8194;
                                         <select name="size" id="size" style="width: 150px" required>

@@ -4,7 +4,7 @@
     <div id="content">
         <div id="content-header">
             <div id="breadcrumb"> <a href="{{ url('/admin/dashboard') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="/admin/view-categories">Categories</a> <a href="#" class="current">Edit Category</a> </div>
-            <h1>Categories</h1>
+            <h1>Category</h1>
         </div>
         <div class="container-fluid"><hr>
             <div class="row-fluid">

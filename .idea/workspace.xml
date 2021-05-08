@@ -2,9 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d55aefa-07cd-49f9-b334-7d2ae82c409a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/database/migrations/2021_05_07_235946_create_pattern_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_03_10_092426_create_products_tables.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_03_10_092426_create_products_tables.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_05_05_072728_create_sleeve_info_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_05_05_072728_create_sleeve_info_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/banners/add_banner.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/banners/add_banner.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/banners/edit_banner.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/banners/edit_banner.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/categories/add_category.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/categories/add_category.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/categories/edit_category.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/categories/edit_category.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/coupons/add_coupon.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/coupons/add_coupon.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/coupons/edit_coupon.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/coupons/edit_coupon.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/currencies/add_currency.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/currencies/add_currency.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/currencies/edit_currency.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/currencies/edit_currency.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/products/add_product.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/products/add_product.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/products/edit_product.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/products/edit_product.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/products/view_products.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/products/view_products.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/frontLayout/front_sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/frontLayout/front_sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/products/detail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/detail.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,7 +170,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -182,7 +197,9 @@
       <workItem from="1619363581766" duration="20628000" />
       <workItem from="1619548705224" duration="43104000" />
       <workItem from="1619823251989" duration="35949000" />
-      <workItem from="1620092756243" duration="24756000" />
+      <workItem from="1620092756243" duration="25413000" />
+      <workItem from="1620431563453" duration="35000" />
+      <workItem from="1620431626033" duration="6130000" />
     </task>
     <servers />
   </component>

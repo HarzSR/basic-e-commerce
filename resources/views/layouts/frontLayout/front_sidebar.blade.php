@@ -42,7 +42,7 @@
         </div>
     </div>
 
-    @if(!empty($url) || !empty($id))
+    @if(!empty($url))
         <div class="left-sidebar">
             <h2>Colors</h2>
             <div class="panel-group category-products" id="color">
@@ -79,6 +79,28 @@
                             <h4 class="panel-title">
                                 <a>
                                     {{ $sleeve->description }}<span class="pull-right"><input type="checkbox" name="sleeveFilter[]" id="{{ $sleeve->description }}" value="{{ $sleeve->description }}" onchange="javascript:this.form.submit();" @if(!empty($sleeveArray) && in_array($sleeve->description, $sleeveArray)) checked @endif></span>
+                                </a>
+                            </h4>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
+        <div class="left-sidebar">
+            <h2>Pattern</h2>
+            <div class="panel-group category-products" id="color">
+                @if(!empty($_GET['pattern']))
+                    <?php
+                        $patternArray = explode('-', $_GET['pattern']);
+                    ?>
+                @endif
+                <div class="panel panel-default">
+                    @foreach($patterns as $pattern)
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a>
+                                    {{ $pattern->description }}<span class="pull-right"><input type="checkbox" name="patternFilter[]" id="{{ $pattern->description }}" value="{{ $pattern->description }}" onchange="javascript:this.form.submit();" @if(!empty($patternArray) && in_array($pattern->description, $patternArray)) checked @endif></span>
                                 </a>
                             </h4>
                         </div>

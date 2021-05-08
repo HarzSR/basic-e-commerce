@@ -4,7 +4,7 @@
     <div id="content">
         <div id="content-header">
             <div id="breadcrumb"> <a href="{{ url('/admin/dashboard') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{ url('/admin/view-products') }}">Products</a> <a href="#" class="current">Edit Product</a> </div>
-            <h1>Products</h1>
+            <h1>Product</h1>
             @if(Session::has('flash_message_error'))
                 <div class="alert alert-error alert-block">
                     <button type="button" class="close" data-dismiss="alert">×</button>
@@ -81,7 +81,18 @@
                                         <select name="sleeve" id="sleeve" class="form-control" style="width: 220px;">
                                             <option value="">Select</option>
                                             @foreach($sleeveArray as $sleeve)
-                                                <option value="{{ $sleeve->description }}" @if(!empty('$sleeve') && old('sleeve') == $sleeve->description) selected @elseif($productDetails->sleeve == $sleeve->description) selected @endif>{{ $sleeve->description }}</option>
+                                                <option value="{{ $sleeve->description }}" @if(!empty('sleeve') && old('sleeve') == $sleeve->description) selected @elseif($productDetails->sleeve == $sleeve->description) selected @endif>{{ $sleeve->description }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Product Pattern</label>
+                                    <div class="controls">
+                                        <select name="pattern" id="pattern" class="form-control" style="width: 220px;">
+                                            <option value="">Select</option>
+                                            @foreach($patternArray as $pattern)
+                                                <option value="{{ $pattern->description }}" @if(!empty('pattern') && old('pattern') == $pattern->description) selected @elseif($productDetails->pattern == $pattern->description) selected @endif>{{ $pattern->description }}</option>
                                             @endforeach
                                         </select>
                                     </div>
