@@ -108,5 +108,27 @@
                 </div>
             </div>
         </div>
+
+        <div class="left-sidebar">
+            <h2>Size</h2>
+            <div class="panel-group category-products" id="color">
+                @if(!empty($_GET['size']))
+                    <?php
+                        $sizeArray = explode('-', $_GET['size']);
+                    ?>
+                @endif
+                <div class="panel panel-default">
+                    @foreach($sizes as $size)
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a>
+                                    {{ $size->size }}<span class="pull-right"><input type="checkbox" name="sizeFilter[]" id="{{ $size->size }}" value="{{ $size->size }}" onchange="javascript:this.form.submit();" @if(!empty($sizeArray) && in_array($size->size, $sizeArray)) checked @endif></span>
+                                </a>
+                            </h4>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
     @endif
 </form>

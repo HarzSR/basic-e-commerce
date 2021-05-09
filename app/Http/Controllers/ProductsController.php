@@ -591,13 +591,14 @@ class ProductsController extends Controller
         $categoryDetails = Category::where(['url' => $url])->first();
         $sleeves = DB::table('sleeve_info')->get();
         $patterns = DB::table('pattern')->get();
+        $sizes = ProductsAttribute::select('size')->groupBy('size')->get();
         $meta_title = $categoryDetails->meta_title;
         $meta_description = $categoryDetails->meta_description;
         $meta_keywords = $categoryDetails->meta_keywords;
 
         if ($categoryDetails->parent_id != 0)
         {
-            $productsAll = Product::where(['category_id' => $categoryDetails->id])->where('status', 1);
+            $productsAll = Product::where(['products.category_id' => $categoryDetails->id])->where('status', 1);
         }
         else
         {
@@ -607,19 +608,19 @@ class ProductsController extends Controller
                 $categoryIds[] = $subCategory->id;
             }
             array_push($categoryIds, $categoryDetails->id);
-            $productsAll = Product::whereIn('category_id', $categoryIds)->where('status', 1);
+            $productsAll = Product::whereIn('products.category_id', $categoryIds)->where('status', 1);
         }
 
         if(!empty($_GET['color']))
         {
             $colorArray = explode('-', $_GET['color']);
-            $productsAll = $productsAll->whereIn('product_color', $colorArray);
+            $productsAll = $productsAll->whereIn('products.product_color', $colorArray);
         }
 
         if(!empty($_GET['sleeve']))
         {
             $sleeveArray = explode('-', $_GET['sleeve']);
-            $productsAll = $productsAll->whereIn('sleeve', $sleeveArray);
+            $productsAll = $productsAll->whereIn('products.sleeve', $sleeveArray);
         }
 
         if(!empty($_GET['pattern']))
@@ -628,11 +629,17 @@ class ProductsController extends Controller
             $productsAll = $productsAll->whereIn('pattern', $patternArray);
         }
 
+        if(!empty($_GET['size']))
+        {
+            $sizeArray = explode('-', $_GET['size']);
+            $productsAll = $productsAll->join('products_attributes', 'products_attributes.product_id', '=', 'products.id')->select('products.*', 'products_attributes.product_id', 'products_attributes.size')->groupBy('products_attributes.product_id')->whereIn('products_attributes.size',$sizeArray);
+        }
+
         $productsAll = $productsAll->paginate(3);
 
         $banners = Banner::where('status', 1)->get();
 
-        return view('products.listing')->with(compact('categoryDetails', 'productsAll', 'categories', 'meta_title', 'meta_description', 'meta_keywords', 'banners', 'url', 'colors', 'sleeves', 'patterns'));
+        return view('products.listing')->with(compact('categoryDetails', 'productsAll', 'categories', 'meta_title', 'meta_description', 'meta_keywords', 'banners', 'url', 'colors', 'sleeves', 'patterns', 'sizes'));
     }
 
     // Display Individual Product Function
@@ -1267,6 +1274,7 @@ class ProductsController extends Controller
             $colorUrl = "";
             $sleeveUrl = "";
             $patternUrl = "";
+            $sizeUrl = "";
 
             if(!empty($data['colorFilter']))
             {
@@ -1313,111 +1321,222 @@ class ProductsController extends Controller
                 }
             }
 
+            if(!empty($data['sizeFilter']))
+            {
+                foreach ($data['sizeFilter'] as $size)
+                {
+                    if(empty($sizeUrl))
+                    {
+                        $sizeUrl = "size=" . $size;
+                    }
+                    else
+                    {
+                        $sizeUrl = $sizeUrl . "-" . $size;
+                    }
+                }
+            }
+
             if(empty($data['url']) && empty($data['id']))
             {
                 $data['url'] = "t-shirts";
 
-                if (empty($colorUrl) && empty($sleeveUrl) && empty($patternUrl))
+                if (empty($colorUrl) && empty($sleeveUrl) && empty($patternUrl) && empty($sizeUrl))
                 {
                     $finalUrl = "products/" . $data['url'];
                 }
-                elseif(empty($sleeveUrl) && empty($patternUrl))
+                elseif(empty($sleeveUrl) && empty($patternUrl) && empty($sizeUrl))
                 {
                     $finalUrl = "products/" . $data['url'] . "?" . $colorUrl;
                 }
-                elseif(empty($colorUrl) && empty($patternUrl))
+                elseif(empty($colorUrl) && empty($patternUrl) && empty($sizeUrl))
                 {
                     $finalUrl = "products/" . $data['url'] . "?" . $sleeveUrl;
                 }
-                elseif(empty($colorUrl) && empty($sleeveUrl))
+                elseif(empty($colorUrl) && empty($sleeveUrl) && empty($sizeUrl))
                 {
                     $finalUrl = "products/" . $data['url'] . "?" . $patternUrl;
                 }
-                elseif(empty($sleeveUrl))
+                elseif(empty($colorUrl) && empty($sleeveUrl) && empty($patternUrl))
                 {
-                    $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $patternUrl;
+                    $finalUrl = "products/" . $data['url'] . "?" . $sizeUrl;
                 }
-                elseif(empty($colorUrl))
+                elseif(empty($colorUrl) && empty($sleeveUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $patternUrl . '&' . $sizeUrl;
+                }
+                elseif(empty($colorUrl) && empty($patternUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $sleeveUrl . '&' . $sizeUrl;
+                }
+                elseif(empty($colorUrl) && empty($sizeUrl))
                 {
                     $finalUrl = "products/" . $data['url'] . "?" . $sleeveUrl . '&' . $patternUrl;
                 }
-                elseif(empty($patternUrl))
+                elseif(empty($sleeveUrl) && empty($patternUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $sizeUrl;
+                }
+                elseif(empty($sleeveUrl) && empty($sizeUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $patternUrl;
+                }
+                elseif(empty($patternUrl) && empty($sizeUrl))
                 {
                     $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $sleeveUrl;
                 }
-                else
+                elseif(empty($sleeveUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $patternUrl . '&' . $sizeUrl;
+                }
+                elseif(empty($colorUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $sleeveUrl . '&1' . $patternUrl . '&' . $sizeUrl;
+                }
+                elseif(empty($patternUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $sleeveUrl . '&' . $sizeUrl;
+                }
+                elseif(empty($sizeUrl))
                 {
                     $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $sleeveUrl . '&' . $patternUrl;
+                }
+                else
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $sleeveUrl . '&' . $patternUrl . '&' . $sizeUrl;
                 }
             }
             else if(empty($data['url']) && !empty($data['id']))
             {
-                if (empty($colorUrl) && empty($sleeveUrl) && empty($patternUrl))
+                if (empty($colorUrl) && empty($sleeveUrl) && empty($patternUrl) && empty($sizeUrl))
                 {
                     $finalUrl = "product/" . $data['id'];
                 }
-                elseif(empty($sleeveUrl) && empty($patternUrl))
-                {
-                    $finalUrl = "product/" . $data['id'] . "?" . $sleeveUrl;
-                }
-                elseif(empty($colorUrl) && empty($patternUrl))
+                elseif(empty($sleeveUrl) && empty($patternUrl) && empty($sizeUrl))
                 {
                     $finalUrl = "product/" . $data['id'] . "?" . $colorUrl;
                 }
-                elseif(empty($colorUrl) && empty($sleeveUrl))
+                elseif(empty($colorUrl) && empty($patternUrl) && empty($sizeUrl))
+                {
+                    $finalUrl = "product/" . $data['id'] . "?" . $sleeveUrl;
+                }
+                elseif(empty($colorUrl) && empty($sleeveUrl) && empty($sizeUrl))
                 {
                     $finalUrl = "product/" . $data['id'] . "?" . $patternUrl;
                 }
-                elseif(empty($sleeveUrl))
+                elseif(empty($colorUrl) && empty($sleeveUrl) && empty($patternUrl))
                 {
-                    $finalUrl = "product/" . $data['id'] . "?" . $colorUrl . '&' . $patternUrl;
+                    $finalUrl = "product/" . $data['id'] . "?" . $sizeUrl;
                 }
-                elseif(empty($colorUrl))
+                elseif(empty($colorUrl) && empty($sleeveUrl))
+                {
+                    $finalUrl = "product/" . $data['id'] . "?" . $patternUrl . '&' . $sizeUrl;
+                }
+                elseif(empty($colorUrl) && empty($patternUrl))
+                {
+                    $finalUrl = "product/" . $data['id'] . "?" . $sleeveUrl . '&' . $sizeUrl;
+                }
+                elseif(empty($colorUrl) && empty($sizeUrl))
                 {
                     $finalUrl = "product/" . $data['id'] . "?" . $sleeveUrl . '&' . $patternUrl;
                 }
-                elseif(empty($patternUrl))
+                elseif(empty($sleeveUrl) && empty($patternUrl))
+                {
+                    $finalUrl = "product/" . $data['id'] . "?" . $colorUrl . '&' . $sizeUrl;
+                }
+                elseif(empty($sleeveUrl) && empty($sizeUrl))
+                {
+                    $finalUrl = "product/" . $data['id'] . "?" . $colorUrl . '&' . $patternUrl;
+                }
+                elseif(empty($patternUrl) && empty($sizeUrl))
                 {
                     $finalUrl = "product/" . $data['id'] . "?" . $colorUrl . '&' . $sleeveUrl;
                 }
-                else
+                elseif(empty($sleeveUrl))
+                {
+                    $finalUrl = "product/" . $data['id'] . "?" . $colorUrl . '&' . $patternUrl . '&' . $sizeUrl;
+                }
+                elseif(empty($colorUrl))
+                {
+                    $finalUrl = "product/" . $data['id'] . "?" . $sleeveUrl . '&1' . $patternUrl . '&' . $sizeUrl;
+                }
+                elseif(empty($patternUrl))
+                {
+                    $finalUrl = "product/" . $data['id'] . "?" . $colorUrl . '&' . $sleeveUrl . '&' . $sizeUrl;
+                }
+                elseif(empty($sizeUrl))
                 {
                     $finalUrl = "product/" . $data['id'] . "?" . $colorUrl . '&' . $sleeveUrl . '&' . $patternUrl;
+                }
+                else
+                {
+                    $finalUrl = "product/" . $data['id'] . "?" . $colorUrl . '&' . $sleeveUrl . '&' . $patternUrl . '&' . $sizeUrl;
                 }
             }
             else if(!empty($data['url']) && empty($data['id']))
             {
-                if (empty($colorUrl) && empty($sleeveUrl) && empty($patternUrl))
+                if (empty($colorUrl) && empty($sleeveUrl) && empty($patternUrl) && empty($sizeUrl))
                 {
                     $finalUrl = "products/" . $data['url'];
                 }
-                elseif(empty($sleeveUrl) && empty($patternUrl))
+                elseif(empty($sleeveUrl) && empty($patternUrl) && empty($sizeUrl))
                 {
                     $finalUrl = "products/" . $data['url'] . "?" . $colorUrl;
                 }
-                elseif(empty($colorUrl) && empty($patternUrl))
+                elseif(empty($colorUrl) && empty($patternUrl) && empty($sizeUrl))
                 {
                     $finalUrl = "products/" . $data['url'] . "?" . $sleeveUrl;
                 }
-                elseif(empty($colorUrl) && empty($sleeveUrl))
+                elseif(empty($colorUrl) && empty($sleeveUrl) && empty($sizeUrl))
                 {
                     $finalUrl = "products/" . $data['url'] . "?" . $patternUrl;
                 }
-                elseif(empty($sleeveUrl))
+                elseif(empty($colorUrl) && empty($sleeveUrl) && empty($patternUrl))
                 {
-                    $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $patternUrl;
+                    $finalUrl = "products/" . $data['url'] . "?" . $sizeUrl;
                 }
-                elseif(empty($colorUrl))
+                elseif(empty($colorUrl) && empty($sleeveUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $patternUrl . '&' . $sizeUrl;
+                }
+                elseif(empty($colorUrl) && empty($patternUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $sleeveUrl . '&' . $sizeUrl;
+                }
+                elseif(empty($colorUrl) && empty($sizeUrl))
                 {
                     $finalUrl = "products/" . $data['url'] . "?" . $sleeveUrl . '&' . $patternUrl;
                 }
-                elseif(empty($patternUrl))
+                elseif(empty($sleeveUrl) && empty($patternUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $sizeUrl;
+                }
+                elseif(empty($sleeveUrl) && empty($sizeUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $patternUrl;
+                }
+                elseif(empty($patternUrl) && empty($sizeUrl))
                 {
                     $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $sleeveUrl;
                 }
-                else
+                elseif(empty($sleeveUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $patternUrl . '&' . $sizeUrl;
+                }
+                elseif(empty($colorUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $sleeveUrl . '&' . $patternUrl . '&' . $sizeUrl;
+                }
+                elseif(empty($patternUrl))
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $sleeveUrl . '&' . $sizeUrl;
+                }
+                elseif(empty($sizeUrl))
                 {
                     $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $sleeveUrl . '&' . $patternUrl;
+                }
+                else
+                {
+                    $finalUrl = "products/" . $data['url'] . "?" . $colorUrl . '&' . $sleeveUrl . '&' . $patternUrl . '&' . $sizeUrl;
                 }
             }
 

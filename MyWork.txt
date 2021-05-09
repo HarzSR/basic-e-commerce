@@ -109,12 +109,16 @@ Things done on this project
 - Add Advance Search Product
 - Colors Filter - Category and Products Page only
 - Add Sleeve and sleeve based filter
+- Add Pattern and pattern based filter
+- Add Size based filter
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms
 - Listing Pagination not working for Searched Products
 - Show Currency based on Dropdown
 - Colors Filter Pagination not working
+- Sleeve Filter Pagination not working
+- Pattern Filter Pagination not working
 
 Not ToDo List
 - Add Social Share Button (Index: 145) - Implemented and commented out: CORS Errors
