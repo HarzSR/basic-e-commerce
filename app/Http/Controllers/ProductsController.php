@@ -598,7 +598,9 @@ class ProductsController extends Controller
 
         if ($categoryDetails->parent_id != 0)
         {
-            $productsAll = Product::where(['products.category_id' => $categoryDetails->id])->where('status', 1);
+            $productsAll = Product::where(['products.category_id' => $categoryDetails->id])->where('products.status', 1);
+            $mainCategory = Category::where('id', $categoryDetails->parent_id)->first();
+            $breadcrumb = "<a href='/'> Home</a> | <a href='" . $mainCategory->url . "'>" . $mainCategory->name . "</a> | <a href='" . $categoryDetails->url . "'>" . $categoryDetails->name . "</a>";
         }
         else
         {
@@ -608,7 +610,8 @@ class ProductsController extends Controller
                 $categoryIds[] = $subCategory->id;
             }
             array_push($categoryIds, $categoryDetails->id);
-            $productsAll = Product::whereIn('products.category_id', $categoryIds)->where('status', 1);
+            $productsAll = Product::whereIn('products.category_id', $categoryIds)->where('products.status', 1);
+            $breadcrumb = "<a href='/'> Home</a> | <a href='" . $categoryDetails->url . "'>" . $categoryDetails->name . "</a>";
         }
 
         if(!empty($_GET['color']))
@@ -639,7 +642,7 @@ class ProductsController extends Controller
 
         $banners = Banner::where('status', 1)->get();
 
-        return view('products.listing')->with(compact('categoryDetails', 'productsAll', 'categories', 'meta_title', 'meta_description', 'meta_keywords', 'banners', 'url', 'colors', 'sleeves', 'patterns', 'sizes'));
+        return view('products.listing')->with(compact('categoryDetails', 'productsAll', 'categories', 'meta_title', 'meta_description', 'meta_keywords', 'banners', 'url', 'colors', 'sleeves', 'patterns', 'sizes', 'breadcrumb'));
     }
 
     // Display Individual Product Function
@@ -653,11 +656,24 @@ class ProductsController extends Controller
         }
 
         $productDetails = Product::with('attributes')->where(['id' => $id])->first();
+        // $productAltImages = ProductsImage::where('parent_id', $id)->get();
         $meta_title = $productDetails->product_name;
         $meta_description = $productDetails->description;
         $meta_keywords = $productDetails->product_name;
 
         $categories = Category::with('categories')->where(['parent_id' => 0])->get();
+        $categoryDetails = Category::where('id', $productDetails->category_id)->first();
+
+        if($categoryDetails->parent_id != 0)
+        {
+            $mainCategory = Category::where('id', $categoryDetails->parent_id)->first();
+            $breadcrumb = "<a href='/'> Home</a> | <a href='/products/" . $mainCategory->url . "'>" . $mainCategory->name . "</a> | <a href='/products/" . $categoryDetails->url . "'>" . $categoryDetails->name . "</a> | " . $productDetails->product_name;
+        }
+        else
+        {
+            $breadcrumb = "<a href='/'> Home</a> | <a href='" . $categoryDetails->url . "'>" . $categoryDetails->name . "</a>";
+        }
+
         $colors = Product::distinct()->where('status', 1)->get(['product_color']);
         $sleeves = DB::table('sleeve_info')->get();
         $patterns = DB::table('pattern')->get();
@@ -668,7 +684,7 @@ class ProductsController extends Controller
 
         $relatedProducts = Product::where('id', '!=', $id)->where(['category_id' => $productDetails->category_id])->get();
 
-        return view('products.detail')->with(compact('productDetails', 'categories', 'productAdditionalImages', 'total_stock', 'relatedProducts', 'meta_title', 'meta_description', 'meta_keywords', 'id', 'colors', 'sleeves', 'patterns'));
+        return view('products.detail')->with(compact('productDetails', 'categories', 'productAdditionalImages', 'total_stock', 'relatedProducts', 'meta_title', 'meta_description', 'meta_keywords', 'id', 'colors', 'sleeves', 'patterns', 'breadcrumb'));
     }
 
     // Get Product Price upon Attribute Change Function

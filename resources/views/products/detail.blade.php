@@ -27,6 +27,8 @@
                                 <strong>{!! session('flash_message_success') !!}</strong>
                             </div>
                         @endif
+                        <div align="left"><?php echo $breadcrumb; ?></div>
+                        <div>&nbsp;</div>
                         <div class="col-sm-5">
                             <div class="view-product">
                                 <div class="easyzoom easyzoom--overlay easyzoom--with-thumbnails">

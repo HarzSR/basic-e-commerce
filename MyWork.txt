@@ -111,6 +111,7 @@ Things done on this project
 - Add Sleeve and sleeve based filter
 - Add Pattern and pattern based filter
 - Add Size based filter
+- Add Breadcrumbs Navigation
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms
