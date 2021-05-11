@@ -112,6 +112,7 @@ Things done on this project
 - Add Pattern and pattern based filter
 - Add Size based filter
 - Add Breadcrumbs Navigation
+- Product Stock Management: Reduce stock upon order placement
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms

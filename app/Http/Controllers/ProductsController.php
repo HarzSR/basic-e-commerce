@@ -1101,6 +1101,10 @@ class ProductsController extends Controller
                 $cartPro->product_qty = $cartProduct->quantity;
 
                 $cartPro->save();
+
+                $getProductStock = ProductsAttribute::where('sku', $cartProduct->product_code)-first();
+                $newStock = $getProductStock->stock - $cartProduct->quantity;
+                ProductsAttribute::where('sku', $cartProduct->product_code)->update(['stock' => $newStock]);
             }
 
             Session::put('order_id', $order_id);
