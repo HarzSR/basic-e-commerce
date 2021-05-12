@@ -113,6 +113,7 @@ Things done on this project
 - Add Size based filter
 - Add Breadcrumbs Navigation
 - Product Stock Management: Reduce stock upon order placement
+- Avoid Order placement due to No Stock (Stock taken by others)
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms
@@ -121,6 +122,7 @@ ToDo List
 - Colors Filter Pagination not working
 - Sleeve Filter Pagination not working
 - Pattern Filter Pagination not working
+- Avoid Order placement - in case of trying to order more than required quantity: perform action
 
 Not ToDo List
 - Add Social Share Button (Index: 145) - Implemented and commented out: CORS Errors

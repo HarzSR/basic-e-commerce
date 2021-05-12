@@ -35,7 +35,6 @@
             @if(!empty(Session::has('order_id') && !empty(Session::has('grand_total'))))
                 <div class="heading" align="center">
                     <h3>Your Order has been placed Successfully</h3>
-                    <h3>Your Order has been placed Successfully</h3>
                     <?php
                         $getCartCurrencyRates = Product::getCurrencyRates(Session::get('grand_total'));
                     ?>

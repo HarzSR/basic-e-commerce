@@ -78,4 +78,38 @@ class Product extends Model
 
         return $currenciesArray;
     }
+
+    // Get Product Stock Function
+
+    public static function getProductStock($product_id, $product_size)
+    {
+        $getProductStock = ProductsAttribute::select('stock')->where(['product_id' => $product_id, 'size' => $product_size])->first();
+
+        return $getProductStock;
+    }
+
+    // Delete Cart Item of 0 Stock Product Function
+
+    public static function deleteCartProduct($product_id, $user_email)
+    {
+        DB::table('cart')->where(['product_id' => $product_id, 'user_email' => $user_email])->delete();
+    }
+
+    // Get Product Status Function
+
+    public static function getProductStatus($product_id)
+    {
+        $getProductStatus = Product::select('status')->where('product_id', $product_id)->first();
+
+        return $getProductStatus->status;
+    }
+
+    // Get Attributes Count Function
+
+    public static function getAttributeCount($product_id, $product_size)
+    {
+        $getAttributeCount = ProductsAttribute::where(['product_id' => $product_id, 'size' => $product_size])->count();
+
+        return $getAttributeCount;
+    }
 }

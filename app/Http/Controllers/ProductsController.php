@@ -1045,9 +1045,43 @@ class ProductsController extends Controller
             $user_id = Auth::User()->id;
             $user_email = Auth::User()->email;
             $session_id = Session::get('session_id');
-
+            $userCart = DB::table('cart')->where('user_email', $user_email)->get();
             $shippingDetails = DeliveryAddress::where(['user_email' => $user_email])->first();
             $pincodeCount = DB::table('pincodes')->where('pincode', $shippingDetails->pincode)->count();
+
+            foreach ($userCart as $cart)
+            {
+                $getAttributeCount = Product::getAttributeCount($cart->product_id, $cart->size);
+
+                if($getAttributeCount == 0)
+                {
+                    Product::deleteCartProduct($cart->product_id ,$user_email);
+
+                    return redirect('/cart')->with('flash_message_error', 'Cart item removed, as the seller removed the item. Please try again.');
+                }
+
+                $product_stock = Product::getProductStock($cart->product_id, $cart->size);
+
+                if($product_stock == 0)
+                {
+                    Product::deleteCartProduct($cart->product_id ,$user_email);
+
+                    return redirect('/cart')->with('flash_message_error', 'Cart item removed, as one of the item is sold out. Please try again.');
+                }
+                if($cart->quantity > $product_stock)
+                {
+                    return redirect('/cart')->with('flash_message_error', 'Unfortunately, we dont have so much in stock. Please update cart values.');
+                }
+
+                $product_status = Product::getProductStatus($cart->product_id);
+
+                if($product_status == 0)
+                {
+                    Product::deleteCartProduct($cart->product_id);
+
+                    return redirect('/cart')->with('flash_message_error', 'Cart item removed as seller disabled it. Please try again.');
+                }
+            }
 
             if($pincodeCount == 0)
             {
@@ -1103,7 +1137,16 @@ class ProductsController extends Controller
                 $cartPro->save();
 
                 $getProductStock = ProductsAttribute::where('sku', $cartProduct->product_code)-first();
-                $newStock = $getProductStock->stock - $cartProduct->quantity;
+
+                if($getProductStock->stock - $cartProduct->quantity < 0)
+                {
+                    $newStock = 0;
+                }
+                else
+                {
+                    $newStock = $getProductStock->stock - $cartProduct->quantity;
+                }
+
                 ProductsAttribute::where('sku', $cartProduct->product_code)->update(['stock' => $newStock]);
             }
 
