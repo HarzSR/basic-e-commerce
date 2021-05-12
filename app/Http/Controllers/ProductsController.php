@@ -1081,6 +1081,16 @@ class ProductsController extends Controller
 
                     return redirect('/cart')->with('flash_message_error', 'Cart item removed as seller disabled it. Please try again.');
                 }
+
+                $getCategoryId = Product::select('category_id')->where('id', $cart->product_id)->first();
+                $categoryStatus = Product::getCategoryStatus($getCategoryId);
+
+                if($categoryStatus == 0)
+                {
+                    Product::deleteCartProduct($cart->product_id ,$user_email);
+
+                    return redirect('/cart')->with('flash_message_error', 'Cart item removed, as one of the item is disabled by Seller. Please try again.');
+                }
             }
 
             if($pincodeCount == 0)

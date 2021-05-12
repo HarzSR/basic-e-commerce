@@ -114,6 +114,7 @@ Things done on this project
 - Add Breadcrumbs Navigation
 - Product Stock Management: Reduce stock upon order placement
 - Avoid Order placement due to No Stock (Stock taken by others)
+- Avoid Order placement due to Disabled Category
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms

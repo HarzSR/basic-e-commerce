@@ -83,9 +83,19 @@ class Product extends Model
 
     public static function getProductStock($product_id, $product_size)
     {
-        $getProductStock = ProductsAttribute::select('stock')->where(['product_id' => $product_id, 'size' => $product_size])->first();
+        $getAttributeCount = self::getAttributeCount($product_id, $product_size);
 
-        return $getProductStock;
+        if($getAttributeCount > 0)
+        {
+            $getProductStock = ProductsAttribute::select('stock')->where(['product_id' => $product_id, 'size' => $product_size])->first();
+            $productStock = $getProductStock->stock;
+        }
+        else
+        {
+            $productStock = 0;
+        }
+
+        return $productStock;
     }
 
     // Delete Cart Item of 0 Stock Product Function
@@ -111,5 +121,20 @@ class Product extends Model
         $getAttributeCount = ProductsAttribute::where(['product_id' => $product_id, 'size' => $product_size])->count();
 
         return $getAttributeCount;
+    }
+
+    // Get Category Status Function
+
+    public static function getCategoryStatus($category_id)
+    {
+        $getCategoryStatus = Category::where('id', $category_id)->count();
+
+        if($getCategoryStatus > 0)
+        {
+            $categoryStatus = Category::select('status')->where('id', $category_id)->first();
+            $status = $categoryStatus->status;
+        }
+
+        return $status;
     }
 }

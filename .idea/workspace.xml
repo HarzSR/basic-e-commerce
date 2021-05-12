@@ -6,7 +6,6 @@
       <change beforePath="$PROJECT_DIR$/MyWork.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MyWork.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/orders/paypal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/paypal.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +189,7 @@
       <workItem from="1620628330568" duration="1200000" />
       <workItem from="1620644013093" duration="3533000" />
       <workItem from="1620731296571" duration="1224000" />
-      <workItem from="1620803992007" duration="7821000" />
+      <workItem from="1620803992007" duration="10717000" />
     </task>
     <servers />
   </component>
