@@ -42,6 +42,11 @@
                 <li <?php if (preg_match("/(view-currencies|edit-currency)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-currencies') }}">View Currencies</a></li>
             </ul>
         </li>
+        <li class="submenu"> <a href="#"><i class="icon icon-retweet"></i> <span>Shipping Charges</span> <span class="label label-important">1</span></a>
+            <ul <?php if (preg_match("/shipping/i", url()->current())) echo "style=\"display: block;\"" ?>>
+                <li <?php if (preg_match("/(view-shipping-charges|edit-shipping-charge)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-shipping-charges') }}">View Shipping Charges</a></li>
+            </ul>
+        </li>
         <li class="submenu"> <a href="#"><i class="icon icon-film"></i> <span>Banners</span> <span class="label label-important">2</span></a>
             <ul <?php if (preg_match("/banner/i", url()->current())) echo "style=\"display: block;\"" ?>>
                 <li <?php if (preg_match("/add-banner/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/add-banner') }}">Add Banner</a></li>

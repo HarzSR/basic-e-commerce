@@ -51,7 +51,7 @@
                                                 <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">In-Active</button>
                                             @endif
                                         </td>
-                                        <td><?php echo date('d-M-Y H:i A', strtotime($cmsPage->created_at)); ?></td>
+                                        <td><?php echo date('d-M-Y h:i A', strtotime($cmsPage->created_at)); ?></td>
                                         <td class="center">
                                             <a href="#myModal{{ $cmsPage->id }}" data-toggle="modal" class="btn btn-success btn-mini" title="View Description">View</a>
                                             <a href="{{ url('/admin/edit-cms-page/' . $cmsPage->id) }}" class="btn btn-primary btn-mini" title="Edit CMS Page">Edit</a>

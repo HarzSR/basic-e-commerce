@@ -51,8 +51,8 @@
                                                 NZ$ {{ $coupon->amount }}
                                             @endif
                                         </td>
-                                        <td><?php echo date('d-M-Y H:i A', strtotime($coupon->created_at)); ?></td>
-                                        <td><?php echo date('d-M-Y H:i A', strtotime($coupon->expiry_date)); ?></td>
+                                        <td><?php echo date('d-M-Y h:i A', strtotime($coupon->created_at)); ?></td>
+                                        <td><?php echo date('d-M-Y h:i A', strtotime($coupon->expiry_date)); ?></td>
                                         <td>
                                             @if($coupon->status == 1)
                                                 <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Active</button>
