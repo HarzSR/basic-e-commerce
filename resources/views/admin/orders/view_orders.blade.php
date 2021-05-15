@@ -53,7 +53,7 @@
                                                     {{ $product->product_name }} | {{ $product->product_code }} | {{ $product->product_size }} | {{ $product->product_color }} | {{ $product->product_qty }}<br>
                                                 @endforeach
                                             </td>
-                                            <td>{{ $order->grand_total }}</td>
+                                            <td>&#8377; {{ $order->grand_total }}</td>
                                             <td>{{ $order->order_status }}</td>
                                             <td>{{ $order->payment_method }}</td>
                                             <td class="center">

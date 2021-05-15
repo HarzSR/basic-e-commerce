@@ -127,7 +127,7 @@
                                         $getCouponRates = Product::getCurrencyRates(Session::get('couponAmount'));
                                     ?>
                                     <li>Discount <span class="btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCouponRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCouponRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCouponRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCouponRates['NZD_Rate'] }} <br>">&#8377; <?php echo Session::get('couponAmount'); ?> | <a class="cart_quantity_delete" href="{{ url('cart/remove-coupon/') }}" onclick="return confirm('Would you like to remove Coupon?')"><i class="fa fa-times"></i></a></span></li>
-                                    <li>Shipping Cost <span>Free</span></li>
+                                    <li>Shipping Cost <span>Yet to Calculate</span></li>
                                     <?php
                                         if ($total_amount - Session::get('couponAmount') < 0)
                                             $total_amount = 0;
@@ -141,7 +141,7 @@
                                         $getCartRates = Product::getCurrencyRates($total_amount);
                                     ?>
                                     <li>Cart Sub Total <span class="btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCartRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCartRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCartRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCartRates['NZD_Rate'] }} <br>">&#8377; <?php echo $total_amount; ?></span></li>
-                                    <li>Shipping Cost <span>Free</span></li>
+                                    <li>Shipping Cost <span>Yet to Calculate</span></li>
                                     <?php
                                         $getCurrencyRates = Product::getCurrencyRates($total_amount);
                                     ?>

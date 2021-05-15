@@ -24,7 +24,8 @@ class Product extends Model
         if(Auth::check())
         {
             $user_email = Auth::User()->email;
-            $cartCount = DB::table('cart')->where('user_email', $user_email)->sum('quantity');
+            $session_id = Session::get('session_id');
+            $cartCount = DB::table('cart')->where(['user_email' => $user_email, 'session_id' => $session_id])->sum('quantity');
         }
         else
         {
@@ -109,7 +110,7 @@ class Product extends Model
 
     public static function getProductStatus($product_id)
     {
-        $getProductStatus = Product::select('status')->where('product_id', $product_id)->first();
+        $getProductStatus = Product::select('status')->where('id', $product_id)->first();
 
         return $getProductStatus->status;
     }
@@ -136,5 +137,15 @@ class Product extends Model
         }
 
         return $status;
+    }
+
+    // Get Shipping Charges Function
+
+    public static function getShippingCharges($country)
+    {
+        $shippingDetails = ShippingCharge::where('country', $country)->first();
+        $shipping_charges = $shippingDetails->shipping_charges;
+
+        return $shipping_charges;
     }
 }

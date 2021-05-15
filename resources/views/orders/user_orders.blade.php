@@ -37,6 +37,7 @@
                             <th>Order ID</th>
                             <th>Ordered Products</th>
                             <th>Payment Method</th>
+                            <th>Shipping Charges</th>
                             <th>Grand Total</th>
                             <th>Created On</th>
                             <th>Actions</th>
@@ -53,6 +54,14 @@
                                 </td>
                                 <td>{{ $order->payment_method }}</td>
                                 <?php
+                                    $getShippingRates = Product::getCurrencyRates($order->shipping_charges);
+                                ?>
+                                @if($order->shipping_charges != 0)
+                                    <td><span class="btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getShippingRates['USD_Rate'] }} <br> GB&#xa3; {{ $getShippingRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getShippingRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getShippingRates['NZD_Rate'] }} <br>">&#8377; {{ $order->shipping_charges }}</span></td>
+                                @else
+                                    <td>Free</td>
+                                @endif
+                                <?php
                                     $getCurrencyRates = Product::getCurrencyRates($order->grand_total);
                                 ?>
                                 <td><span class="btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCurrencyRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCurrencyRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCurrencyRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCurrencyRates['NZD_Rate'] }} <br>">&#8377; {{ $order->grand_total }}</span></td>
@@ -66,6 +75,7 @@
                             <th>Order ID</th>
                             <th>Ordered Products</th>
                             <th>Payment Method</th>
+                            <th>Shipping Charges</th>
                             <th>Grand Total</th>
                             <th>Created On</th>
                             <th>Actions</th>

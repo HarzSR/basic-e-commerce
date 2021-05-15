@@ -1026,12 +1026,13 @@ class ProductsController extends Controller
 
         $codPincodeCount = DB::table('cod_pincodes')->where('pincode', $shippingDetails->pincode)->count();
         $prepaidPincodeCount = DB::table('prepaid_pincodes')->where('pincode', $shippingDetails->pincode)->count();
+        $shippingCharges = Product::getShippingCharges($shippingDetails->country);
 
         $meta_title = "Order Review";
         $meta_description = "Check before you place your Order";
         $meta_keywords = "place-order,shopping";
 
-        return view('products.order_review')->with(compact('userDetails', 'shippingDetails', 'userCart', 'meta_title', 'meta_description', 'meta_keywords', 'codPincodeCount', 'prepaidPincodeCount'));
+        return view('products.order_review')->with(compact('userDetails', 'shippingDetails', 'userCart', 'meta_title', 'meta_description', 'meta_keywords', 'codPincodeCount', 'prepaidPincodeCount', 'shippingCharges'));
     }
 
     // Place Order Function
@@ -1083,7 +1084,7 @@ class ProductsController extends Controller
                 }
 
                 $getCategoryId = Product::select('category_id')->where('id', $cart->product_id)->first();
-                $categoryStatus = Product::getCategoryStatus($getCategoryId);
+                $categoryStatus = Product::getCategoryStatus($getCategoryId->category_id);
 
                 if($categoryStatus == 0)
                 {
@@ -1109,6 +1110,8 @@ class ProductsController extends Controller
                 $couponAmount = Session::get('couponAmount');
             }
 
+            $shippingCharges = Product::getShippingCharges($shippingDetails->country);
+
             $order = new Order;
             $order->user_id = $user_id;
             $order->user_email = $user_email;
@@ -1119,6 +1122,7 @@ class ProductsController extends Controller
             $order->pincode = $shippingDetails->pincode;
             $order->country = $shippingDetails->country;
             $order->mobile = $shippingDetails->mobile;
+            $order->shipping_charges = $shippingCharges;
             $order->coupon_code = $couponCode;
             $order->coupon_amount = $couponAmount;
             $order->order_status = "New";
@@ -1146,7 +1150,7 @@ class ProductsController extends Controller
 
                 $cartPro->save();
 
-                $getProductStock = ProductsAttribute::where('sku', $cartProduct->product_code)-first();
+                $getProductStock = ProductsAttribute::where('sku', $cartProduct->product_code)->first();
 
                 if($getProductStock->stock - $cartProduct->quantity < 0)
                 {
