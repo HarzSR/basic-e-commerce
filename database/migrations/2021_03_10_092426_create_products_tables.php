@@ -26,6 +26,7 @@ class CreateProductsTables extends Migration
             $table->string('sleeve');
             $table->string('pattern');
             $table->float('price');
+            $table->integer('weight');
             $table->string('image');
             $table->string('video');
             $table->tinyInteger('feature_item')->default('1');

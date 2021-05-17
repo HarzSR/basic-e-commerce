@@ -117,6 +117,8 @@ Things done on this project
 - Avoid Order placement due to Disabled Category
 - Add Shipping Rates
 - View Shipping Rates
+- Add Shipping Rate to Order
+- Add Advance Shipping Rate to Order: By Weight
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms

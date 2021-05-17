@@ -89,6 +89,14 @@ class ProductsController extends Controller
                 $product->pattern = '';
             }
             $product->price = $data['price'];
+            if (!empty($data['weight']))
+            {
+                $product->weight = $data['weight'];
+            }
+            else
+            {
+                $product->weight = 0;
+            }
             if (empty($data['image']))
             {
                 $product->image = '';
@@ -282,6 +290,11 @@ class ProductsController extends Controller
                 $data['pattern'] = '';
             }
 
+            if (empty($data['weight']))
+            {
+                $data['weight'] = 0;
+            }
+
             if (empty($data['status']))
             {
                 $status = 0;
@@ -300,7 +313,7 @@ class ProductsController extends Controller
                 $feature_item = 1;
             }
 
-            Product::where(['id' => $id])->update(['category_id' => $data['category_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'description' => $data['description'], 'care' => $data['care'], 'sleeve' => $data['sleeve'], 'pattern' => $data['pattern'], 'price' => $data['price'], 'image' => $fileName, 'video' => $video_name, 'feature_item' => $feature_item , 'status' => $status]);
+            Product::where(['id' => $id])->update(['category_id' => $data['category_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'description' => $data['description'], 'care' => $data['care'], 'sleeve' => $data['sleeve'], 'pattern' => $data['pattern'], 'price' => $data['price'], 'weight' => $data['weight'] ,'image' => $fileName, 'video' => $video_name, 'feature_item' => $feature_item , 'status' => $status]);
 
             return redirect()->back()->with('flash_message_success', 'Product Updated Successfully');
         }

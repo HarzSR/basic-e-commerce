@@ -37,6 +37,7 @@
                                         <th>Product Color</th>
                                         <th>Product Sleeve</th>
                                         <th>Product Pattern</th>
+                                        <th>Product Weight</th>
                                         <th>Product Image</th>
                                         <th>Product Price</th>
                                         <th>Product Featured</th>
@@ -55,11 +56,22 @@
                                         <td>{{ $product->sleeve }}</td>
                                         <td>{{ $product->pattern }}</td>
                                         <td>
+                                            @if($product->weight == 0)
+                                                Yet to say
+                                            @else
+                                                @if($product->weight == 1)
+                                                    {{ $product->weight }} gm
+                                                @else
+                                                    {{ $product->weight }} gms
+                                                @endif
+                                            @endif
+                                        </td>
+                                        <td>
                                             @if(!empty($product->image))
                                                 <img src="{{ asset('/images/backend_images/products/small/' . $product->image) }}" style="width: 70px">
                                             @endif
                                         </td>
-                                        <td>{{ $product->price }}</td>
+                                        <td>&#8377; {{ $product->price }}</td>
                                         <td>
                                             @if($product->feature_item == 1)
                                                 <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Featured</button>
@@ -93,7 +105,18 @@
                                             <p><strong>Category ID:</strong> {{ $product->category_id }}</p>
                                             <p><strong>Product Code:</strong> {{ $product->product_code }}</p>
                                             <p><strong>Product Color:</strong> {{ $product->product_color }}</p>
-                                            <p><strong>Price:</strong> {{ $product->price }}</p>
+                                            <p><strong>Product Weight:</strong>
+                                                @if($product->weight == 0)
+                                                    Yet to say
+                                                @else
+                                                    @if($product->weight == 1)
+                                                        {{ $product->weight }} gm
+                                                    @else
+                                                        {{ $product->weight }} gms
+                                                    @endif
+                                                @endif
+                                            </p>
+                                            <p><strong>Price:</strong> &#8377; {{ $product->price }}</p>
                                             <p><strong>Description:</strong> {{ $product->description }}</p>
                                             <p>
                                                 @if(!empty($product->image))
@@ -118,6 +141,7 @@
                                     <th>Product Color</th>
                                     <th>Product Sleeve</th>
                                     <th>Product Pattern</th>
+                                    <th>Product Weight</th>
                                     <th>Product Image</th>
                                     <th>Product Price</th>
                                     <th>Product Featured</th>

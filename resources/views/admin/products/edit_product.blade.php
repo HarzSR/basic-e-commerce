@@ -100,7 +100,13 @@
                                 <div class="control-group">
                                     <label class="control-label">Price</label>
                                     <div class="controls">
-                                        <input type="text" name="price" id="price" value="@if(!empty(old('price'))) {{ old('price') }} @else {{ $productDetails->price }} @endif">
+                                        &#8377; <input type="text" name="price" id="price" value="@if(!empty(old('price'))) {{ old('price') }} @else {{ $productDetails->price }} @endif">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Weight</label>
+                                    <div class="controls">
+                                        <input type="text" name="weight" id="weight" value="@if(!empty(old('weight'))) {{ old('weight') }} @else {{ $productDetails->weight }} @endif"> gm(s)
                                     </div>
                                 </div>
                                 <div class="control-group">

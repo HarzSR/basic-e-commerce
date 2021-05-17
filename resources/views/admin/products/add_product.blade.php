@@ -100,7 +100,13 @@
                                 <div class="control-group">
                                     <label class="control-label">Price</label>
                                     <div class="controls">
-                                        <input type="text" name="price" id="price" value="{{ old('price') }}">
+                                        &#8377; <input type="text" name="price" id="price" value="{{ old('price') }}">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Weight</label>
+                                    <div class="controls">
+                                        <input type="text" name="weight" id="weight" value="{{ old('weight') }}"> gm(s)
                                     </div>
                                 </div>
                                 <div class="control-group">
