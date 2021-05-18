@@ -45,9 +45,27 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label">Exchange Rate</label>
+                                    <label class="control-label">Shipping Charge 0 to 500 gms</label>
                                     <div class="controls">
-                                        <input type="text" autofocus name="shipping_charges" id="shipping_charges" value="@if(!empty(old('shipping_charges'))) {{ old('shipping_charges') }} @else {{ $shipping_charge->shipping_charges }} @endif">
+                                        <input type="text" autofocus name="shipping_charges_0_500g" id="shipping_charges_0_500g" value="@if(!empty(old('shipping_charges_0_500g'))) {{ old('shipping_charges_0_500g') }} @else {{ $shipping_charge->shipping_charges_0_500g }} @endif">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Shipping Charge 501 to 1000 gms</label>
+                                    <div class="controls">
+                                        <input type="text" autofocus name="shipping_charges_501_1000g" id="shipping_charges_501_1000g" value="@if(!empty(old('shipping_charges_501_1000g'))) {{ old('shipping_charges_501_1000g') }} @else {{ $shipping_charge->shipping_charges_501_1000g }} @endif">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Shipping Charge 1001 to 2000 gms</label>
+                                    <div class="controls">
+                                        <input type="text" autofocus name="shipping_charges_1001_2000g" id="shipping_charges_1001_2000g" value="@if(!empty(old('shipping_charges_1001_2000g'))) {{ old('shipping_charges_1001_2000g') }} @else {{ $shipping_charge->shipping_charges_1001_2000g }} @endif">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Shipping Charge 2001 to 5000 gms</label>
+                                    <div class="controls">
+                                        <input type="text" autofocus name="shipping_charges_2001_5000g" id="shipping_charges_2001_5000g" value="@if(!empty(old('shipping_charges_2001_5000g'))) {{ old('shipping_charges_2001_5000g') }} @else {{ $shipping_charge->shipping_charges_2001_5000g }} @endif">
                                     </div>
                                 </div>
                                 <div class="form-actions">

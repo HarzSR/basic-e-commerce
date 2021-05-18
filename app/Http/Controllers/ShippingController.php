@@ -27,7 +27,10 @@ class ShippingController extends Controller
             $data = $request->all();
 
             $validator = Validator::make($request->all(), [
-                'shipping_charges' => 'required|numeric|between:0,999.99'
+                'shipping_charges_0_500g' => 'required|numeric',
+                'shipping_charges_501_1000g' => 'required|numeric',
+                'shipping_charges_1001_2000g' => 'required|numeric',
+                'shipping_charges_2001_5000g' => 'required|numeric'
             ]);
 
             if($validator->fails())
@@ -35,7 +38,7 @@ class ShippingController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput($request->input());
             }
 
-            ShippingCharge::where('id', $id)->update(['shipping_charges' => $data['shipping_charges']]);
+            ShippingCharge::where('id', $id)->update(['shipping_charges_0_500g' => $data['shipping_charges_0_500g'], 'shipping_charges_501_1000g' => $data['shipping_charges_501_1000g'], 'shipping_charges_1001_2000g' => $data['shipping_charges_1001_2000g'], 'shipping_charges_2001_5000g' => $data['shipping_charges_2001_5000g']]);
 
             return redirect()->back()->with('flash_message_success', 'Shipping Charge Updated Successfully');
         }
