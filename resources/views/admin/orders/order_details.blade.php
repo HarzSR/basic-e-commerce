@@ -43,7 +43,7 @@
                                     <td class="taskStatus">&#8377; {{ $orderDetails->grand_total }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="taskDesc">Shipping Charges</td>
+                                    <td class="taskDesc">Shipping Charges (+)</td>
                                     <td class="taskStatus">&#8377; {{ $orderDetails->shipping_charges }}</td>
                                 </tr>
                                 <tr>
@@ -51,7 +51,7 @@
                                     <td class="taskStatus" style="text-transform: uppercase;">{{ $orderDetails->coupon_code }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="taskDesc">Coupon Amount</td>
+                                    <td class="taskDesc">Coupon Amount (-)</td>
                                     <td class="taskStatus">&#8377; {{ $orderDetails->coupon_amount }}</td>
                                 </tr>
                                 <tr>
@@ -162,14 +162,15 @@
             <div class="row-fluid">
                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                     <thead>
-                    <tr>
-                        <th>Product Code</th>
-                        <th>Product Name</th>
-                        <th>Product Size</th>
-                        <th>Product Color</th>
-                        <th>Product Price</th>
-                        <th>Product Qty</th>
-                    </tr>
+                        <tr>
+                            <th>Product Code</th>
+                            <th>Product Name</th>
+                            <th>Product Size</th>
+                            <th>Product Color</th>
+                            <th>Product Price</th>
+                            <th>Product Qty</th>
+                            <th>Product Price</th>
+                        </tr>
                     </thead>
                     <tbody>
                     @foreach($orderDetails->orders as $pro)
@@ -180,6 +181,7 @@
                             <td>{{ $pro->product_color }}</td>
                             <td>&#8377; {{ $pro->product_price }}</td>
                             <td>{{ $pro->product_qty }}</td>
+                            <td>&#8377; {{ $pro->product_price * $pro->product_qty }}</td>
                         </tr>
                     @endforeach
                     </tbody>

@@ -38,6 +38,7 @@
                             <th>Ordered Products</th>
                             <th>Payment Method</th>
                             <th>Shipping Charges</th>
+                            <th>Coupon Charges</th>
                             <th>Grand Total</th>
                             <th>Created On</th>
                             <th>Actions</th>
@@ -62,6 +63,14 @@
                                     <td>Free</td>
                                 @endif
                                 <?php
+                                    $getCouponRates = Product::getCurrencyRates($order->coupon_amount);
+                                ?>
+                                @if($order->coupon_amount != 0)
+                                    <td><span class="btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCouponRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCouponRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCouponRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCouponRates['NZD_Rate'] }} <br>">&#8377; {{ $order->coupon_amount }}</span></td>
+                                @else
+                                    <td>No Coupon</td>
+                                @endif
+                                <?php
                                     $getCurrencyRates = Product::getCurrencyRates($order->grand_total);
                                 ?>
                                 <td><span class="btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCurrencyRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCurrencyRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCurrencyRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCurrencyRates['NZD_Rate'] }} <br>">&#8377; {{ $order->grand_total }}</span></td>
@@ -76,6 +85,7 @@
                             <th>Ordered Products</th>
                             <th>Payment Method</th>
                             <th>Shipping Charges</th>
+                            <th>Coupon Charges</th>
                             <th>Grand Total</th>
                             <th>Created On</th>
                             <th>Actions</th>

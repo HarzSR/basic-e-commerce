@@ -1030,16 +1030,19 @@ class ProductsController extends Controller
         $session_id = Session::get('session_id');
         $shippingDetails = DeliveryAddress::where('user_id', $user_id)->first();
         $userCart = DB::table('cart')->where(['user_email' => $user_email, 'session_id' => $session_id])->get();
+        $total_weight = 0;
 
         foreach ($userCart as $key => $product)
         {
             $productDetails = Product::where('id', $product->product_id)->first();
             $userCart[$key]->image = $productDetails->image;
+            $total_weight = $total_weight + $productDetails->weight;
         }
 
         $codPincodeCount = DB::table('cod_pincodes')->where('pincode', $shippingDetails->pincode)->count();
         $prepaidPincodeCount = DB::table('prepaid_pincodes')->where('pincode', $shippingDetails->pincode)->count();
-        $shippingCharges = Product::getShippingCharges($shippingDetails->country);
+        $shippingCharges = Product::getShippingCharges($total_weight, $shippingDetails->country);
+        Session::put('ShippingCharges', $shippingCharges);
 
         $meta_title = "Order Review";
         $meta_description = "Check before you place your Order";
@@ -1123,7 +1126,8 @@ class ProductsController extends Controller
                 $couponAmount = Session::get('couponAmount');
             }
 
-            $shippingCharges = Product::getShippingCharges($shippingDetails->country);
+            // Removed as Advance Shipping Charges were implemented
+            // $shippingCharges = Product::getShippingCharges($shippingDetails->country);
 
             $order = new Order;
             $order->user_id = $user_id;
@@ -1135,7 +1139,14 @@ class ProductsController extends Controller
             $order->pincode = $shippingDetails->pincode;
             $order->country = $shippingDetails->country;
             $order->mobile = $shippingDetails->mobile;
-            $order->shipping_charges = $shippingCharges;
+            if(Session::has('ShippingCharges'))
+            {
+                $order->shipping_charges = Session::get('ShippingCharges');
+            }
+            else
+            {
+                $order->shipping_charges = 0;
+            }
             $order->coupon_code = $couponCode;
             $order->coupon_amount = $couponAmount;
             $order->order_status = "New";
@@ -1200,6 +1211,8 @@ class ProductsController extends Controller
                 $meta_title = "COD Placed";
                 $meta_description = "COD for Order Placed";
                 $meta_keywords = "cod,shopping";
+
+                Session::forget('ShippingCharges');
 
                 return redirect(('/thanks'))->with(compact( 'meta_title', 'meta_description', 'meta_keywords'));
             }

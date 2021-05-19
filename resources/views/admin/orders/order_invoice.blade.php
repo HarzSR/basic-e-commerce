@@ -78,9 +78,9 @@
                                             <td class="text-left">{{ $pro->product_code }}</td>
                                             <td class="text-center">{{ $pro->product_size }}</td>
                                             <td class="text-center">{{ $pro->product_color }}</td>
-                                            <td class="text-center">NZ$ {{ $pro->product_price }}</td>
+                                            <td class="text-center">&#8377; {{ $pro->product_price }}</td>
                                             <td class="text-center">{{ $pro->product_qty }}</td>
-                                            <td class="text-right">NZ$ {{ $pro->product_price * $pro->product_qty }}</td>
+                                            <td class="text-right">&#8377; {{ $pro->product_price * $pro->product_qty }}</td>
                                         </tr>
                                         <?php $Subtotal = $Subtotal + ($pro->product_price * $pro->product_qty); ?>
                                     @endforeach
@@ -90,7 +90,7 @@
                                         <td class="thick-line"></td>
                                         <td class="thick-line"></td>
                                         <td class="thick-line text-center"><strong>Subtotal</strong></td>
-                                        <td class="thick-line text-right">NZ$ {{ $Subtotal }}</td>
+                                        <td class="thick-line text-right">&#8377; {{ $Subtotal }}</td>
                                     </tr>
                                     <tr>
                                         <td class="no-line"></td>
@@ -98,7 +98,7 @@
                                         <td class="no-line"></td>
                                         <td class="no-line"></td>
                                         <td class="no-line text-center"><strong>Shipping Charges (+)</strong></td>
-                                        <td class="no-line text-right">NZ$ 0</td>
+                                        <td class="no-line text-right">&#8377; {{ $orderDetails->shipping_charges }}</td>
                                     </tr>
                                     <tr>
                                         <td class="no-line"></td>
@@ -106,7 +106,7 @@
                                         <td class="no-line"></td>
                                         <td class="no-line"></td>
                                         <td class="no-line text-center"><strong>Coupon Discount (-)</strong></td>
-                                        <td class="no-line text-right">NZ$ {{ $orderDetails->coupon_amount }}</td>
+                                        <td class="no-line text-right">&#8377; {{ $orderDetails->coupon_amount }}</td>
                                     </tr>
                                     <tr>
                                         <td class="no-line"></td>
@@ -114,7 +114,7 @@
                                         <td class="no-line"></td>
                                         <td class="no-line"></td>
                                         <td class="no-line text-center"><strong>Grand Total</strong></td>
-                                        <td class="no-line text-right">NZ$ {{ $orderDetails->grand_total }}</td>
+                                        <td class="no-line text-right">&#8377; {{ $orderDetails->grand_total }}</td>
                                     </tr>
                                 </tbody>
                             </table>

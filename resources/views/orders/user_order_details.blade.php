@@ -41,6 +41,7 @@
                         <th>Product Color</th>
                         <th>Product Price</th>
                         <th>Quantity</th>
+                        <th>Sub Total</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -55,6 +56,10 @@
                             ?>
                             <td><span class="btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCurrencyRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCurrencyRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCurrencyRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCurrencyRates['NZD_Rate'] }} <br>">&#8377; {{ $order->product_price }}</span></td>
                             <td>{{ $order->product_qty }}</td>
+                            <?php
+                                $getTotalPrice = Product::getCurrencyRates(($order->product_price * $order->product_qty));
+                            ?>
+                            <td><span class="btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getTotalPrice['USD_Rate'] }} <br> GB&#xa3; {{ $getTotalPrice['GBP_Rate'] }} <br> EU&#x20AC; {{ $getTotalPrice['EUR_Rate'] }} <br> NZ&#x24; {{ $getTotalPrice['NZD_Rate'] }} <br>">&#8377; {{ $order->product_price * $order->product_qty }}</span></td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -66,6 +71,7 @@
                         <th>Product Color</th>
                         <th>Product Price</th>
                         <th>Quantity</th>
+                        <th>Sub Total</th>
                     </tr>
                     </tfoot>
                 </table>

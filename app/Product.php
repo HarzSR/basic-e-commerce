@@ -141,10 +141,37 @@ class Product extends Model
 
     // Get Shipping Charges Function
 
-    public static function getShippingCharges($country)
+    public static function getShippingCharges($total_weight, $country)
     {
         $shippingDetails = ShippingCharge::where('country', $country)->first();
-        $shipping_charges = $shippingDetails->shipping_charges;
+
+        if($total_weight > 0)
+        {
+            if($total_weight > 0 && $total_weight <= 500)
+            {
+                $shipping_charges = $shippingDetails->shipping_charges_0_500g;
+            }
+            else if($total_weight > 500 && $total_weight <= 1000)
+            {
+                $shipping_charges = $shippingDetails->shipping_charges_501_1000g;
+            }
+            else if($total_weight > 1000 && $total_weight <= 2000)
+            {
+                $shipping_charges = $shippingDetails->shipping_charges_1001_2000g;
+            }
+            else if($total_weight > 2000 && $total_weight <= 5000)
+            {
+                $shipping_charges = $shippingDetails->shipping_charges_2001_5000g;
+            }
+            else
+            {
+                $shipping_charges = 10000;
+            }
+        }
+        else
+        {
+            $shipping_charges = 0;
+        }
 
         return $shipping_charges;
     }
