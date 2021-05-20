@@ -118,4 +118,14 @@ class AdminController extends Controller
 
         return redirect('/admin')->with('flash_message_success', 'Logged out Successfully');
     }
+
+    // View Admins/Sub-Admins Function
+
+    public function viewAdmins()
+    {
+        $admins = Admin::get();
+        $adminCount = Admin::count();
+
+        return view('admin.admins.view_admins')->with(compact('admins', 'adminCount'));
+    }
 }

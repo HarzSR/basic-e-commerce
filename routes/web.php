@@ -143,6 +143,10 @@ Route::group(['middleware' => ['adminlogin']], function () {
     Route::get('/admin/view-shipping-charges', 'ShippingController@viewShippingCharges');
     Route::match(['get', 'post'], '/admin/edit-shipping-charge/{id}', 'ShippingController@editShippingCharge');
     // Route::get('/admin/delete-shipping-charge/{id}', 'ShippingController@deleteShippingCharge');
+
+    // Admin/Sub-Admin Routes
+
+    Route::get('/admin/view-admins', 'AdminController@viewAdmins');
 });
 
 Auth::routes(['verify' => true]);

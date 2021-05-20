@@ -2,6 +2,13 @@
 <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
     <ul>
         <li <?php if (preg_match("/dashboard/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/dashboard') }}"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
+        <li class="submenu"> <a href="#"><i class="icon icon-qrcode"></i> <span>Admin</span> <span class="label label-important">1</span></a>
+            <!-- <ul <?php if (preg_match("/(add-admin|view-admins|edit-admin)/i", url()->current())) echo "style=\"display: block;\"" ?>> -->
+            <ul <?php if (preg_match("/(view-admins|edit-admin)/i", url()->current())) echo "style=\"display: block;\"" ?>>
+                <!-- <li <?php if (preg_match("/add-admin/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/add-admin') }}">Add Admin</a></li> -->
+                <li <?php if (preg_match("/(view-admins|edit-admin)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-admins') }}">View Admins</a></li>
+            </ul>
+        </li>
         <li class="submenu"> <a href="#"><i class="icon icon-user"></i> <span>Users</span> <span class="label label-important">1</span></a>
             <ul <?php if (preg_match("/user/i", url()->current())) echo "style=\"display: block;\"" ?>>
                 <li <?php if (preg_match("/(view-users|view-user)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-users') }}">View Users</a></li>
@@ -9,7 +16,7 @@
         </li>
         <li class="submenu"> <a href="#"><i class="icon icon-file-alt"></i> <span>CMS Pages</span> <span class="label label-important">2</span></a>
             <ul <?php if (preg_match("/cms-page/i", url()->current())) echo "style=\"display: block;\"" ?>>
-                <li <?php if (preg_match("/add-cms-page/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/add-cms-page') }}">Add CMS Pages</a></li>
+                <li <?php if (preg_match("/add-cms-page/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/add-cms-page') }}">Add CMS Page</a></li>
                 <li <?php if (preg_match("/(view-cms-page|edit-cms-page)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-cms-pages') }}">View CMS Pages</a></li>
             </ul>
         </li>
