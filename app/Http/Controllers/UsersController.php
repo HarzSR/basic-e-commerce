@@ -44,6 +44,9 @@ class UsersController extends Controller
                 $user->name = $data['name'];
                 $user->email = $data['email'];
                 $user->password = bcrypt($data['registerPassword']);
+                // date_default_timezone_set('Asia/Kolkata');
+                // $user->created_at = date('Y-m-d H:i:s');
+                // $user->updated_at = date('Y-m-d H:i:s');
                 $user->save();
 
                 // Send Successful Registration Email
@@ -58,11 +61,13 @@ class UsersController extends Controller
 
                 // Email Confirmation
 
+                /*
                 $email = $data['email'];
                 $messageData = ['email' => $data['email'], 'name' => $data['name'], 'code' => base64_encode($data['email'])];
                 Mail::send('emails.confirmation', $messageData, function($message) use($email) {
                     $message->to($email)->subject('Please verify your account');
                 });
+                */
 
                 return redirect()->back()->with('flash_message_success', 'User Successfully Registered. Please check email for verification link.');
 
@@ -168,10 +173,12 @@ class UsersController extends Controller
 
                 // Send Successful Registration Email
 
+                /*
                 $messageData = ['email' => $email, 'name' => $userDetails->name];
                 Mail::send('emails.welcome', $messageData, function($message) use($email) {
                     $message->to($email)->subject('Welcome to site');
                 });
+                */
 
                 return redirect('login-register')->with('flash_message_success', 'Successfully Activated. Please Login.');
             }
@@ -335,6 +342,9 @@ class UsersController extends Controller
 
             User::where('email', $data['email'])->update(['password' => $new_password]);
 
+            // Send Forgotten Email
+
+            /*
             $email = $data['email'];
             $name = $userDetails->name;
             $messageData = [
@@ -345,6 +355,7 @@ class UsersController extends Controller
             Mail::send('emails.forgotpassword', $messageData, function ($message) use ($email){
                 $message->to($email)->subject('New Temporary Password');
             });
+            */
 
             return redirect('/login-register')->with('flash_message_success', 'Password reset Successful. Please check email for Temporary New Password');
         }

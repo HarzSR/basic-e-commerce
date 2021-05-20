@@ -197,6 +197,9 @@ class CmsController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput($request->input());
             }
 
+            // Send Mail Enquiry
+
+            /*
             $email = "hariharansmm@gmail.com";
             $messageData = [
                 'name' => $data['name'],
@@ -207,6 +210,7 @@ class CmsController extends Controller
             Mail::send('emails.enquiry', $messageData, function ($message) use ($email){
                 $message->to($email)->subject('Enquiry - Contact Form');
             });
+            */
 
             return redirect()->back()->with('flash_message_success', 'Thank you for your enquiry. We will get back to you soon.');
         }

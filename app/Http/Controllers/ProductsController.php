@@ -1196,6 +1196,9 @@ class ProductsController extends Controller
                 $productDetails = Order::with('orders')->where('id', $order_id)->first();
                 $userDetails = User::where('id', $user_id)->first();
 
+                // Email upon Successful Order
+
+                /*
                 $email = $user_email;
                 $messageData = [
                     'email' => $user_email,
@@ -1207,6 +1210,7 @@ class ProductsController extends Controller
                 Mail::send('emails.order', $messageData, function ($message) use($email) {
                     $message->to($email)->subject('Order Placed Successfully');
                 });
+                */
 
                 $meta_title = "COD Placed";
                 $meta_description = "COD for Order Placed";
@@ -1346,8 +1350,9 @@ class ProductsController extends Controller
             })->where('status', 1)->get();
 
             $banners = Banner::where('status', 1)->get();
+            $breadcrumb = "<a href='/'> Home</a> |  <a href='/'>" . ucfirst($search_product) . "</a>";
 
-            return view('products.listing')->with(compact('categories', 'productsAll', 'search_product', 'banners'));
+            return view('products.listing')->with(compact('categories', 'productsAll', 'search_product', 'banners', 'breadcrumb'));
         }
 
         return redirect('/');

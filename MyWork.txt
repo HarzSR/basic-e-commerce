@@ -119,6 +119,8 @@ Things done on this project
 - View Shipping Rates
 - Add Shipping Rate to Order
 - Add Advance Shipping Rate to Order: By Weight
+- Breadcrumb for search results
+- Timezone Settings
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms
