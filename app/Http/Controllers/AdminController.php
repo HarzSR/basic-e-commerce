@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use Validator;
 
 class AdminController extends Controller
 {
@@ -19,14 +20,23 @@ class AdminController extends Controller
         {
             $data = $request->input();
 
-            $adminCount = Admin::where(['username' => $data['username'], 'password' => md5($data['password']), 'status' => '1'])->count();
+            $adminCount = Admin::where(['username' => $data['username'], 'password' => md5($data['password'])])->count();
 
             // if(Auth::attempt(['email' => $data['email'], 'password' => $data['password'], 'admin' => '1']))
             if($adminCount == 1)
             {
-                Session::put('adminSession', $data['username']);
+                $adminStatus = Admin::where(['username' => $data['username'], 'password' => md5($data['password'])])->first();
 
-                return redirect('/admin/dashboard');
+                if($adminStatus->status == 1)
+                {
+                    Session::put('adminSession', $data['username']);
+
+                    return redirect('/admin/dashboard');
+                }
+                else
+                {
+                    return redirect('/admin')->with('flash_message_error', 'Account Not Activated. Please ask other Admin to activate your account.');
+                }
             }
             else
             {
@@ -76,6 +86,7 @@ class AdminController extends Controller
     public function chkPassword(Request $request)
     {
         $data = $request->all();
+
         $adminCount = Admin::where(['username' => Session::get('adminSession'),'password'=>md5($data['current_pwd'])])->count();
         if ($adminCount == 1)
         {
@@ -94,6 +105,7 @@ class AdminController extends Controller
         if($request->isMethod('POST'))
         {
             $data = $request->all();
+
             $adminCount = Admin::where(['username' => Session::get('adminSession'),'password'=>md5($data['current_pwd'])])->count();
 
             if ($adminCount == 1)
@@ -117,6 +129,53 @@ class AdminController extends Controller
         Session::flush();
 
         return redirect('/admin')->with('flash_message_success', 'Logged out Successfully');
+    }
+
+    // Add Admins/Sub-Admins Function
+
+    public function addAdmin(Request $request)
+    {
+        if($request->isMethod('POST'))
+        {
+            $data = $request->all();
+
+            $validator = Validator::make($request->all(), [
+                'username' => 'required|min:4|alpha',
+                'password' => 'required|min:8|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'
+            ]);
+
+            if($validator->fails())
+            {
+                return redirect()->back()->withErrors($validator)->withInput($request->input());
+            }
+
+            $adminCount = Admin::where('username', $data['username'])->count();
+
+            if($adminCount > 0)
+            {
+                return redirect()->back()->with('flash_message_error', 'Admin Username Already Taken, Please choose a different one')->withInput($request->input());
+            }
+            else
+            {
+                $admin = new Admin;
+                $admin->username = $data['username'];
+                $admin->password = md5($data['password']);
+                if(empty($data['status']))
+                {
+                    $admin->status = '0';
+                }
+                else
+                {
+                    $admin->status = $data['status'];
+                }
+
+                $admin->save();
+
+                return redirect()->back()->with('flash_message_success', 'Successfully added Admin');
+            }
+        }
+
+        return view('admin.admins.add_admin');
     }
 
     // View Admins/Sub-Admins Function

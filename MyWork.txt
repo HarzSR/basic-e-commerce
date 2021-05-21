@@ -122,6 +122,7 @@ Things done on this project
 - Breadcrumb for search results
 - Timezone Settings
 - Admin, Sub-Admin Roles and Views
+- Add Admin, Sub-Admin
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms

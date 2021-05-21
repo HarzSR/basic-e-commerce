@@ -3,9 +3,8 @@
     <ul>
         <li <?php if (preg_match("/dashboard/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/dashboard') }}"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
         <li class="submenu"> <a href="#"><i class="icon icon-qrcode"></i> <span>Admin</span> <span class="label label-important">1</span></a>
-            <!-- <ul <?php if (preg_match("/(add-admin|view-admins|edit-admin)/i", url()->current())) echo "style=\"display: block;\"" ?>> -->
-            <ul <?php if (preg_match("/(view-admins|edit-admin)/i", url()->current())) echo "style=\"display: block;\"" ?>>
-                <!-- <li <?php if (preg_match("/add-admin/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/add-admin') }}">Add Admin</a></li> -->
+            <ul <?php if (preg_match("/(add-admin|view-admins|edit-admin)/i", url()->current())) echo "style=\"display: block;\"" ?>>
+                <li <?php if (preg_match("/add-admin/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/add-admin') }}">Add Admin</a></li>
                 <li <?php if (preg_match("/(view-admins|edit-admin)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-admins') }}">View Admins</a></li>
             </ul>
         </li>
