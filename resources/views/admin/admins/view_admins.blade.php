@@ -33,6 +33,11 @@
                                     <tr>
                                         <th>User ID</th>
                                         <th>User Name</th>
+                                        <th>User Type</th>
+                                        <th>Categories Access</th>
+                                        <th>Products Access</th>
+                                        <th>Orders Access</th>
+                                        <th>User Access</th>
                                         <th>Status</th>
                                         <th>Created at</th>
                                         <th>Action</th>
@@ -43,6 +48,35 @@
                                     <tr class="gradeX">
                                         <td>{{ $admin->id }}</td>
                                         <td>{{ $admin->username }}</td>
+                                        <td>{{ $admin->type }}</td>
+                                        <td>
+                                            @if($admin->categories_access == 1 || $admin->type == "Admin")
+                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Yes</button>
+                                            @else
+                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">No</button>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($admin->products_access == 1 || $admin->type == "Admin")
+                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Yes</button>
+                                            @else
+                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">No</button>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($admin->orders_access == 1 || $admin->type == "Admin")
+                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Yes</button>
+                                            @else
+                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">No</button>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($admin->users_access == 1 || $admin->type == "Admin")
+                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Yes</button>
+                                            @else
+                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">No</button>
+                                            @endif
+                                        </td>
                                         <td>
                                             @if($admin->status == 1)
                                                 <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Active</button>
@@ -54,7 +88,7 @@
                                         <td>
                                             <a href="{{ url('/admin/edit-admin/' . $admin->id) }}" class="btn btn-primary btn-mini" title="Edit Admin">Edit</a>
                                             {{-- <a href="{{ url('/admin/delete-admin' . $admin->id) }}" class="btn btn-danger btn-mini delProduct" >Delete</a></td> --}}
-                                            <a rel="{{ $admin->id }}" rel1="delete-admins" rel2="Admin" href="javascript:" class="btn btn-danger btn-mini deleteRecord" title="Delete Admin">Delete</a>
+                                            <a rel="{{ $admin->id }}" rel1="delete-admins" rel2="Admin" href="javascript:" class="btn btn-danger btn-mini deleteRecord" @if($admin->id == 1) disabled @endif title="Delete Admin">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -62,6 +96,11 @@
                                 <tfoot>
                                     <th>User ID</th>
                                     <th>User Name</th>
+                                    <th>User Type</th>
+                                    <th>Categories Access</th>
+                                    <th>Products Access</th>
+                                    <th>Orders Access</th>
+                                    <th>User Access</th>
                                     <th>Status</th>
                                     <th>Created at</th>
                                     <th>Action</th>

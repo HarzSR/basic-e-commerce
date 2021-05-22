@@ -1,7 +1,27 @@
 
 $(document).ready(function()
 {
-	$("#new_pwd").keyup(function()
+    $("#type").change(function (){
+        if($("#type").val())
+        {
+            var type = $("#type").val();
+            if(type == "Admin")
+            {
+                $("#access").hide();
+            }
+            else
+            {
+                $("#access").show();
+            }
+        }
+        else
+        {
+            $("#access").hide();
+        }
+
+    });
+
+    $("#new_pwd").keyup(function()
     {
 		var current_pwd = $("#current_pwd").val();
 		$.ajax({

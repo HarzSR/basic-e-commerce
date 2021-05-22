@@ -140,6 +140,7 @@ class AdminController extends Controller
             $data = $request->all();
 
             $validator = Validator::make($request->all(), [
+                'type' => 'required|nullable',
                 'username' => 'required|min:4|alpha',
                 'password' => 'required|min:8|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'
             ]);
@@ -157,21 +158,76 @@ class AdminController extends Controller
             }
             else
             {
-                $admin = new Admin;
-                $admin->username = $data['username'];
-                $admin->password = md5($data['password']);
-                if(empty($data['status']))
+                if($data['type'] == "Admin")
                 {
-                    $admin->status = '0';
+                    $admin = new Admin;
+                    $admin->username = $data['username'];
+                    $admin->password = md5($data['password']);
+                    $admin->type = $data['type'];
+                    if(empty($data['status']))
+                    {
+                        $admin->status = '0';
+                    }
+                    else
+                    {
+                        $admin->status = $data['status'];
+                    }
+
+                    $admin->save();
+
+                    return redirect()->back()->with('flash_message_success', 'Successfully added Admin');
                 }
-                else
+                else if($data['type'] == "Sub Admin")
                 {
-                    $admin->status = $data['status'];
+                    $admin = new Admin;
+                    $admin->username = $data['username'];
+                    $admin->password = md5($data['password']);
+                    $admin->type = $data['type'];
+                    if(empty($data['categories_access']))
+                    {
+                        $admin->categories_access = '0';
+                    }
+                    else
+                    {
+                        $admin->categories_access = $data['categories_access'];
+                    }
+                    if(empty($data['products_access']))
+                    {
+                        $admin->products_access = '0';
+                    }
+                    else
+                    {
+                        $admin->products_access = $data['products_access'];
+                    }
+                    if(empty($data['orders_access']))
+                    {
+                        $admin->orders_access = '0';
+                    }
+                    else
+                    {
+                        $admin->orders_access = $data['orders_access'];
+                    }
+                    if(empty($data['users_access']))
+                    {
+                        $admin->users_access = '0';
+                    }
+                    else
+                    {
+                        $admin->users_access = $data['users_access'];
+                    }
+                    if(empty($data['status']))
+                    {
+                        $admin->status = '0';
+                    }
+                    else
+                    {
+                        $admin->status = $data['status'];
+                    }
+
+                    $admin->save();
+
+                    return redirect()->back()->with('flash_message_success', 'Successfully added Sub Admin');
                 }
-
-                $admin->save();
-
-                return redirect()->back()->with('flash_message_success', 'Successfully added Admin');
             }
         }
 
@@ -186,5 +242,93 @@ class AdminController extends Controller
         $adminCount = Admin::count();
 
         return view('admin.admins.view_admins')->with(compact('admins', 'adminCount'));
+    }
+
+    // Edit Admin/Sub-Admin Function
+
+    public function editAdmin(Request $request, $id = null)
+    {
+        if($request->isMethod('POSt'))
+        {
+            $data = $request->all();
+
+            $validator = Validator::make($request->all(), [
+                'password' => 'required|min:8|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'
+            ]);
+
+            if($validator->fails())
+            {
+                return redirect()->back()->withErrors($validator)->withInput($request->input());
+            }
+
+            // dd($data);
+
+            if($data['type'] == "Admin")
+            {
+                if(empty($data['status']))
+                {
+                    $status = '0';
+                }
+                else
+                {
+                    $status = $data['status'];
+                }
+
+                Admin::where('id', $id)->update(['password' => md5($data['password']), 'status' => $status]);
+
+                return redirect()->back()->with('flash_message_success', 'Successfully updated Admin');
+            }
+            else if($data['type'] == "Sub Admin")
+            {
+                if(empty($data['categories_access']))
+                {
+                    $categories_access = '0';
+                }
+                else
+                {
+                    $categories_access = $data['categories_access'];
+                }
+                if(empty($data['products_access']))
+                {
+                    $products_access = '0';
+                }
+                else
+                {
+                    $products_access = $data['products_access'];
+                }
+                if(empty($data['orders_access']))
+                {
+                    $orders_access = '0';
+                }
+                else
+                {
+                    $orders_access = $data['orders_access'];
+                }
+                if(empty($data['users_access']))
+                {
+                    $users_access = '0';
+                }
+                else
+                {
+                    $users_access = $data['users_access'];
+                }
+                if(empty($data['status']))
+                {
+                    $status = '0';
+                }
+                else
+                {
+                    $status = $data['status'];
+                }
+
+                Admin::where('id', $id)->update(['password' => md5($data['password']), 'categories_access' => $categories_access, 'products_access' => $products_access, 'orders_access' => $orders_access, 'users_access' => $users_access, 'status' => $status]);
+
+                return redirect()->back()->with('flash_message_success', 'Successfully updated Sub Admin');
+            }
+        }
+
+        $adminDetails = Admin::where('id', $id)->first();
+
+        return view('admin.admins.edit_admin')->with(compact('adminDetails'));
     }
 }

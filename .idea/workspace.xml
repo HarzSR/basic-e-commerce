@@ -2,43 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d55aefa-07cd-49f9-b334-7d2ae82c409a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/admins/add_admin.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/admins/edit_admin.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyWork.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MyWork.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_04_17_031556_create_admins_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_04_17_031556_create_admins_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/backend_js/matrix.form_validation.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/backend_js/matrix.form_validation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/admins/add_admin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/admins/add_admin.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/admins/view_admins.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/admins/view_admins.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/banners/add_banner.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/banners/add_banner.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/banners/edit_banner.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/banners/edit_banner.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/banners/view_banners.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/banners/view_banners.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/categories/add_category.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/categories/add_category.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/categories/edit_category.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/categories/edit_category.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/categories/view_categories.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/categories/view_categories.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/coupons/add_coupon.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/coupons/add_coupon.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/coupons/edit_coupon.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/coupons/edit_coupon.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/coupons/view_coupons.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/coupons/view_coupons.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/currencies/add_currency.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/currencies/add_currency.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/currencies/edit_currency.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/currencies/edit_currency.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/currencies/view_currencies.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/currencies/view_currencies.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/orders/order_details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/orders/order_details.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/orders/view_orders.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/orders/view_orders.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/add_cms_page.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/add_cms_page.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/edit_cms_page.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/edit_cms_page.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/view_cms_pages.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/view_cms_pages.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/products/add_attributes.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/products/add_attributes.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/products/add_images.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/products/add_images.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/products/add_product.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/products/add_product.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/products/edit_product.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/products/edit_product.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/products/view_products.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/products/view_products.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/shipping/edit_shipping_charge.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/shipping/edit_shipping_charge.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/shipping/view_shipping_charges.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/shipping/view_shipping_charges.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/view_users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/view_users.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/adminLayout/admin_design.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/adminLayout/admin_design.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/adminLayout/admin_sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/adminLayout/admin_sidebar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -181,8 +152,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../instaClone" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -190,7 +163,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.PHP" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -224,7 +197,8 @@
       <workItem from="1620644013093" duration="3533000" />
       <workItem from="1620731296571" duration="1224000" />
       <workItem from="1620803992007" duration="11419000" />
-      <workItem from="1620957050693" duration="47238000" />
+      <workItem from="1620957050693" duration="55283000" />
+      <workItem from="1621656296576" duration="6906000" />
     </task>
     <servers />
   </component>

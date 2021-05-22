@@ -4,7 +4,7 @@
 
     <div id="content">
         <div id="content-header">
-            <div id="breadcrumb"> <a href="{{ url('/admin/dashboard') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Admins/Sub-Admins</a> <a href="#" class="current">Add Admin/Sub-Admin</a> </div>
+            <div id="breadcrumb"> <a href="{{ url('/admin/dashboard') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{ url('/admin/view-admins') }}">Admins/Sub-Admins</a> <a href="#" class="current">Edit Admin/Sub-Admin</a> </div>
             <h1>Admin/Sub-Admin</h1>
             @if(Session::has('flash_message_error'))
                 <div class="alert alert-error alert-block">
@@ -24,7 +24,7 @@
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
-                            <h5>Add Admin/Sub-Admin</h5>
+                            <h5>Edit Admin/Sub-Admin</h5>
                         </div>
                         @if($errors->any())
                             <div class="alert alert-danger">
@@ -36,47 +36,49 @@
                             </div>
                         @endif
                         <div class="widget-content nopadding">
-                            <form class="form-horizontal" method="post" action="{{ url('/admin/add-admin') }}" name="add_admin" id="add_admin" novalidate="novalidate">
+                            <form class="form-horizontal" method="post" action="{{ url('/admin/edit-admin/' . $adminDetails->id) }}" name="edit_admin" id="edit_admin" novalidate="novalidate">
                                 {{ csrf_field() }}
                                 <div class="control-group">
                                     <label class="control-label">Type</label>
+                                    <input type="hidden" name="type" id="type" value="{{ $adminDetails->type }}">
                                     <div class="controls">
-                                        <select name="type" id="type" style="width: 220px;">
+                                        <select name="type" id="type" style="width: 220px;" disabled>
                                             <option value="">Select Type</option>
-                                            <option value="Admin" @if(old('type') == "Admin") Selected @endif>Admin</option>
-                                            <option value="Sub Admin" @if(old('type') == "Sub Admin") Selected @endif>Sub Admin</option>
+                                            <option value="Admin" @if(old('type') == "Admin" || $adminDetails->type == "Admin") Selected @endif>Admin</option>
+                                            <option value="Sub Admin" @if(old('type') == "Sub Admin" || $adminDetails->type == "Sub Admin") Selected @endif>Sub Admin</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Username</label>
                                     <div class="controls">
-                                        <input type="text" name="username" id="username" value="{{ old('username') }}">
+                                        <input type="hidden" name="username" id="username" value="{{ $adminDetails->username }}">
+                                        <input type="text" name="username" id="username" value="@if(!empty(old('username'))) {{ old('username') }} @else {{ $adminDetails->username }} @endif" disabled>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Password</label>
                                     <div class="controls">
-                                        <input type="password" name="password" id="password" value="{{ old('password') }}">
+                                        <input type="password" name="password" id="password" value="@if(!empty(old('password'))) {{ old('password') }} @endif">
                                     </div>
                                 </div>
-                                <div class="control-group" name="access" id="access" @if(old('type') == "Admin" || empty(old('type'))) hidden @endif>
+                                <div class="control-group" name="access" id="access" @if(old('type') == "Admin" || empty(old('type') || $adminDetails->type == "Sub Admin")) hidden @endif>
                                     <label class="control-label">Access</label>
                                     <div class="controls" style="margin-top: 5px;">
-                                        <input style="margin-top: -3px;" type="checkbox" name="categories_access" id="categories_access" @if(!empty(old('categories_access'))) checked @endif value="1"> Categories &nbsp;&nbsp; &nbsp;&nbsp;
-                                        <input style="margin-top: -3px;" type="checkbox" name="products_access" id="products_access" @if(!empty(old('products_access'))) checked @endif value="1"> Products &nbsp;&nbsp; &nbsp;&nbsp;
-                                        <input style="margin-top: -3px;" type="checkbox" name="orders_access" id="orders_access" @if(!empty(old('orders_access'))) checked @endif value="1"> Orders &nbsp;&nbsp; &nbsp;&nbsp;
-                                        <input style="margin-top: -3px;" type="checkbox" name="users_access" id="users_access" @if(!empty(old('users_access'))) checked @endif value="1"> Users
+                                        <input style="margin-top: -3px;" type="checkbox" name="categories_access" id="categories_access" @if(! ($errors->any() && is_null(old('categories_access'))) && old('categories_access', $adminDetails->categories_access)) checked @endif value="1"> Categories &nbsp;&nbsp; &nbsp;&nbsp;
+                                        <input style="margin-top: -3px;" type="checkbox" name="products_access" id="products_access" @if(! ($errors->any() && is_null(old('products_access'))) && old('products_access', $adminDetails->products_access)) checked @endif value="1"> Products &nbsp;&nbsp; &nbsp;&nbsp;
+                                        <input style="margin-top: -3px;" type="checkbox" name="orders_access" id="orders_access" @if(! ($errors->any() && is_null(old('orders_access'))) && old('orders_access', $adminDetails->orders_access)) checked @endif value="1"> Orders &nbsp;&nbsp; &nbsp;&nbsp;
+                                        <input style="margin-top: -3px;" type="checkbox" name="users_access" id="users_access" @if(! ($errors->any() && is_null(old('users_access'))) && old('users_access', $adminDetails->users_access)) checked @endif value="1"> Users &nbsp;&nbsp; &nbsp;&nbsp;
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Enable</label>
                                     <div class="controls">
-                                        <input type="checkbox" name="status" id="status" @if(!empty(old('status'))) checked @endif value="1">
+                                        <input type="checkbox" name="status" id="status"@if(! ($errors->any() && is_null(old('status'))) && old('status', $adminDetails->status)) checked @endif value="1">
                                     </div>
                                 </div>
                                 <div class="form-actions">
-                                    <input type="submit" value="Add Admin/Sub-Admin" class="btn btn-success">
+                                    <input type="submit" value="Update Admin/Sub-Admin" class="btn btn-success">
                                 </div>
                             </form>
                         </div>

@@ -148,6 +148,8 @@ Route::group(['middleware' => ['adminlogin']], function () {
 
     Route::match(['get', 'post'], '/admin/add-admin', 'AdminController@addAdmin');
     Route::get('/admin/view-admins', 'AdminController@viewAdmins');
+    Route::match(['get', 'post'], '/admin/edit-admin/{id}', 'AdminController@editAdmin');
+    Route::get('/admin/delete-admin/{id}', 'AdminController@deleteAdmin');
 });
 
 Auth::routes(['verify' => true]);
