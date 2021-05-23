@@ -10,21 +10,41 @@
         </div>
         <!--End-breadcrumbs-->
 
+        @if(Session::has('flash_message_error'))
+            <div class="alert alert-error alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{!! session('flash_message_error') !!}</strong>
+            </div>
+        @endif
+        @if(Session::has('flash_message_success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{!! session('flash_message_success') !!}</strong>
+            </div>
+    @endif
+
         <!--Action boxes-->
         <div class="container-fluid">
             <div class="quick-actions_homepage">
                 <ul class="quick-actions">
-                    <li class="bg_lb"> <a href="index.html"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> My Dashboard </a> </li>
-                    <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> Charts</a> </li>
-                    <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success">101</span> Widgets </a> </li>
-                    <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i> Tables</a> </li>
-                    <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i> Full width</a> </li>
-                    <li class="bg_lo span3"> <a href="form-common.html"> <i class="icon-th-list"></i> Forms</a> </li>
-                    <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Buttons</a> </li>
-                    <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"></i>Elements</a> </li>
-                    <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i> Calendar</a> </li>
-                    <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> Error</a> </li>
-
+                    <li class="bg_lb"> <a href="{{ url('admin/dashboard') }}"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> My Dashboard </a> </li>
+                    @if(Session::get('adminDetails')['categories_access'] == 1)
+                        <li class="bg_db"> <a href="{{ url('admin/categories') }}"> <i class="icon-inbox"></i><span class="label label-success">101</span> Categories </a> </li>
+                    @endif
+                    @if(Session::get('adminDetails')['products_access'] == 1)
+                        <li class="bg_lg"> <a href="{{ url('admin/products') }}"> <i class="icon-inbox"></i><span class="label label-success">101</span> Products </a> </li>
+                    @endif
+                    @if(Session::get('adminDetails')['orders_access'] == 1)
+                        <li class="bg_dg"> <a href="{{ url('admin/orders') }}"> <i class="icon-inbox"></i><span class="label label-success">101</span> Orders </a> </li>
+                    @endif
+                    @if(Session::get('adminDetails')['users_access'] == 1)
+                        <li class="bg_ly"> <a href="{{ url('admin/users') }}"> <i class="icon-inbox"></i><span class="label label-success">101</span> Users </a> </li>
+                    @endif
+                    <li class="bg_dy"> <a href="{{ url('admin/coupons') }}"> <i class="icon-inbox"></i><span class="label label-success">101</span> Coupons </a> </li>
+                    <li class="bg_ls"> <a href="{{ url('admin/currencies') }}"> <i class="icon-inbox"></i><span class="label label-success">101</span> Currencies </a> </li>
+                    <li class="bg_lo"> <a href="{{ url('admin/shipping') }}"> <i class="icon-inbox"></i><span class="label label-success">101</span> Shipping Locations </a> </li>
+                    <li class="bg_lr"> <a href="{{ url('admin/banners') }}"> <i class="icon-inbox"></i><span class="label label-success">101</span> Banners </a> </li>
+                    {{-- <li class="bg_lv"> <a href="tables.html"> <i class="icon-th"></i> Tables</a> </li> --}}
                 </ul>
             </div>
             <!--End-Action boxes-->

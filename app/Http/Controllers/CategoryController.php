@@ -12,6 +12,11 @@ class CategoryController extends Controller
 
     public function addCategory(Request $request)
     {
+        if(Session::get('adminDetails')['categories_access'] == 0)
+        {
+            return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
+        }
+
         if($request->isMethod('POST'))
         {
             $data = $request->all();
@@ -78,6 +83,11 @@ class CategoryController extends Controller
 
     public function viewCategory()
     {
+        if(Session::get('adminDetails')['categories_access'] == 0)
+        {
+            return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
+        }
+
         $categories = Category::get();
         $categoryCount = Category::count();
         $levels = Category::where(['parent_id' => 0])->get();
@@ -89,6 +99,11 @@ class CategoryController extends Controller
 
     public function editCategory(Request $request, $id = null)
     {
+        if(Session::get('adminDetails')['categories_access'] == 0)
+        {
+            return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
+        }
+
         if($request->isMethod('POST'))
         {
             $data = $request->all();
@@ -151,6 +166,11 @@ class CategoryController extends Controller
 
     public function deleteCategory($id = null)
     {
+        if(Session::get('adminDetails')['categories_access'] == 0)
+        {
+            return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
+        }
+
         if(!empty($id))
         {
             Category::where(['id' => $id])->delete();

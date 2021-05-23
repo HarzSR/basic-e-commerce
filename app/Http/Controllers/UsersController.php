@@ -315,6 +315,11 @@ class UsersController extends Controller
 
     public function viewUsers()
     {
+        if(Session::get('adminDetails')['users_access'] == 0)
+        {
+            return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
+        }
+
         $users = User::get();
         $userCount = User::count();
 

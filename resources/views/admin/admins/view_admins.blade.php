@@ -88,8 +88,9 @@
                                         <td>
                                             <a href="{{ url('/admin/edit-admin/' . $admin->id) }}" class="btn btn-primary btn-mini" title="Edit Admin">Edit</a>
                                             {{-- <a href="{{ url('/admin/delete-admin' . $admin->id) }}" class="btn btn-danger btn-mini delProduct" >Delete</a></td> --}}
-                                            <a rel="{{ $admin->id }}" rel1="delete-admins" rel2="Admin" href="javascript:" class="btn btn-danger btn-mini deleteRecord" @if($admin->id == 1) disabled @endif title="Delete Admin">Delete</a>
-                                        </td>
+                                            @if($admin->id != 1)
+                                                <a rel="{{ $admin->id }}" rel1="delete-admin" rel2="Admin/Sub-Admin" href="javascript:" class="btn btn-danger btn-mini deleteRecord" title="Delete Admin">Delete</a>
+                                            @endif
                                     </tr>
                                 @endforeach
                                 </tbody>

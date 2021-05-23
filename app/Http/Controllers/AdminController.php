@@ -164,6 +164,10 @@ class AdminController extends Controller
                     $admin->username = $data['username'];
                     $admin->password = md5($data['password']);
                     $admin->type = $data['type'];
+                    $admin->categories_access = '1';
+                    $admin->products_access = '1';
+                    $admin->orders_access = '1';
+                    $admin->users_access = '1';
                     if(empty($data['status']))
                     {
                         $admin->status = '0';
@@ -330,5 +334,14 @@ class AdminController extends Controller
         $adminDetails = Admin::where('id', $id)->first();
 
         return view('admin.admins.edit_admin')->with(compact('adminDetails'));
+    }
+
+    // Delete Admin/Sub-Admin Function
+
+    public function deleteAdmin($id = null)
+    {
+        Admin::where(['id' => $id])->delete();
+
+        return redirect()->back()->with('flash_message_success', 'Admin/Sub-Admin removed successfully');
     }
 }

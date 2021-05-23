@@ -30,6 +30,11 @@ class ProductsController extends Controller
 
     public function addProduct(Request $request)
     {
+        if(Session::get('adminDetails')['products_access'] == 0)
+        {
+            return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
+        }
+
         if ($request->isMethod('POST'))
         {
             $data = $request->all();
@@ -183,6 +188,11 @@ class ProductsController extends Controller
 
     public function viewProducts()
     {
+        if(Session::get('adminDetails')['products_access'] == 0)
+        {
+            return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
+        }
+
         $products = Product::orderby('id', 'DESC')->get();
         $productCount = Product::count();
 
@@ -199,6 +209,11 @@ class ProductsController extends Controller
 
     public function editProduct(Request $request, $id = null)
     {
+        if(Session::get('adminDetails')['products_access'] == 0)
+        {
+            return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
+        }
+
         if ($request->isMethod('POST'))
         {
             $data = $request->all();
@@ -362,6 +377,11 @@ class ProductsController extends Controller
 
     public function deleteProduct($id = null)
     {
+        if(Session::get('adminDetails')['products_access'] == 0)
+        {
+            return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
+        }
+
         $product = Product::where(['id' => $id])->first();
 
         $large_image_path = 'images/backend_images/products/large/' . $product->image;
@@ -426,6 +446,11 @@ class ProductsController extends Controller
 
     public function deleteProductImage($id = null)
     {
+        if(Session::get('adminDetails')['products_access'] == 0)
+        {
+            return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
+        }
+
         // Hard Delete
 
         $product = Product::where(['id' => $id])->first();
@@ -459,6 +484,11 @@ class ProductsController extends Controller
 
     public function deleteProductVideo($id = null)
     {
+        if(Session::get('adminDetails')['products_access'] == 0)
+        {
+            return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
+        }
+
         // Hard Delete
 
         $product = Product::where(['id' => $id])->first();
@@ -482,6 +512,11 @@ class ProductsController extends Controller
 
     public function addAttributes(Request $request, $id = null)
     {
+        if(Session::get('adminDetails')['products_access'] == 0)
+        {
+            return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
+        }
+
         if ($request->isMethod('POST'))
         {
             $data = $request->all();
@@ -523,6 +558,11 @@ class ProductsController extends Controller
 
     public function editAttributes(Request $request, $id = null)
     {
+        if(Session::get('adminDetails')['products_access'] == 0)
+        {
+            return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
+        }
+
         if ($request->isMethod('POST'))
         {
             $data = $request->all();
@@ -539,6 +579,11 @@ class ProductsController extends Controller
 
     public function addImages(Request $request, $id = null)
     {
+        if(Session::get('adminDetails')['products_access'] == 0)
+        {
+            return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
+        }
+
         if ($request->isMethod('POST'))
         {
             $data = $request->all();
@@ -584,6 +629,11 @@ class ProductsController extends Controller
 
     public function deleteAttribute($id = null)
     {
+        if(Session::get('adminDetails')['products_access'] == 0)
+        {
+            return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
+        }
+
         ProductsAttribute::where(['id' => $id])->delete();
 
         return redirect()->back()->with('flash_message_success', 'Product Attribute Deleted Successfully');
@@ -717,6 +767,11 @@ class ProductsController extends Controller
 
     public function deleteAdditionalImage($id = null)
     {
+        if(Session::get('adminDetails')['products_access'] == 0)
+        {
+            return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
+        }
+
         // Hard Delete
 
         $product = ProductsImage::where(['id' => $id])->first();
@@ -1290,6 +1345,11 @@ class ProductsController extends Controller
 
     public function viewOrders()
     {
+        if(Session::get('adminDetails')['orders_access'] == 0)
+        {
+            return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
+        }
+
         $orders = Order::with('orders')->orderBy('id','DESC')->get();
         $orderCount = Order::count();
 
@@ -1300,6 +1360,11 @@ class ProductsController extends Controller
 
     public function viewOrdersDetails($order_id = null)
     {
+        if(Session::get('adminDetails')['orders_access'] == 0)
+        {
+            return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
+        }
+
         $orderDetails = Order::with('orders')->where('id', $order_id)->first();
 
         $user_id = $orderDetails->user_id;
@@ -1312,6 +1377,11 @@ class ProductsController extends Controller
 
     public function viewOrdersInvoice($order_id = null)
     {
+        if(Session::get('adminDetails')['orders_access'] == 0)
+        {
+            return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
+        }
+
         $orderDetails = Order::with('orders')->where('id', $order_id)->first();
 
         $user_id = $orderDetails->user_id;
@@ -1324,6 +1394,11 @@ class ProductsController extends Controller
 
     public function updateOrderStatus(Request $request)
     {
+        if(Session::get('adminDetails')['orders_access'] == 0)
+        {
+            return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
+        }
+
         if($request->isMethod('POST'))
         {
             $data = $request->all();

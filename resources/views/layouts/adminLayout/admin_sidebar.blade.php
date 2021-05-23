@@ -1,3 +1,7 @@
+<?php
+    use Illuminate\Support\Facades\Session;
+?>
+
 <!--sidebar-menu-->
 <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
     <ul>
@@ -8,40 +12,48 @@
                 <li <?php if (preg_match("/(view-admins|edit-admin)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-admins') }}">View Admins</a></li>
             </ul>
         </li>
+        @if(Session::get('adminDetails')['users_access'] == 1)
         <li class="submenu"> <a href="#"><i class="icon icon-user"></i> <span>Users</span> <span class="label label-important">1</span></a>
             <ul <?php if (preg_match("/user/i", url()->current())) echo "style=\"display: block;\"" ?>>
                 <li <?php if (preg_match("/(view-users|view-user)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-users') }}">View Users</a></li>
             </ul>
         </li>
+        @endif
         <li class="submenu"> <a href="#"><i class="icon icon-file-alt"></i> <span>CMS Pages</span> <span class="label label-important">2</span></a>
             <ul <?php if (preg_match("/cms-page/i", url()->current())) echo "style=\"display: block;\"" ?>>
                 <li <?php if (preg_match("/add-cms-page/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/add-cms-page') }}">Add CMS Page</a></li>
                 <li <?php if (preg_match("/(view-cms-page|edit-cms-page)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-cms-pages') }}">View CMS Pages</a></li>
             </ul>
         </li>
+        @if(Session::get('adminDetails')['categories_access'] == 1)
         <li class="submenu"> <a href="#"><i class="icon icon-folder-open"></i> <span>Categories</span> <span class="label label-important">2</span></a>
             <ul <?php if (preg_match("/categor/i", url()->current())) echo "style=\"display: block;\"" ?>>
                 <li <?php if (preg_match("/add-category/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/add-category') }}">Add Category</a></li>
                 <li <?php if (preg_match("/(view-categories|edit-category)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-categories') }}">View Categories</a></li>
             </ul>
         </li>
+        @endif
+        @if(Session::get('adminDetails')['products_access'] == 1)
         <li class="submenu"> <a href="#"><i class="icon icon-file"></i> <span>Products</span> <span class="label label-important">2</span></a>
             <ul <?php if (preg_match("/(product|attribute|images)/i", url()->current())) echo "style=\"display: block;\"" ?>>
                 <li <?php if (preg_match("/add-product/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/add-product') }}">Add Product</a></li>
                 <li <?php if (preg_match("/(view-products|edit-product|add-attribute|add-images)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-products') }}">View Products</a></li>
             </ul>
         </li>
+        @endif
         <li class="submenu"> <a href="#"><i class="icon icon-tags"></i> <span>Coupons</span> <span class="label label-important">2</span></a>
             <ul <?php if (preg_match("/coupon/i", url()->current())) echo "style=\"display: block;\"" ?>>
                 <li <?php if (preg_match("/add-coupon/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/add-coupon') }}">Add Coupon</a></li>
                 <li <?php if (preg_match("/(view-coupons|edit-coupon)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-coupons') }}">View Coupons</a></li>
             </ul>
         </li>
+        @if(Session::get('adminDetails')['orders_access'] == 1)
         <li class="submenu"> <a href="#"><i class="icon icon-inbox"></i> <span>Orders</span> <span class="label label-important">1</span></a>
             <ul <?php if (preg_match("/order/i", url()->current())) echo "style=\"display: block;\"" ?>>
                 <li <?php if (preg_match("/(view-orders|view-order)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-orders') }}">View Orders</a></li>
             </ul>
         </li>
+        @endif
         <li class="submenu"> <a href="#"><i class="icon icon-money"></i> <span>Currencies</span> <span class="label label-important">2</span></a>
             <ul <?php if (preg_match("/currenc/i", url()->current())) echo "style=\"display: block;\"" ?>>
                 <li <?php if (preg_match("/add-currency/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/add-currency') }}">Add Currency</a></li>
