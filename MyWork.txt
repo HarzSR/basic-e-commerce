@@ -124,6 +124,7 @@ Things done on this project
 - Admin, Sub-Admin Roles and Views
 - Add Admin, Sub-Admin
 - Restrict Access based on Sub-Admin Permission
+- Advance Admin, Sub-Admin roles
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms
@@ -134,6 +135,7 @@ ToDo List
 - Pattern Filter Pagination not working
 - Avoid Order placement - in case of trying to order more than required quantity: perform action
 - Block access to Admin for Sub-Admin logins
+- Verify access based on sub-categories roles
 
 Not ToDo List
 - Add Social Share Button (Index: 145) - Implemented and commented out: CORS Errors

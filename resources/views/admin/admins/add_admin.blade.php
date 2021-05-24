@@ -63,10 +63,22 @@
                                 <div class="control-group" name="access" id="access" @if(old('type') == "Admin" || empty(old('type'))) hidden @endif>
                                     <label class="control-label">Access</label>
                                     <div class="controls" style="margin-top: 5px;">
-                                        <input style="margin-top: -3px;" type="checkbox" name="categories_access" id="categories_access" @if(!empty(old('categories_access'))) checked @endif value="1"> Categories &nbsp;&nbsp; &nbsp;&nbsp;
-                                        <input style="margin-top: -3px;" type="checkbox" name="products_access" id="products_access" @if(!empty(old('products_access'))) checked @endif value="1"> Products &nbsp;&nbsp; &nbsp;&nbsp;
-                                        <input style="margin-top: -3px;" type="checkbox" name="orders_access" id="orders_access" @if(!empty(old('orders_access'))) checked @endif value="1"> Orders &nbsp;&nbsp; &nbsp;&nbsp;
-                                        <input style="margin-top: -3px;" type="checkbox" name="users_access" id="users_access" @if(!empty(old('users_access'))) checked @endif value="1"> Users
+                                        <input style="margin-top: -3px;" type="checkbox" name="categories_view_access" id="categories_view_access" @if(!empty(old('categories_view_access'))) checked @endif value="1"> View Categories &nbsp;&nbsp; &nbsp;&nbsp;
+                                        <input style="margin-top: -3px;" type="checkbox" name="products_view_access" id="products_view_access" @if(!empty(old('products_view_access'))) checked @endif value="1"> View Products &nbsp;&nbsp; &nbsp;&nbsp;
+                                        <input style="margin-top: -3px;" type="checkbox" name="orders_view_access" id="orders_view_access" @if(!empty(old('orders_view_access'))) checked @endif value="1"> View Orders &nbsp;&nbsp; &nbsp;&nbsp;
+                                        <input style="margin-top: -3px;" type="checkbox" name="users_view_access" id="users_view_access" @if(!empty(old('users_view_access'))) checked @endif value="1"> View Users
+                                    </div>
+                                    <div class="controls" style="margin-top: 5px;">
+                                        <input style="margin-top: -3px;" type="checkbox" name="categories_edit_access" id="categories_edit_access" @if(!empty(old('categories_edit_access'))) checked @endif value="1"> Edit Categories &nbsp;&nbsp; &nbsp;&nbsp;
+                                        <input style="margin-top: -3px;" type="checkbox" name="products_edit_access" id="products_edit_access" @if(!empty(old('products_edit_access'))) checked @endif value="1"> Edit Products &nbsp;&nbsp; &nbsp;&nbsp;
+                                        <input style="margin-top: -3px;" type="checkbox" name="orders_edit_access" id="orders_edit_access" @if(!empty(old('orders_edit_access'))) checked @endif value="1"> Edit Orders &nbsp;&nbsp; &nbsp;&nbsp;
+                                        <input style="margin-top: -3px;" type="checkbox" name="users_edit_access" id="users_edit_access" @if(!empty(old('users_edit_access'))) checked @endif value="1"> Edit Users
+                                    </div>
+                                    <div class="controls" style="margin-top: 5px;">
+                                        <input style="margin-top: -3px;" type="checkbox" name="categories_full_access" id="categories_full_access" @if(!empty(old('categories_full_access'))) checked @endif value="1"> Full Categories &nbsp;&nbsp; &nbsp;&nbsp;
+                                        <input style="margin-top: -3px;" type="checkbox" name="products_full_access" id="products_full_access" @if(!empty(old('products_full_access'))) checked @endif value="1"> Full Products &nbsp;&nbsp; &nbsp;&nbsp;
+                                        <input style="margin-top: -3px;" type="checkbox" name="orders_full_access" id="orders_full_access" @if(!empty(old('orders_full_access'))) checked @endif value="1"> Full Orders &nbsp;&nbsp; &nbsp;&nbsp;
+                                        <input style="margin-top: -3px;" type="checkbox" name="users_full_access" id="users_full_access" @if(!empty(old('users_full_access'))) checked @endif value="1"> Full Users
                                     </div>
                                 </div>
                                 <div class="control-group">

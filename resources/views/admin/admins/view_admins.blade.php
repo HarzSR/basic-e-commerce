@@ -50,31 +50,71 @@
                                         <td>{{ $admin->username }}</td>
                                         <td>{{ $admin->type }}</td>
                                         <td>
-                                            @if($admin->categories_access == 1 || $admin->type == "Admin")
-                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Yes</button>
+                                            @if($admin->categories_view_access == 1 || $admin->type == "Admin")
+                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">View</button>
                                             @else
-                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">No</button>
+                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">View</button>
+                                            @endif
+                                            @if($admin->categories_edit_access == 1 || $admin->type == "Admin")
+                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Edit</button>
+                                            @else
+                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">Edit</button>
+                                            @endif
+                                            @if($admin->categories_full_access == 1 || $admin->type == "Admin")
+                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Full</button>
+                                            @else
+                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">Full</button>
                                             @endif
                                         </td>
                                         <td>
-                                            @if($admin->products_access == 1 || $admin->type == "Admin")
-                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Yes</button>
+                                            @if($admin->products_view_access == 1 || $admin->type == "Admin")
+                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">View</button>
                                             @else
-                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">No</button>
+                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">View</button>
+                                            @endif
+                                            @if($admin->products_edit_access == 1 || $admin->type == "Admin")
+                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Edit</button>
+                                            @else
+                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">Edit</button>
+                                            @endif
+                                            @if($admin->products_full_access == 1 || $admin->type == "Admin")
+                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Full</button>
+                                            @else
+                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">Full</button>
                                             @endif
                                         </td>
                                         <td>
-                                            @if($admin->orders_access == 1 || $admin->type == "Admin")
-                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Yes</button>
+                                            @if($admin->orders_view_access == 1 || $admin->type == "Admin")
+                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">View</button>
                                             @else
-                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">No</button>
+                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">View</button>
+                                            @endif
+                                            @if($admin->orders_edit_access == 1 || $admin->type == "Admin")
+                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Edit</button>
+                                            @else
+                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">Edit</button>
+                                            @endif
+                                            @if($admin->orders_full_access == 1 || $admin->type == "Admin")
+                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Full</button>
+                                            @else
+                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">Full</button>
                                             @endif
                                         </td>
                                         <td>
-                                            @if($admin->users_access == 1 || $admin->type == "Admin")
-                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Yes</button>
+                                            @if($admin->users_view_access == 1 || $admin->type == "Admin")
+                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">View</button>
                                             @else
-                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">No</button>
+                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">View</button>
+                                            @endif
+                                            @if($admin->users_edit_access == 1 || $admin->type == "Admin")
+                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Edit</button>
+                                            @else
+                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">Edit</button>
+                                            @endif
+                                            @if($admin->users_full_access == 1 || $admin->type == "Admin")
+                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Full</button>
+                                            @else
+                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">Full</button>
                                             @endif
                                         </td>
                                         <td>
@@ -86,10 +126,20 @@
                                         </td>
                                         <td><?php echo date('d-M-Y h:i A', strtotime($admin->created_at)); ?></td>
                                         <td>
-                                            <a href="{{ url('/admin/edit-admin/' . $admin->id) }}" class="btn btn-primary btn-mini" title="Edit Admin">Edit</a>
-                                            {{-- <a href="{{ url('/admin/delete-admin' . $admin->id) }}" class="btn btn-danger btn-mini delProduct" >Delete</a></td> --}}
-                                            @if($admin->id != 1)
-                                                <a rel="{{ $admin->id }}" rel1="delete-admin" rel2="Admin/Sub-Admin" href="javascript:" class="btn btn-danger btn-mini deleteRecord" title="Delete Admin">Delete</a>
+                                            @if($admin->id != Session::get('adminDetails')['id'] && Session::get('adminDetails')['type'] == "Sub Admin")
+                                                <a href="{{ url('/admin/edit-admin/' . $admin->id) }}" class="btn btn-primary btn-mini" title="Edit Admin">Edit</a>
+                                                {{-- <a href="{{ url('/admin/delete-admin' . $admin->id) }}" class="btn btn-danger btn-mini delProduct" >Delete</a></td> --}}
+                                                @if($admin->id != 1)
+                                                    <a rel="{{ $admin->id }}" rel1="delete-admin" rel2="Admin/Sub-Admin" href="javascript:" class="btn btn-danger btn-mini deleteRecord" title="Delete Admin">Delete</a>
+                                                @endif
+                                            @elseif(Session::get('adminDetails')['type'] == "Admin")
+                                                <a href="{{ url('/admin/edit-admin/' . $admin->id) }}" class="btn btn-primary btn-mini" title="Edit Admin">Edit</a>
+                                                {{-- <a href="{{ url('/admin/delete-admin' . $admin->id) }}" class="btn btn-danger btn-mini delProduct" >Delete</a></td> --}}
+                                                @if($admin->id != 1)
+                                                    <a rel="{{ $admin->id }}" rel1="delete-admin" rel2="Admin/Sub-Admin" href="javascript:" class="btn btn-danger btn-mini deleteRecord" title="Delete Admin">Delete</a>
+                                                @endif
+                                            @else
+                                                <button class="btn btn-primary btn-mini" title="Self" style="pointer-events: none; user-select: none;">Self</button>
                                             @endif
                                     </tr>
                                 @endforeach

@@ -141,7 +141,7 @@ class AdminController extends Controller
 
             $validator = Validator::make($request->all(), [
                 'type' => 'required|nullable',
-                'username' => 'required|min:4|alpha',
+                'username' => 'required|min:4|alpha_num',
                 'password' => 'required|min:8|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'
             ]);
 
@@ -164,10 +164,18 @@ class AdminController extends Controller
                     $admin->username = $data['username'];
                     $admin->password = md5($data['password']);
                     $admin->type = $data['type'];
-                    $admin->categories_access = '1';
-                    $admin->products_access = '1';
-                    $admin->orders_access = '1';
-                    $admin->users_access = '1';
+                    $admin->categories_view_access = '1';
+                    $admin->categories_edit_access = '1';
+                    $admin->categories_full_access = '1';
+                    $admin->products_view_access = '1';
+                    $admin->products_edit_access = '1';
+                    $admin->products_full_access = '1';
+                    $admin->orders_view_access = '1';
+                    $admin->orders_edit_access = '1';
+                    $admin->orders_full_access = '1';
+                    $admin->users_view_access = '1';
+                    $admin->users_edit_access = '1';
+                    $admin->users_full_access = '1';
                     if(empty($data['status']))
                     {
                         $admin->status = '0';
@@ -242,7 +250,14 @@ class AdminController extends Controller
 
     public function viewAdmins()
     {
-        $admins = Admin::get();
+        if(Session::get('adminDetails')['type'] == "Sub Admin")
+        {
+            $admins = Admin::where('type', "Sub Admin")->get();
+        }
+        else
+        {
+            $admins = Admin::get();
+        }
         $adminCount = Admin::count();
 
         return view('admin.admins.view_admins')->with(compact('admins', 'adminCount'));
@@ -284,37 +299,101 @@ class AdminController extends Controller
             }
             else if($data['type'] == "Sub Admin")
             {
-                if(empty($data['categories_access']))
+                if(empty($data['categories_view_access']))
                 {
-                    $categories_access = '0';
+                    $categories_view_access = '0';
                 }
                 else
                 {
-                    $categories_access = $data['categories_access'];
+                    $categories_view_access = $data['categories_view_access'];
                 }
-                if(empty($data['products_access']))
+                if(empty($data['categories_edit_access']))
                 {
-                    $products_access = '0';
-                }
-                else
-                {
-                    $products_access = $data['products_access'];
-                }
-                if(empty($data['orders_access']))
-                {
-                    $orders_access = '0';
+                    $categories_edit_access = '0';
                 }
                 else
                 {
-                    $orders_access = $data['orders_access'];
+                    $categories_edit_access = $data['categories_edit_access'];
                 }
-                if(empty($data['users_access']))
+                if(empty($data['categories_full_access']))
                 {
-                    $users_access = '0';
+                    $categories_full_access = '0';
                 }
                 else
                 {
-                    $users_access = $data['users_access'];
+                    $categories_full_access = $data['categories_full_access'];
+                }
+                if(empty($data['products_view_access']))
+                {
+                    $products_view_access = '0';
+                }
+                else
+                {
+                    $products_view_access = $data['products_view_access'];
+                }
+                if(empty($data['products_edit_access']))
+                {
+                    $products_edit_access = '0';
+                }
+                else
+                {
+                    $products_edit_access = $data['products_edit_access'];
+                }
+                if(empty($data['products_full_access']))
+                {
+                    $products_full_access = '0';
+                }
+                else
+                {
+                    $products_full_access = $data['products_full_access'];
+                }
+                if(empty($data['orders_view_access']))
+                {
+                    $orders_view_access = '0';
+                }
+                else
+                {
+                    $orders_view_access = $data['orders_view_access'];
+                }
+                if(empty($data['orders_edit_access']))
+                {
+                    $orders_edit_access = '0';
+                }
+                else
+                {
+                    $orders_edit_access = $data['orders_edit_access'];
+                }
+                if(empty($data['orders_full_access']))
+                {
+                    $orders_full_access = '0';
+                }
+                else
+                {
+                    $orders_full_access = $data['orders_full_access'];
+                }
+                if(empty($data['users_view_access']))
+                {
+                    $users_view_access = '0';
+                }
+                else
+                {
+                    $users_view_access = $data['users_view_access'];
+                }
+                if(empty($data['users_edit_access']))
+                {
+                    $users_edit_access = '0';
+                }
+                else
+                {
+                    $users_edit_access = $data['users_edit_access'];
+                }
+                if(empty($data['users_full_access']))
+                {
+                    $users_full_access = '0';
+                }
+                else
+                {
+                    $users_full_access = $data['users_full_access'];
                 }
                 if(empty($data['status']))
                 {
@@ -325,7 +404,7 @@ class AdminController extends Controller
                     $status = $data['status'];
                 }
 
-                Admin::where('id', $id)->update(['password' => md5($data['password']), 'categories_access' => $categories_access, 'products_access' => $products_access, 'orders_access' => $orders_access, 'users_access' => $users_access, 'status' => $status]);
+                Admin::where('id', $id)->update(['password' => md5($data['password']), 'categories_view_access' => $categories_view_access, 'categories_edit_access' => $categories_edit_access, 'categories_full_access' => $categories_full_access, 'products_view_access' => $products_view_access, 'products_edit_access' => $products_edit_access, 'products_full_access' => $products_full_access, 'orders_view_access' => $orders_view_access, 'orders_edit_access' => $orders_edit_access, 'orders_full_access' => $orders_full_access, 'users_view_access' => $users_view_access, 'users_edit_access' => $users_edit_access, 'users_full_access' => $users_full_access, 'status' => $status]);
 
                 return redirect()->back()->with('flash_message_success', 'Successfully updated Sub Admin');
             }
