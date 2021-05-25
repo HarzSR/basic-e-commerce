@@ -8,11 +8,11 @@
         <li <?php if (preg_match("/dashboard/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/dashboard') }}"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
         <li class="submenu"> <a href="#"><i class="icon icon-qrcode"></i> <span>Admin</span> <span class="label label-important">1</span></a>
             <ul <?php if (preg_match("/(add-admin|view-admins|edit-admin)/i", url()->current())) echo "style=\"display: block;\"" ?>>
-                <li <?php if (preg_match("/add-admin/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/add-admin') }}">Add Admin</a></li>
-                <li <?php if (preg_match("/(view-admins|edit-admin)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-admins') }}">View Admins</a></li>
+                <li <?php if (preg_match("/add-admin/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/add-admin') }}">Add Admin/Sub-Admin</a></li>
+                <li <?php if (preg_match("/(view-admins|edit-admin)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-admins') }}">View Admins/Sub-Admins</a></li>
             </ul>
         </li>
-        @if(Session::get('adminDetails')['users_access'] == 1)
+        @if(Session::get('adminDetails')['users_view_access'] == 1 || Session::get('adminDetails')['users_edit_access'] == 1 || Session::get('adminDetails')['users_full_access'] == 1)
         <li class="submenu"> <a href="#"><i class="icon icon-user"></i> <span>Users</span> <span class="label label-important">1</span></a>
             <ul <?php if (preg_match("/user/i", url()->current())) echo "style=\"display: block;\"" ?>>
                 <li <?php if (preg_match("/(view-users|view-user)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-users') }}">View Users</a></li>
@@ -25,15 +25,19 @@
                 <li <?php if (preg_match("/(view-cms-page|edit-cms-page)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-cms-pages') }}">View CMS Pages</a></li>
             </ul>
         </li>
-        @if(Session::get('adminDetails')['categories_access'] == 1)
+        @if(Session::get('adminDetails')['categories_view_access'] == 1 || Session::get('adminDetails')['categories_edit_access'] == 1 || Session::get('adminDetails')['categories_full_access'] == 1)
         <li class="submenu"> <a href="#"><i class="icon icon-folder-open"></i> <span>Categories</span> <span class="label label-important">2</span></a>
             <ul <?php if (preg_match("/categor/i", url()->current())) echo "style=\"display: block;\"" ?>>
-                <li <?php if (preg_match("/add-category/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/add-category') }}">Add Category</a></li>
-                <li <?php if (preg_match("/(view-categories|edit-category)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-categories') }}">View Categories</a></li>
+                @if(Session::get('adminDetails')['categories_edit_access'] == 1 || Session::get('adminDetails')['categories_full_access'] == 1)
+                    <li <?php if (preg_match("/add-category/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/add-category') }}">Add Category</a></li>
+                @endif
+                @if(Session::get('adminDetails')['categories_view_access'] == 1 || Session::get('adminDetails')['categories_edit_access'] == 1 || Session::get('adminDetails')['categories_full_access'] == 1)
+                    <li <?php if (preg_match("/(view-categories|edit-category)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-categories') }}">View Categories</a></li>
+                @endif
             </ul>
         </li>
         @endif
-        @if(Session::get('adminDetails')['products_access'] == 1)
+        @if(Session::get('adminDetails')['products_view_access'] == 1 || Session::get('adminDetails')['products_edit_access'] == 1 || Session::get('adminDetails')['products_full_access'] == 1)
         <li class="submenu"> <a href="#"><i class="icon icon-file"></i> <span>Products</span> <span class="label label-important">2</span></a>
             <ul <?php if (preg_match("/(product|attribute|images)/i", url()->current())) echo "style=\"display: block;\"" ?>>
                 <li <?php if (preg_match("/add-product/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/add-product') }}">Add Product</a></li>
@@ -47,7 +51,7 @@
                 <li <?php if (preg_match("/(view-coupons|edit-coupon)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-coupons') }}">View Coupons</a></li>
             </ul>
         </li>
-        @if(Session::get('adminDetails')['orders_access'] == 1)
+        @if(Session::get('adminDetails')['orders_view_access'] == 1 || Session::get('adminDetails')['orders_edit_access'] == 1 || Session::get('adminDetails')['orders_full_access'] == 1)
         <li class="submenu"> <a href="#"><i class="icon icon-inbox"></i> <span>Orders</span> <span class="label label-important">1</span></a>
             <ul <?php if (preg_match("/order/i", url()->current())) echo "style=\"display: block;\"" ?>>
                 <li <?php if (preg_match("/(view-orders|view-order)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-orders') }}">View Orders</a></li>

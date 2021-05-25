@@ -30,7 +30,15 @@ class Adminlogin
 
             $currentPath = Route::getFacadeRoot()->current()->uri();
 
-            if(($currentPath == "admin/add-category" || $currentPath == "admin/view-categories" || $currentPath == "admin/edit-category/{id}" || $currentPath == "admin/delete-category/{id}") && Session::get('adminDetails')['categories_access'] == 0)
+            if(($currentPath == "admin/add-category" || $currentPath == "admin/edit-category/{id}") && Session::get('adminDetails')['categories_edit_access'] == 0 && Session::get('adminDetails')['categories_full_access'] == 0)
+            {
+                return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, unfortunately you don\'t have access to this module. Please contact Admin for further access.');
+            }
+            if($currentPath == "admin/view-categories" && Session::get('adminDetails')['categories_view_access'] == 0 && Session::get('adminDetails')['categories_edit_access'] == 0 && Session::get('adminDetails')['categories_full_access'] == 0)
+            {
+                return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, unfortunately you don\'t have access to this module. Please contact Admin for further access.');
+            }
+            if($currentPath == "admin/delete-category/{id}" && Session::get('adminDetails')['categories_full_access'] == 0)
             {
                 return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, unfortunately you don\'t have access to this module. Please contact Admin for further access.');
             }

@@ -62,9 +62,15 @@
                                             @endif
                                         </td>
                                         <td class="center">
-                                            <a href="{{ url('/admin/edit-category/'.$category->id) }}" class="btn btn-primary btn-mini">Edit</a>
-                                            {{-- <a href="{{ url('/admin/delete-category/'.$category->id) }}" class="btn btn-danger btn-mini delCategory">Delete</a> --}}
-                                            <a rel="{{ $category->id }}" rel1="delete-category" rel2="Category" href="javascript:" class="btn btn-danger btn-mini deleteRecord">Delete</a>
+                                            @if(Session::get('adminDetails')['categories_edit_access'] == 1 || Session::get('adminDetails')['categories_full_access'] == 1)
+                                                <a href="{{ url('/admin/edit-category/'.$category->id) }}" class="btn btn-primary btn-mini">Edit</a>
+                                                @if(Session::get('adminDetails')['categories_full_access'] == 1)
+                                                    {{-- <a href="{{ url('/admin/delete-category/'.$category->id) }}" class="btn btn-danger btn-mini delCategory">Delete</a> --}}
+                                                    <a rel="{{ $category->id }}" rel1="delete-category" rel2="Category" href="javascript:" class="btn btn-danger btn-mini deleteRecord">Delete</a>
+                                                @endif
+                                            @else
+                                                <button class="btn btn-primary btn-mini" title="No Permission Granted" style="pointer-events: none; user-select: none;">No Permission Granted</button>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

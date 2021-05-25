@@ -134,7 +134,6 @@ ToDo List
 - Sleeve Filter Pagination not working
 - Pattern Filter Pagination not working
 - Avoid Order placement - in case of trying to order more than required quantity: perform action
-- Block access to Admin for Sub-Admin logins
 - Verify access based on sub-categories roles
 
 Not ToDo List

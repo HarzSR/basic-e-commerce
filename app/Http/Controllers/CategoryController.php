@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use Validator;
 use Illuminate\Http\Request;
+use Session;
 
 class CategoryController extends Controller
 {
@@ -12,7 +13,7 @@ class CategoryController extends Controller
 
     public function addCategory(Request $request)
     {
-        if(Session::get('adminDetails')['categories_access'] == 0)
+        if(Session::get('adminDetails')['categories_edit_access'] == 0 && Session::get('adminDetails')['categories_full_access'] == 0 )
         {
             return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
         }
@@ -83,7 +84,7 @@ class CategoryController extends Controller
 
     public function viewCategory()
     {
-        if(Session::get('adminDetails')['categories_access'] == 0)
+        if(Session::get('adminDetails')['categories_view_access'] == 0 && Session::get('adminDetails')['categories_edit_access'] == 0 && Session::get('adminDetails')['categories_full_access'] == 0)
         {
             return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
         }
@@ -99,7 +100,7 @@ class CategoryController extends Controller
 
     public function editCategory(Request $request, $id = null)
     {
-        if(Session::get('adminDetails')['categories_access'] == 0)
+        if(Session::get('adminDetails')['categories_edit_access'] == 0 && Session::get('adminDetails')['categories_full_access'] == 0)
         {
             return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
         }
