@@ -40,8 +40,12 @@
         @if(Session::get('adminDetails')['products_view_access'] == 1 || Session::get('adminDetails')['products_edit_access'] == 1 || Session::get('adminDetails')['products_full_access'] == 1)
         <li class="submenu"> <a href="#"><i class="icon icon-file"></i> <span>Products</span> <span class="label label-important">2</span></a>
             <ul <?php if (preg_match("/(product|attribute|images)/i", url()->current())) echo "style=\"display: block;\"" ?>>
-                <li <?php if (preg_match("/add-product/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/add-product') }}">Add Product</a></li>
-                <li <?php if (preg_match("/(view-products|edit-product|add-attribute|add-images)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-products') }}">View Products</a></li>
+                @if(Session::get('adminDetails')['products_edit_access'] == 1 || Session::get('adminDetails')['products_full_access'] == 1)
+                    <li <?php if (preg_match("/add-product/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/add-product') }}">Add Product</a></li>
+                @endif
+                @if(Session::get('adminDetails')['products_view_access'] == 1 || Session::get('adminDetails')['products_edit_access'] == 1 || Session::get('adminDetails')['products_full_access'] == 1)
+                    <li <?php if (preg_match("/(view-products|edit-product|add-attribute|add-images)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-products') }}">View Products</a></li>
+                @endif
             </ul>
         </li>
         @endif

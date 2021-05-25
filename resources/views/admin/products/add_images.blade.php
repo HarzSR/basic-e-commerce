@@ -44,7 +44,11 @@
                                     </div>
                                 </div>
                                 <div class="form-actions">
-                                    <input type="submit" value="Add Image" class="btn btn-success">
+                                    @if(Session::get('adminDetails')['products_edit_access'] == 1 || Session::get('adminDetails')['products_full_access'] == 1)
+                                        <input type="submit" value="Add Image" class="btn btn-success">
+                                    @else
+                                        <button class="btn btn-primary btn-mini" title="No Permission Granted" style="pointer-events: none; user-select: none;">No Permission Granted</button>
+                                    @endif
                                 </div>
                             </form>
                         </div>
@@ -74,7 +78,11 @@
                                             <td>{{ $productDetails->product_name }}</td>
                                             <td><img src="{{ asset('images/backend_images/products/small/' . $image->image) }}" style="width: 50px"></td>
                                             <td>
-                                                <a rel="{{ $image->id }}" rel1="delete-additional-image" rel2="Image" href="javascript:" class="btn btn-danger btn-mini deleteRecord" title="Delete Image">Delete</a>
+                                                @if(Session::get('adminDetails')['products_full_access'] == 1)
+                                                    <a rel="{{ $image->id }}" rel1="delete-additional-image" rel2="Image" href="javascript:" class="btn btn-danger btn-mini deleteRecord" title="Delete Image">Delete</a>
+                                                @else
+                                                    <button class="btn btn-primary btn-mini" title="No Permission Granted" style="pointer-events: none; user-select: none;">No Permission Granted</button>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

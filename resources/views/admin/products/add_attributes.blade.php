@@ -41,22 +41,28 @@
                                     <label class="control-label">Product Color</label>
                                     <label class="control-label"><strong>{{ $productDetails->product_color }}</strong></label>
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label"></label>
-                                    <div class="field_wrapper">
-                                        <div>
-                                            <input type="text" name="sku[]" id="sku" placeholder="SKU" style="width: 120px;" required>
-                                            <input type="text" name="size[]" id="size" placeholder="Size" style="width: 120px;" required>
-                                            <input type="text" name="price[]" id="price" placeholder="Price" style="width: 120px;" required>
-                                            <input type="text" name="stock[]" id="stock" placeholder="Stock" style="width: 120px;" required>
-                                            <a href="javascript:void(0);" class="add_button" title="Add Field">
-                                                <!-- <img src="add_icon.png"> -->Add
-                                            </a>
+                                @if(Session::get('adminDetails')['products_edit_access'] == 1 || Session::get('adminDetails')['products_full_access'] == 1)
+                                    <div class="control-group">
+                                        <label class="control-label"></label>
+                                        <div class="field_wrapper">
+                                            <div>
+                                                <input type="text" name="sku[]" id="sku" placeholder="SKU" style="width: 120px;" required>
+                                                <input type="text" name="size[]" id="size" placeholder="Size" style="width: 120px;" required>
+                                                <input type="text" name="price[]" id="price" placeholder="Price" style="width: 120px;" required>
+                                                <input type="text" name="stock[]" id="stock" placeholder="Stock" style="width: 120px;" required>
+                                                <a href="javascript:void(0);" class="add_button" title="Add Field">
+                                                    <!-- <img src="add_icon.png"> -->Add
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
                                 <div class="form-actions">
-                                    <input type="submit" value="Add Attributes" class="btn btn-success">
+                                    @if(Session::get('adminDetails')['products_edit_access'] == 1 || Session::get('adminDetails')['products_full_access'] == 1)
+                                        <input type="submit" value="Add Attributes" class="btn btn-success">
+                                    @else
+                                        <button class="btn btn-primary btn-mini" title="No Permission Granted" style="pointer-events: none; user-select: none;">No Permission Granted</button>
+                                    @endif
                                 </div>
                             </form>
                         </div>
@@ -92,8 +98,14 @@
                                             <td><input type="text" name="price[]" value="{{ $attribute->price }}"></td>
                                             <td><input type="text" name="stock[]" value="{{ $attribute->stock }}"></td>
                                             <td class="center">
-                                                <input type="submit" value="Update" class="btn btn-primary btn-mini">
-                                                <a rel="{{ $attribute->id }}" rel1="delete-attribute" rel2="Attribute" href="javascript:" class="btn btn-danger btn-mini deleteRecord" >Delete</a>
+                                                @if(Session::get('adminDetails')['products_edit_access'] == 1 || Session::get('adminDetails')['products_full_access'] == 1)
+                                                    <input type="submit" value="Update" class="btn btn-primary btn-mini">
+                                                    @if(Session::get('adminDetails')['products_full_access'] == 1)
+                                                        <a rel="{{ $attribute->id }}" rel1="delete-attribute" rel2="Attribute" href="javascript:" class="btn btn-danger btn-mini deleteRecord" >Delete</a>
+                                                    @endif
+                                                @else
+                                                    <button class="btn btn-primary btn-mini" title="No Permission Granted" style="pointer-events: none; user-select: none;">No Permission Granted</button>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

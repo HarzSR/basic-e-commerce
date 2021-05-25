@@ -134,7 +134,7 @@ ToDo List
 - Sleeve Filter Pagination not working
 - Pattern Filter Pagination not working
 - Avoid Order placement - in case of trying to order more than required quantity: perform action
-- Verify access based on sub-categories roles
+- Verify access based on sub-categories roles - need to verify for all products use case
 
 Not ToDo List
 - Add Social Share Button (Index: 145) - Implemented and commented out: CORS Errors
