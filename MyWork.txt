@@ -125,6 +125,7 @@ Things done on this project
 - Add Admin, Sub-Admin
 - Restrict Access based on Sub-Admin Permission
 - Advance Admin, Sub-Admin roles
+- Restrict all functions to role based
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms
@@ -134,7 +135,7 @@ ToDo List
 - Sleeve Filter Pagination not working
 - Pattern Filter Pagination not working
 - Avoid Order placement - in case of trying to order more than required quantity: perform action
-- Verify access based on sub-categories roles - need to verify for all products use case
+- Need to verify User based authentication for all use case
 
 Not ToDo List
 - Add Social Share Button (Index: 145) - Implemented and commented out: CORS Errors

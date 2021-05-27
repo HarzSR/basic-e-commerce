@@ -54,11 +54,11 @@ class Adminlogin
             {
                 return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, unfortunately you don\'t have access to this module. Please contact Admin for further access.');
             }
-            if(($currentPath == "admin/view-orders" || $currentPath == "admin/view-order/{id}" || $currentPath == "admin/view-order-invoice/{id}" || $currentPath == "admin/print-order-invoice/{id}" || $currentPath == "admin/update-order-status") && Session::get('adminDetails')['orders_access'] == 0)
+            if(($currentPath == "admin/view-orders" || $currentPath == "admin/view-order/{id}" || $currentPath == "admin/view-order-invoice/{id}" || $currentPath == "admin/print-order-invoice/{id}" || $currentPath == "admin/update-order-status") && Session::get('adminDetails')['orders_view_access'] == 0 && Session::get('adminDetails')['orders_edit_access'] == 0 && Session::get('adminDetails')['orders_full_access'] == 0)
             {
                 return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, unfortunately you don\'t have access to this module. Please contact Admin for further access.');
             }
-            if($currentPath == "admin/view-users" && Session::get('adminDetails')['users_access'] == 0)
+            if($currentPath == "admin/view-users" && Session::get('adminDetails')['users_view_access'] == 0 && Session::get('adminDetails')['users_edit_access'] == 0 && Session::get('adminDetails')['users_full_access'] == 0)
             {
                 return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, unfortunately you don\'t have access to this module. Please contact Admin for further access.');
             }

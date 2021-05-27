@@ -1355,7 +1355,7 @@ class ProductsController extends Controller
 
     public function viewOrders()
     {
-        if(Session::get('adminDetails')['orders_access'] == 0)
+        if(Session::get('adminDetails')['orders_view_access'] == 0 && Session::get('adminDetails')['orders_edit_access'] == 0 && Session::get('adminDetails')['orders_full_access'] == 0)
         {
             return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
         }
@@ -1370,7 +1370,7 @@ class ProductsController extends Controller
 
     public function viewOrdersDetails($order_id = null)
     {
-        if(Session::get('adminDetails')['orders_access'] == 0)
+        if(Session::get('adminDetails')['orders_view_access'] == 0 && Session::get('adminDetails')['orders_edit_access'] == 0 && Session::get('adminDetails')['orders_full_access'] == 0)
         {
             return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
         }
@@ -1387,7 +1387,7 @@ class ProductsController extends Controller
 
     public function viewOrdersInvoice($order_id = null)
     {
-        if(Session::get('adminDetails')['orders_access'] == 0)
+        if(Session::get('adminDetails')['orders_view_access'] == 0 && Session::get('adminDetails')['orders_edit_access'] == 0 && Session::get('adminDetails')['orders_full_access'] == 0)
         {
             return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
         }
@@ -1404,7 +1404,7 @@ class ProductsController extends Controller
 
     public function updateOrderStatus(Request $request)
     {
-        if(Session::get('adminDetails')['orders_access'] == 0)
+        if(Session::get('adminDetails')['orders_view_access'] == 0 && Session::get('adminDetails')['orders_edit_access'] == 0 && Session::get('adminDetails')['orders_full_access'] == 0)
         {
             return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
         }

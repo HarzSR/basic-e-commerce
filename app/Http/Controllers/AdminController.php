@@ -3,8 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Admin;
+use App\Banner;
+use App\Category;
+use App\Coupon;
+use App\Currency;
+use App\Order;
+use App\Product;
+use App\ShippingCharge;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Session;
 use App\User;
 use Illuminate\Support\Facades\Hash;
@@ -31,7 +39,16 @@ class AdminController extends Controller
                 {
                     Session::put('adminSession', $data['username']);
 
-                    return redirect('/admin/dashboard');
+                    $categoryCount = Category::count();
+                    $productCount = Product::count();
+                    $orderCount = Order::count();
+                    $userCount = User::count();
+                    $couponCount = Coupon::count();
+                    $currencyCount = Currency::count();
+                    $shippingCount = ShippingCharge::count();
+                    $bannerCount = Banner::count();
+
+                    return redirect('/admin/dashboard')->with(compact('categoryCount', 'productCount', 'orderCount', 'userCount', 'couponCount', 'currencyCount', 'shippingCount', 'bannerCount'));
                 }
                 else
                 {
@@ -46,7 +63,16 @@ class AdminController extends Controller
 
         if(Session::has('adminSession'))
         {
-            return redirect('/admin/dashboard');
+            $categoryCount = Category::count();
+            $productCount = Product::count();
+            $orderCount = Order::count();
+            $userCount = User::count();
+            $couponCount = Coupon::count();
+            $currencyCount = Currency::count();
+            $shippingCount = ShippingCharge::count();
+            $bannerCount = Banner::count();
+
+            return redirect('/admin/dashboard')->with(compact('categoryCount', 'productCount', 'orderCount', 'userCount', 'couponCount', 'currencyCount', 'shippingCount', 'bannerCount'));
         }
 
         return view('admin.admin_login');
@@ -69,7 +95,16 @@ class AdminController extends Controller
         }
         */
 
-        return view('admin.dashboard');
+        $categoryCount = Category::count();
+        $productCount = Product::count();
+        $orderCount = Order::count();
+        $userCount = User::count();
+        $couponCount = Coupon::count();
+        $currencyCount = Currency::count();
+        $shippingCount = ShippingCharge::count();
+        $bannerCount = Banner::count();
+
+        return view('admin.dashboard')->with(compact('categoryCount', 'productCount', 'orderCount', 'userCount', 'couponCount', 'currencyCount', 'shippingCount', 'bannerCount'));
     }
 
     // Settings Function

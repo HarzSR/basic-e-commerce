@@ -27,23 +27,23 @@
         <div class="container-fluid">
             <div class="quick-actions_homepage">
                 <ul class="quick-actions">
-                    <li class="bg_lb"> <a href="{{ url('admin/dashboard') }}"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> My Dashboard </a> </li>
-                    @if(Session::get('adminDetails')['categories_access'] == 1)
-                        <li class="bg_db"> <a href="{{ url('admin/categories') }}"> <i class="icon-inbox"></i><span class="label label-success">101</span> Categories </a> </li>
+                    <li class="bg_lb"> <a href="{{ url('admin/dashboard') }}"> <i class="icon-dashboard"></i> @if(!empty($dashbaord)) <span class="label label-important">{{ $dashbaord }}</span> @endif My Dashboard </a> </li>
+                    @if(Session::get('adminDetails')['categories_view_access'] == 1 || Session::get('adminDetails')['categories_edit_access'] == 1 || Session::get('adminDetails')['categories_full_access'] == 1)
+                        <li class="bg_db"> <a href="{{ url('admin/view-categories') }}"> <i class="icon-inbox"> @if(!empty($categoryCount)) </i><span class="label label-success">{{ $categoryCount }}</span> @endif Categories </a> </li>
                     @endif
-                    @if(Session::get('adminDetails')['products_access'] == 1)
-                        <li class="bg_lg"> <a href="{{ url('admin/products') }}"> <i class="icon-inbox"></i><span class="label label-success">101</span> Products </a> </li>
+                    @if(Session::get('adminDetails')['products_view_access'] == 1 || Session::get('adminDetails')['products_edit_access'] == 1 || Session::get('adminDetails')['products_full_access'] == 1)
+                        <li class="bg_lg"> <a href="{{ url('admin/view-products') }}"> <i class="icon-inbox"></i> @if(!empty($productCount)) <span class="label label-success">{{ $productCount }}</span> @endif Products </a> </li>
                     @endif
-                    @if(Session::get('adminDetails')['orders_access'] == 1)
-                        <li class="bg_dg"> <a href="{{ url('admin/orders') }}"> <i class="icon-inbox"></i><span class="label label-success">101</span> Orders </a> </li>
+                    @if(Session::get('adminDetails')['orders_view_access'] == 1 || Session::get('adminDetails')['orders_edit_access'] == 1 || Session::get('adminDetails')['orders_full_access'] == 1)
+                        <li class="bg_dg"> <a href="{{ url('admin/view-orders') }}"> <i class="icon-inbox"></i> @if(!empty($orderCount)) <span class="label label-success">{{ $orderCount }}</span> @endif Orders </a> </li>
                     @endif
-                    @if(Session::get('adminDetails')['users_access'] == 1)
-                        <li class="bg_ly"> <a href="{{ url('admin/users') }}"> <i class="icon-inbox"></i><span class="label label-success">101</span> Users </a> </li>
+                    @if(Session::get('adminDetails')['users_view_access'] == 1 || Session::get('adminDetails')['users_edit_access'] == 1 || Session::get('adminDetails')['users_full_access'] == 1)
+                        <li class="bg_ly"> <a href="{{ url('admin/view-users') }}"> <i class="icon-inbox"></i> @if(!empty($userCount)) <span class="label label-success">{{ $userCount }}</span> @endif Users </a> </li>
                     @endif
-                    <li class="bg_dy"> <a href="{{ url('admin/coupons') }}"> <i class="icon-inbox"></i><span class="label label-success">101</span> Coupons </a> </li>
-                    <li class="bg_ls"> <a href="{{ url('admin/currencies') }}"> <i class="icon-inbox"></i><span class="label label-success">101</span> Currencies </a> </li>
-                    <li class="bg_lo"> <a href="{{ url('admin/shipping') }}"> <i class="icon-inbox"></i><span class="label label-success">101</span> Shipping Locations </a> </li>
-                    <li class="bg_lr"> <a href="{{ url('admin/banners') }}"> <i class="icon-inbox"></i><span class="label label-success">101</span> Banners </a> </li>
+                    <li class="bg_dy"> <a href="{{ url('admin/view-coupons') }}"> <i class="icon-inbox"></i> @if(!empty($couponCount)) <span class="label label-success">{{ $couponCount }}</span> @endif Coupons </a> </li>
+                    <li class="bg_ls"> <a href="{{ url('admin/view-currencies') }}"> <i class="icon-inbox"></i> @if(!empty($currencyCount)) <span class="label label-success">{{ $currencyCount }}</span> @endif Currencies </a> </li>
+                    <li class="bg_lo"> <a href="{{ url('admin/view-shipping-charges') }}"> <i class="icon-inbox"></i> @if(!empty($shippingCount)) <span class="label label-success">{{ $shippingCount }}</span> @endif Shipping Locations </a> </li>
+                    <li class="bg_lr"> <a href="{{ url('admin/view-banners') }}"> <i class="icon-inbox"></i> @if(!empty($bannerCount)) <span class="label label-success">{{ $bannerCount }}</span> @endif Banners </a> </li>
                     {{-- <li class="bg_lv"> <a href="tables.html"> <i class="icon-th"></i> Tables</a> </li> --}}
                 </ul>
             </div>
