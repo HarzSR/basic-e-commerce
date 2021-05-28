@@ -126,6 +126,7 @@ Things done on this project
 - Restrict Access based on Sub-Admin Permission
 - Advance Admin, Sub-Admin roles
 - Restrict all functions to role based
+- Website Security: Ensuring safety of grand total
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms

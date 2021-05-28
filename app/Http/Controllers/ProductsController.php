@@ -1194,6 +1194,8 @@ class ProductsController extends Controller
             // Removed as Advance Shipping Charges were implemented
             // $shippingCharges = Product::getShippingCharges($shippingDetails->country);
 
+            $grand_total = Product::getGrandTotal();
+
             $order = new Order;
             $order->user_id = $user_id;
             $order->user_email = $user_email;
@@ -1216,7 +1218,7 @@ class ProductsController extends Controller
             $order->coupon_amount = $couponAmount;
             $order->order_status = "New";
             $order->payment_method = $data['payment_method'];
-            $order->grand_total = $data['grand_total'];
+            $order->grand_total = $grand_total;
 
             $order->save();
 
@@ -1254,7 +1256,7 @@ class ProductsController extends Controller
             }
 
             Session::put('order_id', $order_id);
-            Session::put('grand_total', $data['grand_total']);
+            Session::put('grand_total', $grand_total);
 
             if($data['payment_method'] == "COD")
             {

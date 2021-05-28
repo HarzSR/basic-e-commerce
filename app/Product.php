@@ -175,4 +175,23 @@ class Product extends Model
 
         return $shipping_charges;
     }
+
+    // Get Grand Total Function
+
+    public static function getGrandTotal()
+    {
+        $user_email = Auth::User()->email;
+        $session_id = Session::get('session_id');
+        $userCart = DB::table('cart')->where(['user_email' => $user_email, 'session_id' => $session_id])->get();
+
+        foreach ($userCart as $product)
+        {
+            $productPrice = ProductsAttribute::where(['product_id' => $product['product_id'], 'size' => $product['size']])->first();
+            $priceArray[] = $productPrice->price;
+        }
+
+        $grandTotal = array_sum($priceArray) - Session::get('couponAmount') + Session::get('ShippingCharges');
+
+        return $grandTotal;
+    }
 }
