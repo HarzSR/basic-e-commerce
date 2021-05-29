@@ -52,9 +52,10 @@
                                     </td>
                                     <td class="cart_price">
                                         <?php
-                                            $getItemPrice = Product::getCurrencyRates($cart->price);
+                                            $product_price = Product::getProductPrice($cart->product_id, $cart->size);
+                                            $getItemPrice = Product::getCurrencyRates($product_price);
                                         ?>
-                                        <p class="btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getItemPrice['USD_Rate'] }} <br> GB&#xa3; {{ $getItemPrice['GBP_Rate'] }} <br> EU&#x20AC; {{ $getItemPrice['EUR_Rate'] }} <br> NZ&#x24; {{ $getItemPrice['NZD_Rate'] }} <br>">&#8377; {{ $cart->price }}</p>
+                                        <p class="btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getItemPrice['USD_Rate'] }} <br> GB&#xa3; {{ $getItemPrice['GBP_Rate'] }} <br> EU&#x20AC; {{ $getItemPrice['EUR_Rate'] }} <br> NZ&#x24; {{ $getItemPrice['NZD_Rate'] }} <br>">&#8377; {{ $product_price }}</p>
                                     </td>
                                     <td class="cart_quantity">
                                         <div class="cart_quantity_button">
@@ -67,15 +68,17 @@
                                     </td>
                                     <td class="cart_total">
                                         <?php
-                                            $getCartCurrencyRates = Product::getCurrencyRates($cart->quantity * $cart->price);
+                                            $getCartCurrencyRates = Product::getCurrencyRates($cart->quantity * $product_price);
                                         ?>
-                                        <p class="cart_total_price btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCartCurrencyRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCartCurrencyRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCartCurrencyRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCartCurrencyRates['NZD_Rate'] }} <br>">&#8377; {{ $cart->quantity * $cart->price }}</p>
+                                        <p class="cart_total_price btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCartCurrencyRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCartCurrencyRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCartCurrencyRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCartCurrencyRates['NZD_Rate'] }} <br>">&#8377; {{ $cart->quantity * $product_price }}</p>
                                     </td>
                                     <td class="cart_delete">
                                         <a class="cart_quantity_delete" href="{{ url('cart/delete-product/' . $cart->id) }}" onclick="return confirm('Would you like to delete {{ $cart->product_name }} - {{ $cart->size }}?')"><i class="fa fa-times"></i></a>
                                     </td>
                                 </tr>
-                                <?php $total_amount = $total_amount + ($cart->quantity * $cart->price); ?>
+                                <?php
+                                    $total_amount = $total_amount + ($cart->quantity * $product_price);
+                                ?>
                             @endforeach
                         </tbody>
                     </table>
