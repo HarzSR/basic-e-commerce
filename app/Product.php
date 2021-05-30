@@ -183,11 +183,20 @@ class Product extends Model
         $user_email = Auth::User()->email;
         $session_id = Session::get('session_id');
         $userCart = DB::table('cart')->where(['user_email' => $user_email, 'session_id' => $session_id])->get();
+        $userCartCount = DB::table('cart')->where(['user_email' => $user_email, 'session_id' => $session_id])->count();
 
-        foreach ($userCart as $product)
+        if($userCartCount == 1)
         {
-            $productPrice = ProductsAttribute::where(['product_id' => $product['product_id'], 'size' => $product['size']])->first();
+            $productPrice = ProductsAttribute::where(['product_id' => $userCart[0]->product_id, 'size' => $userCart[0]->sizex])->first();
             $priceArray[] = $productPrice->price;
+        }
+        else
+        {
+            foreach ($userCart as $product)
+            {
+                $productPrice = ProductsAttribute::where(['product_id' => $product['product_id'], 'size' => $product['size']])->first();
+                $priceArray[] = $productPrice->price;
+            }
         }
 
         $grandTotal = array_sum($priceArray) - Session::get('couponAmount') + Session::get('ShippingCharges');

@@ -1,0 +1,234 @@
+[33mcommit b2986e70783a4d0c052c753d4c003c735582ac6a[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+AuthorDate: Sat May 29 23:59:59 2021 +1200
+Commit:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+CommitDate: Sat May 29 23:59:59 2021 +1200
+
+    One Hundred Twenty Fourth Commit
+    
+    Secure Cart Price by using Session
+    Modified Product Controller and Product Model
+
+[33mcommit f270600498bdadbbb1bf4c74dad960d695104ca3[m
+Author:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+AuthorDate: Fri May 28 22:35:28 2021 +1200
+Commit:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+CommitDate: Fri May 28 22:35:28 2021 +1200
+
+    One Hundred Twenty Third Commit
+    
+    Secure Grand Total by using Session
+    Modified Product Controller and Product Model
+
+[33mcommit 0bd4e2e0b30230e6f037bd58f7a0314b312be2b9[m
+Author:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+AuthorDate: Thu May 27 23:46:26 2021 +1200
+Commit:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+CommitDate: Thu May 27 23:46:26 2021 +1200
+
+    One Hundred Twenty Second Commit
+    
+    Modified Admin Sidebar
+    Modified Order and User to work based on Role
+    PS: Modified only for Categories, Products, Order, Users
+    Pending - Test all Products page
+
+[33mcommit 959aebd57960c2e7cf9def9f789a880a07cf90b2[m
+Author:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+AuthorDate: Wed May 26 01:13:18 2021 +1200
+Commit:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+CommitDate: Wed May 26 01:13:18 2021 +1200
+
+    One Hundred Twenty First Commit
+    
+    Added Verification for Products Function
+    Modified View Products Page
+    Modified Add Attributes Page
+    Modified Add Images Page
+    Modified Admin Sidebar
+    PS: Modified only for Categories, Products
+    Pending - Orders, Users
+    Pending - Test all Products page
+
+[33mcommit 46f972601be497a9d673bcf576481390157fa766[m
+Author:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+AuthorDate: Tue May 25 23:42:07 2021 +1200
+Commit:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+CommitDate: Tue May 25 23:42:07 2021 +1200
+
+    One Hundred Twentieth Commit
+    
+    Modified Category Controller to Accommodate changes
+    Modified Admin Login to Accommodate changes
+    Made changes to Add Admin Page
+    Made changes to Edit Admin Page
+    Made changes to View Admin Page
+    Made changes to Admin Sidebar Page
+    PS: Modified only for Categories,
+    Pending - Orders, Products, Users
+
+[33mcommit a2892733c4cd0aab19ce755c8321742cd63e32e9[m
+Author:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+AuthorDate: Mon May 24 23:58:22 2021 +1200
+Commit:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+CommitDate: Mon May 24 23:58:22 2021 +1200
+
+    One Hundred and Nineteenth Commit
+    
+    Added View, Edit and Full access to all 4 types
+    Modified Migration
+    Modified Add Admin Page
+    Modified View Admin Page
+    Modified Edit Admin Page
+
+[33mcommit a366b80ec31aa801395a27bc63adb74abf825fca[m
+Author:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+AuthorDate: Sun May 23 17:04:29 2021 +1200
+Commit:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+CommitDate: Mon May 24 23:56:59 2021 +1200
+
+    One Hundred and Eighteenth Commit
+    
+    Modified Admin Migration to accommodate access level
+    Protect function with Access levels
+    Modify side bar based on access levels
+    Fix Bugs
+
+[33mcommit f319bf0861a617d12d669492f37e1aadd8a8632a[m
+Author:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+AuthorDate: Sat May 22 23:55:53 2021 +1200
+Commit:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+CommitDate: Sat May 22 23:56:41 2021 +1200
+
+    One Hundred and Seventeenth Commit
+    
+    Add Function to add Data Type to Add Admin
+    Modified Admin Migration
+    Created View based on JS for Admin/Sub Admin
+    Modified Add Admin Page to add Type
+    Created Edit Admin Page
+    Modified View Admin Page
+    Created route foe Edit Admin and Delete Admin
+
+[33mcommit 0fedb694afaed389ba54bd62904cbd60b74e3700[m
+Author:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+AuthorDate: Fri May 21 23:35:00 2021 +1200
+Commit:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+CommitDate: Fri May 21 23:35:00 2021 +1200
+
+    One Hundred and Sixteenth Commit
+    
+    Added Add Admin Page
+    Created Function to add Admin
+    Added Validator to Admin
+    Fixed Bugs
+
+[33mcommit e0373ab8f63657785a3b46c5d998e7ca82a71217[m
+Author:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+AuthorDate: Fri May 21 00:39:46 2021 +1200
+Commit:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+CommitDate: Fri May 21 00:39:46 2021 +1200
+
+    One Hundred and Fifteenth Commit
+    
+    Created function to View Admins
+    Created Admin View Sidebar
+    Created Admin View Page
+
+[33mcommit 26adbc4262e40ef7036b80dcd5cf787f8e0546d8[m
+Author:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+AuthorDate: Thu May 20 22:03:29 2021 +1200
+Commit:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+CommitDate: Thu May 20 22:03:29 2021 +1200
+
+    One Hundred and Fourteenth Commit
+    
+    Added breadcrumbs to Search results
+    Commented Email
+    Changed Time Zone
+    Fixed Bugs
+
+[33mcommit aa42c7873ff968ef093bddf5604ddb718f8b2df2[m
+Author:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+AuthorDate: Wed May 19 23:24:58 2021 +1200
+Commit:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+CommitDate: Wed May 19 23:24:58 2021 +1200
+
+    One Hundred and Thirteenth Commit
+    
+    Added Shipping Charges to Checkout page
+    Changed Shipping Charge calculation in Model page
+    Fixed Bugs
+
+[33mcommit 7f91ae0dd49bfc0b464dc732a158a9fdc61e01e3[m
+Author:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+AuthorDate: Tue May 18 16:18:31 2021 +1200
+Commit:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+CommitDate: Tue May 18 16:18:31 2021 +1200
+
+    One Hundred and Twelfth Commit
+    
+    Added Weight based price for Shipping
+    Modified shipping migration
+    Modified view shipping rates page
+    Modified edit shipping rates page
+
+[33mcommit c2b2de0247c4f31d230c238aa85a0648f7831c8e[m
+Author:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+AuthorDate: Mon May 17 22:54:18 2021 +1200
+Commit:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+CommitDate: Mon May 17 22:54:18 2021 +1200
+
+    One Hundred and Eleventh Commit
+    
+    Add Weight based Calculator for Shipping
+    Add Weight to add product page
+    Add Weight to edit product page
+    Add Weight to Migration file
+    Add Weight to View Page
+
+[33mcommit 317641e0d967fc31ac3eead892665459161f304f[m
+Author:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+AuthorDate: Sun May 16 01:07:59 2021 +1200
+Commit:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+CommitDate: Mon May 17 22:52:34 2021 +1200
+
+    One Hundred Tenth Commit
+    
+    Added Shipping Charges to Check out and Order into DB
+    Got Shipping Charges and displayed with Currency rates
+    Fixed Bugs
+
+[33mcommit 84f15cda79273a1b404158e8fa24f3adf15a4eb8[m
+Author:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+AuthorDate: Sat May 15 00:53:18 2021 +1200
+Commit:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+CommitDate: Sat May 15 00:53:18 2021 +1200
+
+    One Hundred Ninth Commit
+    
+    Added Edit Shipping Controller
+    Used Validator to validate
+    Created Edit Shipping Charge Page
+    Added Routes for Edit Shipping Charge
+
+[33mcommit 45910d43615698f0a122136f064da577c0c81372[m
+Author:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+AuthorDate: Fri May 14 23:43:53 2021 +1200
+Commit:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+CommitDate: Fri May 14 23:43:53 2021 +1200
+
+    One Hundred Eight Commit
+    
+    Created Shipping Charges Database
+    Created Shipping Controller
+    Created Shipping Model
+    Created View Function
+    Created and Commented - Delete Function (Won't be required)
+    Created View Shipping Rates Page
+    Add Routes for Viewing Shipping Charges
+
+[33mcommit bc92828fc0640ebcc66b435411f9a0be4f9b9552[m
+Author:     Hariharan Thiagarajan <hariharansmm@gmail.com>
+AuthorDate: Thu May 13 11:51:38 2021 +1200
+Commit:     Harih
