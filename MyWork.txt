@@ -128,6 +128,7 @@ Things done on this project
 - Restrict all functions to role based
 - Website Security: Ensuring safety of grand total
 - Website Security: Order review page
+- Website Security: Secure place order page
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms
