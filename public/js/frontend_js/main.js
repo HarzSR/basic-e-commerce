@@ -418,3 +418,41 @@ function checkPincode()
         });
     }
 }
+
+function checkSubscriber()
+{
+    var subscriber_email = $("#subscriber_email").val();
+    $('#statusSubscriber').hide()
+    $.ajax({
+        type: 'post',
+        data: {
+            subscriber_email: subscriber_email
+        },
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: '/check-subscriber-email',
+        success: function (response) {
+            // alert(response);
+            $('#statusSubscriber').show()
+            if(response == "Error")
+            {
+                // alert("Email ID Invalid Format. Please check again.");
+                $('#statusSubscriber').html("<font color='red'><br><br><b>Unfortunately, there is an Error in Email ID. Please correct it and try again.</b></font>");
+            }
+            else if(response == "Exist")
+            {
+                // alert("Email ID already subscribed");
+                $('#statusSubscriber').html("<font color='orange'><br><br><b>Luckily you are already a Subscriber. If you are not receiving our emails properly, please contact help desk.</b></font>");
+            }
+            else if(response == "Success")
+            {
+                // alert("Successfully Subscribed");
+                $('#statusSubscriber').html("<font color='green'><br><br><b>You have successfully Subscribed. Welcome to the club.</b></font>");
+            }
+        },
+        error: function (response) {
+            alert("Error : " + response);
+        }
+    });
+}

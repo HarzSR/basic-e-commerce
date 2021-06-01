@@ -129,6 +129,7 @@ Things done on this project
 - Website Security: Ensuring safety of grand total
 - Website Security: Order review page
 - Website Security: Secure place order page
+- Subscribe to Newsletter
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms

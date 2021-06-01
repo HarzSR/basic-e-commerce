@@ -133,9 +133,11 @@
                 <div class="col-sm-3 col-sm-offset-1">
                     <div class="single-widget">
                         <h2>About Shopper</h2>
-                        <form action="#" class="searchform">
-                            <input type="text" placeholder="Your email address" />
+                        <form action="javascript:void(0);" class="searchform" type="post">
+                            {{ csrf_field() }}
+                            <input onfocusout="checkSubscriber();" type="email" name="subscriber_email" id="subscriber_email" placeholder="Your email address" required/>
                             <button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
+                            <span id="statusSubscriber" style="display: none;"></span>
                             <p>Get the most recent updates from <br />our site and be updated your self...</p>
                         </form>
                     </div>
