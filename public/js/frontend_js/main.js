@@ -422,7 +422,8 @@ function checkPincode()
 function checkSubscriber()
 {
     var subscriber_email = $("#subscriber_email").val();
-    $('#statusSubscriber').hide()
+    $('#statusSubscriber').hide();
+    $('#statusButton').hide();
     $.ajax({
         type: 'post',
         data: {
@@ -434,7 +435,56 @@ function checkSubscriber()
         url: '/check-subscriber-email',
         success: function (response) {
             // alert(response);
-            $('#statusSubscriber').show()
+            $('#statusSubscriber').show();
+            $('#statusButton').show();
+            if(response == "Error")
+            {
+                // alert("Email ID Invalid Format. Please check again.");
+                if(subscriber_email.length == 0)
+                {
+                    $('#statusSubscriber').hide();
+                }
+                else
+                {
+                    $('#statusButton').html("");
+                    $('#statusSubscriber').html("<font color='red'><br><br><b>Unfortunately, there is an Error in Email ID. Please correct it and try again.</b></font>");
+                }
+            }
+            else if(response == "Exist")
+            {
+                // alert("Email ID already subscribed");
+                $('#statusButton').html("");
+                $('#statusSubscriber').html("<font color='orange'><br><br><b>Luckily you are already a Subscriber. If you are not receiving our emails properly, please contact help desk.</b></font>");
+            }
+            else if(response == "Success")
+            {
+                // alert("Successfully Subscribed");
+                $('#statusButton').html("<button type='submit' class='btn btn-default' name='subscriber_button' id='subscriber_button' onclick='addSubscriber();'><i class='fa fa-arrow-circle-o-right'></i></button>");
+                $('#statusSubscriber').html("<font color='green'><br><br><b>You haven't joined the club yet. Click to Join now.</b></font>");
+            }
+        },
+        error: function (response) {
+            alert("Error : " + response);
+        }
+    });
+}
+
+function addSubscriber()
+{
+    var subscriber_email = $("#subscriber_email").val();
+    $('#statusSubscriber').hide();
+    $.ajax({
+        type: 'post',
+        data: {
+            subscriber_email: subscriber_email
+        },
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: '/add-subscriber-email',
+        success: function (response) {
+            // alert(response);
+            $('#statusSubscriber').show();
             if(response == "Error")
             {
                 // alert("Email ID Invalid Format. Please check again.");
@@ -448,7 +498,9 @@ function checkSubscriber()
             else if(response == "Success")
             {
                 // alert("Successfully Subscribed");
-                $('#statusSubscriber').html("<font color='green'><br><br><b>You have successfully Subscribed. Welcome to the club.</b></font>");
+                $("#subscriber_email").val('');
+                $('#statusButton').hide();
+                $('#statusSubscriber').html("<font color='green'><br><br><b>You have successfully joined the club. Welcome.</b></font>");
             }
         },
         error: function (response) {

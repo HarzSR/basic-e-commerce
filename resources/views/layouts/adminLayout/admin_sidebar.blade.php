@@ -79,6 +79,11 @@
                 <li <?php if (preg_match("/(view-banners|edit-banner)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-banners') }}">View Banners</a></li>
             </ul>
         </li>
+        <li class="submenu"> <a href="#"><i class="icon icon-envelope"></i> <span>Newsletter Subscribers</span> <span class="label label-important">1</span></a>
+            <ul <?php if (preg_match("/newsletter-subscribers/i", url()->current())) echo "style=\"display: block;\"" ?>>
+                <li <?php if (preg_match("/(view-newsletter-subscribers|view-newsletter-subscriber)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-newsletter-subscribers') }}">View Newsletter Subscribers</a></li>
+            </ul>
+        </li>
         <li <?php if (preg_match("/settings/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/dashboard') }}"><i class="icon icon-cogs"></i> <span>Settings</span></a> </li>
     </ul>
 </div>

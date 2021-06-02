@@ -48,6 +48,7 @@ Route::get('/user-logout', 'UsersController@logout');
 Route::match(['get', 'post'], '/search-products', 'ProductsController@searchProducts');
 Route::post('/check-pincode', 'ProductsController@checkPincode');
 Route::post('/check-subscriber-email', 'NewsletterController@checkSubscriber');
+Route::post('/add-subscriber-email', 'NewsletterController@addSubscriber');
 
 Route::match(['get', 'post'], '/page/contact', 'CmsController@contact');
 Route::match(['get', 'post'], '/page/{url}', 'CmsController@cmsPage');
@@ -151,6 +152,10 @@ Route::group(['middleware' => ['adminlogin']], function () {
     Route::get('/admin/view-admins', 'AdminController@viewAdmins');
     Route::match(['get', 'post'], '/admin/edit-admin/{id}', 'AdminController@editAdmin');
     Route::get('/admin/delete-admin/{id}', 'AdminController@deleteAdmin');
+
+    // View Newsletter Subscribers
+
+    Route::get('/admin/view-newsletter-subscribers', 'NewsletterController@viewSubscribers');
 });
 
 Auth::routes(['verify' => true]);

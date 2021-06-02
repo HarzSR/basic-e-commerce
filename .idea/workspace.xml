@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d55aefa-07cd-49f9-b334-7d2ae82c409a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/NewsletterController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/NewsletterSubscriber.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_06_01_164349_create_newsletter_subscribers_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/newsletters/view_newsletter_subscribers.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyWork.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MyWork.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NewsletterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NewsletterController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/frontend_js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/frontend_js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/adminLayout/admin_sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/adminLayout/admin_sidebar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/frontLayout/front_footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/frontLayout/front_footer.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -199,7 +198,7 @@
       <workItem from="1620957050693" duration="55283000" />
       <workItem from="1621656296576" duration="44087000" />
       <workItem from="1622373410286" duration="2001000" />
-      <workItem from="1622430881029" duration="6136000" />
+      <workItem from="1622430881029" duration="11785000" />
     </task>
     <servers />
   </component>
