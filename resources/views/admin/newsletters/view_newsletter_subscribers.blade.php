@@ -26,6 +26,7 @@
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
                             <h5>View Newsletter Subscribers - {{ $subscriberCount }}</h5>
+                            <a href="{{ url('/admin/export-newsletter-subscribers') }}" class="btn btn-success btn-mini" title="Export Subscribers" style="float: right; margin-right: 7px; margin-top: 7px;">Export Subscribers</a>
                         </div>
                         <div class="widget-content nopadding">
                             <table class="table table-bordered data-table">
@@ -35,6 +36,7 @@
                                         <th>Email</th>
                                         <th>Status</th>
                                         <th>Created at</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -44,12 +46,13 @@
                                         <td>{{ $subscriber->email }}</td>
                                         <td>
                                             @if($subscriber->status == 1)
-                                                <button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Active</button>
+                                                <a href="{{ url('admin/update-newsletter-status/' . $subscriber->id . '/0') }}"><button class="btn btn-success btn-mini" title="Active" style="pointer-events: none; user-select: none;">Active</button></a>
                                             @else
-                                                <button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">In-Active</button>
+                                                <a href="{{ url('admin/update-newsletter-status/' . $subscriber->id . '/1') }}"><button class="btn btn-danger btn-mini" title="In-Active" style="pointer-events: none; user-select: none;">In-Active</button></a>
                                             @endif
                                         </td>
                                         <td><?php echo date('d-M-Y h:i A', strtotime($subscriber->created_at)); ?></td>
+                                        <td><a rel="{{ $subscriber->id }}" rel1="delete-newsletter-subscriber" rel2="Subscriber" href="javascript:" class="btn btn-danger btn-mini deleteRecord" title="Delete Subscriber">Delete</a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -58,6 +61,7 @@
                                     <th>Email</th>
                                     <th>Status</th>
                                     <th>Created at</th>
+                                    <th>Action</th>
                                 </tfoot>
                             </table>
                         </div>

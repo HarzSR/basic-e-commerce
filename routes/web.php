@@ -156,6 +156,9 @@ Route::group(['middleware' => ['adminlogin']], function () {
     // View Newsletter Subscribers
 
     Route::get('/admin/view-newsletter-subscribers', 'NewsletterController@viewSubscribers');
+    Route::get('/admin/update-newsletter-status/{id}/{status}', 'NewsletterController@updateSubscriber');
+    Route::get('/admin/delete-newsletter-subscriber/{id}', 'NewsletterController@deleteSubscriber');
+    Route::get('/admin/export-newsletter-subscribers', 'NewsletterController@exportSubscribers');
 });
 
 Auth::routes(['verify' => true]);
