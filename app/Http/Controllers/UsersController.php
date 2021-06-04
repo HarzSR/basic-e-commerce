@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Country;
+use App\Exports\usersExport;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 use Session;
 use DB;
 use function foo\func;
@@ -326,7 +328,7 @@ class UsersController extends Controller
         return view('admin.users.view_users')->with(compact('users', 'userCount'));
     }
 
-    // Forgot Password for Users
+    // Forgot Password for Users Function
 
     public function forgotPassword(Request $request)
     {
@@ -366,5 +368,12 @@ class UsersController extends Controller
         }
 
         return view('users.forgot_password');
+    }
+
+    // Export Users function
+
+    public function exportUsers()
+    {
+        return Excel::download(new usersExport,'Users ' . date('d-M-Y h:i:s') . '.xlsx');
     }
 }

@@ -26,6 +26,7 @@
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
                             <h5>View Users - {{ $userCount }}</h5>
+                            <a href="{{ url('/admin/export-users') }}" class="btn btn-success btn-mini" title="Export Subscribesersrs" style="float: right; margin-right: 7px; margin-top: 7px;">Export Users</a>
                         </div>
                         <div class="widget-content nopadding">
                             <table class="table table-bordered data-table">
