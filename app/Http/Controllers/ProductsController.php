@@ -7,6 +7,8 @@ use App\Category;
 use App\Country;
 use App\Coupon;
 use App\DeliveryAddress;
+use App\Exports\productsExport;
+use App\Exports\usersExport;
 use App\Order;
 use App\OrdersProduct;
 use App\Product;
@@ -22,6 +24,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Image;
+use Maatwebsite\Excel\Facades\Excel;
 use Validator;
 
 class ProductsController extends Controller
@@ -1738,5 +1741,12 @@ class ProductsController extends Controller
 
             return redirect::to($finalUrl);
         }
+    }
+
+    // Export Users function
+
+    public function exportProducts()
+    {
+        return Excel::download(new productsExport,'Products ' . date('d-M-Y h:i:s') . '.xlsx');
     }
 }

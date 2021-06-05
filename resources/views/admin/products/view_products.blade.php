@@ -26,6 +26,7 @@
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
                             <h5>View Products @if($productCount != 0) - {{ $productCount }} @endif</h5>
+                            <a href="{{ url('/admin/export-products') }}" class="btn btn-success btn-mini" title="Export Products" style="float: right; margin-right: 7px; margin-top: 7px;">Export Products</a>
                         </div>
                         <div class="widget-content nopadding">
                             <table class="table table-bordered data-table">

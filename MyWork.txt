@@ -132,6 +132,7 @@ Things done on this project
 - Subscribe to Newsletter
 - Export Subscribers
 - Export Users
+- Export Products
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms
@@ -142,7 +143,6 @@ ToDo List
 - Pattern Filter Pagination not working
 - Avoid Order placement - in case of trying to order more than required quantity: perform action
 - Need to verify User based authentication for all use case
-- Header for Export Subscribers and Users
 
 Not ToDo List
 - Add Social Share Button (Index: 145) - Implemented and commented out: CORS Errors
