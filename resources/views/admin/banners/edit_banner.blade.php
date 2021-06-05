@@ -26,6 +26,15 @@
                         <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
                             <h5>Edit Banner</h5>
                         </div>
+                        @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="widget-content nopadding">
                             <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{ url('/admin/edit-banner/' . $bannerDetails->id) }}" name="edit_banner" id="edit_banner" novalidate="novalidate">
                                 {{ csrf_field() }}
@@ -43,19 +52,19 @@
                                 <div class="control-group">
                                     <label class="control-label">Title</label>
                                     <div class="controls">
-                                        <input type="text" name="title" id="title" value="{{ $bannerDetails->title }}">
+                                        <input type="text" name="title" id="title" value="@if(!empty(old('title'))) {{ old('title') }} @else {{ $bannerDetails->title }} @endif">
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Link</label>
                                     <div class="controls">
-                                        <input type="text" name="link" id="link" value="{{ $bannerDetails->link }}">
+                                        <input type="text" name="link" id="link" value="@if(!empty(old('link'))) {{ old('link') }} @else {{ $bannerDetails->link }} @endif">
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Enable</label>
                                     <div class="controls">
-                                        <input type="checkbox" name="status" id="status" @if($bannerDetails->status == 1) checked @endif value="1">
+                                        <input type="checkbox" name="status" id="status" @if(! ($errors->any() && is_null(old('status'))) && old('status', $bannerDetails->status)) checked @endif value="1">
                                     </div>
                                 </div>
                                 <div class="form-actions">

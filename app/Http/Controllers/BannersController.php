@@ -6,6 +6,7 @@ use App\Banner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Image;
+use Validator;
 
 class BannersController extends Controller
 {
@@ -17,6 +18,17 @@ class BannersController extends Controller
         {
             $data = $request->all();
 
+            $validator = Validator::make($request->all(), [
+                'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
+                'title' => 'required|regex:/^[\w\-\s]+$/',
+                'link' => 'required|regex:/(?:.*\/)(?:[^.]+$)/'
+            ]);
+
+            if($validator->fails())
+            {
+                return redirect()->back()->withErrors($validator)->withInput($request->input());
+            }
+
             $banner = new Banner();
             if (empty($data['image']))
             {
@@ -26,7 +38,7 @@ class BannersController extends Controller
             {
                 if ($request->hasFile('image'))
                 {
-                    $image_tmp = Input::file('image');
+                    $image_tmp = $request->file('image');
 
                     if ($image_tmp->isValid())
                     {
@@ -80,10 +92,21 @@ class BannersController extends Controller
         {
             $data = $request->all();
 
+            $validator = Validator::make($request->all(), [
+                'current_image' => 'required',
+                'title' => 'required|regex:/^[\w\-\s]+$/',
+                'link' => 'required|regex:/(?:.*\/)(?:[^.]+$)/'
+            ]);
+
+            if($validator->fails())
+            {
+                return redirect()->back()->withErrors($validator)->withInput($request->input());
+            }
+
             $banner = new Banner();
             if ($request->hasFile('image'))
             {
-                $image_tmp = Input::file('image');
+                $image_tmp = $request->file('image');
 
                 if ($image_tmp->isValid())
                 {
@@ -97,7 +120,7 @@ class BannersController extends Controller
             }
             else if(!empty($data['current_image']))
             {
-                $fileName= $data['current_image'];
+                $fileName = $data['current_image'];
             }
             else
             {
@@ -137,7 +160,7 @@ class BannersController extends Controller
         $banner_image_path = 'images/frontend_images/banners/' . $banner->image;
 
         // File::delete($banner_image_path);
-        if (file_exists($banner_image_path))
+        if (file_exists($banner_image_path) && !empty($banner->image))
         {
             unlink($banner_image_path);
         }

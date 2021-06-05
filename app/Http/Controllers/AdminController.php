@@ -302,7 +302,7 @@ class AdminController extends Controller
 
     public function editAdmin(Request $request, $id = null)
     {
-        if($request->isMethod('POSt'))
+        if($request->isMethod('POST'))
         {
             $data = $request->all();
 
@@ -314,8 +314,6 @@ class AdminController extends Controller
             {
                 return redirect()->back()->withErrors($validator)->withInput($request->input());
             }
-
-            // dd($data);
 
             if($data['type'] == "Admin")
             {

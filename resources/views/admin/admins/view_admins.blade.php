@@ -127,16 +127,16 @@
                                         <td><?php echo date('d-M-Y h:i A', strtotime($admin->created_at)); ?></td>
                                         <td>
                                             @if($admin->id != Session::get('adminDetails')['id'] && Session::get('adminDetails')['type'] == "Sub Admin")
-                                                <a href="{{ url('/admin/edit-admin/' . $admin->id) }}" class="btn btn-primary btn-mini" title="Edit Admin">Edit</a>
+                                                <a href="{{ url('/admin/edit-admin/' . $admin->id) }}" class="btn btn-primary btn-mini" title="Edit Admin/Sub-Admin" onclick="return confirm('Updating will required to re-enter this users Password. Are you willing to proceed?');">Edit</a>
                                                 {{-- <a href="{{ url('/admin/delete-admin' . $admin->id) }}" class="btn btn-danger btn-mini delProduct" >Delete</a></td> --}}
                                                 @if($admin->id != 1)
-                                                    <a rel="{{ $admin->id }}" rel1="delete-admin" rel2="Admin/Sub-Admin" href="javascript:" class="btn btn-danger btn-mini deleteRecord" title="Delete Admin">Delete</a>
+                                                    <a rel="{{ $admin->id }}" rel1="delete-admin" rel2="Admin/Sub-Admin" href="javascript:" class="btn btn-danger btn-mini deleteRecord" title="Delete Admin/Sub-Admin">Delete</a>
                                                 @endif
                                             @elseif(Session::get('adminDetails')['type'] == "Admin")
-                                                <a href="{{ url('/admin/edit-admin/' . $admin->id) }}" class="btn btn-primary btn-mini" title="Edit Admin">Edit</a>
+                                                <a href="{{ url('/admin/edit-admin/' . $admin->id) }}" class="btn btn-primary btn-mini" title="Edit Admin/Sub-Admin" onclick="return confirm('Updating will required to re-enter this users Password. Are you willing to proceed?');">Edit</a>
                                                 {{-- <a href="{{ url('/admin/delete-admin' . $admin->id) }}" class="btn btn-danger btn-mini delProduct" >Delete</a></td> --}}
                                                 @if($admin->id != 1)
-                                                    <a rel="{{ $admin->id }}" rel1="delete-admin" rel2="Admin/Sub-Admin" href="javascript:" class="btn btn-danger btn-mini deleteRecord" title="Delete Admin">Delete</a>
+                                                    <a rel="{{ $admin->id }}" rel1="delete-admin" rel2="Admin/Sub-Admin" href="javascript:" class="btn btn-danger btn-mini deleteRecord" title="Delete Admin/Sub-Admin">Delete</a>
                                                 @endif
                                             @else
                                                 <button class="btn btn-primary btn-mini" title="Self" style="pointer-events: none; user-select: none;">Self</button>

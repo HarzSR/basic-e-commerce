@@ -8,7 +8,6 @@ use App\Country;
 use App\Coupon;
 use App\DeliveryAddress;
 use App\Exports\productsExport;
-use App\Exports\usersExport;
 use App\Order;
 use App\OrdersProduct;
 use App\Product;
@@ -113,7 +112,7 @@ class ProductsController extends Controller
             {
                 if ($request->hasFile('image'))
                 {
-                    $image_tmp = Input::file('image');
+                    $image_tmp = $request->file('image');
 
                     if ($image_tmp->isValid())
                     {
@@ -138,7 +137,7 @@ class ProductsController extends Controller
             }
             elseif($request->hasFile('video'))
             {
-                $video_temp = Input::file('video');
+                $video_temp = $request->file('video');
                 $video_name = $video_temp->getClientOriginalName();
                 $video_extension = $video_temp->getClientOriginalExtension();
                 $video_path = public_path() . '/videos/backend_videos/products';
@@ -240,7 +239,7 @@ class ProductsController extends Controller
 
             if ($request->hasFile('image'))
             {
-                $image_tmp = Input::file('image');
+                $image_tmp = $request->file('image');
 
                 if ($image_tmp->isValid())
                 {
@@ -270,7 +269,7 @@ class ProductsController extends Controller
 
             if ($request->hasFile('video'))
             {
-                $video_temp = Input::file('video');
+                $video_temp = $request->file('video');
                 $video_name = $video_temp->getClientOriginalName();
                 $video_extension = $video_temp->getClientOriginalExtension();
                 $video_path = public_path() . '/videos/backend_videos/products';
@@ -392,39 +391,43 @@ class ProductsController extends Controller
         $small_image_path = 'images/backend_images/products/small/' . $product->image;
 
         // File::delete($large_image_path, $medium_image_path, $small_image_path);
-        if (file_exists($large_image_path))
+        if (file_exists($large_image_path) && !empty($product->image))
         {
             unlink($large_image_path);
         }
-        if (file_exists($medium_image_path))
+        if (file_exists($medium_image_path) && !empty($product->image))
         {
             unlink($medium_image_path);
         }
-        if (file_exists($small_image_path))
+        if (file_exists($small_image_path) && !empty($product->image))
         {
             unlink($small_image_path);
         }
 
         $products = ProductsImage::where(['product_id' => $id])->first();
+        $productsCount = ProductsImage::where(['product_id' => $id])->count();
 
-        foreach ($products as $product)
+        if($productsCount != 0)
         {
-            $large_image_path = 'images/backend_images/products/large/' . $product->image;
-            $medium_image_path = 'images/backend_images/products/medium/' . $product->image;
-            $small_image_path = 'images/backend_images/products/small/' . $product->image;
+            foreach ($products as $product)
+            {
+                $large_image_path = 'images/backend_images/products/large/' . $product->image;
+                $medium_image_path = 'images/backend_images/products/medium/' . $product->image;
+                $small_image_path = 'images/backend_images/products/small/' . $product->image;
 
-            // File::delete($large_image_path, $medium_image_path, $small_image_path);
-            if (file_exists($large_image_path))
-            {
-                unlink($large_image_path);
-            }
-            if (file_exists($medium_image_path))
-            {
-                unlink($medium_image_path);
-            }
-            if (file_exists($small_image_path))
-            {
-                unlink($small_image_path);
+                // File::delete($large_image_path, $medium_image_path, $small_image_path);
+                if (file_exists($large_image_path) && !empty($product->image))
+                {
+                    unlink($large_image_path);
+                }
+                if (file_exists($medium_image_path) && !empty($product->image))
+                {
+                    unlink($medium_image_path);
+                }
+                if (file_exists($small_image_path) && !empty($product->image))
+                {
+                    unlink($small_image_path);
+                }
             }
         }
 
@@ -433,7 +436,7 @@ class ProductsController extends Controller
         $video_path = public_path() . '/videos/backend_videos/products/' . $product->video;
 
         // File::delete($video_path);
-        if (file_exists($video_path))
+        if (file_exists($video_path) && !empty($product->video))
         {
             unlink($video_path);
         }
@@ -463,15 +466,15 @@ class ProductsController extends Controller
         $small_image_path = 'images/backend_images/products/small/' . $product->image;
 
         // File::delete($large_image_path, $medium_image_path, $small_image_path);
-        if (file_exists($large_image_path))
+        if (file_exists($large_image_path) && !empty($product->image))
         {
             unlink($large_image_path);
         }
-        if (file_exists($medium_image_path))
+        if (file_exists($medium_image_path) && !empty($product->image))
         {
             unlink($medium_image_path);
         }
-        if (file_exists($small_image_path))
+        if (file_exists($small_image_path) && !empty($product->image))
         {
             unlink($small_image_path);
         }
@@ -499,7 +502,7 @@ class ProductsController extends Controller
         $video_path = public_path() . '/videos/backend_videos/products/' . $product->video;
 
         // File::delete($video_path);
-        if (file_exists($video_path))
+        if (file_exists($video_path) && !empty($product->video))
         {
             unlink($video_path);
         }
@@ -657,6 +660,7 @@ class ProductsController extends Controller
     public function products($url = null)
     {
         $categoryCount = Category::where(['url' => $url, 'status' => 1])->count();
+
         if ($categoryCount == 0)
         {
             abort(404);
@@ -726,6 +730,7 @@ class ProductsController extends Controller
     public function product($id = null)
     {
         $productsCount = Product::where(['id' => $id, 'status' => 1])->count();
+
         if ($productsCount == 0)
         {
             abort(404);
@@ -780,7 +785,7 @@ class ProductsController extends Controller
 
     public function deleteAdditionalImage($id = null)
     {
-        if(Session::get('adminDetails')['products_access'] == 0)
+        if(Session::get('adminDetails')['products_full_access'] == 0)
         {
             return redirect('/admin/dashboard')->with('flash_message_error', 'Sorry, you don\'t have access to this page. How did you manage to come here. Please let us know, so that we can fix this bug.');
         }
@@ -794,15 +799,15 @@ class ProductsController extends Controller
         $small_image_path = 'images/backend_images/products/small/' . $product->image;
 
         // File::delete($large_image_path, $medium_image_path, $small_image_path);
-        if (file_exists($large_image_path))
+        if (file_exists($large_image_path) && !empty($product->image))
         {
             unlink($large_image_path);
         }
-        if (file_exists($medium_image_path))
+        if (file_exists($medium_image_path) && !empty($product->image))
         {
             unlink($medium_image_path);
         }
-        if (file_exists($small_image_path))
+        if (file_exists($small_image_path) && !empty($product->image))
         {
             unlink($small_image_path);
         }
@@ -1209,6 +1214,7 @@ class ProductsController extends Controller
             $order->pincode = $shippingDetails->pincode;
             $order->country = $shippingDetails->country;
             $order->mobile = $shippingDetails->mobile;
+
             if(Session::has('ShippingCharges'))
             {
                 $order->shipping_charges = Session::get('ShippingCharges');

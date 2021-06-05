@@ -26,6 +26,15 @@
                         <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
                             <h5>Add Banner</h5>
                         </div>
+                        @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="widget-content nopadding">
                             <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{ url('/admin/add-banner') }}" name="add_banner" id="add_banner" novalidate="novalidate">
                                 {{ csrf_field() }}
@@ -35,26 +44,16 @@
                                         <input type="file" name="image" id="image">
                                     </div>
                                 </div>
-                                {{-- <div class="control-group">
-                                    <label class="control-label">Image</label>
-                                    <div class="controls">
-                                        <div class="uploader" id="uniform-undefined">
-                                            <input type="file" name="image" id="image" size="19" style="opacity: 0;">
-                                            <span class="filename">No File Selected</span>
-                                            <span class="action">Choose File</span>
-                                        </div>
-                                    </div>
-                                </div> --}}
                                 <div class="control-group">
                                     <label class="control-label">Title</label>
                                     <div class="controls">
-                                        <input type="text" name="title" id="title">
+                                        <input type="text" name="title" id="title" value="{{ old('title') }}">
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Link</label>
                                     <div class="controls">
-                                        <input type="text" name="link" id="link">
+                                        <input type="text" name="link" id="link" value="{{ old('link') }}">
                                     </div>
                                 </div>
                                 <div class="control-group">
