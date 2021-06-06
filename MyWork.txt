@@ -133,6 +133,7 @@ Things done on this project
 - Export Subscribers
 - Export Users
 - Export Products
+- WYSIWYG Editor
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms

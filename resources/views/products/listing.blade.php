@@ -106,7 +106,8 @@
                                                 <div class="overlay-content">
                                                     <h2>NZ$ {{ $product->price }}</h2>
                                                     <p>{{ $product->product_name }}</p>
-                                                    <p>{{ $product->description }}</p>
+                                                    <p><?php echo $product->description; ?></p>
+                                                    <p><?php echo $product->care; ?></p>
                                                     <a href="{{ url('product/' . $product->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                                 </div>
                                             </div> -->

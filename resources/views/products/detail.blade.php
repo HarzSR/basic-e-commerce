@@ -142,13 +142,13 @@
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="description" >
                                 <div class="col-sm-12">
-                                    <p>{{ $productDetails->description }}</p>
+                                    <p><?php echo $productDetails->description; ?></p>
                                 </div>
                             </div>
 
                             <div class="tab-pane fade" id="care" >
                                 <div class="col-sm-12">
-                                    <p>{{ $productDetails->care }}</p>
+                                    <p><?php echo $productDetails->care; ?></p>
                                 </div>
                             </div>
 

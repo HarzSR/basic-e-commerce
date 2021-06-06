@@ -67,13 +67,13 @@
                                 <div class="control-group">
                                     <label class="control-label">Description</label>
                                     <div class="controls">
-                                        <textarea name="description" id="description">{{ old('description') }}</textarea>
+                                        <textarea name="description" id="description" class="span5">{{ old('description') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Materials & Care</label>
                                     <div class="controls">
-                                        <textarea name="care" id="care">{{ old('care') }}</textarea>
+                                        <textarea name="care" id="care" class="span5">{{ old('care') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="control-group">

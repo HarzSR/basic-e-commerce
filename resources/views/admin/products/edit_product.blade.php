@@ -67,13 +67,13 @@
                                 <div class="control-group">
                                     <label class="control-label">Description</label>
                                     <div class="controls">
-                                        <textarea name="description" id="description">@if(!empty(old('description'))) {{ old('description') }} @else {{ $productDetails->description }} @endif</textarea>
+                                        <textarea name="description" id="description" class="span5">@if(!empty(old('description'))) {{ old('description') }} @else {{ $productDetails->description }} @endif</textarea>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Materials & Care</label>
                                     <div class="controls">
-                                        <textarea name="care" id="care">@if(!empty(old('care'))) {{ old('care') }} @else {{ $productDetails->care }} @endif</textarea>
+                                        <textarea name="care" id="care" class="span5">@if(!empty(old('care'))) {{ old('care') }} @else {{ $productDetails->care }} @endif</textarea>
                                     </div>
                                 </div>
                                 <div class="control-group">
