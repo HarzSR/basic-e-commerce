@@ -31,7 +31,7 @@
                             {{ $orderDetails->state }} <br>
                             {{ $orderDetails->country }} <br>
                             {{ $orderDetails->pincode }} <br>
-                            {{ $orderDetails->mobile }}
+                            {{ $orderDetails->mobile }} <br>
                         </address>
                     </div>
                 </div>
