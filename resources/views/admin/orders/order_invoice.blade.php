@@ -45,7 +45,7 @@
                     <div class="col-xs-6 text-right">
                         <address>
                             <strong>Order Date:</strong><br>
-                            {{ $orderDetails->created_at }}<br><br>
+                            <?php echo date('d-M-Y h:i A', strtotime($orderDetails->created_at)); ?><br><br>
                         </address>
                     </div>
                 </div>
