@@ -102,12 +102,18 @@
                                         <label>Quantity: </label>
                                         <input type="number" name="quantity" id="quantity" value="1" />
                                         @if($total_stock > 0)
-                                            <button type="submit" class="btn btn-fefault cart" id="cartButton">
+                                            <button type="submit" class="btn btn-fefault cart" id="cartButton" name="cartButton" value="Shopping Cart">
                                                 <i class="fa fa-shopping-cart"></i>
-                                                Add to cart
+                                                 Add to cart
                                             </button>
                                         @endif
                                     </span>
+                                    <p>
+                                        <button type="submit" class="btn btn-fefault cart" id="wishListButton" name="wishListButton" value="Wish List" style="margin-left: 0px;">
+                                            <i class="fa fa-list"></i>
+                                             Add to wishlist
+                                        </button>
+                                    </p>
                                     <p><b>Availability: </b>
                                         <span id="availability">
                                             @if($total_stock > 0)

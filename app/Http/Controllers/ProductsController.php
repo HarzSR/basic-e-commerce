@@ -26,6 +26,7 @@ use Image;
 use Maatwebsite\Excel\Facades\Excel;
 use Validator;
 use Dompdf\Dompdf;
+use Carbon\Carbon;
 
 class ProductsController extends Controller
 {
@@ -829,51 +830,78 @@ class ProductsController extends Controller
 
         $data = $request->all();
 
-        if(empty(Auth::User()->email))
+        if(!empty($data['wishListButton']) && $data['wishListButton'] == "Wish List")
         {
-            $data['user_email'] = '';
-        }
-        else
-        {
-            $data['user_email'] = Auth::User()->email;
-        }
-
-        if(empty(Session::has('session_id')))
-        {
-            $session_id = str_random(40);
-            Session::put('session_id', $session_id);
-        }
-        $session_id = Session::get('session_id');
-
-        $sizeArray = explode('-', $data['size']);
-
-        $countProducts = DB::table('cart')->where(['product_id' => $data['product_id'], 'product_color' => $data['product_color'], 'size' => $sizeArray[1], 'session_id' => $session_id])->count();
-
-        if($countProducts > 0)
-        {
-            return redirect()->back()->with('flash_message_error', 'Product already exist');
-
-            // DB::table('cart')->where( 'session_id', $session_id)->increment('quantity', $data['quantity']);
-
-            // return redirect()->back()->with('flash_message_success', 'Product Already Exist. Cart Updated Successfully');
-        }
-        else
-        {
-            $getSku = ProductsAttribute::select('sku')->where(['product_id' => $data['product_id'], 'size' => $sizeArray[1]])->first();
-
-            $getStockCount = ProductsAttribute::select('stock')->where(['product_id' => $data['product_id'], 'size' => $sizeArray[1]])->first();
-
-            if($data['quantity'] > $getStockCount->stock)
+            if(!Auth::check())
             {
-                return redirect()->back()->with('flash_message_error', 'Quantity out of Stock, Please choose a lower quantity. Available quantity - ' . $getStockCount->stock);
+                return redirect()->back()->with('flash_message_error', 'Please log in to add to Wish List');
             }
 
-            DB::table('cart')->insert(['product_id' => $data['product_id'], 'product_name' => $data['product_name'], 'product_code' => $getSku->sku, 'product_color' => $data['product_color'], 'price' => $data['price'], 'size' => $sizeArray[1], 'quantity' => $data['quantity'], 'user_email' => $data['user_email'], 'session_id' => $session_id, 'created_at' => DB::raw('CURRENT_TIMESTAMP'), 'updated_at' => DB::raw('CURRENT_TIMESTAMP')]);
+            if(empty($data['size']))
+            {
+                return redirect()->back()->with('flash_message_error', 'Please select Size to add to Wish List');
+            }
 
-            return redirect()->back()->with('flash_message_success', 'Added to cart Successfully');
+            $sizeArray = explode('-', $data['size']);
+
+            $productPrice = ProductsAttribute::where(['product_id' => $data['product_id'], 'size' => $sizeArray[1]])->first();
+
+            $user_email = Auth::user()->email;
+            $created_at = Carbon::now();
+            $updated_at = Carbon::now();
+
+            DB::table('wish_list')->insert(['product_id' => $data['product_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'size' => $sizeArray[1], 'price' => $productPrice->price, 'quantity' => $data['quantity'], 'user_email' => $user_email, 'created_at' => $created_at, 'updated_at' => $updated_at]);
+
+            return redirect()->back()->with('flash_message_success', 'Product added to Wishlist Successfully');
         }
+        else
+        {
+            if(empty(Auth::User()->email))
+            {
+                $data['user_email'] = '';
+            }
+            else
+            {
+                $data['user_email'] = Auth::User()->email;
+            }
 
-        // return redirect('cart')->with('flash_message_success', 'Added to cart Successfully');
+            if(empty(Session::has('session_id')))
+            {
+                $session_id = str_random(40);
+                Session::put('session_id', $session_id);
+            }
+            $session_id = Session::get('session_id');
+
+            $sizeArray = explode('-', $data['size']);
+
+            $countProducts = DB::table('cart')->where(['product_id' => $data['product_id'], 'product_color' => $data['product_color'], 'size' => $sizeArray[1], 'session_id' => $session_id])->count();
+
+            if($countProducts > 0)
+            {
+                return redirect()->back()->with('flash_message_error', 'Product already exist');
+
+                // DB::table('cart')->where( 'session_id', $session_id)->increment('quantity', $data['quantity']);
+
+                // return redirect()->back()->with('flash_message_success', 'Product Already Exist. Cart Updated Successfully');
+            }
+            else
+            {
+                $getSku = ProductsAttribute::select('sku')->where(['product_id' => $data['product_id'], 'size' => $sizeArray[1]])->first();
+
+                $getStockCount = ProductsAttribute::select('stock')->where(['product_id' => $data['product_id'], 'size' => $sizeArray[1]])->first();
+
+                if($data['quantity'] > $getStockCount->stock)
+                {
+                    return redirect()->back()->with('flash_message_error', 'Quantity out of Stock, Please choose a lower quantity. Available quantity - ' . $getStockCount->stock);
+                }
+
+                DB::table('cart')->insert(['product_id' => $data['product_id'], 'product_name' => $data['product_name'], 'product_code' => $getSku->sku, 'product_color' => $data['product_color'], 'price' => $data['price'], 'size' => $sizeArray[1], 'quantity' => $data['quantity'], 'user_email' => $data['user_email'], 'session_id' => $session_id, 'created_at' => DB::raw('CURRENT_TIMESTAMP'), 'updated_at' => DB::raw('CURRENT_TIMESTAMP')]);
+
+                return redirect()->back()->with('flash_message_success', 'Added to cart Successfully');
+            }
+
+            // return redirect('cart')->with('flash_message_success', 'Added to cart Successfully');
+        }
     }
 
     // Display Cart Function
