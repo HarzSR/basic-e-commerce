@@ -70,7 +70,7 @@
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
                             <li><a href="{{ url('/account') }}"><i class="fa fa-user"></i> Account</a></li>
-                            <li><a href="{{ url('/wishlist') }}"><i class="fa fa-star"></i> Wishlist</a></li>
+                            <li><a href="{{ url('/wish-list') }}"><i class="fa fa-star"></i> Wishlist</a></li>
                             <li><a href="{{ url('/orders') }}"><i class="fa fa-dropbox"></i> Orders</a></li>
                             <li><a href="{{ url('/checkout') }}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                             <li><a href="{{ url('/cart') }}"><i class="fa fa-shopping-cart"></i> Cart @if($cartCount != 0)<span class="notify">{{ $cartCount }}</span>@endif</a></li>

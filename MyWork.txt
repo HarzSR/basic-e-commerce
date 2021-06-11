@@ -136,6 +136,7 @@ Things done on this project
 - WYSIWYG Editor
 - PDF View
 - Add Wish List
+- View Wish List
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms
@@ -147,6 +148,7 @@ ToDo List
 - Avoid Order placement - in case of trying to order more than required quantity: perform action
 - Need to verify User based authentication for all use case
 - Fix Logo in PDF Generated
+- Fix Add to Wish List based on Product Selected and Remove from Wish List, Increments and Decrements
 
 Not ToDo List
 - Add Social Share Button (Index: 145) - Implemented and commented out: CORS Errors

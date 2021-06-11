@@ -850,9 +850,18 @@ class ProductsController extends Controller
             $created_at = Carbon::now();
             $updated_at = Carbon::now();
 
-            DB::table('wish_list')->insert(['product_id' => $data['product_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'size' => $sizeArray[1], 'price' => $productPrice->price, 'quantity' => $data['quantity'], 'user_email' => $user_email, 'created_at' => $created_at, 'updated_at' => $updated_at]);
+            $wishListCount = DB::table('wish_list')->where(['user_email' => $user_email, 'product_id' => $data['product_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'],'product_color' => $data['product_color'], 'size' => $sizeArray[1]])->count();
 
-            return redirect()->back()->with('flash_message_success', 'Product added to Wishlist Successfully');
+            if($wishListCount >= 1)
+            {
+                return redirect()->back()->with('flash_message_error','Product already in Wish List');
+            }
+            else
+            {
+                DB::table('wish_list')->insert(['product_id' => $data['product_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'size' => $sizeArray[1], 'price' => $productPrice->price, 'quantity' => $data['quantity'], 'user_email' => $user_email, 'created_at' => $created_at, 'updated_at' => $updated_at]);
+
+                return redirect()->back()->with('flash_message_success', 'Product added to Wishlist Successfully');
+            }
         }
         else
         {
@@ -2034,5 +2043,25 @@ class ProductsController extends Controller
     public function exportProducts()
     {
         return Excel::download(new productsExport,'Products ' . date('d-M-Y h:i:s') . '.xlsx');
+    }
+
+    // View Wish List Function
+
+    public function wishList()
+    {
+        $user_email = Auth::user()->email;
+        $user_wishList = DB::table('wish_list')->where('user_email', $user_email)->get();
+
+        foreach($user_wishList as $key => $product)
+        {
+            $productDetails = Product::where('id', $product->product_id)->first();
+            $user_wishList[$key]->image = $productDetails->image;
+        }
+
+        $meta_title = "Wish List";
+        $meta_description = "Wish List for Shopping";
+        $meta_keywords = "wish-list,shopping";
+
+        return view('products.wish_list')->with(compact('user_wishList', 'meta_title', 'meta_description', 'meta_keywords'));
     }
 }
