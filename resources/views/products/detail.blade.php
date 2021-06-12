@@ -109,7 +109,7 @@
                                         @endif
                                     </span>
                                     <p>
-                                        <button type="submit" class="btn btn-fefault cart" id="wishListButton" name="wishListButton" value="Wish List" style="margin-left: 0px;">
+                                        <button type="submit" class="btn btn-fefault cart" id="wishListButton" name="wishListButton" value="Add Wish List" style="margin-left: 0px;">
                                             <i class="fa fa-list"></i>
                                              Add to wishlist
                                         </button>

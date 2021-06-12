@@ -26,6 +26,7 @@ class Product extends Model
             $user_email = Auth::User()->email;
             $session_id = Session::get('session_id');
             $cartCount = DB::table('cart')->where(['user_email' => $user_email, 'session_id' => $session_id])->sum('quantity');
+            // $cartCount = DB::table('cart')->where(['user_email' => $user_email])->sum('quantity');
         }
         else
         {

@@ -67,6 +67,7 @@ Route::group(['middleware' => ['frontlogin']], function () {
     Route::get('/paypal/thanks', 'ProductsController@thanksPaypal');
     Route::get('/paypal/cancel', 'ProductsController@cancelPaypal');
     Route::match(['get', 'post'], '/wish-list', 'ProductsController@wishList');
+    Route::get('wish-list/delete-product/{id}', 'ProductsController@deleteWishList');
 });
 
 Route::group(['middleware' => ['adminlogin']], function () {

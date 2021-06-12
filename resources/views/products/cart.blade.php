@@ -37,6 +37,7 @@
                                 <td class="quantity">Quantity</td>
                                 <td class="total">Total</td>
                                 <td></td>
+                                <td></td>
                             </tr>
                         </thead>
                         <tbody>
@@ -71,6 +72,22 @@
                                             $getCartCurrencyRates = Product::getCurrencyRates($cart->quantity * $product_price);
                                         ?>
                                         <p class="cart_total_price btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCartCurrencyRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCartCurrencyRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCartCurrencyRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCartCurrencyRates['NZD_Rate'] }} <br>">&#8377; {{ $cart->quantity * $product_price }}</p>
+                                    </td>
+                                    <td>
+                                        <form action="{{ url('/add-cart') }}" name="addToCartForm" id="addToCartForm" method="POST">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="product_id" id="product_id" value="{{ $cart->product_id }}">
+                                            <input type="hidden" name="product_name" id="product_name" value="{{ $cart->product_name }}">
+                                            <input type="hidden" name="product_code" id="product_code" value="{{ $cart->product_code }}">
+                                            <input type="hidden" name="product_color" id="product_color" value="{{ $cart->product_color }}">
+                                            <input type="hidden" name="size" id="size" value="{{ $cart->product_id . '-' . $cart->size }}">
+                                            <input type="hidden" name="quantity" id="quantity" value="{{ $cart->quantity }}">
+                                            <input type="hidden" name="price" id="price" value="{{ $cart->quantity * $cart->price }}">
+                                            <button type="submit" class="btn btn-fefault cart" id="wishListButton" name="wishListButton" value="Move Wish List" style="float: right; margin-bottom: 0px;">
+                                                <i class="fa fa-shopping-cart"></i>
+                                                Move to Wish List
+                                            </button>
+                                        </form>
                                     </td>
                                     <td class="cart_delete">
                                         <a class="cart_quantity_delete" href="{{ url('cart/delete-product/' . $cart->id) }}" onclick="return confirm('Would you like to delete {{ $cart->product_name }} - {{ $cart->size }}?')"><i class="fa fa-times"></i></a>

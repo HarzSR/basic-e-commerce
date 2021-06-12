@@ -77,7 +77,7 @@
                                             <input type="hidden" name="size" id="size" value="{{ $wishList->product_id . '-' . $wishList->size }}">
                                             <input type="hidden" name="quantity" id="quantity" value="{{ $wishList->quantity }}">
                                             <input type="hidden" name="price" id="price" value="{{ $wishList->price }}">
-                                            <button type="submit" class="btn btn-fefault cart" id="cartButton" name="cartButton" value="Wish List" style="float: right; margin-bottom: 0px;">
+                                            <button type="submit" class="btn btn-fefault cart" id="cartButton" name="cartButton" value="Move To Cart" style="float: right; margin-bottom: 0px;">
                                                 <i class="fa fa-shopping-cart"></i>
                                                 Add to cart
                                             </button>

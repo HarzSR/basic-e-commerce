@@ -830,7 +830,7 @@ class ProductsController extends Controller
 
         $data = $request->all();
 
-        if(!empty($data['wishListButton']) && $data['wishListButton'] == "Wish List")
+        if(!empty($data['wishListButton']) && ($data['wishListButton'] == "Add Wish List" || $data['wishListButton'] == "Move Wish List"))
         {
             if(!Auth::check())
             {
@@ -859,6 +859,13 @@ class ProductsController extends Controller
             else
             {
                 DB::table('wish_list')->insert(['product_id' => $data['product_id'], 'product_name' => $data['product_name'], 'product_code' => $data['product_code'], 'product_color' => $data['product_color'], 'size' => $sizeArray[1], 'price' => $productPrice->price, 'quantity' => $data['quantity'], 'user_email' => $user_email, 'created_at' => $created_at, 'updated_at' => $updated_at]);
+
+                if(!empty($data['wishListButton']) && $data['wishListButton'] == "Move Wish List")
+                {
+                    DB::table('cart')->where(['product_id' => $data['product_id'], 'user_email' => $user_email])->delete();
+
+                    return redirect()->back()->with('flash_message_success', 'Product moved to Wishlist Successfully');
+                }
 
                 return redirect()->back()->with('flash_message_success', 'Product added to Wishlist Successfully');
             }
@@ -906,9 +913,11 @@ class ProductsController extends Controller
 
                 DB::table('cart')->insert(['product_id' => $data['product_id'], 'product_name' => $data['product_name'], 'product_code' => $getSku->sku, 'product_color' => $data['product_color'], 'price' => $data['price'], 'size' => $sizeArray[1], 'quantity' => $data['quantity'], 'user_email' => $data['user_email'], 'session_id' => $session_id, 'created_at' => DB::raw('CURRENT_TIMESTAMP'), 'updated_at' => DB::raw('CURRENT_TIMESTAMP')]);
 
-                if(!empty($data['cartButton']) && $data['cartButton'] == "Wish List")
+                if(!empty($data['cartButton']) && $data['cartButton'] == "Move To Cart")
                 {
                     DB::table('wish_list')->where(['product_id' => $data['product_id'], 'user_email' => $data['user_email']])->delete();
+
+                    return redirect()->back()->with('flash_message_success', 'Moved to cart Successfully');
                 }
 
                 return redirect()->back()->with('flash_message_success', 'Added to cart Successfully');
@@ -922,6 +931,16 @@ class ProductsController extends Controller
 
     public function cart(Request $request)
     {
+        if(!empty(Auth::User()->email))
+        {
+            $user_email = Auth::user()->email;
+            $userCartCount = DB::table('cart')->where(['user_email' => $user_email])->count();
+        }
+        else
+        {
+            $userCartCount = 0;
+        }
+
         if(Session::has('session_id'))
         {
             /*
@@ -953,6 +972,23 @@ class ProductsController extends Controller
             $meta_keywords = "cart,shopping";
 
             return view('products.cart')->with(compact('userCart', 'meta_title', 'meta_description', 'meta_keywords'));
+        }
+        else if($userCartCount > 0)
+        {
+            $userCart = DB::table('cart')->where(['user_email' => $user_email])->get();
+
+            foreach ($userCart as $key => $value)
+            {
+                $productDetails = Product::where('id', $value->product_id)->first();
+                $userCart[$key]->image = $productDetails->image;
+            }
+
+            $meta_title = "Cart";
+            $meta_description = "Cart for Shopping";
+            $meta_keywords = "cart,shopping";
+
+            return view('products.cart')->with(compact('userCart', 'meta_title', 'meta_description', 'meta_keywords'));
+
         }
         else
         {
@@ -2043,7 +2079,7 @@ class ProductsController extends Controller
         }
     }
 
-    // Export Users function
+    // Export Users Function
 
     public function exportProducts()
     {
@@ -2068,5 +2104,14 @@ class ProductsController extends Controller
         $meta_keywords = "wish-list,shopping";
 
         return view('products.wish_list')->with(compact('user_wishList', 'meta_title', 'meta_description', 'meta_keywords'));
+    }
+
+    // Delete Wish List Function
+
+    public function deleteWishList($id = null)
+    {
+        DB::table('wish_list')->where('id', $id)->delete();
+
+        return redirect('wish-list')->with('flash_message_success', 'Removed from Wish List Successfully');
     }
 }
