@@ -37,6 +37,7 @@
                                 <td class="quantity">Quantity</td>
                                 <td class="total">Total</td>
                                 <td></td>
+                                <td></td>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,13 +59,7 @@
                                         <p class="btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getItemPrice['USD_Rate'] }} <br> GB&#xa3; {{ $getItemPrice['GBP_Rate'] }} <br> EU&#x20AC; {{ $getItemPrice['EUR_Rate'] }} <br> NZ&#x24; {{ $getItemPrice['NZD_Rate'] }} <br>">&#8377; {{ $product_price }}</p>
                                     </td>
                                     <td class="cart_quantity">
-                                        <div class="cart_quantity_button">
-                                            @if($wishList->quantity > 1)
-                                                <a class="cart_quantity_down" href="{{ url('cart/update-quantity/' . $wishList->id . '/-1') }}"> - </a>
-                                            @endif
-                                            <input class="cart_quantity_input" type="text" name="quantity" value="{{ $wishList->quantity }}" autocomplete="off" size="2">
-                                            <a class="cart_quantity_up" href="{{ url('cart/update-quantity/' . $wishList->id . '/1') }}"> + </a>
-                                        </div>
+                                        <p>{{ $wishList->quantity }}</p>
                                     </td>
                                     <td class="cart_total">
                                         <?php
@@ -72,8 +67,24 @@
                                         ?>
                                         <p class="cart_total_price btn-secondary" data-toggle="tooltip" data-html="true" title="US&#x24; {{ $getCartCurrencyRates['USD_Rate'] }} <br> GB&#xa3; {{ $getCartCurrencyRates['GBP_Rate'] }} <br> EU&#x20AC; {{ $getCartCurrencyRates['EUR_Rate'] }} <br> NZ&#x24; {{ $getCartCurrencyRates['NZD_Rate'] }} <br>">&#8377; {{ $wishList->quantity * $product_price }}</p>
                                     </td>
+                                    <td>
+                                        <form action="{{ url('/add-cart') }}" name="addToCartForm" id="addToCartForm" method="POST">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="product_id" id="product_id" value="{{ $wishList->product_id }}">
+                                            <input type="hidden" name="product_name" id="product_name" value="{{ $wishList->product_name }}">
+                                            <input type="hidden" name="product_code" id="product_code" value="{{ $wishList->product_code }}">
+                                            <input type="hidden" name="product_color" id="product_color" value="{{ $wishList->product_color }}">
+                                            <input type="hidden" name="size" id="size" value="{{ $wishList->product_id . '-' . $wishList->size }}">
+                                            <input type="hidden" name="quantity" id="quantity" value="{{ $wishList->quantity }}">
+                                            <input type="hidden" name="price" id="price" value="{{ $wishList->price }}">
+                                            <button type="submit" class="btn btn-fefault cart" id="cartButton" name="cartButton" value="Wish List" style="float: right; margin-bottom: 0px;">
+                                                <i class="fa fa-shopping-cart"></i>
+                                                Add to cart
+                                            </button>
+                                        </form>
+                                    </td>
                                     <td class="cart_delete">
-                                        <a class="cart_quantity_delete" href="{{ url('cart/delete-product/' . $wishList->id) }}" onclick="return confirm('Would you like to delete {{ $wishList->product_name }} - {{ $wishList->size }}?')"><i class="fa fa-times"></i></a>
+                                        <a class="cart_quantity_delete" href="{{ url('wish-list/delete-product/' . $wishList->id) }}" onclick="return confirm('Would you like to delete {{ $wishList->product_name }} - {{ $wishList->size }}?')"><i class="fa fa-times"></i></a>
                                     </td>
                                 </tr>
                                 <?php
@@ -85,10 +96,12 @@
                 </div>
             @else
                 <div>
-                    <a href="{{ url('/') }}" style="cursor: default"><img src="{{ asset('images/backend_images/empty-cart.png') }}" alt="" class="center-block"></a>
+                    <a href="{{ url('/') }}" style="cursor: default"><img src="{{ asset('images/backend_images/empty-wishlist.png') }}" alt="" class="center-block"></a>
                     <div class="container text-center">
                         <div class="content-404">
-                            <h2><a href="{{ asset('/') }}">Let's Shop for some goodies</a></h2>
+                            <h2><a href="{{ asset('/') }}">Let's make a wish come true</a></h2>
+                            <br>
+                            <br>
                         </div>
                     </div>
                 </div>

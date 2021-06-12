@@ -906,6 +906,11 @@ class ProductsController extends Controller
 
                 DB::table('cart')->insert(['product_id' => $data['product_id'], 'product_name' => $data['product_name'], 'product_code' => $getSku->sku, 'product_color' => $data['product_color'], 'price' => $data['price'], 'size' => $sizeArray[1], 'quantity' => $data['quantity'], 'user_email' => $data['user_email'], 'session_id' => $session_id, 'created_at' => DB::raw('CURRENT_TIMESTAMP'), 'updated_at' => DB::raw('CURRENT_TIMESTAMP')]);
 
+                if(!empty($data['cartButton']) && $data['cartButton'] == "Wish List")
+                {
+                    DB::table('wish_list')->where(['product_id' => $data['product_id'], 'user_email' => $data['user_email']])->delete();
+                }
+
                 return redirect()->back()->with('flash_message_success', 'Added to cart Successfully');
             }
 

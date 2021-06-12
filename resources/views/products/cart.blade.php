@@ -89,6 +89,8 @@
                     <div class="container text-center">
                         <div class="content-404">
                             <h2><a href="{{ asset('/') }}">Let's Shop for some goodies</a></h2>
+                            <br>
+                            <br>
                         </div>
                     </div>
                 </div>
