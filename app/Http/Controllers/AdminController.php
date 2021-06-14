@@ -230,37 +230,101 @@ class AdminController extends Controller
                     $admin->username = $data['username'];
                     $admin->password = md5($data['password']);
                     $admin->type = $data['type'];
-                    if(empty($data['categories_access']))
+                    if(empty($data['categories_view_access']))
                     {
-                        $admin->categories_access = '0';
+                        $admin->categories_view_access = '0';
                     }
                     else
                     {
-                        $admin->categories_access = $data['categories_access'];
+                        $admin->categories_view_access = $data['categories_view_access'];
                     }
-                    if(empty($data['products_access']))
+                    if(empty($data['categories_edit_access']))
                     {
-                        $admin->products_access = '0';
-                    }
-                    else
-                    {
-                        $admin->products_access = $data['products_access'];
-                    }
-                    if(empty($data['orders_access']))
-                    {
-                        $admin->orders_access = '0';
+                        $admin->categories_edit_access = '0';
                     }
                     else
                     {
-                        $admin->orders_access = $data['orders_access'];
+                        $admin->categories_edit_access = $data['categories_edit_access'];
                     }
-                    if(empty($data['users_access']))
+                    if(empty($data['categories_full_access']))
                     {
-                        $admin->users_access = '0';
+                        $admin->categories_full_access = '0';
                     }
                     else
                     {
-                        $admin->users_access = $data['users_access'];
+                        $admin->categories_full_access = $data['categories_full_access'];
+                    }
+                    if(empty($data['products_view_access']))
+                    {
+                        $admin->products_view_access = '0';
+                    }
+                    else
+                    {
+                        $admin->products_view_access = $data['products_view_access'];
+                    }
+                    if(empty($data['products_edit_access']))
+                    {
+                        $admin->products_edit_access = '0';
+                    }
+                    else
+                    {
+                        $admin->products_edit_access = $data['products_edit_access'];
+                    }
+                    if(empty($data['products_full_access']))
+                    {
+                        $admin->products_full_access = '0';
+                    }
+                    else
+                    {
+                        $admin->products_full_access = $data['products_full_access'];
+                    }
+                    if(empty($data['orders_view_access']))
+                    {
+                        $admin->orders_view_access = '0';
+                    }
+                    else
+                    {
+                        $admin->orders_view_access = $data['orders_view_access'];
+                    }
+                    if(empty($data['orders_edit_access']))
+                    {
+                        $admin->orders_edit_access = '0';
+                    }
+                    else
+                    {
+                        $admin->orders_edit_access = $data['orders_edit_access'];
+                    }
+                    if(empty($data['orders_full_access']))
+                    {
+                        $admin->orders_full_access = '0';
+                    }
+                    else
+                    {
+                        $admin->orders_full_access = $data['orders_full_access'];
+                    }
+                    if(empty($data['users_view_access']))
+                    {
+                        $admin->users_view_access = '0';
+                    }
+                    else
+                    {
+                        $admin->users_view_access = $data['users_view_access'];
+                    }
+                    if(empty($data['users_edit_access']))
+                    {
+                        $admin->users_edit_access = '0';
+                    }
+                    else
+                    {
+                        $admin->users_edit_access = $data['users_edit_access'];
+                    }
+                    if(empty($data['users_full_access']))
+                    {
+                        $admin->users_full_access = '0';
+                    }
+                    else
+                    {
+                        $admin->users_full_access = $data['users_full_access'];
                     }
                     if(empty($data['status']))
                     {

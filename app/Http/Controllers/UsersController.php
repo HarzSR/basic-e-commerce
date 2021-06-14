@@ -376,4 +376,13 @@ class UsersController extends Controller
     {
         return Excel::download(new usersExport,'Users ' . date('d-M-Y h:i:s') . '.xlsx');
     }
+
+    // View User Analysis Function
+
+    public function viewUsersAnalysis()
+    {
+        $userCount = User::count();
+
+        return view('admin.users.view_users_analysis')->with(compact('userCount'));
+    }
 }

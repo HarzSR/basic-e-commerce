@@ -137,6 +137,7 @@ Things done on this project
 - PDF View
 - Add Wish List
 - View Wish List
+- Admin Analysis
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms
@@ -148,7 +149,8 @@ ToDo List
 - Avoid Order placement - in case of trying to order more than required quantity: perform action
 - Need to verify User based authentication for all use case
 - Fix Logo in PDF Generated
-- Fix Add to Wish List based on Product Selected and Remove from Wish List, Increments and Decrements
+- Test - move to wish list and move to cart and vise versa
+- Modify Template - User Analysis
 
 Not ToDo List
 - Add Social Share Button (Index: 145) - Implemented and commented out: CORS Errors

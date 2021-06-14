@@ -13,9 +13,10 @@
             </ul>
         </li>
         @if(Session::get('adminDetails')['users_view_access'] == 1 || Session::get('adminDetails')['users_edit_access'] == 1 || Session::get('adminDetails')['users_full_access'] == 1)
-        <li class="submenu"> <a href="#"><i class="icon icon-user"></i> <span>Users</span> <span class="label label-important">1</span></a>
+        <li class="submenu"> <a href="#"><i class="icon icon-user"></i> <span>Users</span> <span class="label label-important">2</span></a>
             <ul <?php if (preg_match("/user/i", url()->current())) echo "style=\"display: block;\"" ?>>
-                <li <?php if (preg_match("/(view-users|view-user)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-users') }}">View Users</a></li>
+                <li <?php if (preg_match("/(view-users-all)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-users-all') }}">View Users</a></li>
+                <li <?php if (preg_match("/(view-users-analysis)/i", url()->current())) echo "class=\"active\"" ?>><a href="{{ url('/admin/view-users-analysis') }}">View Users Analysis</a></li>
             </ul>
         </li>
         @endif

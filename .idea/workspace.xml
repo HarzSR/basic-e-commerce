@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d55aefa-07cd-49f9-b334-7d2ae82c409a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/users/view_users_analysis.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/products/cart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/cart.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/products/detail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/detail.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/products/wish_list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/wish_list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyWork.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MyWork.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/adminLayout/admin_sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/adminLayout/admin_sidebar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -168,7 +168,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/products" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admin/users" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -180,6 +180,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\basic-e-commerce\resources\views\admin\users" />
       <recent name="C:\xampp\htdocs\basic-e-commerce\resources\views\products" />
       <recent name="C:\xampp\htdocs\basic-e-commerce\resources\views\emails" />
     </key>
@@ -216,7 +217,7 @@
       <workItem from="1622430881029" duration="19871000" />
       <workItem from="1622806292154" duration="18767000" />
       <workItem from="1623150949030" duration="4506000" />
-      <workItem from="1623289675475" duration="19899000" />
+      <workItem from="1623289675475" duration="23932000" />
     </task>
     <servers />
   </component>
