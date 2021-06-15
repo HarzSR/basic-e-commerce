@@ -2114,4 +2114,18 @@ class ProductsController extends Controller
 
         return redirect('wish-list')->with('flash_message_success', 'Removed from Wish List Successfully');
     }
+
+    // View Order Charts Function
+
+    public function viewOrdersAnalysis()
+    {
+        $orderCount = Order::count();
+        $currentMonthOrders = Order::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->count();
+        $lastMonthOrders = Order::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(1))->count();
+        $lastPreviousMonthOrders = Order::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(2))->count();
+        $lastFourMonthOrders = Order::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(3))->count();
+        $lastFiveMonthOrders = Order::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(4))->count();
+
+        return view('admin.products.view_orders_analysis')->with(compact('orderCount', 'currentMonthOrders', 'lastMonthOrders', 'lastPreviousMonthOrders', 'lastFourMonthOrders', 'lastFiveMonthOrders'));
+    }
 }
