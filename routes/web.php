@@ -128,7 +128,7 @@ Route::group(['middleware' => ['adminlogin']], function () {
 
     // Users Routes
 
-    Route::get('/admin/view-users-all', 'UsersController@viewUsers');
+    Route::get('/admin/view-users', 'UsersController@viewUsers');
     Route::get('/admin/export-users', 'UsersController@exportUsers');
     Route::get('/admin/view-users-analysis', 'UsersController@viewUsersAnalysis');
 

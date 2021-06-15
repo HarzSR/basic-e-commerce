@@ -150,7 +150,6 @@ ToDo List
 - Need to verify User based authentication for all use case
 - Fix Logo in PDF Generated
 - Test - move to wish list and move to cart and vise versa
-- Modify Template - User Analysis
 
 Not ToDo List
 - Add Social Share Button (Index: 145) - Implemented and commented out: CORS Errors

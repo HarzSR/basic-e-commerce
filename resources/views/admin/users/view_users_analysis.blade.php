@@ -1,12 +1,17 @@
 <?php
+
+    $currentMonth = date('M');
+    $lastMonth = date('M', strtotime("-1 Month"));
+    $lastPreviousMonth = date('M', strtotime("-2 Month"));
+    $lastFourMonth = date('M', strtotime("-3 Month"));
+    $lastFiveMonth = date('M', strtotime("-4 Month"));
+
     $dataPoints = array(
-        array("y" => 25, "label" => "Sunday"),
-        array("y" => 15, "label" => "Monday"),
-        array("y" => 25, "label" => "Tuesday"),
-        array("y" => 5, "label" => "Wednesday"),
-        array("y" => 10, "label" => "Thursday"),
-        array("y" => 0, "label" => "Friday"),
-        array("y" => 20, "label" => "Saturday")
+        array("y" => $lastFiveMonthUsers, "label" => $lastFiveMonth),
+        array("y" => $lastFourMonthUsers, "label" => $lastFourMonth),
+        array("y" => $lastPreviousMonthUsers, "label" => $lastPreviousMonth),
+        array("y" => $lastMonthUsers, "label" => $lastMonth),
+        array("y" => $currentMonthUsers, "label" => $currentMonth)
     );
 ?>
 <script>
@@ -14,10 +19,10 @@
 
         var chart = new CanvasJS.Chart("chartContainer", {
             title: {
-                text: "Push-ups Over a Week"
+                text: "Users Reporting"
             },
             axisY: {
-                title: "Number of Push-ups"
+                title: "Number of Users"
             },
             data: [{
                 type: "line",
@@ -56,7 +61,7 @@
                 <div class="span12">
                     <div class="widget-box">
                         <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-                            <h5>View Users - {{ $userCount }}</h5>
+                            <h5>Users Reporting - {{ $userCount }}</h5>
                             <a href="{{ url('/admin/export-users') }}" class="btn btn-success btn-mini" title="Export Users" style="float: right; margin-right: 7px; margin-top: 7px;">Export Users</a>
                         </div>
                         <div class="widget-content nopadding">

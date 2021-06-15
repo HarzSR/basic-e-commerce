@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Country;
 use App\Exports\usersExport;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -382,7 +383,12 @@ class UsersController extends Controller
     public function viewUsersAnalysis()
     {
         $userCount = User::count();
+        $currentMonthUsers = User::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->count();
+        $lastMonthUsers = User::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(1))->count();
+        $lastPreviousMonthUsers = User::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(2))->count();
+        $lastFourMonthUsers = User::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(3))->count();
+        $lastFiveMonthUsers = User::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(4))->count();
 
-        return view('admin.users.view_users_analysis')->with(compact('userCount'));
+        return view('admin.users.view_users_analysis')->with(compact('userCount', 'currentMonthUsers', 'lastMonthUsers', 'lastPreviousMonthUsers', 'lastFourMonthUsers', 'lastFiveMonthUsers'));
     }
 }
