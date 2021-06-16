@@ -391,4 +391,15 @@ class UsersController extends Controller
 
         return view('admin.users.view_users_analysis')->with(compact('userCount', 'currentMonthUsers', 'lastMonthUsers', 'lastPreviousMonthUsers', 'lastFourMonthUsers', 'lastFiveMonthUsers'));
     }
+
+    // View User Country Function
+
+    public function viewUsersCountriesAnalysis()
+    {
+        $userCount = User::count();
+        $getUserCountries = User::select('country', DB::raw('count(country) as count'))->groupBy('country')->get();
+        $getUserCountriesCount = User::distinct('country')->count('country');
+
+        return view('admin.users.view_users_countries_analysis')->with(compact('userCount', 'getUserCountries', 'getUserCountriesCount'));
+    }
 }

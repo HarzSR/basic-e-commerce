@@ -139,6 +139,7 @@ Things done on this project
 - View Wish List
 - Admin Analysis
 - Order Analysis
+- Demographics Analysis
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms

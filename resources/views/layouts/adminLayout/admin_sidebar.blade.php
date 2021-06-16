@@ -13,13 +13,14 @@
             </ul>
         </li>
         @if(Session::get('adminDetails')['users_view_access'] == 1 || Session::get('adminDetails')['users_edit_access'] == 1 || Session::get('adminDetails')['users_full_access'] == 1)
-        <li class="submenu"> <a href="#"><i class="icon icon-user"></i> <span>Users</span> <span class="label label-important">2</span></a>
+        <li class="submenu"> <a href="#"><i class="icon icon-user"></i> <span>Users</span> <span class="label label-important">3</span></a>
             <?php
                 $url = basename(url()->current());
             ?>
             <ul <?php if (preg_match("/user/i", url()->current())) echo "style=\"display: block;\"" ?>>
                 <li <?php if ($url == 'view-users') echo "class=\"active\"" ?>><a href="{{ url('/admin/view-users') }}">View Users</a></li>
                 <li <?php if ($url == 'view-users-analysis') echo "class=\"active\"" ?>><a href="{{ url('/admin/view-users-analysis') }}">View Users Analysis</a></li>
+                <li <?php if ($url == 'view-users-countries-analysis') echo "class=\"active\"" ?>><a href="{{ url('/admin/view-users-countries-analysis') }}">View Users Demographics</a></li>
             </ul>
         </li>
         @endif
