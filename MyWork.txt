@@ -140,6 +140,7 @@ Things done on this project
 - Admin Analysis
 - Order Analysis
 - Demographics Analysis
+- Add Barcode to Order
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms

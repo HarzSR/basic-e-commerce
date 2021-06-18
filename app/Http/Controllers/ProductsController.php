@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Image;
 use Maatwebsite\Excel\Facades\Excel;
+use Milon\Barcode\DNS1D;
 use Validator;
 use Dompdf\Dompdf;
 use Carbon\Carbon;
