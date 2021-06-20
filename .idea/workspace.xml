@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d55aefa-07cd-49f9-b334-7d2ae82c409a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/basic-e-commerce.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/basic-e-commerce.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyWork.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MyWork.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/mail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,6 +153,9 @@
       <path value="$PROJECT_DIR$/vendor/phenx/php-svg-lib" />
       <path value="$PROJECT_DIR$/vendor/dompdf/dompdf" />
       <path value="$PROJECT_DIR$/vendor/milon/barcode" />
+      <path value="$PROJECT_DIR$/vendor/softon/indipay" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
     </include_path>
   </component>
   <component name="ProjectId" id="1rfLu2qQt67aL3u7pBMLztBC2Zi" />
@@ -215,7 +222,7 @@
       <workItem from="1622430881029" duration="19871000" />
       <workItem from="1622806292154" duration="18767000" />
       <workItem from="1623150949030" duration="4506000" />
-      <workItem from="1623289675475" duration="44145000" />
+      <workItem from="1623289675475" duration="47564000" />
     </task>
     <servers />
   </component>

@@ -142,6 +142,7 @@ Things done on this project
 - Demographics Analysis
 - Add Barcode to Order
 - Update Mail System
+- PayUMoney Integration
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms
