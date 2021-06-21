@@ -372,7 +372,7 @@ $().ready(function (){
 
 function selectPaymentMethod()
 {
-    if($('#Paypal').is(':checked') || $('#COD').is(':checked'))
+    if($('#Paypal').is(':checked') || $('#COD').is(':checked') || $('#PayUMoney').is(':checked'))
     {
         // alert("Paypal");
     }

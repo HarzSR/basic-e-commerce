@@ -200,6 +200,9 @@
                         <span>
                             <label><input type="radio" name="payment_method" id="Paypal" value="Paypal" required><strong>  Paypal</strong></label>
                         </span>
+                        <span>
+                            <label><input type="radio" name="payment_method" id="PayUMoney" value="PayUMoney" required><strong>  PayUMoney</strong></label>
+                        </span>
                     @endif
                     <span style="float: right; margin-top: -23px;">
                         <button type="submit" class="btn btn-primary" onclick="return selectPaymentMethod();">Place Order</button>

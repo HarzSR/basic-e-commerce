@@ -156,6 +156,7 @@ ToDo List
 - Fix Logo in PDF Generated
 - Test - move to wish list and move to cart and vise versa
 - Export Orders
+- Fix bugs on Cart products retrieval
 
 Not ToDo List
 - Add Social Share Button (Index: 145) - Implemented and commented out: CORS Errors

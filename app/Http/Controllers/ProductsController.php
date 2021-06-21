@@ -1325,7 +1325,7 @@ class ProductsController extends Controller
                 $cartPro->product_name = $cartProduct->product_name;
                 $cartPro->product_color = $cartProduct->product_color;
                 $cartPro->product_size = $cartProduct->size;
-                $product_price = Product::getProductPrice($cartProduct->product_id. $cartProduct->size);
+                $product_price = Product::getProductPrice($cartProduct->product_id, $cartProduct->size);
                 $cartPro->product_price = $product_price;
                 $cartPro->product_qty = $cartProduct->quantity;
 
@@ -1384,6 +1384,14 @@ class ProductsController extends Controller
                 $meta_keywords = "paypal,shopping";
 
                 return redirect(('/paypal'))->with(compact( 'meta_title', 'meta_description', 'meta_keywords'));
+            }
+            else if($data['payment_method'] == "PayUMoney")
+            {
+                $meta_title = "PayUMoney Placed";
+                $meta_description = "PayUMoney for Order Placed";
+                $meta_keywords = "payumoney,shopping";
+
+                return redirect(('/payumoney'))->with(compact( 'meta_title', 'meta_description', 'meta_keywords'));
             }
         }
     }

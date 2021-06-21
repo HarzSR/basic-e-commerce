@@ -188,7 +188,7 @@ class Product extends Model
 
         if($userCartCount == 1)
         {
-            $productPrice = ProductsAttribute::where(['product_id' => $userCart[0]->product_id, 'size' => $userCart[0]->sizex])->first();
+            $productPrice = ProductsAttribute::where(['product_id' => $userCart[0]->product_id, 'size' => $userCart[0]->size])->first();
             $priceArray[] = $productPrice->price;
         }
         else
