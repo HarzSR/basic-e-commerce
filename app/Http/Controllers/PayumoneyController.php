@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Softon\Indipay\Facades\Indipay;
 
 class PayumoneyController extends Controller
@@ -11,23 +13,28 @@ class PayumoneyController extends Controller
 
     public function payumoneyPayment(Request $request)
     {
+        $order_id = Session::get('order_id');
+        $grand_total = Session::get('grand_total');
+        $orderDetails = Order::getOrderDetails($order_id);
+        $fullName = explode(' ', $orderDetails->name);
+
         $parameters = [
-            'txnid' => 123,
-            'order_id' => 123,
-            'amount' => 123.45,
-            'firstname' => 'First',
-            'lastname' => 'Last',
-            'email' => 'email@email.com',
-            'phone' => '001234567890',
-            'productinfo' => 123,
+            'txnid' => $order_id,
+            'order_id' => $order_id,
+            'amount' => $grand_total,
+            'firstname' => $fullName[0],
+            'lastname' => $fullName[1],
+            'email' => $orderDetails->user_email,
+            'phone' => $orderDetails->mobile,
+            'productinfo' => $order_id,
             // 'service_provider' => '',
-            'zipcode' => '123456',
-            'city' => 'ABC',
-            'state' => 'DEF',
-            'country' => 'India',
-            'address1' => 'GHI',
-            'address2' => 'JKL',
-            'curl' => url('payu/response'),
+            'zipcode' => $orderDetails->pincode,
+            'city' => $orderDetails->city,
+            'state' => $orderDetails->state,
+            'country' => $orderDetails->country,
+            'address1' => $orderDetails->address,
+            'address2' => '',
+            'curl' => url('payumoney/response'),
         ];
         $order = Indipay::prepare($parameters);
 
