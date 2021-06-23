@@ -61,7 +61,7 @@
             </ul>
         </li>
         @if(Session::get('adminDetails')['orders_view_access'] == 1 || Session::get('adminDetails')['orders_edit_access'] == 1 || Session::get('adminDetails')['orders_full_access'] == 1)
-        <li class="submenu"> <a href="#"><i class="icon icon-inbox"></i> <span>Orders</span> <span class="label label-important">1</span></a>
+        <li class="submenu"> <a href="#"><i class="icon icon-inbox"></i> <span>Orders</span> <span class="label label-important">2</span></a>
             <ul <?php if (preg_match("/order/i", url()->current())) echo "style=\"display: block;\"" ?>>
                 <li <?php if ($url == 'view-orders') echo "class=\"active\"" ?>><a href="{{ url('/admin/view-orders') }}">View Orders</a></li>
                 <li <?php if ($url == 'view-orders-analysis') echo "class=\"active\"" ?>><a href="{{ url('/admin/view-orders-analysis') }}">View Orders Analysis</a></li>

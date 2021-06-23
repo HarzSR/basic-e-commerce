@@ -116,7 +116,7 @@
                                     <form action="{{ url('admin/update-order-status') }}" method="post">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="order_id" id="order_id" value="{{ $orderDetails->id }}">
-                                        <table width="100%">
+                                        <table width="50%">
                                             <tr>
                                                 <td>
                                                     <select name="order_status" id="order_status" class="control-label" required="">
@@ -126,7 +126,8 @@
                                                         <option value="In Process" @if($orderDetails->order_status == "In Process") selected @endif>In Process</option>
                                                         <option value="Shipped" @if($orderDetails->order_status == "Shipped") selected @endif>Shipped</option>
                                                         <option value="Delivered" @if($orderDetails->order_status == "Delivered") selected @endif>Delivered</option>
-                                                        <option value="Paid" @if($orderDetails->order_status == "Paid") selected @endif>Paid</option>
+                                                        <option value="Paid-Success" @if($orderDetails->order_status == "Paid-Success") selected @endif>Payment Successful</option>
+                                                        <option value="Paid-Failure" @if($orderDetails->order_status == "Paid-Failure") selected @endif>Payment Failure</option>
                                                     </select>
                                                 </td>
                                                 <td>

@@ -7,7 +7,7 @@
             <div class="breadcrumbs">
                 <ol class="breadcrumb">
                     <li><a href="{{ url('/') }}">Home</a></li>
-                    <li class="active">Order Confirmation</li>
+                    <li class="active">Order Failed</li>
                 </ol>
             </div>
             @if(Session::has('flash_message_error'))
@@ -28,8 +28,9 @@
         <div class="container">
             @if(!empty(Session::has('order_id') && !empty(Session::has('grand_total'))))
                 <div class="heading" align="center">
-                    <h3>Your Order has been placed Successfully</h3>
-                    <p>Order ID #{{ Session::get('order_id') }} and Amount Paid is INR {{ Session::get('grand_total') }}</p>
+                    <h3>Payment has been terminated</h3>
+                    <p>Don't worry for safety, we have removed all the items to avoid double order. Please try again.</p>
+                    <p>Also, no money has been deducted. So free feel to place again.</p>
                 </div>
                 {{ Session::forget('order_id') }} {{ Session::forget('grand_total') }} {{ Session::forget('session_id') }} {{ Session::forget('couponCode') }} {{ Session::forget('couponAmount') }}
             @else
