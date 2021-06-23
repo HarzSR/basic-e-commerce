@@ -23,7 +23,7 @@ class PayumoneyController extends Controller
             'order_id' => $order_id,
             'amount' => $grand_total,
             'firstname' => $fullName[0],
-            'lastname' => $fullName[1],
+            'lastname' => $fullName[0],
             'email' => $orderDetails->user_email,
             'phone' => $orderDetails->mobile,
             'productinfo' => $order_id,
@@ -36,8 +36,25 @@ class PayumoneyController extends Controller
             'address2' => '',
             'curl' => url('payumoney/response'),
         ];
+
         $order = Indipay::prepare($parameters);
 
         return Indipay::process($order);
+    }
+
+    // Function to PayUMoney Response
+
+    public function payumoneyResponse(Request $request)
+    {
+        $response = Indipay::response($request);
+
+        if($response['status'] == "success" && $response['unmappedstatus'] == "captured")
+        {
+            echo "Success";
+        }
+        else
+        {
+            echo "Fail";
+        }
     }
 }

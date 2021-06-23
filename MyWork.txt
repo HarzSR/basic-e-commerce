@@ -157,6 +157,7 @@ ToDo List
 - Test - move to wish list and move to cart and vise versa
 - Export Orders
 - Fix bugs on Cart products retrieval
+- PayUMoney Integration: still working on
 
 Not ToDo List
 - Add Social Share Button (Index: 145) - Implemented and commented out: CORS Errors
