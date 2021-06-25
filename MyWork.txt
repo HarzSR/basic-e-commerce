@@ -143,6 +143,7 @@ Things done on this project
 - Add Barcode to Order
 - Update Mail System
 - PayUMoney Integration
+- PayUMoney Verification
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms
@@ -157,7 +158,7 @@ ToDo List
 - Test - move to wish list and move to cart and vise versa
 - Export Orders
 - Fix bugs on Cart products retrieval
-- PayUMoney Integration: still working on
+- PayUMoney Integration: Upgrade and Test
 
 Not ToDo List
 - Add Social Share Button (Index: 145) - Implemented and commented out: CORS Errors

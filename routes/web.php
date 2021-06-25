@@ -70,6 +70,8 @@ Route::group(['middleware' => ['frontlogin']], function () {
     Route::any('/payumoney/response', 'PayumoneyController@payumoneyResponse');
     Route::get('/payumoney/thanks', 'PayumoneyController@payumoneyThanks');
     Route::get('/payumoney/failure', 'PayumoneyController@payumoneyFailure');
+    Route::get('/payumoney/verification/{id}', 'PayumoneyController@payumoneyVerification');
+    Route::get('/payumoney/verify', 'PayumoneyController@payumoneyVerify');
     Route::match(['get', 'post'], '/wish-list', 'ProductsController@wishList');
     Route::get('wish-list/delete-product/{id}', 'ProductsController@deleteWishList');
 });

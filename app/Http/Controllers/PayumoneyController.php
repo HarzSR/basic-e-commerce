@@ -14,7 +14,7 @@ class PayumoneyController extends Controller
 {
     // Function to Trigger PayUMoney
 
-    public function payumoneyPayment(Request $request)
+    public function payumoneyPayment(Request $keyArrayequest)
     {
         $order_id = Session::get('order_id');
         $grand_total = Session::get('grand_total');
@@ -47,11 +47,11 @@ class PayumoneyController extends Controller
 
     // Function to PayUMoney Response
 
-    public function payumoneyResponse(Request $request)
+    public function payumoneyResponse(Request $keyArrayequest)
     {
-        $response = Indipay::response($request);
+        $keyArrayesponse = Indipay::response($keyArrayequest);
 
-        if($response['status'] == "success" && $response['unmappedstatus'] == "captured")
+        if($keyArrayesponse['status'] == "success" && $keyArrayesponse['unmappedstatus'] == "captured")
         {
             // echo "Success";
 
@@ -109,5 +109,122 @@ class PayumoneyController extends Controller
     public function payumoneyFailure()
     {
         return view('orders.failure_payumoney');
+    }
+
+    // Function to Verify Payment
+
+    public function payumoneyVerification($order_id = null)
+    {
+        $key = 'gtKFFx';
+        $salt = 'eCwWELxi';
+
+        $command = "verify_payment";
+
+        $temp_orderId = $order_id;
+        $hash_str = $key  . '|' . $command . '|' . $temp_orderId . '|' . $salt ;
+        $hash = strtolower(hash('sha512', $hash_str));
+        $keyArray = array('key' => $key , 'hash' =>$hash , 'var1' => $temp_orderId, 'command' => $command);
+
+        $query = http_build_query($keyArray);
+        $wsUrl = "https://test.payu.in/merchant/postservice?form=2";
+
+        $curlAction = curl_init();
+        curl_setopt($curlAction, CURLOPT_URL, $wsUrl);
+        curl_setopt($curlAction, CURLOPT_POST, 1);
+        curl_setopt($curlAction, CURLOPT_POSTFIELDS, $query);
+        curl_setopt($curlAction, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curlAction, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curlAction, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($curlAction, CURLOPT_SSL_VERIFYPEER, 0);
+        $curlOutput = curl_exec($curlAction);
+
+        if (curl_errno($curlAction))
+        {
+            $sad = curl_error($curlAction);
+            throw new Exception($sad);
+        }
+
+        curl_close($curlAction);
+
+        $valueSerialized = @unserialize($curlOutput);
+
+        if($curlOutput === 'b:0;' || $valueSerialized !== false)
+        {
+            print_r($valueSerialized);
+        }
+
+        $curlOutput = json_decode($curlOutput);
+
+        echo "<pre>"; print_r($curlOutput); die;
+    }
+
+    // Function to Verify
+
+    public function payumoneyVerify()
+    {
+        $orders = Order::where('payment_method','Payumoney')->take(5)->orderBy('id','Desc')->get();
+        $orders = json_decode(json_encode($orders));
+
+        foreach($orders as $order)
+        {
+            $key = 'gtKFFx';
+            $salt = 'eCwWELxi';
+            $command = "verify_payment";
+            $order_id = $order->id;
+            $hash_str = $key  . '|' . $command . '|' . $order_id . '|' . $salt ;
+            $hash = strtolower(hash('sha512', $hash_str));
+            $keyArray = array('key' => $key , 'hash' =>$hash , 'var1' => $order_id, 'command' => $command);
+
+            $query = http_build_query($keyArray);
+            $wsUrl = "https://test.payu.in/merchant/postservice?form=2";
+
+            $curlAction = curl_init();
+            curl_setopt($curlAction, CURLOPT_URL, $wsUrl);
+            curl_setopt($curlAction, CURLOPT_POST, 1);
+            curl_setopt($curlAction, CURLOPT_POSTFIELDS, $query);
+            curl_setopt($curlAction, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($curlAction, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($curlAction, CURLOPT_SSL_VERIFYHOST, 0);
+            curl_setopt($curlAction, CURLOPT_SSL_VERIFYPEER, 0);
+            $curlOutput= curl_exec($curlAction);
+
+            if (curl_errno($curlAction))
+            {
+                $sad = curl_error($curlAction);
+                throw new Exception($sad);
+            }
+
+            curl_close($curlAction);
+
+            $valueSerialized = @unserialize($curlOutput);
+
+            if($curlOutput=== 'b:0;' || $valueSerialized !== false)
+            {
+                print_r($valueSerialized);
+            }
+
+            $curlOutput= json_decode($curlOutput);
+
+            foreach($curlOutput->transaction_details as $key => $val)
+            {
+                if(($val->status=="success")&&($val->unmappedstatus=="captured"))
+                {
+                    if($order->order_status == "Payment Failed" || $order->order_status == "New")
+                    {
+                        Order::where(['id' => $order->id])->update(['order_status' => 'Payment Captured']);
+                    }
+                }
+                else
+                {
+                    if($order->order_status == "Payment Captured" || $order->order_status == "New")
+                    {
+                        Order::where(['id' => $order->id])->update(['order_status' => 'Payment Failed']);
+                    }
+                }
+            }
+        }
+
+        echo "CRON Job Completed Successfully";
+        die;
     }
 }
