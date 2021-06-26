@@ -4,7 +4,8 @@
     <list default="true" id="7d55aefa-07cd-49f9-b334-7d2ae82c409a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyWork.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MyWork.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PayumoneyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PayumoneyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/orders/paypal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/paypal.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -222,7 +223,7 @@
       <workItem from="1623289675475" duration="50612000" />
       <workItem from="1624359657008" duration="2746000" />
       <workItem from="1624441562371" duration="6023000" />
-      <workItem from="1624621697299" duration="644000" />
+      <workItem from="1624621697299" duration="3992000" />
     </task>
     <servers />
   </component>

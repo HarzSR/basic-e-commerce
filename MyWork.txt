@@ -144,6 +144,8 @@ Things done on this project
 - Update Mail System
 - PayUMoney Integration
 - PayUMoney Verification
+- Paypal Instant Payment Notification (INP) Integration
+- Complete
 
 ToDo List
 - Add Validator to all Admin and Frontend Forms
@@ -159,6 +161,7 @@ ToDo List
 - Export Orders
 - Fix bugs on Cart products retrieval
 - PayUMoney Integration: Upgrade and Test
+- Intensive Testing Required
 
 Not ToDo List
 - Add Social Share Button (Index: 145) - Implemented and commented out: CORS Errors

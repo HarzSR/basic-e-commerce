@@ -2137,4 +2137,42 @@ class ProductsController extends Controller
 
         return view('admin.products.view_orders_analysis')->with(compact('orderCount', 'currentMonthOrders', 'lastMonthOrders', 'lastPreviousMonthOrders', 'lastFourMonthOrders', 'lastFiveMonthOrders'));
     }
+
+    // Paypal Instant Payment Notification Function
+
+    public function ipnPaypal(Request $request)
+    {
+        $data = $request->all();
+
+        if($data['payment_status'] == "Completed")
+        {
+            $order_id = Session::get('order_id');
+
+            Order::where('id', $order_id)->update(['order_status' => 'Payment Captured']);
+
+            $productDetails = Order::with('orders')->where('id', $order_id)->first();
+            $user_id = $productDetails['user_id'];
+            $user_name = $productDetails['name'];
+            $user_email = $productDetails['user_email'];
+            $userDetails = User::where('id', $user_id)->first();
+
+            // Email upon Successful Order
+
+            /*
+            $email = $user_email;
+            $messageData = [
+                'email' => $user_email,
+                'name' => $user_name,
+                'order_id' => $order_id,
+                'productDetails' => $productDetails,
+                'userDetails' => $userDetails
+            ];
+            Mail::send('emails.order', $messageData, function ($message) use($email) {
+                $message->to($email)->subject('Order Placed & Paid Successfully');
+            });
+            */
+
+            DB::table('cart')->where('user_email', $user_email)->delete();
+        }
+    }
 }

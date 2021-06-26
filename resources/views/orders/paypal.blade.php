@@ -64,6 +64,7 @@
                         <input type="hidden" name="email" value="{{ $orderDetails->user_email }}">
                         <input type="hidden" name="return" value="{{ url('/paypal/thanks') }}">
                         <input type="hidden" name="cancel_return" value="{{ url('/paypal/cancel') }}">
+                        <input type="hidden" name="notify_url" value="{{ url('/paypal/ipn') }}">
                         <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
                     </form>
                 </div>
