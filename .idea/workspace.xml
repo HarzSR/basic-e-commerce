@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="7d55aefa-07cd-49f9-b334-7d2ae82c409a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyWork.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MyWork.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/orders/paypal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/paypal.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,12 +36,19 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/routes/web.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/resources/views/admin/products/view_products.blade.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/resources/views/products/detail.blade.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/MyWork.txt" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/app/Http/Controllers/ProductsController.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/products/view_products.blade.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/banners/edit_banner.blade.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/layouts/adminLayout/admin_header.blade.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/layouts/adminLayout/admin_design.blade.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MyWork.txt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/routes/web.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/resources/views/admin/products/edit_product.blade.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/layouts/frontLayout/front_design.blade.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/products/detail.blade.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/public/js/frontend_js/main.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/public/js/backend_js/matrix.form_validation.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/views/admin/categories/edit_category.blade.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -223,7 +230,34 @@
       <workItem from="1623289675475" duration="50612000" />
       <workItem from="1624359657008" duration="2746000" />
       <workItem from="1624441562371" duration="6023000" />
-      <workItem from="1624621697299" duration="3992000" />
+      <workItem from="1624621697299" duration="4801000" />
+      <workItem from="1625270823669" duration="1334000" />
+      <workItem from="1625395094442" duration="133000" />
+      <workItem from="1625395818499" duration="447000" />
+      <workItem from="1625396960707" duration="404000" />
+      <workItem from="1625398754959" duration="609000" />
+      <workItem from="1625654280286" duration="625000" />
+      <workItem from="1625699824065" duration="1817000" />
+      <workItem from="1626419631463" duration="1225000" />
+      <workItem from="1626435170245" duration="141000" />
+      <workItem from="1626506185257" duration="2297000" />
+      <workItem from="1626522568617" duration="165000" />
+      <workItem from="1626578345780" duration="1340000" />
+      <workItem from="1626604684043" duration="60000" />
+      <workItem from="1626605222288" duration="531000" />
+      <workItem from="1626614918025" duration="1060000" />
+      <workItem from="1626779815549" duration="13000" />
+      <workItem from="1626780984795" duration="126000" />
+      <workItem from="1627161832362" duration="1559000" />
+      <workItem from="1627296897477" duration="484000" />
+      <workItem from="1627385891304" duration="45000" />
+      <workItem from="1628938956654" duration="23000" />
+      <workItem from="1629544372017" duration="200000" />
+      <workItem from="1629846780013" duration="598000" />
+      <workItem from="1629862136797" duration="22000" />
+      <workItem from="1629896914260" duration="277000" />
+      <workItem from="1630254031260" duration="668000" />
+      <workItem from="1630285837538" duration="2000" />
     </task>
     <servers />
   </component>
